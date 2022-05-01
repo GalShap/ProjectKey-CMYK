@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
      */
     [Header("Physics")]
     [SerializeField] private float moveSpeed = 5f;
+
+    [SerializeField] private float maxSped = 7;
     [SerializeField] private float jumpSpeed = 5f;
     [SerializeField] private float fallMultiplier = 4f;
     [SerializeField] private float gravityScale = 1f;
@@ -47,7 +49,8 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 vel = _rigidbody2D.velocity;
         vel.x = movement.x * moveSpeed;
-        _rigidbody2D.velocity = vel;
+        _rigidbody2D.AddForce(vel);
+        // _rigidbody2D.velocity = vel;
         SetGravity();
     }
 
