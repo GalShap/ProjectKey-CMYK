@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,6 +7,16 @@ using UnityEngine.UI;
 
 public class ColorManager : MonoBehaviour
 {
+    [Serializable]
+    public struct ColorLayer
+    {
+        public LayerMask layer;
+        public Color color;
+
+        public int index =>
+            Mathf.RoundToInt(Mathf.Log(layer.value,
+                2)); //LayerMask.NameToLayer(LayerMask.LayerToName(layer.value));
+    }
     
     #region Inspector
     
@@ -13,21 +24,31 @@ public class ColorManager : MonoBehaviour
 
     [SerializeField] private int CurWorldColor = -1;
     
-    [SerializeField] private int TotalColors = 3;
+    // [SerializeField] private int TotalColors = 3;
 
     [SerializeField] private SpriteRenderer Background;
 
-    [SerializeField] private List<Color> Colors = new List<Color>() {Color.red, Color.green, Color.blue};
+    // [SerializeField] private List<Color> Colors = new List<Color>() {Color.red, Color.green, Color.blue};
+
+    [SerializeField] private List<ColorLayer> layers;
     #endregion
 
     
     #region Constants
-    private const int PLAYER_LAYER = 6;
-    
-    private const int FIRST_COLOR_LAYER = 7;
-    
+    // private const int FIRST_COLOR_LAYER = 7;
+
     #endregion
-    
+
+    #region Fields
+
+    public static int CurrLayer => _shared.layers[_shared.CurWorldColor].index;
+
+    private static ColorManager _shared;
+
+    private int TotalColors => layers.Count;
+
+    #endregion
+
     protected enum CurColor
     {
         Default, Red, Green, Blue
@@ -36,38 +57,36 @@ public class ColorManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (CurWorldColor != -1)
-            SetWorldColor(CurWorldColor);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (_shared == null)
+        {
+            _shared = this;
+            if (CurWorldColor != -1)
+                SetWorldColor(CurWorldColor);
+        }
     }
 
     #region Private Methods
     
     // function disables the given layer and enables all other layers. 
-    private void CancelCollisionLayer(int layer)
+    private void CancelCollisionLayer(int pos)
     {
-        int i = FIRST_COLOR_LAYER + 1;
-
-        while (i <= FIRST_COLOR_LAYER + TotalColors)
+        int layer = layers[pos].index;
+        foreach (var l in layers)
         {
-            if (i == layer) // cancel the given color collisions with player.
-                Physics2D.IgnoreLayerCollision(layer, PLAYER_LAYER, true);
-            
-            else 
-                Physics2D.IgnoreLayerCollision(i, PLAYER_LAYER, false);
+            Physics2D.IgnoreLayerCollision(l.index, Player.layer, l.index == layer);
         }
     }
-    
-    
+
     // color: the index of the color in the Colors list
     private void SetBackGroundColor(int color)
     {
-        Background.color = Colors[color];
+        Background.color = layers[color].color;
+    }
+
+    public static void RotateColor()
+    {
+        _shared.CurWorldColor = (_shared.CurWorldColor + 1) % _shared.TotalColors;
+        _shared.SetWorldColor(_shared.CurWorldColor);
     }
     
     #endregion
@@ -77,7 +96,7 @@ public class ColorManager : MonoBehaviour
     public void SetWorldColor(int color)
     {
         SetBackGroundColor(color);
-        CancelCollisionLayer(color + FIRST_COLOR_LAYER);
+        CancelCollisionLayer(color);
     }
     
     #endregion

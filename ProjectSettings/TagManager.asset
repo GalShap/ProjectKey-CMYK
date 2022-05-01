@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Floor
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,7 @@ TagManager:
   - Red
   - Green
   - Blue
-  - 
+  - Neutral
   - 
   - 
   - 
@@ -46,4 +47,7 @@ TagManager:
     locked: 0
   - name: Game
     uniqueID: 3712461745
+    locked: 0
+  - name: Player
+    uniqueID: 3667924489
     locked: 0
