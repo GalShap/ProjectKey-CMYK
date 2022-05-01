@@ -173,6 +173,9 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 512
     color: {r: 0, g: 0.40471482, b: 1, a: 1}
+  Neutral:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!4 &429530485
 Transform:
   m_ObjectHideFlags: 0

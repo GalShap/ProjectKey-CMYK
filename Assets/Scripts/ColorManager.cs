@@ -31,6 +31,8 @@ public class ColorManager : MonoBehaviour
     // [SerializeField] private List<Color> Colors = new List<Color>() {Color.red, Color.green, Color.blue};
 
     [SerializeField] private List<ColorLayer> layers;
+
+    [SerializeField] private LayerMask Neutral;
     #endregion
 
     
@@ -46,6 +48,22 @@ public class ColorManager : MonoBehaviour
     private static ColorManager _shared;
 
     private int TotalColors => layers.Count;
+
+    public static LayerMask GroundLayers
+    {
+        get
+        {
+            LayerMask m = _shared.Neutral;
+            foreach (var layer in _shared.layers)
+            {
+                if(_shared.CurWorldColor != -1 && layer.index == CurrLayer)
+                    continue;
+                m |= layer.layer;
+            }
+
+            return m;
+        }
+    }
 
     #endregion
 

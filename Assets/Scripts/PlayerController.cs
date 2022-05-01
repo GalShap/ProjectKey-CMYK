@@ -9,9 +9,8 @@ public class PlayerController : MonoBehaviour
 { 
     /**
      * TODO:
-     * 1. fix collision while changing color
-     * 2. find best jump values
-     * 3. smooth running : https://www.youtube.com/watch?v=USLp-4iwNnQ
+     * 1. find best jump values
+     * 2. smooth running : https://www.youtube.com/watch?v=USLp-4iwNnQ
      */
     [Header("Physics")]
     [SerializeField] private float moveSpeed = 5f;
@@ -36,7 +35,7 @@ public class PlayerController : MonoBehaviour
             transform.position, 
             Vector2.down, 
             transform.lossyScale.y * 0.55f, 
-            groundLayers);
+            ColorManager.GroundLayers);
     }
 
     private void FixedUpdate()
@@ -80,6 +79,8 @@ public class PlayerController : MonoBehaviour
         switch (context.phase)
         {
             case InputActionPhase.Started:
+                if(!onGround)
+                    return;
                 _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x,0);
                 _rigidbody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
                 jumping = true;
