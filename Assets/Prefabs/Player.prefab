@@ -72,8 +72,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -582505551
-  m_SortingLayer: 2
+  m_SortingLayerID: -627042807
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 0.8207547, g: 0.66616654, b: 0.22764327, a: 1}
@@ -198,7 +198,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 8863397447226026584}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 99f52ba1e79e1a343b535e78fa962e19, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -227,10 +227,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3e46774b6e4f6e4cb14e6958bf2c9e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  maxSpeed: 7
+  moveSpeed: 10
+  linearDrag: 5
   jumpSpeed: 8
-  fallMultiplier: 4
+  fallMultiplier: 5
   gravityScale: 1
+  jumpDelay: 0.25
+  scale: 0
   groundLayers:
     serializedVersion: 2
     m_Bits: 1920

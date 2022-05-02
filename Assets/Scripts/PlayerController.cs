@@ -6,79 +6,104 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
-{ 
+{
     /**
      * TODO:
      * 1. find best jump values
      * 2. smooth running : https://www.youtube.com/watch?v=USLp-4iwNnQ
      */
-    [Header("Physics")]
+    [Header("Running Physics")] 
+    [SerializeField] private float maxSpeed = 7f;
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float linearDrag = 5f;
     
-
-    [SerializeField] private float maxSped = 7;
+    [Header("Jumping Physics")]
     [SerializeField] private float jumpSpeed = 5f;
     [SerializeField] private float fallMultiplier = 4f;
     [SerializeField] private float gravityScale = 1f;
+    [SerializeField] private float jumpDelay = 0.25f;
+    public float scale;
+    private float jumpTimer;
+    private bool jumping;
+    
+    [Header("Collision")]
     [SerializeField] private LayerMask groundLayers;
+    private Vector3 collisionOffset;
     
     private Rigidbody2D _rigidbody2D;
     private bool onGround;
-    private bool jumping;
     private Vector2 movement;
 
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        collisionOffset = Vector3.right * transform.lossyScale.x / 2;
     }
 
     private void Update()
     {
         onGround = Physics2D.Raycast(
-            transform.position, 
-            Vector2.down, 
-            transform.lossyScale.y * 0.55f, 
+            transform.position + collisionOffset,
+            Vector2.down,
+            transform.lossyScale.y * 0.55f,
+            ColorManager.GroundLayers) 
+                   || 
+                   Physics2D.Raycast(
+            transform.position - collisionOffset,
+            Vector2.down,
+            transform.lossyScale.y * 0.55f,
             ColorManager.GroundLayers);
     }
 
     private void FixedUpdate()
     {
-        SetVelocity();
+        MoveCharacter();
+        if (jumpTimer > Time.time && onGround)
+        {
+            Jump();
+        }
         ModifyPhysics();
+        scale = _rigidbody2D.gravityScale;
     }
 
-    private void SetVelocity()
+    private void MoveCharacter()
     {
-        Vector2 vel = _rigidbody2D.velocity;
-        vel.x = movement.x * moveSpeed;
-        _rigidbody2D.AddForce(vel);
-        // _rigidbody2D.velocity = vel;
-        SetGravity();
+        _rigidbody2D.AddForce(Vector2.right * movement.x * moveSpeed);
+
+        if (Math.Abs(_rigidbody2D.velocity.x) > maxSpeed)
+        {
+            float sign = Mathf.Sign(_rigidbody2D.velocity.x);
+            _rigidbody2D.velocity = new Vector2(sign * maxSpeed, _rigidbody2D.velocity.y);
+        }
+    }
+
+    private void Jump()
+    {
+        _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x,0);
+        print(_rigidbody2D.mass);
+        _rigidbody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+        jumpTimer = 0;
     }
 
     private void ModifyPhysics()
     {
         bool changingDirection = 0 > movement.x * _rigidbody2D.velocity.x;
-        if (Math.Abs(_rigidbody2D.velocity.x) < 0.4 || changingDirection)
-        {
-            _rigidbody2D.drag = linearDrag;
-        }
-        else
-        {
-            _rigidbody2D.drag = 0f;
-        }
-    }
-    private void SetGravity()
-    {
-        float scale = 0;
         if (onGround)
         {
-            scale = 0;
+            if (Math.Abs(movement.x) < 0.4 || changingDirection)
+            {
+                _rigidbody2D.drag = linearDrag;
+            }
+            else
+            {
+                _rigidbody2D.drag = 0f;
+            }
+
+            _rigidbody2D.gravityScale = 0;
         }
         else
         {
-            scale = gravityScale;
+            float scale = gravityScale;
             if (_rigidbody2D.velocity.y < 0)
             {
                 scale *= fallMultiplier;
@@ -87,9 +112,9 @@ public class PlayerController : MonoBehaviour
             {
                 scale *= fallMultiplier / 2;
             }
-        }
 
-        _rigidbody2D.gravityScale = scale;
+            _rigidbody2D.gravityScale = scale;
+        }
     }
 
     public void onJump(InputAction.CallbackContext context)
@@ -97,10 +122,7 @@ public class PlayerController : MonoBehaviour
         switch (context.phase)
         {
             case InputActionPhase.Started:
-                if(!onGround)
-                    return;
-                _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x,0);
-                _rigidbody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+                jumpTimer = Time.time + jumpDelay;
                 jumping = true;
                 break;
             case InputActionPhase.Canceled:
