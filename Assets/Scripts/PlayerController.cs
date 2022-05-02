@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
      */
     [Header("Physics")]
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float linearDrag = 5f;
+    
 
     [SerializeField] private float maxSped = 7;
     [SerializeField] private float jumpSpeed = 5f;
@@ -43,6 +45,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         SetVelocity();
+        ModifyPhysics();
     }
 
     private void SetVelocity()
@@ -54,6 +57,18 @@ public class PlayerController : MonoBehaviour
         SetGravity();
     }
 
+    private void ModifyPhysics()
+    {
+        bool changingDirection = 0 > movement.x * _rigidbody2D.velocity.x;
+        if (Math.Abs(_rigidbody2D.velocity.x) < 0.4 || changingDirection)
+        {
+            _rigidbody2D.drag = linearDrag;
+        }
+        else
+        {
+            _rigidbody2D.drag = 0f;
+        }
+    }
     private void SetGravity()
     {
         float scale = 0;
@@ -118,4 +133,6 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
+    
+    
 }
