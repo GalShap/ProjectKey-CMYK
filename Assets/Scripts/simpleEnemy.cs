@@ -22,19 +22,17 @@ public class simpleEnemy : enemyObject
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    private void Update()
+    { 
         _currentTarget = player.transform.position;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        if (!isAlive())
-        {
-            gameObject.SetActive(false);
-        }
+        if (!isAlive()) gameObject.SetActive(false);
         move();
     }
+ 
     /**
      * move the enemy by following the player.
      */
@@ -48,6 +46,7 @@ public class simpleEnemy : enemyObject
     {
         return (transform.position.x - player.transform.position.x);
     }
+
     private float PositionY()
     {
         return (transform.position.y - player.transform.position.y);
