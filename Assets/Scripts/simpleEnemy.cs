@@ -46,11 +46,16 @@ public class simpleEnemy : enemyObject
         movement = transform.position;
         if (x < 0)
         {
-            movement.x = transform.position.x + 1;
+            
+            // rb.velocity = new Vector2(1, rb.velocity.y) * speed;
+            rb.velocity = new Vector2(0, rb.velocity.y) + (new Vector2(1, 0) * speed);
+            // movement.x = transform.position.x + 1;
         }
         else
         {
-            movement.x = transform.position.x -1;
+            // rb.velocity = new Vector2(-1, rb.velocity.y) * speed;
+            rb.velocity = new Vector2(0, rb.velocity.y) + (new Vector2(-1, 0) * speed);
+            // movement.x = transform.position.x -1;
         }
 
         // if (y < 0)
@@ -62,7 +67,8 @@ public class simpleEnemy : enemyObject
         //     movement.y = transform.position.y -1;
         // }
         // Vector3 x = transform.position - player.transform.position;
-        rb.MovePosition(Vector3.MoveTowards(transform.position, movement, speed * Time.deltaTime));
+        // rb.MovePosition(Vector3.MoveTowards(transform.position, movement, speed * Time.deltaTime));
+        // rb.velocity = (Vector3.MoveTowards(transform.position, movement, speed * Time.deltaTime));
         // if(player.transform.position.x) 
     }
     
