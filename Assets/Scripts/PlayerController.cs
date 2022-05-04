@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     
     [Header("Collision")]
     [SerializeField] private LayerMask groundLayers;
-    private Vector3 collisionOffset;
+    private Vector2 collisionOffset;
     
     private Rigidbody2D _rigidbody2D;
     private bool onGround;
@@ -37,26 +37,28 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        collisionOffset = Vector3.right * transform.lossyScale.x / 2;
+        collisionOffset = Vector2.right * transform.lossyScale.x / 2;
     }
 
     private void Update()
     {
-        onGround = Physics2D.Raycast(
-            transform.position + collisionOffset,
-            Vector2.down,
-            transform.lossyScale.y * 0.55f,
-            ColorManager.GroundLayers) 
-                   || 
-                   Physics2D.Raycast(
-            transform.position - collisionOffset,
-            Vector2.down,
-            transform.lossyScale.y * 0.55f,
-            ColorManager.GroundLayers);
+        
     }
 
     private void FixedUpdate()
     {
+        onGround = Physics2D.Raycast(
+                       _rigidbody2D.position + collisionOffset,
+                       Vector2.down,
+                       transform.lossyScale.y * 0.55f,
+                       ColorManager.GroundLayers) 
+                   || 
+                   Physics2D.Raycast(
+                       _rigidbody2D.position - collisionOffset,
+                       Vector2.down,
+                       transform.lossyScale.y * 0.55f,
+                       ColorManager.GroundLayers);
+        
         MoveCharacter();
         if (jumpTimer > Time.time && onGround)
         {
@@ -69,7 +71,7 @@ public class PlayerController : MonoBehaviour
     private void MoveCharacter()
     {
         _rigidbody2D.AddForce(Vector2.right * movement.x * moveSpeed);
-
+        
         if (Math.Abs(_rigidbody2D.velocity.x) > maxSpeed)
         {
             float sign = Mathf.Sign(_rigidbody2D.velocity.x);
@@ -79,8 +81,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x,0);
-        print(_rigidbody2D.mass);
+        _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0);
         _rigidbody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
         jumpTimer = 0;
     }
@@ -98,12 +99,14 @@ public class PlayerController : MonoBehaviour
             {
                 _rigidbody2D.drag = 0f;
             }
-
+            
             _rigidbody2D.gravityScale = 0;
         }
         else
         {
+            _rigidbody2D.drag = 0;
             float scale = gravityScale;
+            
             if (_rigidbody2D.velocity.y < 0)
             {
                 scale *= fallMultiplier;
