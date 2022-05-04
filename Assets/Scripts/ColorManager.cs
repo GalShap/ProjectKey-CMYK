@@ -15,7 +15,7 @@ public class ColorManager : MonoBehaviour
 
         public int index =>
             Mathf.RoundToInt(Mathf.Log(layer.value,
-                2)); //LayerMask.NameToLayer(LayerMask.LayerToName(layer.value));
+                2));
     }
     
     #region Inspector
@@ -23,22 +23,12 @@ public class ColorManager : MonoBehaviour
     [SerializeField] private GameObject Player;
 
     [SerializeField] private int CurWorldColor = -1;
-    
-    // [SerializeField] private int TotalColors = 3;
 
     [SerializeField] private SpriteRenderer Background;
-
-    // [SerializeField] private List<Color> Colors = new List<Color>() {Color.red, Color.green, Color.blue};
 
     [SerializeField] private List<ColorLayer> layers;
 
     [SerializeField] private LayerMask Neutral;
-    #endregion
-
-    
-    #region Constants
-    // private const int FIRST_COLOR_LAYER = 7;
-
     #endregion
 
     #region Fields
@@ -65,6 +55,8 @@ public class ColorManager : MonoBehaviour
         }
     }
 
+    public static LayerMask NeutralLayer => _shared.Neutral;
+
     #endregion
 
     protected enum CurColor
@@ -73,7 +65,7 @@ public class ColorManager : MonoBehaviour
     }
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (_shared == null)
         {
@@ -105,6 +97,33 @@ public class ColorManager : MonoBehaviour
     {
         _shared.CurWorldColor = (_shared.CurWorldColor + 1) % _shared.TotalColors;
         _shared.SetWorldColor(_shared.CurWorldColor);
+    }
+
+    public static int GetLayer(Color c)
+    {
+        foreach (var layer in _shared.layers)
+        {
+            if (layer.color == c)
+                return layer.index;
+        }
+
+        return -1;
+    }
+
+    public static Color? GetColor(int layerValue)
+    {
+        print($"{layerValue},{_shared.Neutral.value}");
+        if (layerValue == _shared.Neutral.value)
+            return Color.white;
+        
+        foreach (var layer in _shared.layers)
+        {
+            print($"{layerValue},{layer.layer.value}");
+            if (layer.layer.value == layerValue)
+                return layer.color;
+        }
+
+        return null;
     }
     
     #endregion
