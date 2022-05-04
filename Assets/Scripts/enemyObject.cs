@@ -24,4 +24,6 @@ public class enemyObject : MonoBehaviour
         }
         return false;
     }
+    
+    
 }
