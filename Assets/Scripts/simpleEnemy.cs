@@ -37,7 +37,7 @@ public class simpleEnemy : enemyObject
     private void FixedUpdate()
     {
         if (!isAlive()) gameObject.SetActive(false);
-        if (Math.Abs(PositionX()) <= len)
+        if (Math.Abs(PositionX()) <= len && Math.Abs(PositionY()) <= 0.3f)
         {
             move();
         }
