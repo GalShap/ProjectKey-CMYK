@@ -29,6 +29,8 @@ public class ColorManager : MonoBehaviour
     [SerializeField] private List<ColorLayer> layers;
 
     [SerializeField] private LayerMask Neutral;
+
+    [SerializeField] private PlayerHUD PlayerHUD;
     #endregion
 
     #region Fields
@@ -134,6 +136,7 @@ public class ColorManager : MonoBehaviour
     {
         SetBackGroundColor(color);
         CancelCollisionLayer(color);
+        PlayerHUD.SetCurColorUI(color);
     }
     
     #endregion
