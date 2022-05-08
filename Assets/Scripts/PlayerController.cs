@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,7 +19,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float fallMultiplier = 4f;
     [SerializeField] private float gravityScale = 1f;
     [SerializeField] private float jumpDelay = 0.25f;
-    public float scale;
     private float jumpTimer;
     private bool jumping;
     
@@ -31,12 +27,17 @@ public class PlayerController : MonoBehaviour
     private Vector2 collisionOffset;
     
     private Rigidbody2D _rigidbody2D;
+    private SpriteRenderer _renderer;
+    private Animator _animator;
+    
     private bool onGround;
     private Vector2 movement;
 
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _renderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
         collisionOffset = Vector2.right * transform.lossyScale.x / 2;
     }
 
@@ -47,16 +48,17 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        float height = _renderer.sprite.rect.height / _renderer.sprite.pixelsPerUnit; 
         onGround = Physics2D.Raycast(
                        _rigidbody2D.position + collisionOffset,
                        Vector2.down,
-                       transform.lossyScale.y * 0.55f,
+                        height * 0.5f + 0.05f,
                        ColorManager.GroundLayers) 
                    || 
                    Physics2D.Raycast(
                        _rigidbody2D.position - collisionOffset,
                        Vector2.down,
-                       transform.lossyScale.y * 0.55f,
+                       height * 0.5f + 0.05f,
                        ColorManager.GroundLayers);
         
         MoveCharacter();
@@ -65,7 +67,6 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
         ModifyPhysics();
-        scale = _rigidbody2D.gravityScale;
     }
 
     private void MoveCharacter()
@@ -140,9 +141,12 @@ public class PlayerController : MonoBehaviour
         {
             case InputActionPhase.Performed:
                 movement = context.ReadValue<Vector2>();
+                _renderer.flipX = movement.x <= 0;
+                _animator.SetBool("Walking", movement.x != 0);
                 break;
             case InputActionPhase.Canceled:
                 movement = Vector2.zero;
+                _animator.SetBool("Walking", false);
                 break;
         }
     }
