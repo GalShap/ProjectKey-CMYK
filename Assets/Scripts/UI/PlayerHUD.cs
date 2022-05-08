@@ -10,7 +10,6 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private Slider lifeFill;
 
     [SerializeField] private List<Image> colorRenderers;
-    // Start is called before the first frame update
 
     private float _timeToScaleLife = 0.3f;
 
