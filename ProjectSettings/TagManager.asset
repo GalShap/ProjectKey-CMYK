@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Floor
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - Yellow
   - Cyan
   - Neutral
-  - 
+  - Camera Confiners
   - 
   - 
   - 
