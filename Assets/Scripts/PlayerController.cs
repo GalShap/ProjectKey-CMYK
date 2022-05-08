@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     [Header("Running Physics")] 
     [SerializeField] private float maxSpeed = 7f;
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float linearDrag = 5f;
+    // [SerializeField] private float linearDrag = 5f;
     
     [Header("Jumping Physics")]
     [SerializeField] private float jumpSpeed = 5f;
@@ -92,14 +92,18 @@ public class PlayerController : MonoBehaviour
         bool changingDirection = 0 > movement.x * _rigidbody2D.velocity.x;
         if (onGround)
         {
-            if (Math.Abs(movement.x) < 0.4 || changingDirection)
+            if (changingDirection)
             {
-                _rigidbody2D.drag = linearDrag;
+                _rigidbody2D.velocity = new Vector2(0, _rigidbody2D.velocity.y);
             }
-            else
-            {
-                _rigidbody2D.drag = 0f;
-            }
+            // if (Math.Abs(movement.x) < 0.4 || changingDirection)
+            // {
+            //     // _rigidbody2D.drag = linearDrag;
+            // }
+            // else
+            // {
+            //     _rigidbody2D.drag = 0f;
+            // }
             
             _rigidbody2D.gravityScale = 0;
         }
@@ -146,6 +150,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case InputActionPhase.Canceled:
                 movement = Vector2.zero;
+                _rigidbody2D.velocity = new Vector2(0, _rigidbody2D.velocity.y);
                 _animator.SetBool("Walking", false);
                 break;
         }

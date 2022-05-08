@@ -72,6 +72,7 @@ public class ColorManager : MonoBehaviour
         if (_shared == null)
         {
             _shared = this;
+            Background.color = Color.white;
             if (CurWorldColor != -1)
                 SetWorldColor(CurWorldColor);
         }
@@ -86,6 +87,14 @@ public class ColorManager : MonoBehaviour
         foreach (var l in layers)
         {
             Physics2D.IgnoreLayerCollision(l.index, Player.layer, l.index == layer);
+            Physics2D.IgnoreLayerCollision(l.index, (int) Mathf.Log(Neutral.value,2), l.index == layer);
+            foreach (var l2 in layers)
+            {
+                if (l2.index != layer)
+                {
+                    Physics2D.IgnoreLayerCollision(l.index, l2.index, l.index == layer);
+                }
+            }
         }
     }
 

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7795900407446731316}
   - component: {fileID: 6201211273585282540}
   - component: {fileID: 7079085583658117098}
+  - component: {fileID: 8583504733800406368}
   m_Layer: 10
   m_Name: Platform
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7795900407446731321}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.98, y: -1.79, z: 0}
+  m_LocalPosition: {x: -7.52, y: -2.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -157,12 +158,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62025e659154bdaa3a7261213dc8cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isColor: 0
   layer:
     serializedVersion: 2
     m_Bits: 1024
   neutralSprite: {fileID: 21300000, guid: 29cb4710e66e6b34fb3ebf54f2c6bf19, type: 3}
   whiteSprite: {fileID: 21300000, guid: 69f6f58f07eec124e9e4e690341561c7, type: 3}
+--- !u!251 &8583504733800406368
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7795900407446731321}
+  m_Enabled: 0
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!114 &-8868429515241254223
 MonoBehaviour:
   m_ObjectHideFlags: 0

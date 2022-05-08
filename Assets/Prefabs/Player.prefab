@@ -51,8 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 5
   moveSpeed: 3.5
-  linearDrag: 8
-  jumpSpeed: 6
+  jumpSpeed: 6.5
   fallMultiplier: 2.5
   gravityScale: 1
   jumpDelay: 0.15
