@@ -5,19 +5,19 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    [SerializeField] private CinemachineVirtualCamera leftCam;
-    [SerializeField] private CinemachineVirtualCamera rightCam;
+    [SerializeField] private Room leftRoom;
+    [SerializeField] private Room rightRoom;
 
     private void SetPriorities(int left, int right)
     {
         // dont add to priority if already positive
-        if (leftCam.Priority * left > 0 || rightCam.Priority * right > 0)
+        if (leftRoom.Camera.Priority * left > 0 || rightRoom.Camera.Priority * right > 0)
         {
             print("here");
             return;
         }
-        leftCam.Priority += left;
-        rightCam.Priority += right;
+        leftRoom.Camera.Priority += left;
+        rightRoom.Camera.Priority += right;
     }
 
     public void SetLeftCamera() => SetPriorities(1,-1);

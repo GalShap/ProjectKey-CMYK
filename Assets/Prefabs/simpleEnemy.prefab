@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: -7191191578019289835}
   - component: {fileID: 345676864710358490}
   - component: {fileID: 493031402523882575}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: simpleEnemy
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,6 +99,9 @@ MonoBehaviour:
   _currentTarget: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
   speed: 4
+  len: 4
+  places: []
+  counter: 0
 --- !u!50 &493031402523882575
 Rigidbody2D:
   serializedVersion: 4

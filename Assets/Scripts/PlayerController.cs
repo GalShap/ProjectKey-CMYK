@@ -60,8 +60,10 @@ public class PlayerController : MonoBehaviour
                        Vector2.down,
                        height * 0.5f + 0.05f,
                        ColorManager.GroundLayers);
-        
-        MoveCharacter();
+        if (movement != Vector2.zero)
+        {
+            MoveCharacter();
+        }
         if (jumpTimer > Time.time && onGround)
         {
             Jump();

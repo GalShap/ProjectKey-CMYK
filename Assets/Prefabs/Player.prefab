@@ -49,10 +49,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3e46774b6e4f6e4cb14e6958bf2c9e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 5
-  moveSpeed: 3.5
-  jumpSpeed: 6.5
-  fallMultiplier: 2.5
+  maxSpeed: 6
+  moveSpeed: 5
+  jumpSpeed: 8
+  fallMultiplier: 3.5
   gravityScale: 1
   jumpDelay: 0.15
   groundLayers:

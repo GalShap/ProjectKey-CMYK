@@ -123,13 +123,11 @@ public class ColorManager : MonoBehaviour
 
     public static Color? GetColor(int layerValue)
     {
-        print($"{layerValue},{_shared.Neutral.value}");
         if (layerValue == _shared.Neutral.value)
             return Color.white;
         
         foreach (var layer in _shared.layers)
         {
-            print($"{layerValue},{layer.layer.value}");
             if (layer.layer.value == layerValue)
                 return layer.color;
         }

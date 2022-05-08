@@ -36,7 +36,7 @@ public class PlayerHUD : MonoBehaviour
 
     #region Constants
 
-    private const int MAX_LIFE = 6;
+    public const int MAX_LIFE = 6;
 
     private const int MAX_LIFE_VALUE = 120;
 
@@ -82,8 +82,8 @@ public class PlayerHUD : MonoBehaviour
 
     public void SetCurColorUI(int newColor)
     {
-        StartCoroutine(ChangeColor(_curActiveColor, newColor));
-        _curActiveColor = newColor;
+        // StartCoroutine(ChangeColor(_curActiveColor, newColor));
+        // _curActiveColor = newColor;
     }
 
     private IEnumerator ChangeColor(int curColor, int newColor)
