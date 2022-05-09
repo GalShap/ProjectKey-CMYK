@@ -51,8 +51,6 @@ public class PlayerHUD : MonoBehaviour
         lifeFill.value = MAX_LIFE_VALUE;
     }
 
-    // Update is called once per frame
-
     public void removeLifeOnUI(int livesToRemove)
     {   
      
@@ -82,8 +80,8 @@ public class PlayerHUD : MonoBehaviour
 
     public void SetCurColorUI(int newColor)
     {
-        // StartCoroutine(ChangeColor(_curActiveColor, newColor));
-        // _curActiveColor = newColor;
+        StartCoroutine(ChangeColor(_curActiveColor, newColor));
+        _curActiveColor = newColor;
     }
 
     private IEnumerator ChangeColor(int curColor, int newColor)

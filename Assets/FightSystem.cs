@@ -17,14 +17,16 @@ public class FightSystem : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Vector2 normal = other.contacts[0].normal;
-        print(normal);
-        _rigidbody.AddForce(normal);
-
-        if (lives > 0)
+        if(other.gameObject.CompareTag("Monster"))
         {
-            lives -= 1;
-            hud.removeLifeOnUI(1);
+            Vector2 normal = other.contacts[0].normal;
+            _rigidbody.AddForce(normal);
+
+            if (lives > 0)
+            {
+                lives -= 1;
+                hud.removeLifeOnUI(1);
+            }
         }
     }
 }
