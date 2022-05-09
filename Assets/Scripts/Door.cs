@@ -10,6 +10,7 @@ public class Door : MonoBehaviour
 
     private void SetPriorities(int left, int right)
     {
+        print("hi");
         // dont add to priority if already positive
         if (leftRoom.Camera.Priority * left > 0 || rightRoom.Camera.Priority * right > 0)
         {
