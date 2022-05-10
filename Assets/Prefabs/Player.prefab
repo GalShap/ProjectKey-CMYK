@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 315701123}
   - component: {fileID: 171750083408035272}
   - component: {fileID: 6782527906361684794}
+  - component: {fileID: 315701129}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -49,9 +50,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3e46774b6e4f6e4cb14e6958bf2c9e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 6
-  moveSpeed: 5
-  jumpSpeed: 8
+  maxSpeed: 5.5
+  moveSpeed: 4
+  linearDrag: 7
+  jumpSpeed: 7
   fallMultiplier: 3.5
   gravityScale: 1
   jumpDelay: 0.15
@@ -269,3 +271,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &315701129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8863397447226026584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcddeb59b4ebe274ab9853b2a21408c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hud: {fileID: 0}
