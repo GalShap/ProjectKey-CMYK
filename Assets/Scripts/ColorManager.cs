@@ -86,15 +86,16 @@ public class ColorManager : MonoBehaviour
         int layer = layers[pos].index;
         foreach (var l in layers)
         {
+            print($"{l.index}, {layer}");
             Physics2D.IgnoreLayerCollision(l.index, Player.layer, l.index == layer);
             Physics2D.IgnoreLayerCollision(l.index, (int) Mathf.Log(Neutral.value,2), l.index == layer);
-            foreach (var l2 in layers)
-            {
-                if (l2.index != layer)
-                {
-                    Physics2D.IgnoreLayerCollision(l.index, l2.index, l.index == layer);
-                }
-            }
+            // foreach (var l2 in layers)
+            // {
+            //     if (l2.index != layer)
+            //     {
+            //         Physics2D.IgnoreLayerCollision(l.index, l2.index, l.index == layer);
+            //     }
+            // }
         }
     }
 
@@ -143,7 +144,7 @@ public class ColorManager : MonoBehaviour
     {
         SetBackGroundColor(color);
         CancelCollisionLayer(color);
-        PlayerHUD.SetCurColorUI(color);
+        // PlayerHUD.SetCurColorUI(color);
     }
     
     #endregion
