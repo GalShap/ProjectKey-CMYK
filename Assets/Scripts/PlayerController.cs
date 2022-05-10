@@ -4,15 +4,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    /**
-     * TODO:
-     * 1. find best jump values
-     * 2. smooth running : https://www.youtube.com/watch?v=USLp-4iwNnQ
-     */
     [Header("Running Physics")] 
     [SerializeField] private float maxSpeed = 7f;
     [SerializeField] private float moveSpeed = 5f;
-    // [SerializeField] private float linearDrag = 5f;
+    [SerializeField] private float linearDrag = 5f;
     
     [Header("Jumping Physics")]
     [SerializeField] private float jumpSpeed = 5f;
@@ -60,14 +55,12 @@ public class PlayerController : MonoBehaviour
                        Vector2.down,
                        height * 0.5f + 0.05f,
                        ColorManager.GroundLayers);
-        if (movement != Vector2.zero)
-        {
-            MoveCharacter();
-        }
+        
         if (jumpTimer > Time.time && onGround)
         {
             Jump();
         }
+        MoveCharacter();
         ModifyPhysics();
     }
 
@@ -94,18 +87,14 @@ public class PlayerController : MonoBehaviour
         bool changingDirection = 0 > movement.x * _rigidbody2D.velocity.x;
         if (onGround)
         {
-            if (changingDirection)
+            if (Math.Abs(movement.x) < 0.4 || changingDirection)
             {
-                _rigidbody2D.velocity = new Vector2(0, _rigidbody2D.velocity.y);
+                _rigidbody2D.drag = linearDrag;
             }
-            // if (Math.Abs(movement.x) < 0.4 || changingDirection)
-            // {
-            //     // _rigidbody2D.drag = linearDrag;
-            // }
-            // else
-            // {
-            //     _rigidbody2D.drag = 0f;
-            // }
+            else
+            {
+                _rigidbody2D.drag = 0f;
+            }
             
             _rigidbody2D.gravityScale = 0;
         }
@@ -152,7 +141,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case InputActionPhase.Canceled:
                 movement = Vector2.zero;
-                _rigidbody2D.velocity = new Vector2(0, _rigidbody2D.velocity.y);
+                // _rigidbody2D.velocity = new Vector2(0, _rigidbody2D.velocity.y);
                 _animator.SetBool("Walking", false);
                 break;
         }
