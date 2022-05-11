@@ -10,8 +10,10 @@ public class RoundMonster : EnemyObject
     [SerializeField] private float maxRight;
     [SerializeField] private float currentDiag;
     [SerializeField] public GameObject player;
+    [SerializeField] public GameObject cannon;
+    [SerializeField] public Transform shootingSpot;
     float smooth = 5.0f;
-    float tiltAngle = 60.0f;
+    float tiltAngle = 60.0f; 
     Vector3 start;
     private float len = 0;
 
@@ -43,10 +45,10 @@ public class RoundMonster : EnemyObject
         // float tiltAroundX = (clockWise? len: -len) * len;
         
         // Move the player around the scene.
-        Move(tiltAroundX, tiltAroundZ);
+        Move(tiltAroundZ);
     }
 
-    void Move(float h, float v)
+    void Move(float v)
     {
         // Rotate the cube by converting the angles into a quaternion.
         Quaternion target = Quaternion.Euler(0, 0, v);
@@ -57,10 +59,17 @@ public class RoundMonster : EnemyObject
 
     }
 
+    void Shoot()
+    {
+        
+    }
+
     protected override void UponDead()
     {
         throw new System.NotImplementedException();
     }
+    
+    
     
 
    

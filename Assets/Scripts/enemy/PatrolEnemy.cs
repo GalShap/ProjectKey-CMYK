@@ -6,9 +6,9 @@ using UnityEngine;
 public class PatrolEnemy : EnemyObject
 {
     [SerializeField] public GameObject player;
-    [SerializeField] private float speed = 2f;
+    [SerializeField] protected float speed = 2f;
     [SerializeField] protected Transform[] places;
-    [SerializeField] private int counter;
+    [SerializeField] protected int counter;
     // Start is called before the first frame update
 
     private void Awake()
