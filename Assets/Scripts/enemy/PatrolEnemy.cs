@@ -29,7 +29,7 @@ public class PatrolEnemy : EnemyObject
     /**
      * move the enemy by following the places transform positions.
      */
-    private void Move()
+    protected void Move()
     {
         var x = transform.position.x - places[counter].position.x;
         rb.velocity = new Vector2((x <= 0 ? speed : -speed),

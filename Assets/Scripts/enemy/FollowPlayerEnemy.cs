@@ -23,12 +23,12 @@ public class FollowPlayerEnemy : EnemyObject
 
     
     // physics is best, when activating it in Fixed update. 
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
         if (!isAlive()) UponDead();
         if (Math.Abs(PositionX()) <= len && Math.Abs(PositionY()) <= 0.4f)
         {
-            move();
+            Move();
         }
     }
 
@@ -41,7 +41,7 @@ public class FollowPlayerEnemy : EnemyObject
     /**
      * move the enemy by following the player.
      */
-    void move()
+    protected void Move()
     {
         rb.velocity = new Vector2((PositionX() < 0 ? speed : -speed),
             rb.velocity.y);

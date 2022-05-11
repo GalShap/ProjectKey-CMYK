@@ -224,8 +224,10 @@ MonoBehaviour:
   maxRight: -3
   currentDiag: 0
   player: {fileID: 8863397447226026584, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
-  cannon: {fileID: 0}
-  shootingSpot: {fileID: 0}
+  cannon: {fileID: 3209655900275327285}
+  shootingSpot: {fileID: 6460234798318376249}
+  smooth: 5
+  tiltAngle: 60
 --- !u!212 &7129580432990768439
 SpriteRenderer:
   m_ObjectHideFlags: 0

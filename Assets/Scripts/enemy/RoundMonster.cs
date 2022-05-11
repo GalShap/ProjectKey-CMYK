@@ -5,15 +5,15 @@ using UnityEngine;
 public class RoundMonster : EnemyObject
 {
     // public float speed = 6f; // The speed that the player will move at.
-     private bool clockWise;
+    private bool clockWise;
     [SerializeField] private float maxLeft;
     [SerializeField] private float maxRight;
     [SerializeField] private float currentDiag;
     [SerializeField] public GameObject player;
     [SerializeField] public GameObject cannon;
     [SerializeField] public Transform shootingSpot;
-    float smooth = 5.0f;
-    float tiltAngle = 60.0f; 
+    [SerializeField] float smooth = 5.0f;
+    [SerializeField] float tiltAngle = 60.0f;
     Vector3 start;
     private float len = 0;
 
@@ -30,20 +30,18 @@ public class RoundMonster : EnemyObject
         if (!isAlive()) UponDead();
         // Store the input axes.
         // Smoothly tilts a transform towards a target rotation.
-        len = clockWise? (len +1): (len -1);
+        len = clockWise ? (len + 1) : (len - 1);
         if (len == tiltAngle)
         {
             clockWise = false;
         }
-        else if(len == -tiltAngle)
+        else if (len == -tiltAngle)
         {
             clockWise = true;
         }
-        float tiltAroundZ =  len;
-        // float tiltAroundZ = (clockWise? len: -len) * len;
-        float tiltAroundX =  len;
-        // float tiltAroundX = (clockWise? len: -len) * len;
-        
+
+        float tiltAroundZ = len;
+
         // Move the player around the scene.
         Move(tiltAroundZ);
     }
@@ -54,23 +52,11 @@ public class RoundMonster : EnemyObject
         Quaternion target = Quaternion.Euler(0, 0, v);
 
         // Dampen towards the target rotation
-        transform.rotation = Quaternion.Slerp(transform.rotation, target,  Time.deltaTime * smooth);
-
-
-    }
-
-    void Shoot()
-    {
-        
+        transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * smooth);
     }
 
     protected override void UponDead()
     {
         throw new System.NotImplementedException();
     }
-    
-    
-    
-
-   
 }
