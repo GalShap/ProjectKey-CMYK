@@ -30,12 +30,18 @@ public class DialogueManager : MonoBehaviour
     public bool hasDialogue = false;
     
     public static DialogueManager Manager;
-
+    
+    #region Constants
+    
     private const int NO_LINES = 0;
 
     private const int ZERO_SCALE = 0;
 
     private const int FULL_SCALE = 1;
+    
+    #endregion
+    
+    #region MonoBehaviour
     void Awake()
     {   
         // singleton stuff
@@ -55,31 +61,26 @@ public class DialogueManager : MonoBehaviour
         
         Debug.Log(_dialogueLines.Count);
     }
-
-    private void OnEnable()
+    void OnEnable()
     {
         StartCoroutine(ResizeDialogueBox(ZERO_SCALE, FULL_SCALE));
     }
-
-    public void DisableDialog()
-    {
-        StartCoroutine(ResizeDialogueBox(FULL_SCALE, ZERO_SCALE));
-        gameObject.SetActive(true);
-    }
-    private void Start()
+    void Start()
     {  
         if (hasDialogue)
             NextDialogue();
     }
-
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         if (Input.anyKeyDown && hasDialogue)
         {
             NextDialogue();
         }
     }
-
+    #endregion
+    
+    #region Private Methods
+    
     private void NextDialogue()
     {
         Tuple<string, int> nextLine = _dialogueLines.Dequeue();
@@ -89,8 +90,7 @@ public class DialogueManager : MonoBehaviour
         if (_dialogueLines.Count == NO_LINES)
             hasDialogue = false;
     }
-
-    IEnumerator DisplayNextLine(Tuple<string, int> next)
+    private IEnumerator DisplayNextLine(Tuple<string, int> next)
     {
         speakerImage.sprite = SpeakersSprites[next.Item2];
         TextBox.text = "";
@@ -100,8 +100,7 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.0125f);
         }
     }
-
-    IEnumerator ResizeDialogueBox(float start, float end)
+    private IEnumerator ResizeDialogueBox(float start, float end)
     {   
         
         Vector3 newScale = new Vector3(start, start, start);
@@ -116,5 +115,40 @@ public class DialogueManager : MonoBehaviour
         }
     }
     
+    #endregion
+    
+    #region Public Methods
+    
+    /// <summary>
+    /// use this function when you want to set the dialogue box to inactive.
+    /// resizes the box to 0 and deactivates object. 
+    /// </summary>
+    public void DisableDialog()
+    {
+        StartCoroutine(ResizeDialogueBox(FULL_SCALE, ZERO_SCALE));
+        gameObject.SetActive(true);
+    }
+    
+    /// <summary>
+    /// loads a new block of dialogue to the dialogue manager. 
+    /// </summary>
+    /// <param name="dialogues">
+    /// a list of dialogue lines
+    /// </param>
+    /// <param name="speakersId">
+    /// a list that has the index of the speaker image of the current line in the sprites list. 
+    /// </param>
+    public void LoadNewDialog(List<string> dialogues, List<int> speakersId)
+    {
+        _dialogueLines = new Queue<Tuple<string, int>>();
+        for (int i = 0; i < dialogues.Count; i++)
+        {
+            var curLine = new Tuple<string, int>(dialogues[i], speakersId[i]);
+            _dialogueLines.Enqueue(curLine);
+        }
+
+    }
+    
+    #endregion
 }
 
