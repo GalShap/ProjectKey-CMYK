@@ -140,4 +140,9 @@ public class PlayerHUD : MonoBehaviour
         }
         
     }
+
+    public void AddColor(ColorManager.ColorLayer cl)
+    {
+        return;
+    }
 }

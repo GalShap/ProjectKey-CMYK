@@ -89,13 +89,13 @@ public class ColorManager : MonoBehaviour
             print($"{l.index}, {layer}");
             Physics2D.IgnoreLayerCollision(l.index, Player.layer, l.index == layer);
             Physics2D.IgnoreLayerCollision(l.index, (int) Mathf.Log(Neutral.value,2), l.index == layer);
-            // foreach (var l2 in layers)
-            // {
-            //     if (l2.index != layer)
-            //     {
-            //         Physics2D.IgnoreLayerCollision(l.index, l2.index, l.index == layer);
-            //     }
-            // }
+            foreach (var l2 in layers)
+            {
+                if (l2.index != layer)
+                {
+                    Physics2D.IgnoreLayerCollision(l.index, l2.index, l.index == layer);
+                }
+            }
         }
     }
 
@@ -109,6 +109,15 @@ public class ColorManager : MonoBehaviour
     {
         _shared.CurWorldColor = (_shared.CurWorldColor + 1) % _shared.TotalColors;
         _shared.SetWorldColor(_shared.CurWorldColor);
+    }
+
+    public static void AddColor(Color c, LayerMask l)
+    {
+        ColorLayer cl = new ColorLayer();
+        cl.color = c;
+        cl.layer = l;
+        _shared.layers.Add(cl);
+        _shared.PlayerHUD.AddColor(cl);
     }
 
     public static int GetLayer(Color c)
