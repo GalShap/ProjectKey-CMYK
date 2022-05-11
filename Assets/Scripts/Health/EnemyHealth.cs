@@ -1,0 +1,62 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class EnemyHealth : MonoBehaviour, IDamageable
+{
+    [SerializeField] private int health = 100;
+
+    private const int MAX_HEALTH = 100;
+
+    private const int MIN_HEALTH = 0;
+    
+    // Update is called once per frame
+    void Update()
+    {
+        if (health == MIN_HEALTH)
+            Dead();
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Attack"))
+        {
+            Damage(50);
+        }
+    }
+
+    public void Damage(int amount)
+    {
+        health -= amount;
+        if (health < MIN_HEALTH)
+            health = MIN_HEALTH;
+    }
+
+    public void Heal(int amount)
+    {
+        health += amount;
+        if (health > MAX_HEALTH)
+            health = MAX_HEALTH;
+    }
+
+    public void SetHealth(int amount)
+    {
+        health = amount;
+        if (health > MAX_HEALTH)
+            health = MAX_HEALTH;
+        
+        else if (health < MIN_HEALTH)
+            health = MIN_HEALTH;
+    }
+
+    public int GetHealth()
+    {
+        return health;
+    }
+
+    public void Dead()
+    {
+        Debug.Log("Enemy is Dead!");
+    }
+}
