@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -7191191578019289835}
   - component: {fileID: 345676864710358490}
   - component: {fileID: 493031402523882575}
-  - component: {fileID: -7422629483906138177}
+  - component: {fileID: 7631345788110696118}
   m_Layer: 10
   m_Name: followPleyerEnemy
   m_TagString: Monster
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: a5c5212645c7bc542841b614e466c30f, type: 3}
+  m_Sprite: {fileID: -8108438390446734492, guid: 0581e9e94a6a1494a832a4d22b139fc6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -124,7 +124,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &-7422629483906138177
+--- !u!70 &7631345788110696118
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,5 +138,5 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1.24, y: 1.51}
   m_Direction: 0

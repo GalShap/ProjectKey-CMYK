@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Avrahamy.Math;
 using UnityEngine;
+using System;
 
 public class RoundMonster : EnemyObject
 {
@@ -12,47 +14,56 @@ public class RoundMonster : EnemyObject
     [SerializeField] public GameObject player;
     [SerializeField] public GameObject cannon;
     [SerializeField] public Transform shootingSpot;
-    [SerializeField] float smooth = 5.0f;
+    [SerializeField] float smooth = 1.0f;
     [SerializeField] float tiltAngle = 60.0f;
-    Vector3 start;
+    private float tiltAngle_ = 60.0f;
+    [SerializeField] float attackAngleFromPlayer = 3.0f;
+    Quaternion start;
+    Quaternion target;
     private float len = 0;
 
     void Awake()
     {
-        start = gameObject.transform.position;
+        start = gameObject.transform.rotation;
         movement = gameObject.transform.position;
         rb = GetComponent<Rigidbody2D>();
+        tiltAngle_ = tiltAngle;
+        target = Quaternion.Euler(0, 0, tiltAngle_) * start;
     }
 
 
-    void FixedUpdate()
+    void Update()
     {
+        print(player.GetComponent<Rigidbody2D>().transform.position - transform.position);
         if (!isAlive()) UponDead();
-        // Store the input axes.
-        // Smoothly tilts a transform towards a target rotation.
-        len = clockWise ? (len + 1) : (len - 1);
-        if (len == tiltAngle)
-        {
-            clockWise = false;
-        }
-        else if (len == -tiltAngle)
-        {
-            clockWise = true;
-        }
-
-        float tiltAroundZ = len;
-
         // Move the player around the scene.
-        Move(tiltAroundZ);
+        // if (IsInDegreeRange(attackAngleFromPlayer))
+            // return;
+        Move();
     }
 
-    void Move(float v)
+    void Move()
     {
         // Rotate the cube by converting the angles into a quaternion.
-        Quaternion target = Quaternion.Euler(0, 0, v);
 
-        // Dampen towards the target rotation
-        transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * smooth);
+        if ((target == transform.rotation))
+        {
+            tiltAngle_ *= -1;
+            target = Quaternion.Euler(0, 0, tiltAngle_) * start;
+        }
+        
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, target, Time.deltaTime * smooth);
+        
+    }
+
+
+    public bool IsInDegreeRange(float degreeRange)
+    {
+        Vector3 playerPosition = player.transform.position;
+        Vector3 dir = playerPosition - transform.position;
+        float angle = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg;
+        return transform.rotation == Quaternion.AngleAxis(angle, Vector3.forward);
+        // float deg = transform.position.x - transform.position.y
     }
 
     protected override void UponDead()

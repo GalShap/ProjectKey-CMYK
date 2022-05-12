@@ -16,19 +16,21 @@ public class CannonScript : MonoBehaviour
     public Transform m_SpawnTransform; // this is a reference to the transform where the prefab will spawn
     public GameObject player;
     [SerializeField] private float len = 4f;
-    private int counter = 10;
+    [SerializeField] private float timerCounter = 3;
+    private float timer = 0;
+
 
     /// <summary>
     /// Message that is called once per frame
     /// </summary>
-    private void FixedUpdate()
+    private void Update()
     {
-        counter--;
-        if (counter > 0) return;
+        timer -= Time.deltaTime;
+        if (!(timer <= 0)) return;
         Shoot();
-        counter = 10;
+        timer = timerCounter;
     }
-
+    
     protected void Shoot()
     {
         Instantiate(m_Projectile, m_SpawnTransform.position, m_SpawnTransform.rotation);
