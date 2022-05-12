@@ -26,27 +26,31 @@ public class ColorManager : MonoBehaviour
 
     [SerializeField] private SpriteRenderer Background;
 
-    [SerializeField] private List<ColorLayer> layers;
+    [SerializeField] private List<ColorLayer> AllLayers;
 
     [SerializeField] private LayerMask Neutral;
 
     [SerializeField] private PlayerHUD PlayerHUD;
+
+    [SerializeField] private bool startWithAll;
     #endregion
 
     #region Fields
 
-    public static int CurrLayer => _shared.layers[_shared.CurWorldColor].index;
+    public static int CurrLayer => _shared.AllLayers[_shared.CurWorldColor].index;
 
     private static ColorManager _shared;
 
-    private int TotalColors => layers.Count;
+    private int TotalColors => AllLayers.Count;
+
+    private List<ColorLayer> availableLayers;
 
     public static LayerMask GroundLayers
     {
         get
         {
             LayerMask m = _shared.Neutral;
-            foreach (var layer in _shared.layers)
+            foreach (var layer in _shared.AllLayers)
             {
                 if(_shared.CurWorldColor != -1 && layer.index == CurrLayer)
                     continue;
@@ -72,57 +76,95 @@ public class ColorManager : MonoBehaviour
         if (_shared == null)
         {
             _shared = this;
+            InitAvailable();
             Background.color = Color.white;
             if (CurWorldColor != -1)
                 SetWorldColor(CurWorldColor);
         }
     }
 
+    private void InitAvailable()
+    {
+        if (startWithAll)
+        {
+            availableLayers = AllLayers;
+        }
+        else
+        {
+            availableLayers = new List<ColorLayer>();
+            ColorLayer? cl = GetColorLayer(Neutral.value);
+            if(cl == null)
+                return;
+            availableLayers.Add((ColorLayer) cl);   
+        }
+    }
+
     #region Private Methods
     
     // function disables the given layer and enables all other layers. 
-    private void CancelCollisionLayer(int pos)
+    private void CancelCollisionLayer(ColorLayer layer)
     {
-        int layer = layers[pos].index;
-        foreach (var l in layers)
+        foreach (var l in AllLayers)
         {
-            print($"{l.index}, {layer}");
-            Physics2D.IgnoreLayerCollision(l.index, Player.layer, l.index == layer);
-            Physics2D.IgnoreLayerCollision(l.index, (int) Mathf.Log(Neutral.value,2), l.index == layer);
-            foreach (var l2 in layers)
+            bool ignore = layer.layer != Neutral.value && l.index == layer.index;
+            Physics2D.IgnoreLayerCollision(l.index, Player.layer, ignore);
+            foreach (var l2 in AllLayers)
             {
-                if (l2.index != layer)
+                if (l2.index != layer.index)
                 {
-                    Physics2D.IgnoreLayerCollision(l.index, l2.index, l.index == layer);
+                    Physics2D.IgnoreLayerCollision(l.index, l2.index, ignore);
                 }
             }
         }
     }
 
     // color: the index of the color in the Colors list
-    private void SetBackGroundColor(int color)
+    private void SetBackGroundColor(Color color)
     {
-        Background.color = layers[color].color;
+        Background.color = color;
     }
 
     public static void RotateColor()
     {
-        _shared.CurWorldColor = (_shared.CurWorldColor + 1) % _shared.TotalColors;
+        _shared.CurWorldColor = (_shared.CurWorldColor + 1) % _shared.availableLayers.Count;
         _shared.SetWorldColor(_shared.CurWorldColor);
     }
 
-    public static void AddColor(Color c, LayerMask l)
+    public static void AddColor(LayerMask l)
     {
-        ColorLayer cl = new ColorLayer();
-        cl.color = c;
-        cl.layer = l;
-        _shared.layers.Add(cl);
-        _shared.PlayerHUD.AddColor(cl);
+        ColorLayer? cl = GetColorLayer(l.value);
+        if(cl == null || _shared.availableLayers.Contains((ColorLayer) cl))
+            return;
+        
+        _shared.availableLayers.Add((ColorLayer) cl);
+        _shared.PlayerHUD.AddColor((ColorLayer) cl);
     }
 
+    public static ColorLayer? GetColorLayer(int layerValue)
+    {
+        foreach (var layer in _shared.AllLayers)
+        {
+            if (layer.layer.value == layerValue)
+                return layer;
+        }
+
+        return null;
+    }
+    
+    public static ColorLayer? GetColorLayer(Color color)
+    {
+        foreach (var layer in _shared.AllLayers)
+        {
+            if (layer.color == color)
+                return layer;
+        }
+
+        return null;
+    }
+    
     public static int GetLayer(Color c)
     {
-        foreach (var layer in _shared.layers)
+        foreach (var layer in _shared.AllLayers)
         {
             if (layer.color == c)
                 return layer.index;
@@ -131,12 +173,13 @@ public class ColorManager : MonoBehaviour
         return -1;
     }
 
-    public static Color? GetColor(int layerValue)
+    public static Color? GetColor(LayerMask mask)
     {
+        int layerValue = mask.value;
         if (layerValue == _shared.Neutral.value)
             return Color.white;
         
-        foreach (var layer in _shared.layers)
+        foreach (var layer in _shared.AllLayers)
         {
             if (layer.layer.value == layerValue)
                 return layer.color;
@@ -151,8 +194,9 @@ public class ColorManager : MonoBehaviour
     
     public void SetWorldColor(int color)
     {
-        SetBackGroundColor(color);
-        CancelCollisionLayer(color);
+        ColorLayer cl = availableLayers[color];
+        SetBackGroundColor(cl.color);
+        CancelCollisionLayer(cl);
         // PlayerHUD.SetCurColorUI(color);
     }
     

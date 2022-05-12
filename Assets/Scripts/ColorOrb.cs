@@ -9,14 +9,24 @@ public class ColorOrb : MonoBehaviour
     
     private SpriteRenderer _renderer;
 
-    private void Awake()
+    private void Start()
     {
         _renderer = GetComponent<SpriteRenderer>();
+        Init();
+    }
+
+    private void Init()
+    {
+        ColorManager.ColorLayer? cl = ColorManager.GetColorLayer(layer.value);
+        if (cl == null)
+            return;
+        _renderer.color = (Color) cl?.color;
+        gameObject.layer = (int) cl?.index;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        ColorManager.AddColor(_renderer.color, layer);
+        ColorManager.AddColor(layer);
         Destroy(gameObject);
     }
 }
