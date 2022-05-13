@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemyObject : MonoBehaviour
+public abstract class EnemyObject : MonoBehaviour
 {
     protected int lifeCount = 3;
-
+    protected abstract void UponDead();
     protected Rigidbody2D rb;
     protected Vector3 movement;
     
@@ -24,6 +24,8 @@ public class enemyObject : MonoBehaviour
         }
         return false;
     }
+
     
-    
+
+
 }
