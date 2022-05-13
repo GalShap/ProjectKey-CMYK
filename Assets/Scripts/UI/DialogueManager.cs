@@ -27,6 +27,10 @@ public class DialogueManager : MonoBehaviour
 
     private float _timeToScaleBox = 0.5f;
 
+    private float timer = 0.5f;
+
+    private float time = 0;
+
     public bool hasDialogue = false;
 
     private bool dialogueEnd = false;
@@ -75,10 +79,15 @@ public class DialogueManager : MonoBehaviour
     }
     void Update()
     {
-        if (Input.anyKeyDown && hasDialogue)
+        time += Time.deltaTime;
+
+        if (Input.anyKeyDown && hasDialogue && (time >= timer))
+        {
             NextDialogue();
-        
-        else if (Input.anyKeyDown && !hasDialogue && !dialogueEnd)
+            time = 0;
+        }
+
+        else if (Input.anyKeyDown && !hasDialogue && !dialogueEnd && (time >= timer))
         {   
             Debug.Log("disabling!");
             dialogueEnd = true;

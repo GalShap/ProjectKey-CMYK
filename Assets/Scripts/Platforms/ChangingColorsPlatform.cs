@@ -40,8 +40,5 @@ public class ChangingColorsPlatform : ColorObject
 
             time = RESET_TIME;
         }
-        
-
-
     }
 }
