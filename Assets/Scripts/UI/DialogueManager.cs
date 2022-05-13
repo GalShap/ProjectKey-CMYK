@@ -79,7 +79,8 @@ public class DialogueManager : MonoBehaviour
             NextDialogue();
         
         else if (Input.anyKeyDown && !hasDialogue && !dialogueEnd)
-        {
+        {   
+            Debug.Log("disabling!");
             dialogueEnd = true;
             DisableDialog();
         }
@@ -120,6 +121,13 @@ public class DialogueManager : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        
+    }
+
+    private IEnumerator Wait(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
     }
     
     #endregion
@@ -133,7 +141,7 @@ public class DialogueManager : MonoBehaviour
     public void DisableDialog()
     {
         StartCoroutine(ResizeDialogueBox(FULL_SCALE, ZERO_SCALE));
-        gameObject.SetActive(true);
+        gameObject.SetActive(false);
     }
     
     /// <summary>
