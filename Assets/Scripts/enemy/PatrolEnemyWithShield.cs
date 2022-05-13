@@ -10,16 +10,20 @@ public class PatrolEnemyWithShield : PatrolEnemy
     
     [SerializeField] private Transform place1;
     [SerializeField] private Transform place2;
+    private float x = 0f;
 
     private void FixedUpdate()
     {
         if (!isAlive()) UponDead();
         Move();
-        MoveShield();
+        if(rb.velocity.x != x)
+            MoveShield();
     }
 
     private void MoveShield()
     {
-        rig.transform.position = rb.velocity.x < 0 ? place1.position : place2.position;
+        x = rb.velocity.x;
+        rig.transform.position = x < 0 ? place1.position : place2.position;
+        shield.GetComponent<SpriteRenderer>().flipX = x < 0 ? true: false;
     }
 }
