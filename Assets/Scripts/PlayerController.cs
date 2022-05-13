@@ -20,6 +20,11 @@ public class PlayerController : MonoBehaviour
     [Header("Collision")]
     [SerializeField] private LayerMask groundLayers;
     private Vector2 collisionOffset;
+
+    [Header("Attack")] 
+    [SerializeField] private float attackTimer;
+    [SerializeField] private Collider2D attackCollider;
+    private float attackCounter = 0;
     
     private Rigidbody2D _rigidbody2D;
     private SpriteRenderer _renderer;
@@ -27,6 +32,8 @@ public class PlayerController : MonoBehaviour
     
     private bool onGround;
     private Vector2 movement;
+    private static readonly int Attack = Animator.StringToHash("Attack");
+    private static readonly int Walking = Animator.StringToHash("Walking");
 
     private void Awake()
     {
@@ -38,7 +45,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        
+        if (attackCounter > 0)
+        {
+            attackCounter -= Time.deltaTime;
+        }
     }
 
     private void FixedUpdate()
@@ -116,6 +126,29 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void EndAttack()
+    {
+        attackCollider.gameObject.SetActive(false);
+    }
+
+    public void onAttack(InputAction.CallbackContext context)
+    {
+        switch (context.phase)
+        {
+            case InputActionPhase.Started:
+                if (attackCounter <= 0)
+                {
+                    _animator.SetTrigger(Attack);
+                    _rigidbody2D.velocity = Vector2.zero;
+                    attackCollider.gameObject.SetActive(true);
+                    attackCounter = attackTimer;
+                }
+                break;
+            case InputActionPhase.Canceled:
+                break;
+        }
+    }
+
     public void onJump(InputAction.CallbackContext context)
     {
         switch (context.phase)
@@ -136,13 +169,24 @@ public class PlayerController : MonoBehaviour
         {
             case InputActionPhase.Performed:
                 movement = context.ReadValue<Vector2>();
+                
+                bool facingRight = _renderer.flipX;
+                
+                //change attack collider location
+                bool changingDir = facingRight != movement.x <= 0;
+                if (changingDir)
+                {
+                    var pos = attackCollider.gameObject.transform.localPosition;
+                    pos.x *= -1;
+                    attackCollider.gameObject.transform.localPosition = pos;
+                }
+
                 _renderer.flipX = movement.x <= 0;
-                _animator.SetBool("Walking", movement.x != 0);
+                _animator.SetBool(Walking, movement.x != 0);
                 break;
             case InputActionPhase.Canceled:
                 movement = Vector2.zero;
-                // _rigidbody2D.velocity = new Vector2(0, _rigidbody2D.velocity.y);
-                _animator.SetBool("Walking", false);
+                _animator.SetBool(Walking, false);
                 break;
         }
     }

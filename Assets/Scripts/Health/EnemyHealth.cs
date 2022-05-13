@@ -10,18 +10,12 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private const int MAX_HEALTH = 100;
 
     private const int MIN_HEALTH = 0;
-    
-    // Update is called once per frame
-    void Update()
-    {
-        if (health == MIN_HEALTH)
-            Dead();
-    }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Attack"))
+        if (other.gameObject.CompareTag("AttackCollider"))
         {
+            print("damage");
             Damage(50);
         }
     }

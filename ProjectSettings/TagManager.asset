@@ -7,6 +7,7 @@ TagManager:
   - Floor
   - Door
   - Monster
+  - AttackCollider
   layers:
   - Default
   - TransparentFX
