@@ -28,6 +28,8 @@ public class DialogueManager : MonoBehaviour
     private float _timeToScaleBox = 0.5f;
 
     public bool hasDialogue = false;
+
+    private bool dialogueEnd = false;
     
     public static DialogueManager Manager;
     
@@ -63,6 +65,7 @@ public class DialogueManager : MonoBehaviour
     }
     void OnEnable()
     {
+        dialogueEnd = false;
         StartCoroutine(ResizeDialogueBox(ZERO_SCALE, FULL_SCALE));
     }
     void Start()
@@ -75,8 +78,11 @@ public class DialogueManager : MonoBehaviour
         if (Input.anyKeyDown && hasDialogue)
             NextDialogue();
         
-        else if (Input.anyKeyDown && !hasDialogue)
+        else if (Input.anyKeyDown && !hasDialogue && !dialogueEnd)
+        {
+            dialogueEnd = true;
             DisableDialog();
+        }
     }
     #endregion
     
