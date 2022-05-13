@@ -27,6 +27,10 @@ public class DialogueManager : MonoBehaviour
 
     private float _timeToScaleBox = 0.5f;
 
+    private float timer = 0.5f;
+
+    private float time = 0;
+
     public bool hasDialogue = false;
 
     private bool dialogueEnd = false;
@@ -75,11 +79,17 @@ public class DialogueManager : MonoBehaviour
     }
     void Update()
     {
-        if (Input.anyKeyDown && hasDialogue)
-            NextDialogue();
-        
-        else if (Input.anyKeyDown && !hasDialogue && !dialogueEnd)
+        time += Time.deltaTime;
+
+        if (Input.anyKeyDown && hasDialogue && (time >= timer))
         {
+            NextDialogue();
+            time = 0;
+        }
+
+        else if (Input.anyKeyDown && !hasDialogue && !dialogueEnd && (time >= timer))
+        {   
+            Debug.Log("disabling!");
             dialogueEnd = true;
             DisableDialog();
         }
@@ -120,6 +130,13 @@ public class DialogueManager : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        
+    }
+
+    private IEnumerator Wait(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
     }
     
     #endregion
@@ -133,7 +150,7 @@ public class DialogueManager : MonoBehaviour
     public void DisableDialog()
     {
         StartCoroutine(ResizeDialogueBox(FULL_SCALE, ZERO_SCALE));
-        gameObject.SetActive(true);
+        gameObject.SetActive(false);
     }
     
     /// <summary>

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 493031402523882575}
   - component: {fileID: 7631345788110696118}
   m_Layer: 10
-  m_Name: followPleyerEnemy
+  m_Name: followPlayerEnemy
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

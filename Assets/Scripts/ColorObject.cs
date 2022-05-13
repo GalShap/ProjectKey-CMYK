@@ -4,13 +4,13 @@ using UnityEngine;
 public class ColorObject : MonoBehaviour
 {
     [Header("Color Object")]
-    [SerializeField] private LayerMask layer;
-    [SerializeField] private Sprite neutralSprite;
-    [SerializeField] private Sprite whiteSprite;
+    [SerializeField] protected LayerMask layer;
+    [SerializeField] protected Sprite neutralSprite;
+    [SerializeField] protected Sprite whiteSprite;
 
-    private SpriteRenderer _renderer;
+    protected SpriteRenderer _renderer;
 
-    private void Start()
+    protected virtual void Start()
     {
         _renderer = GetComponent<SpriteRenderer>();
         if (layer.value == 0)
@@ -20,12 +20,12 @@ public class ColorObject : MonoBehaviour
         SetLayer();
     }
 
-    private void SetLayer()
+    protected void SetLayer()
     {
         gameObject.layer = (int) Mathf.Log(layer.value, 2);
     }
 
-    private void SetColor()
+    protected void SetColor()
     {
         Color? c = ColorManager.GetColor(layer.value);
         if (c == null)
