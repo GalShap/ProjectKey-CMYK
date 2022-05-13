@@ -70,12 +70,13 @@ public class DialogueManager : MonoBehaviour
         if (hasDialogue)
             NextDialogue();
     }
-    void FixedUpdate()
+    void Update()
     {
         if (Input.anyKeyDown && hasDialogue)
-        {
             NextDialogue();
-        }
+        
+        else if (Input.anyKeyDown && !hasDialogue)
+            DisableDialog();
     }
     #endregion
     
