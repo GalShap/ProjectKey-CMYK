@@ -1302,7 +1302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 315701121}
-  CurWorldColor: -1
+  CurWorldColor: 0
   Background: {fileID: 1463007477}
   AllLayers:
   - layer:

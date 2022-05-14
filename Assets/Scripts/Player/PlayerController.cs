@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float attackTimer;
     [SerializeField] private Collider2D attackCollider;
     private float attackCounter = 0;
+
+    [SerializeField] private Transform child;
     
     private Rigidbody2D _rigidbody2D;
     private SpriteRenderer _renderer;
@@ -38,8 +40,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _renderer = GetComponent<SpriteRenderer>();
-        _animator = GetComponent<Animator>();
+        _renderer = GetComponentInChildren<SpriteRenderer>();
+        _animator = GetComponentInChildren<Animator>();
         collisionOffset = Vector2.right * transform.lossyScale.x / 2;
     }
 
@@ -154,6 +156,11 @@ public class PlayerController : MonoBehaviour
         switch (context.phase)
         {
             case InputActionPhase.Started:
+                if (TutorialManager.Manager.State == TutorialManager.TutorialState.JUMP)
+                {
+                    TutorialManager.Manager.HideTutorial();
+                    TutorialManager.Manager.SetState(TutorialManager.TutorialState.ATTACK);
+                }
                 jumpTimer = Time.time + jumpDelay;
                 jumping = true;
                 break;
@@ -168,6 +175,13 @@ public class PlayerController : MonoBehaviour
         switch (context.phase)
         {
             case InputActionPhase.Performed:
+
+                if (TutorialManager.Manager.State == TutorialManager.TutorialState.MOVE)
+                {
+                    TutorialManager.Manager.HideTutorial();
+                    TutorialManager.Manager.SetState(TutorialManager.TutorialState.JUMP);
+                }
+
                 movement = context.ReadValue<Vector2>();
                 
                 bool facingRight = _renderer.flipX;

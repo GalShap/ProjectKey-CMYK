@@ -34,7 +34,6 @@ public class RoundMonster : EnemyObject
 
     void Update()
     {
-        print(player.GetComponent<Rigidbody2D>().transform.position - transform.position);
         if (!isAlive()) UponDead();
         // Move the player around the scene.
         // if (IsInDegreeRange(attackAngleFromPlayer))

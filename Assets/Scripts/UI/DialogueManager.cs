@@ -3,29 +3,86 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
+using UnityEngine.iOS;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
-    
-    [Tooltip("write all dialogues in here")]
-    [SerializeField] private List<string> Dialogues;
-    
-    [Tooltip("for every line, enter the index of it's speaker, should be in correspondence to the sprite list")]
-    [SerializeField] private List<int> Speakers;
+    public enum Dialogues
+    {
+        CHASE_KEY,
+        CHASE_BLUE,
+        BLOCK
+    }
 
-    [SerializeField] private List<Sprite> SpeakersSprites; 
-    
+    [Serializable]
+    public struct Sentence
+    {
+        public Sentence(string sentence, int id)
+        {
+            this.sentence = sentence;
+            this.id = id;
+        }
+
+        private String sentence;
+        private int id;
+
+        public string Sentence1 => sentence;
+
+        public int ID => id;
+    }
+
+    // [Tooltip("write all dialogues in here")]
+    // [SerializeField] private List<string> Dialogues;
+    //
+    // [Tooltip("for every line, enter the index of it's speaker, should be in correspondence to the sprite list")]
+    // [SerializeField] private List<int> Speakers;
+
+    [SerializeField] private List<Sprite> SpeakersSprites;
+
     [SerializeField] private Image speakerImage;
-    
+
     [SerializeField] private TextMeshProUGUI TextBox;
-    
+
     // the string is the dialogue the character says
     // the int is the index of that character sprite in the SpeakersSprites list; 
-    private Queue<Tuple<string, int>> _dialogueLines;
+    // private Queue<Tuple<string, int>> _dialogueLines;
 
-    private float _timeToScaleBox = 0.5f;
+    private Queue<Sentence> _dialogueLines = new Queue<Sentence>();
+
+    private Coroutine currentLineCoroutine;
+
+    private Hashtable dialogues = new Hashtable()
+    {
+        {
+            Dialogues.CHASE_BLUE, 
+            new List<Sentence>()
+            {
+                new Sentence("*Pant*...\n*Pant*...",1),
+                new Sentence("... Fuck...",1)
+            }
+        },
+        {
+            Dialogues.CHASE_KEY, 
+            new List<Sentence>()
+            {
+                new Sentence("*Pant*...\n*Pant*...",0),
+                new Sentence("Get back here!",0)
+            }
+        },
+        {
+            Dialogues.BLOCK,
+            new List<Sentence>()
+            {
+                new Sentence("He went the other way",0)
+            }
+        }
+        
+    };
+
+private float _timeToScaleBox = 0.5f;
 
     private float timer = 0.5f;
 
@@ -36,7 +93,8 @@ public class DialogueManager : MonoBehaviour
     private bool dialogueEnd = false;
     
     public static DialogueManager Manager;
-    
+    private Action _onEnd;
+
     #region Constants
     
     private const int NO_LINES = 0;
@@ -51,48 +109,39 @@ public class DialogueManager : MonoBehaviour
     void Awake()
     {   
         // singleton stuff
-        if (Manager == null) Manager = this;
-        else if (Manager != this) Destroy(gameObject);
+        if (Manager == null)
+        {
+            print("init");
+            Manager = this;
+        }
+        else if (Manager != this)
+        {
+            print("destroy");
+            Destroy(gameObject);
+        }
         
         // set up the dialogue Lines 
-        _dialogueLines = new Queue<Tuple<string, int>>();
-        for (int i = 0; i < Dialogues.Count; i++)
-        {
-            var curLine = new Tuple<string, int>(Dialogues[i], Speakers[i]);
-            _dialogueLines.Enqueue(curLine);
-        }
+        // _dialogueLines = new Queue<Tuple<string, int>>();
+        // for (int i = 0; i < Dialogues.Count; i++)
+        // {
+        //     var curLine = new Tuple<string, int>(Dialogues[i], Speakers[i]);
+        //     _dialogueLines.Enqueue(curLine);
+        // }
+        //
+        // if (_dialogueLines.Count > NO_LINES)
+        //     hasDialogue = true;
+    }
 
-        if (_dialogueLines.Count > NO_LINES)
-            hasDialogue = true;
-        
-        Debug.Log(_dialogueLines.Count);
-    }
-    void OnEnable()
+    private void Start()
     {
-        dialogueEnd = false;
-        StartCoroutine(ResizeDialogueBox(ZERO_SCALE, FULL_SCALE));
+        DisableDialog();
     }
-    void Start()
-    {  
-        if (hasDialogue)
-            NextDialogue();
-    }
+
     void Update()
     {
-        time += Time.deltaTime;
-
-        if (Input.anyKeyDown && hasDialogue && (time >= timer))
-        {
-            NextDialogue();
-            time = 0;
-        }
-
-        else if (Input.anyKeyDown && !hasDialogue && !dialogueEnd && (time >= timer))
-        {   
-            Debug.Log("disabling!");
-            dialogueEnd = true;
-            DisableDialog();
-        }
+        if(time < timer)
+            time += Time.deltaTime;
+        
     }
     #endregion
     
@@ -100,26 +149,28 @@ public class DialogueManager : MonoBehaviour
     
     private void NextDialogue()
     {
-        Tuple<string, int> nextLine = _dialogueLines.Dequeue();
+        if(currentLineCoroutine != null)
+            StopCoroutine(currentLineCoroutine);
 
-        StartCoroutine(DisplayNextLine(nextLine));
+        Sentence nextLine = _dialogueLines.Dequeue();
+
+        currentLineCoroutine = StartCoroutine(DisplayNextLine(nextLine));
         
         if (_dialogueLines.Count == NO_LINES)
             hasDialogue = false;
     }
-    private IEnumerator DisplayNextLine(Tuple<string, int> next)
+    private IEnumerator DisplayNextLine(Sentence next)
     {
-        speakerImage.sprite = SpeakersSprites[next.Item2];
+        speakerImage.sprite = SpeakersSprites[next.ID];
         TextBox.text = "";
-        foreach (var letter in next.Item1)
+        foreach (var letter in next.Sentence1)
         {
             TextBox.text += letter;
-            yield return new WaitForSecondsRealtime(0.0125f);
+            yield return new WaitForSecondsRealtime(0.05f);
         }
     }
     private IEnumerator ResizeDialogueBox(float start, float end)
-    {   
-        
+    {
         Vector3 newScale = new Vector3(start, start, start);
         float elapsedTime = 0;
         while (elapsedTime < _timeToScaleBox)
@@ -130,8 +181,6 @@ public class DialogueManager : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
-        
     }
 
     private IEnumerator Wait(float time)
@@ -142,7 +191,7 @@ public class DialogueManager : MonoBehaviour
     #endregion
     
     #region Public Methods
-    
+
     /// <summary>
     /// use this function when you want to set the dialogue box to inactive.
     /// resizes the box to 0 and deactivates object. 
@@ -151,8 +200,44 @@ public class DialogueManager : MonoBehaviour
     {
         StartCoroutine(ResizeDialogueBox(FULL_SCALE, ZERO_SCALE));
         gameObject.SetActive(false);
+        InputManager.Manager.ToggleMaps(true);
     }
     
+    public void LoadDialogue(Dialogues d, bool enable = true, Action onEnd = null)
+    {
+        LoadNewDialog((List<Sentence>) dialogues[d], enable, onEnd);
+    }
+    
+    public void EnableDialog()
+    {
+        dialogueEnd = false;
+        gameObject.SetActive(true);
+        NextDialogue();
+        StartCoroutine(ResizeDialogueBox(ZERO_SCALE, FULL_SCALE));
+        
+        InputManager.Manager.ToggleMaps(false);
+    }
+
+    public void OnNext(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            if (hasDialogue && (time >= timer))
+            {
+                NextDialogue();
+                time = 0;
+            }
+
+            else if (!hasDialogue && !dialogueEnd && (time >= timer))
+            {
+                dialogueEnd = true;
+                if(_onEnd != null)
+                    _onEnd.Invoke();
+                DisableDialog();
+            }   
+        }
+    }
+
     /// <summary>
     /// loads a new block of dialogue to the dialogue manager. 
     /// </summary>
@@ -162,15 +247,23 @@ public class DialogueManager : MonoBehaviour
     /// <param name="speakersId">
     /// a list that has the index of the speaker image of the current line in the sprites list. 
     /// </param>
-    public void LoadNewDialog(List<string> dialogues, List<int> speakersId)
+    public void LoadNewDialog(List<Sentence> sentences, bool enable = false, Action onEnd = null)
     {
-        _dialogueLines = new Queue<Tuple<string, int>>();
-        for (int i = 0; i < dialogues.Count; i++)
+        _dialogueLines = new Queue<Sentence>();
+        for (int i = 0; i < sentences.Count; i++)
         {
-            var curLine = new Tuple<string, int>(dialogues[i], speakersId[i]);
-            _dialogueLines.Enqueue(curLine);
+            // var curLine = new Tuple<string, int>(dialogues[i], speakersId[i]);
+            print(sentences[i].Sentence1);
+            _dialogueLines.Enqueue(sentences[i]);
         }
 
+        if (_dialogueLines.Count > NO_LINES)
+            hasDialogue = true;
+        
+        _onEnd = onEnd;
+        
+        if(enable)
+            EnableDialog();
     }
     
     #endregion
