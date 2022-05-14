@@ -10,17 +10,38 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [SerializeField] private int lives = 6;
     
     [SerializeField] private PlayerHUD playerHUD;
-
+    
+    [SerializeField] private float _bounce = 6f;
+    
     #endregion
+    
+    #region Private Field
+    
+    private float _time = 0;
 
+    private float _timeToBounce = 0.2f;
+    
+    private Rigidbody2D _playerRigidBody;
+    
+    private bool _isBouncing = false;
+    
+    #endregion
+    
     #region Constants
   
-    private int MAX_LIVES = 6;
+    private const int MAX_LIVES = 6;
 
-    private int MIN_LIVES = 0;
+    private const int MIN_LIVES = 0;
    
     #endregion
-   
+    
+    #region Mono Behaviour Funcs
+    void Awake()
+    {
+        _playerRigidBody = GetComponent<Rigidbody2D>();
+        lives = PlayerHUD.MAX_LIFE;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -34,17 +55,63 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         
         else if (Input.GetKeyDown(KeyCode.X))
             Heal(1);
-        
+
+        if (_isBouncing)
+        {
+            _time += Time.deltaTime;
+            if (_time >= _timeToBounce)
+            {
+                _isBouncing = false;
+                _time = 0;
+            }
+            
+        }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    void OnCollisionEnter2D(Collision2D other)
     {   
-        // todo review it with alon and harel!
-        if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Projectile"))
+     
+        if (EnemyCollision(other)) 
+        {
             Damage(1);
-        
-        // todo should an animation be played?
+
+            if (!_isBouncing)
+            {
+                _isBouncing = true;
+                PlayerKickBack(other);
+            }
+            
+        }
     }
+    
+    #endregion
+
+    #region Private Methods    
+    private bool EnemyCollision(Collision2D other)
+    {
+        return other.gameObject.CompareTag("Monster") || other.gameObject.CompareTag("Spikes"); //||
+        //other.gameObject.CompareTag("Projectile");
+    }
+    
+    /// <summary>
+    ///  called when play is colliding with an enemy. kicks the player back by the "_bounce" parameter
+    /// </summary>
+    /// <param name="other">
+    /// the collision with an enemy. 
+    /// </param>
+    private void PlayerKickBack(Collision2D other)
+    {   
+        Debug.Log("kick back!");
+        Rigidbody2D enemyRigidBody = other.gameObject.GetComponent<Rigidbody2D>();
+        _playerRigidBody.AddForce((_playerRigidBody.position - enemyRigidBody.position).normalized * _bounce, 
+            ForceMode2D.Impulse);
+        _isBouncing = false;
+
+    }
+    
+    #endregion
+    
+    #region Public Methods
 
     /// <summary>
     ///  inflicts damage to player;
@@ -59,8 +126,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             lives = MIN_LIVES;
         
         playerHUD.removeLifeOnUI(amount);
-        Debug.Log("Damage! Cur Health is: " + lives);
-        
+
     }
     
     /// <summary>
@@ -110,8 +176,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     public void Dead()
     {
-        Debug.Log("Key is Dead!");
+        
     }
+    
+    #endregion
     
     
 }
