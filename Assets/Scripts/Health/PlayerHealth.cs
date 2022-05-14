@@ -49,13 +49,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         {
             Dead();
         }
-        
-        if (Input.GetKeyDown(KeyCode.Z))
-            Damage(1);
-        
-        else if (Input.GetKeyDown(KeyCode.X))
-            Heal(1);
-
+      
+      
         if (_isBouncing)
         {
             _time += Time.deltaTime;

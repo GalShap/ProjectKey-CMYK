@@ -14,8 +14,18 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     [Tooltip("How much time the animation takes for every blip?")] 
     [SerializeField] private float timeToAnimate = 0.1f;
+
+    [SerializeField] private float bounce = 6f;
+
+    [SerializeField] private float _timeToBounce = 0.2f;
     
     #endregion
+
+    private Rigidbody2D _enemyRigidBody;
+
+    private float _time = 0f;
+
+    private bool _isBouncing = false;
 
     #region Constants
     
@@ -28,6 +38,25 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private const int MIN_ALPHA = 0;
     
     #endregion
+
+    private void Start()
+    {
+        _enemyRigidBody = gameObject.GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        if (_isBouncing)
+        {
+            _time += Time.deltaTime;
+            if (_time >= _timeToBounce)
+            {
+                _isBouncing = false;
+                _time = 0;
+            }
+            
+        }
+    }
 
     private IEnumerator DamageFlashAnimation(int count)
     {   
@@ -68,11 +97,29 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("AttackCollider"))
-        {
+        {   
+           
             print("damage");
             Damage(50);
+            
+            if (!_isBouncing)
+            {
+                _isBouncing = true;
+                EnemyKickBack(other);
+            }
         }
     }
+
+    private void EnemyKickBack(Collider2D other)
+    {
+       
+
+        Rigidbody2D _playerRigidBody = other.gameObject.GetComponent<Rigidbody2D>();
+        _playerRigidBody.AddForce((_enemyRigidBody.position - _playerRigidBody.position).normalized * bounce,
+            ForceMode2D.Impulse);
+        _isBouncing = false;
+    }
+
 
     public void Damage(int amount)
     {
