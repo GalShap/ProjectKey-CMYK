@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 315701123}
   - component: {fileID: 171750083408035272}
   - component: {fileID: 6782527906361684794}
-  - component: {fileID: 315701129}
+  - component: {fileID: 5946542345231676971}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -395,7 +395,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &315701129
+--- !u!114 &5946542345231676971
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -404,7 +404,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8863397447226026584}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcddeb59b4ebe274ab9853b2a21408c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 4047684c390d20c42ada51133d745d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hud: {fileID: 0}
+  lives: 6
+  playerHUD: {fileID: 0}
+  _bounce: 6

@@ -14,7 +14,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [SerializeField] private float _bounce = 6f;
     
     #endregion
-
+    
+    #region Private Field
+    
     private float _time = 0;
 
     private float _timeToBounce = 0.2f;
@@ -23,15 +25,18 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     
     private bool _isBouncing = false;
     
+    #endregion
+    
     #region Constants
   
-    private int MAX_LIVES = 6;
+    private const int MAX_LIVES = 6;
 
-    private int MIN_LIVES = 0;
+    private const int MIN_LIVES = 0;
    
     #endregion
-
-    private void Awake()
+    
+    #region Mono Behaviour Funcs
+    void Awake()
     {
         _playerRigidBody = GetComponent<Rigidbody2D>();
         lives = PlayerHUD.MAX_LIFE;
@@ -63,20 +68,29 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    void OnCollisionEnter2D(Collision2D other)
     {   
-        // todo review it with alon and harel!
-        if (other.gameObject.CompareTag("Monster") ||  false)//other.gameObject.CompareTag("Projectile"))
+     
+        if (EnemyCollision(other)) 
         {
             Damage(1);
 
-            if (other.gameObject.CompareTag("Monster") && !_isBouncing)
+            if (!_isBouncing)
             {
                 _isBouncing = true;
                 PlayerKickBack(other);
             }
             
         }
+    }
+    
+    #endregion
+
+    #region Private Methods    
+    private bool EnemyCollision(Collision2D other)
+    {
+        return other.gameObject.CompareTag("Monster") || other.gameObject.CompareTag("Spikes"); //||
+        //other.gameObject.CompareTag("Projectile");
     }
     
     /// <summary>
@@ -94,7 +108,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         _isBouncing = false;
 
     }
-  
+    
+    #endregion
+    
+    #region Public Methods
 
     /// <summary>
     ///  inflicts damage to player;
@@ -161,6 +178,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         
     }
+    
+    #endregion
     
     
 }

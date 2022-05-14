@@ -8,6 +8,7 @@ TagManager:
   - Door
   - Monster
   - AttackCollider
+  - Spikes
   layers:
   - Default
   - TransparentFX
