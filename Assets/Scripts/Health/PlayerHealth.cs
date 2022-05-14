@@ -10,9 +10,19 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [SerializeField] private int lives = 6;
     
     [SerializeField] private PlayerHUD playerHUD;
-
+    
+    [SerializeField] private float _bounce = 6f;
+    
     #endregion
 
+    private float _time = 0;
+
+    private float _timeToBounce = 0.2f;
+    
+    private Rigidbody2D _playerRigidBody;
+    
+    private bool _isBouncing = false;
+    
     #region Constants
   
     private int MAX_LIVES = 6;
@@ -20,7 +30,13 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private int MIN_LIVES = 0;
    
     #endregion
-   
+
+    private void Awake()
+    {
+        _playerRigidBody = GetComponent<Rigidbody2D>();
+        lives = PlayerHUD.MAX_LIFE;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -34,17 +50,51 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         
         else if (Input.GetKeyDown(KeyCode.X))
             Heal(1);
-        
+
+        if (_isBouncing)
+        {
+            _time += Time.deltaTime;
+            if (_time >= _timeToBounce)
+            {
+                _isBouncing = false;
+                _time = 0;
+            }
+            
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {   
         // todo review it with alon and harel!
-        if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Projectile"))
+        if (other.gameObject.CompareTag("Monster") ||  false)//other.gameObject.CompareTag("Projectile"))
+        {
             Damage(1);
-        
-        // todo should an animation be played?
+
+            if (other.gameObject.CompareTag("Monster") && !_isBouncing)
+            {
+                _isBouncing = true;
+                PlayerKickBack(other);
+            }
+            
+        }
     }
+    
+    /// <summary>
+    ///  called when play is colliding with an enemy. kicks the player back by the "_bounce" parameter
+    /// </summary>
+    /// <param name="other">
+    /// the collision with an enemy. 
+    /// </param>
+    private void PlayerKickBack(Collision2D other)
+    {   
+        Debug.Log("kick back!");
+        Rigidbody2D enemyRigidBody = other.gameObject.GetComponent<Rigidbody2D>();
+        _playerRigidBody.AddForce((_playerRigidBody.position - enemyRigidBody.position).normalized * _bounce, 
+            ForceMode2D.Impulse);
+        _isBouncing = false;
+
+    }
+  
 
     /// <summary>
     ///  inflicts damage to player;
@@ -59,8 +109,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             lives = MIN_LIVES;
         
         playerHUD.removeLifeOnUI(amount);
-        Debug.Log("Damage! Cur Health is: " + lives);
-        
+
     }
     
     /// <summary>
@@ -110,7 +159,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     public void Dead()
     {
-        Debug.Log("Key is Dead!");
+        
     }
     
     
