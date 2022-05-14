@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -32,8 +33,19 @@ public class PlayerController : MonoBehaviour
     
     private bool onGround;
     private Vector2 movement;
+   
+    
     private static readonly int Attack = Animator.StringToHash("Attack");
     private static readonly int Walking = Animator.StringToHash("Walking");
+    private static readonly int Action = Animator.StringToHash("Action");
+    
+    #region Constants
+    
+    private const float IDEAL = 0;
+
+    private const float WALKING = 1f;
+ 
+    #endregion
 
     private void Awake()
     {
@@ -127,8 +139,10 @@ public class PlayerController : MonoBehaviour
     }
 
     public void EndAttack()
-    {
+    {   
+        Debug.Log("Animation event Called");
         attackCollider.gameObject.SetActive(false);
+       
     }
 
     public void onAttack(InputAction.CallbackContext context)
@@ -138,10 +152,12 @@ public class PlayerController : MonoBehaviour
             case InputActionPhase.Started:
                 if (attackCounter <= 0)
                 {
+                   
                     _animator.SetTrigger(Attack);
                     _rigidbody2D.velocity = Vector2.zero;
                     attackCollider.gameObject.SetActive(true);
                     attackCounter = attackTimer;
+                    
                 }
                 break;
             case InputActionPhase.Canceled:
@@ -182,11 +198,14 @@ public class PlayerController : MonoBehaviour
                 }
 
                 _renderer.flipX = movement.x <= 0;
-                _animator.SetBool(Walking, movement.x != 0);
+                //_animator.SetBool(Walking, movement.x != 0);
+                _animator.SetFloat(Action, WALKING);
+                
                 break;
             case InputActionPhase.Canceled:
                 movement = Vector2.zero;
-                _animator.SetBool(Walking, false);
+                //_animator.SetBool(Walking, false);
+                _animator.SetFloat(Action, IDEAL);
                 break;
         }
     }

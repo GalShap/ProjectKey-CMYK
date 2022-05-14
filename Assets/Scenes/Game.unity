@@ -8640,9 +8640,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8625425676957740171, guid: 18e99341ca8a88048ad6d0d0baa5773c, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8953315103178594193, guid: 18e99341ca8a88048ad6d0d0baa5773c, type: 3}
       propertyPath: m_Name
       value: PatrolEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953315103178594193, guid: 18e99341ca8a88048ad6d0d0baa5773c, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18e99341ca8a88048ad6d0d0baa5773c, type: 3}
