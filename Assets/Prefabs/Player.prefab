@@ -229,6 +229,8 @@ GameObject:
   - component: {fileID: 1356387341348248899}
   - component: {fileID: 5068568635469016541}
   - component: {fileID: 1249538417906016439}
+  - component: {fileID: 1154897992}
+  - component: {fileID: 1154897995}
   m_Layer: 6
   m_Name: Animated
   m_TagString: Untagged
@@ -244,7 +246,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6390321320373995960}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 7.8, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8155527996113537449}
@@ -315,12 +317,55 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 2d1c0751d6753fe42a96c0a5ef80d1b5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1154897992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6390321320373995960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: c64ac7237c86f744b80c6f55d5b3b0d4, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8863397447226026584}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1154897995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6390321320373995960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7759dc3ff7c3f0446a8a65cfd38ee19b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 315701124}
 --- !u!1 &8863397447226026584
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,9 +381,10 @@ GameObject:
   - component: {fileID: 315701123}
   - component: {fileID: 171750083408035272}
   - component: {fileID: 5946542345231676971}
+  - component: {fileID: 1154897993}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -383,7 +429,7 @@ MonoBehaviour:
     m_Bits: 1920
   attackTimer: 0.25
   attackCollider: {fileID: 7119172714136712465}
-  child: {fileID: 0}
+  isTutorial: 1
 --- !u!114 &8863397447226026587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,12 +520,24 @@ MonoBehaviour:
     m_ActionId: f7d7d7d5-32e8-4a5c-be1a-ffc821b4830a
     m_ActionName: Player/Attack[/Keyboard/z]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
+        m_MethodName: OnNext
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: dd7413cb-b58d-4854-b969-b9d7e851c307
     m_ActionName: Dialogue/Next Dialogue[/Keyboard/anyKey]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: Dialogue
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!50 &315701122
@@ -556,3 +614,17 @@ MonoBehaviour:
   lives: 6
   playerHUD: {fileID: 0}
   _bounce: 6
+--- !u!114 &1154897993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8863397447226026584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b40a8e54adc00e4b9a963947c69afaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCollider: {fileID: 315701123}
+  blueCollider: {fileID: 0}

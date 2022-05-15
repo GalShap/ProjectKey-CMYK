@@ -13,6 +13,10 @@ public class ColorObject : MonoBehaviour
     protected virtual void Start()
     {
         _renderer = GetComponent<SpriteRenderer>();
+        if (_renderer == null)
+        {
+            _renderer = GetComponentInChildren<SpriteRenderer>();
+        }
         if (layer.value == 0)
             layer = ColorManager.NeutralLayer;
 

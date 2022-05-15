@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ColorOrb : MonoBehaviour
 {
     [SerializeField] private LayerMask layer;
+    [SerializeField] private UnityEvent onTake = null;
     
     private SpriteRenderer _renderer;
 
@@ -27,6 +29,8 @@ public class ColorOrb : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         ColorManager.AddColor(layer);
+        if(onTake != null)
+            onTake.Invoke();
         Destroy(gameObject);
     }
 }

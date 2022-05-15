@@ -27,8 +27,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Collider2D attackCollider;
     private float attackCounter = 0;
 
-    [SerializeField] private Transform child;
-    
+    [Header("Other")] [SerializeField] private bool isTutorial;
+
     private Rigidbody2D _rigidbody2D;
     private SpriteRenderer _renderer;
     private Animator _animator;
@@ -72,13 +72,13 @@ public class PlayerController : MonoBehaviour
                        _rigidbody2D.position + collisionOffset,
                        Vector2.down,
                         height * 0.5f + 0.05f,
-                       ColorManager.GroundLayers) 
+                       groundLayers) 
                    || 
                    Physics2D.Raycast(
                        _rigidbody2D.position - collisionOffset,
                        Vector2.down,
                        height * 0.5f + 0.05f,
-                       ColorManager.GroundLayers);
+                       groundLayers);
         
         if (jumpTimer > Time.time && onGround)
         {
@@ -141,17 +141,28 @@ public class PlayerController : MonoBehaviour
     }
 
     public void EndAttack()
-    {   
-        Debug.Log("Animation event Called");
+    {
         attackCollider.gameObject.SetActive(false);
-       
+    }
+
+    public void Stop()
+    {
+        movement = Vector2.zero;
     }
 
     public void onAttack(InputAction.CallbackContext context)
     {
+        if (TimelineManager.Manager.IsPlaying)
+            return;
+        
         switch (context.phase)
         {
             case InputActionPhase.Started:
+                if (isTutorial && TutorialManager.Manager.State == TutorialManager.TutorialState.ATTACK)
+                {
+                    TutorialManager.Manager.HideTutorial();
+                    TutorialManager.Manager.SetState(TutorialManager.TutorialState.COLOR);
+                }
                 if (attackCounter <= 0)
                 {
                    
@@ -169,10 +180,13 @@ public class PlayerController : MonoBehaviour
 
     public void onJump(InputAction.CallbackContext context)
     {
+        if (TimelineManager.Manager.IsPlaying)
+            return;
+        
         switch (context.phase)
         {
             case InputActionPhase.Started:
-                if (TutorialManager.Manager.State == TutorialManager.TutorialState.JUMP)
+                if (isTutorial && TutorialManager.Manager.State == TutorialManager.TutorialState.JUMP)
                 {
                     TutorialManager.Manager.HideTutorial();
                     TutorialManager.Manager.SetState(TutorialManager.TutorialState.ATTACK);
@@ -188,11 +202,14 @@ public class PlayerController : MonoBehaviour
 
     public void onMove(InputAction.CallbackContext context)
     {
+        if (TimelineManager.Manager.IsPlaying)
+            return;
+        
         switch (context.phase)
         {
             case InputActionPhase.Performed:
 
-                if (TutorialManager.Manager.State == TutorialManager.TutorialState.MOVE)
+                if (isTutorial && TutorialManager.Manager.State == TutorialManager.TutorialState.MOVE)
                 {
                     TutorialManager.Manager.HideTutorial();
                     TutorialManager.Manager.SetState(TutorialManager.TutorialState.JUMP);
@@ -226,9 +243,17 @@ public class PlayerController : MonoBehaviour
 
     public void OnChangeColor(InputAction.CallbackContext context)
     {
+        if (TimelineManager.Manager.IsPlaying)
+            return;
+        
         switch (context.phase)
         {
             case InputActionPhase.Performed:
+                if (isTutorial && TutorialManager.Manager.State == TutorialManager.TutorialState.COLOR)
+                {
+                    TutorialManager.Manager.HideTutorial();
+                    TutorialManager.Manager.SetState(TutorialManager.TutorialState.END);
+                }
                 ColorManager.RotateColor();
                 break;
             case InputActionPhase.Canceled:

@@ -13,6 +13,7 @@ public class TimelineManager : MonoBehaviour
     private int currIndex = 0;
     private PlayableDirector _currTimeline;
     public static TimelineManager Manager;
+    public bool IsPlaying => Manager._currTimeline != null && Manager._currTimeline.state == PlayState.Playing;
 
     private void Awake()
     {
