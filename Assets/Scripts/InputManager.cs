@@ -11,6 +11,7 @@ public class InputManager : MonoBehaviour
     public static InputManager Manager;
     private InputActionMap _playerMap;
     private InputActionMap _dialogueMap;
+    private bool playerWasLast = true;
 
     private void Awake()
     {
@@ -31,20 +32,19 @@ public class InputManager : MonoBehaviour
         if (enablePlayer)
         {
             EnablePlayer();
+            playerWasLast = true;
         }
         else
         {
             EnableDialogue();
+            playerWasLast = false;
         }
     }
 
     private void EnableDialogue()
     {
-        print("enable dialogue");
         _playerMap.Disable();
         _dialogueMap.Enable();
-        
-        print(input.actions.FindActionMap("Dialogue").enabled);
     }
     
     private void EnablePlayer()

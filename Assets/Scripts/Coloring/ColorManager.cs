@@ -12,6 +12,7 @@ public class ColorManager : MonoBehaviour
     {
         public LayerMask layer;
         public Color color;
+        public ColorName name;
 
         public int index =>
             Mathf.RoundToInt(Mathf.Log(layer.value,
@@ -65,9 +66,9 @@ public class ColorManager : MonoBehaviour
 
     #endregion
 
-    protected enum CurColor
+    public enum ColorName
     {
-        Default, Red, Green, Blue
+        Neutral, Cyan, Magenta, Yellow
     }
     
     // Start is called before the first frame update
@@ -137,7 +138,7 @@ public class ColorManager : MonoBehaviour
             return;
         
         _shared.availableLayers.Add((ColorLayer) cl);
-        _shared.PlayerHUD.AddColor((ColorLayer) cl);
+//        _shared.PlayerHUD.AddColor((ColorLayer) cl);
     }
 
     public static ColorLayer? GetColorLayer(int layerValue)
@@ -198,6 +199,15 @@ public class ColorManager : MonoBehaviour
         SetBackGroundColor(cl.color);
         CancelCollisionLayer(cl);
         // PlayerHUD.SetCurColorUI(color);
+    }
+
+    public static void SetColor(ColorName c)
+    {
+        int index = _shared.AllLayers.FindIndex(cl => cl.name == c);
+        if(index == -1)
+            return;
+        _shared.SetBackGroundColor(_shared.AllLayers[index].color);
+        _shared.CancelCollisionLayer(_shared.AllLayers[index]);
     }
     
     #endregion

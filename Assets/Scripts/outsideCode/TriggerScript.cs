@@ -15,4 +15,12 @@ public class TriggerScript : MonoBehaviour
             _event.Invoke();
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            _event.Invoke();
+        }
+    }
 }

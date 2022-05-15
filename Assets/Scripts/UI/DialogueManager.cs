@@ -14,7 +14,13 @@ public class DialogueManager : MonoBehaviour
     {
         CHASE_KEY,
         CHASE_BLUE,
-        BLOCK
+        BLOCK,
+        BRIDGE,
+        DAMN_IT,
+        BLUE_END,
+        BLUE_DEAD,
+        TAKE_ORB,
+        ONE_DOWN
     }
 
     [Serializable]
@@ -73,16 +79,68 @@ public class DialogueManager : MonoBehaviour
             }
         },
         {
+            Dialogues.BRIDGE,
+            new List<Sentence>()
+            {
+                new Sentence("Gotcha!",0),
+                new Sentence("Think again...",1)
+            }
+        },
+        {
+            Dialogues.DAMN_IT,
+            new List<Sentence>()
+            {
+                new Sentence("DAMNIT!",0)
+            }
+        },
+        {
             Dialogues.BLOCK,
             new List<Sentence>()
             {
-                new Sentence("He went the other way",0)
+                new Sentence("Gotta move on",0)
+            }
+        },
+        {
+            Dialogues.BLUE_END,
+            new List<Sentence>()
+            {
+                new Sentence("*Pant*...\n*Pant*...",1),
+                new Sentence("*Pant*...\n*Pant*...",1),
+                new Sentence("Rats. Seems like you got me...",1),
+                new Sentence("You know I have to do this...",0),
+                new Sentence("So you say...",1),
+                new Sentence("C'mon. Do your worst.",1)
+            }
+        },
+        {
+            Dialogues.BLUE_DEAD,
+            new List<Sentence>()
+            {
+                new Sentence("You... You have.. no idea...",1),
+                new Sentence("Wh-what... You're getting yourself... into...",1),
+                new Sentence("That may be, But it's too late to go back now.",0),
+                new Sentence("Heh... G'luck k-kid. This is... only... the beginning...",1),
+            }
+        },
+        {
+            Dialogues.TAKE_ORB,
+            new List<Sentence>()
+            {
+                new Sentence("So much power...",0),
+                new Sentence("Hard to believe such a wimp could control it...",0)
+            }
+        },
+        {
+            Dialogues.ONE_DOWN,
+            new List<Sentence>()
+            {
+                new Sentence("One down, two more to go...",0)
             }
         }
         
     };
 
-private float _timeToScaleBox = 0.5f;
+    private float _timeToScaleBox = 0.5f;
 
     private float timer = 0.5f;
 
@@ -113,6 +171,7 @@ private float _timeToScaleBox = 0.5f;
         {
             print("init");
             Manager = this;
+            time = timer;
         }
         else if (Manager != this)
         {
@@ -134,13 +193,14 @@ private float _timeToScaleBox = 0.5f;
 
     private void Start()
     {
-        DisableDialog();
+        var newScale = new Vector3(0, 0, 0);
+        gameObject.GetComponent<RectTransform>().localScale = newScale;
     }
 
     void Update()
     {
-        if(time < timer)
-            time += Time.deltaTime;
+        if(time > 0)
+            time -= Time.deltaTime;
         
     }
     #endregion
@@ -201,6 +261,11 @@ private float _timeToScaleBox = 0.5f;
         StartCoroutine(ResizeDialogueBox(FULL_SCALE, ZERO_SCALE));
         gameObject.SetActive(false);
         InputManager.Manager.ToggleMaps(true);
+        if (_onEnd != null)
+        {
+            _onEnd.Invoke();
+            _onEnd = null;
+        }
     }
     
     public void LoadDialogue(Dialogues d, bool enable = true, Action onEnd = null)
@@ -214,25 +279,31 @@ private float _timeToScaleBox = 0.5f;
         gameObject.SetActive(true);
         NextDialogue();
         StartCoroutine(ResizeDialogueBox(ZERO_SCALE, FULL_SCALE));
-        
         InputManager.Manager.ToggleMaps(false);
+        time = 1;
+    }
+
+    public void BlockDialogue()
+    {
+        LoadDialogue(Dialogues.BLOCK);
     }
 
     public void OnNext(InputAction.CallbackContext context)
     {
+        if (TimelineManager.Manager.IsPlaying)
+            return;
+        
         if (context.phase == InputActionPhase.Started)
         {
-            if (hasDialogue && (time >= timer))
+            if (hasDialogue && (time <= 0))
             {
                 NextDialogue();
-                time = 0;
+                time = timer;
             }
 
-            else if (!hasDialogue && !dialogueEnd && (time >= timer))
+            else if (!hasDialogue && !dialogueEnd && (time <= timer))
             {
                 dialogueEnd = true;
-                if(_onEnd != null)
-                    _onEnd.Invoke();
                 DisableDialog();
             }   
         }
@@ -252,7 +323,6 @@ private float _timeToScaleBox = 0.5f;
         _dialogueLines = new Queue<Sentence>();
         for (int i = 0; i < sentences.Count; i++)
         {
-            // var curLine = new Tuple<string, int>(dialogues[i], speakersId[i]);
             print(sentences[i].Sentence1);
             _dialogueLines.Enqueue(sentences[i]);
         }
