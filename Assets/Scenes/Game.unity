@@ -2864,7 +2864,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 218664447055370143, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
       propertyPath: m_LocalScale.x
-      value: -5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 218664447055370143, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
       propertyPath: m_LocalScale.y
@@ -2884,7 +2884,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 218664447055370143, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 218664447055370143, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
       propertyPath: m_LocalRotation.x
@@ -2896,7 +2896,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 218664447055370143, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 218664447055370143, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2908,8 +2908,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 218664447055370143, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 2450658272463514157, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
+      propertyPath: whiteSprite
+      value: 
+      objectReference: {fileID: 4349874989898575965, guid: 0581e9e94a6a1494a832a4d22b139fc6, type: 3}
+    - target: {fileID: 2450658272463514157, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
+      propertyPath: neutralSprite
+      value: 
+      objectReference: {fileID: 4349874989898575965, guid: 0581e9e94a6a1494a832a4d22b139fc6, type: 3}
     - target: {fileID: 3819642736829985239, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
       propertyPath: m_Name
       value: ballEnemy (1)
