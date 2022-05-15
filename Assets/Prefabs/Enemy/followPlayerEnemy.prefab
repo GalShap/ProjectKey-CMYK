@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021909138222836021}
-  - component: {fileID: 345676864710358490}
   - component: {fileID: 493031402523882575}
   - component: {fileID: 7631345788110696118}
   - component: {fileID: 8990586802292719292}
+  - component: {fileID: -5422545807513706614}
   m_Layer: 10
   m_Name: followPlayerEnemy
   m_TagString: Monster
@@ -35,24 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &345676864710358490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4350815766577247992}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0531458495d16884f80400b27480b01a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentTarget: {x: 0, y: 0, z: 0}
-  player: {fileID: 0}
-  speed: 2
-  len: 4
-  places: []
-  counter: 0
 --- !u!50 &493031402523882575
 Rigidbody2D:
   serializedVersion: 4
@@ -107,6 +89,23 @@ MonoBehaviour:
   timeToAnimate: 0.2
   bounce: 6
   _timeToBounce: 0.2
+--- !u!114 &-5422545807513706614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4350815766577247992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 236067b249a2f5d439e067b2560cda13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentTarget: {x: 0, y: 0, z: 0}
+  player: {fileID: 8863397447226026584, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
+  speed: 2
+  len: 4
+  counter: 0
 --- !u!1 &7585498393590604516
 GameObject:
   m_ObjectHideFlags: 0

@@ -26,7 +26,7 @@ public class FollowPlayerEnemy : EnemyObject
     protected void FixedUpdate()
     {
         if (!isAlive()) UponDead();
-        if (Math.Abs(PositionX()) <= len && Math.Abs(PositionY()) <= 0.4f)
+        // if (Math.Abs(PositionY()) <= len)
         {
             Move();
         }
@@ -50,11 +50,11 @@ public class FollowPlayerEnemy : EnemyObject
     
     private float PositionX()
     {
-        return (transform.position.x - player.transform.position.x);
+        return (transform.position.x - player.GetComponent<Transform>().position.x);
     }
 
     private float PositionY()
     {
-        return (transform.position.y - player.transform.position.y);
+        return (transform.position.y - player.GetComponent<Transform>().position.y);
     }
 }
