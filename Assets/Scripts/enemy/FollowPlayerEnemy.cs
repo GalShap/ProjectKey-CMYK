@@ -26,7 +26,7 @@ public class FollowPlayerEnemy : EnemyObject
     protected void FixedUpdate()
     {
         if (!isAlive()) UponDead();
-        // if (Math.Abs(PositionY()) <= len)
+        if (Math.Abs(PositionY()) <= len)
         {
             Move();
         }
