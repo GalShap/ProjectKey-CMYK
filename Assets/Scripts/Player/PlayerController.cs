@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
                 _rigidbody2D.drag = 0f;
             }
             
-            _rigidbody2D.gravityScale = 0;
+            // _rigidbody2D.gravityScale = 0;
         }
         else
         {

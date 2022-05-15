@@ -7,9 +7,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7795900407446731316, guid: c6e6a0be12badfe4c94af1133839496a, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7795900407446731321, guid: c6e6a0be12badfe4c94af1133839496a, type: 3}
       propertyPath: m_Name
-      value: Platform
+      value: Platform Variant  Moving
       objectReference: {fileID: 0}
     - target: {fileID: 7795900407446731323, guid: c6e6a0be12badfe4c94af1133839496a, type: 3}
       propertyPath: m_RootOrder
@@ -17,11 +21,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7795900407446731323, guid: c6e6a0be12badfe4c94af1133839496a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: -13.5
       objectReference: {fileID: 0}
     - target: {fileID: 7795900407446731323, guid: c6e6a0be12badfe4c94af1133839496a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 7795900407446731323, guid: c6e6a0be12badfe4c94af1133839496a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -74,8 +78,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 145d7ff9a46f97c47b65bfff42b5fd20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 100
   startPos: 0
   points:
-  - {x: 3, y: 1, z: 0}
-  - {x: 6, y: 1, z: 0}
+  - {x: -18.5, y: 6.5, z: 0}
+  - {x: -8.5, y: 6.5, z: 0}

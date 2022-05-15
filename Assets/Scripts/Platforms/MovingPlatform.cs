@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
 using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
@@ -19,16 +22,47 @@ public class MovingPlatform : MonoBehaviour
     private const float MIN_DISTANCE = 0.02f;
 
     private const int INITAL_POS_IDX = 0;
-    
-    // Start is called before the first frame update
+
+    private Rigidbody2D _rigidbody2D;
+
+    private HashSet<Rigidbody2D> colliding = new HashSet<Rigidbody2D>();
+
+    private Vector2 lastPos;
+
+    private void Awake()
+    {
+        _rigidbody2D = GetComponent<Rigidbody2D>();
+        lastPos = _rigidbody2D.position;
+    }
+
     void Start()
     {
         transform.localPosition = points[startPos];
         _curIndex = startPos;
     }
 
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        Rigidbody2D rb = other.collider.GetComponent<Rigidbody2D>();
+        if(rb == null)
+            return;
+        
+        if(!colliding.Contains(rb))
+            colliding.Add(rb);
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        Rigidbody2D rb = other.collider.GetComponent<Rigidbody2D>();
+        if(rb == null)
+            return;
+        
+        if(colliding.Contains(rb))
+            colliding.Remove(rb);
+    }
+    
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Vector3.Distance(points[_curIndex], transform.localPosition) < MIN_DISTANCE)
         {
@@ -38,8 +72,22 @@ public class MovingPlatform : MonoBehaviour
                 _curIndex = INITAL_POS_IDX;
             }
         }
+        
+        _rigidbody2D.velocity = (points[_curIndex]-transform.localPosition).normalized * Time.fixedDeltaTime * speed;
+        var delta = _rigidbody2D.position - lastPos;
 
-        transform.localPosition = Vector3.MoveTowards(transform.localPosition, points[_curIndex],
-            speed * Time.deltaTime);
+        if (colliding.Count > 0)
+        {
+            colliding = new HashSet<Rigidbody2D>(colliding.Where(r => r != null).ToList());
+            foreach (var rb in colliding)
+            {
+                rb.position += delta;
+            }   
+        }
+
+        lastPos = _rigidbody2D.position;
+
+        // transform.localPosition = Vector3.MoveTowards(transform.localPosition, points[_curIndex],
+        //     speed * Time.deltaTime);
     }
 }
