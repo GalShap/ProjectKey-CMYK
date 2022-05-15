@@ -301,7 +301,7 @@ public class DialogueManager : MonoBehaviour
                 time = timer;
             }
 
-            else if (!hasDialogue && !dialogueEnd && (time <= timer))
+            else if (!hasDialogue && !dialogueEnd && (time <= 0))
             {
                 dialogueEnd = true;
                 DisableDialog();

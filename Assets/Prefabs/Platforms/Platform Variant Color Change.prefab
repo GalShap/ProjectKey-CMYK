@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2580455824727483272, guid: 79473d2f8a24f52488f75ffefcf19fad, type: 3}
       propertyPath: m_Name
-      value: Platform
+      value: Platform Variant Color Change
       objectReference: {fileID: 0}
     - target: {fileID: 2580455824727483274, guid: 79473d2f8a24f52488f75ffefcf19fad, type: 3}
       propertyPath: m_RootOrder
@@ -17,11 +17,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2580455824727483274, guid: 79473d2f8a24f52488f75ffefcf19fad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: -17.74
       objectReference: {fileID: 0}
     - target: {fileID: 2580455824727483274, guid: 79473d2f8a24f52488f75ffefcf19fad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 8.6
       objectReference: {fileID: 0}
     - target: {fileID: 2580455824727483274, guid: 79473d2f8a24f52488f75ffefcf19fad, type: 3}
       propertyPath: m_LocalPosition.z
@@ -79,14 +79,12 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 1024
-  neutralSprite: {fileID: 21300000, guid: 29cb4710e66e6b34fb3ebf54f2c6bf19, type: 3}
-  whiteSprite: {fileID: 21300000, guid: 69f6f58f07eec124e9e4e690341561c7, type: 3}
+  neutralSprite: {fileID: 21300000, guid: 0a89287845a3eba4a84579e2e71d13d9, type: 3}
+  whiteSprite: {fileID: 21300000, guid: 269cb1554c1a8b34d8e155c8a4711a3d, type: 3}
   colorLayers:
   - serializedVersion: 2
-    m_Bits: 256
-  - serializedVersion: 2
-    m_Bits: 128
-  - serializedVersion: 2
     m_Bits: 512
+  - serializedVersion: 2
+    m_Bits: 1024
   startIndex: 0
   changeSpeed: 1

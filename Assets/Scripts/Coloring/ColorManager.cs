@@ -33,6 +33,8 @@ public class ColorManager : MonoBehaviour
 
     [SerializeField] private PlayerHUD PlayerHUD;
 
+    [SerializeField] private List<LayerMask> startWith;
+    
     [SerializeField] private bool startWithAll;
     #endregion
 
@@ -93,10 +95,13 @@ public class ColorManager : MonoBehaviour
         else
         {
             availableLayers = new List<ColorLayer>();
-            ColorLayer? cl = GetColorLayer(Neutral.value);
-            if(cl == null)
-                return;
-            availableLayers.Add((ColorLayer) cl);   
+            foreach (var l in startWith)
+            {
+                ColorLayer? cl = GetColorLayer(l.value);
+                if(cl == null)
+                    return;
+                availableLayers.Add((ColorLayer) cl);
+            }
         }
     }
 

@@ -72,13 +72,13 @@ public class PlayerController : MonoBehaviour
                        _rigidbody2D.position + collisionOffset,
                        Vector2.down,
                         height * 0.5f + 0.05f,
-                       ColorManager.GroundLayers) 
+                       groundLayers) 
                    || 
                    Physics2D.Raycast(
                        _rigidbody2D.position - collisionOffset,
                        Vector2.down,
                        height * 0.5f + 0.05f,
-                       ColorManager.GroundLayers);
+                       groundLayers);
         
         if (jumpTimer > Time.time && onGround)
         {

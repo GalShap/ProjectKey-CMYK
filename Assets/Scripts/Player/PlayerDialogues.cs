@@ -11,7 +11,8 @@ public class PlayerDialogues : MonoBehaviour
 
     private void Start()
     {
-        Physics2D.IgnoreCollision(playerCollider, blueCollider, true);
+        if (blueCollider != null) 
+            Physics2D.IgnoreCollision(playerCollider, blueCollider, true);
     }
 
     public void Chase1()

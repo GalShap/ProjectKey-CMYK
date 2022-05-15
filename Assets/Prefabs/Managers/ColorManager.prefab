@@ -71,4 +71,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   PlayerHUD: {fileID: 0}
+  startWith:
+  - serializedVersion: 2
+    m_Bits: 1024
   startWithAll: 0
