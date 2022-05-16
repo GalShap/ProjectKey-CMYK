@@ -118,7 +118,11 @@ public class PlayerController : MonoBehaviour
         bool changingDirection = 0 > movement.x * _rigidbody2D.velocity.x;
         if (onGround)
         {
-            if (Math.Abs(movement.x) < 0.4 || changingDirection)
+            if (Math.Abs(movement.x) == 0 && Math.Abs(_rigidbody2D.velocity.x) < 0.2f)
+            {
+                _rigidbody2D.velocity *= Vector2.up;
+            }
+            if ((Math.Abs(movement.x) < 0.4 && _rigidbody2D.velocity.x != 0) || changingDirection)
             {
                 _rigidbody2D.drag = linearDrag;
             }
