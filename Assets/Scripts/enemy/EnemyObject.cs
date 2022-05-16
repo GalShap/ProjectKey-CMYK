@@ -23,7 +23,7 @@ public abstract class EnemyObject : MonoBehaviour, ColorChangeListener
     }
 
 
-    public void OnColorChange(ColorManager.ColorLayer layer)
+    public virtual void OnColorChange(ColorManager.ColorLayer layer)
     {
         return;
     }

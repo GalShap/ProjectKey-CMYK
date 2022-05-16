@@ -7,7 +7,7 @@ using UnityEngine;
 /// The class definition for a projectile's trigger
 /// </summary>
 /// <remarks>
-public class CannonScript : MonoBehaviour
+public class CannonScript : EnemyObject
 {
     /// Attach this script as a component to any object capable of triggering projectiles
     /// 
@@ -18,6 +18,7 @@ public class CannonScript : MonoBehaviour
     [SerializeField] private float len = 4f;
     [SerializeField] private float timerCounter = 3;
     private float timer = 0;
+    private bool colored;
 
 
     /// <summary>
@@ -33,12 +34,32 @@ public class CannonScript : MonoBehaviour
     
     protected void Shoot()
     {
-        Instantiate(m_Projectile, m_SpawnTransform.position, m_SpawnTransform.rotation);
+        if (!colored)
+        {
+            Instantiate(m_Projectile, m_SpawnTransform.position, m_SpawnTransform.rotation);
+        }
+        
     }
 
     private float PositionX()
     {
         return (transform.position.x - player.transform.position.x);
     }
-    
+
+    public override void OnColorChange(ColorManager.ColorLayer layer)
+    {
+        base.OnColorChange(layer);
+        if (layer.index == gameObject.layer)
+        {
+            colored = true;
+        }
+        else
+        {
+            colored = false;
+        }
+    }
+    protected override void UponDead()
+    {
+        gameObject.SetActive(false);
+    }
 }

@@ -2101,6 +2101,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2450658272463514157, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
+      propertyPath: layer.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     - target: {fileID: 3819642736829985239, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
       propertyPath: m_Name
       value: ballEnemy
@@ -2325,6 +2329,10 @@ PrefabInstance:
       propertyPath: whiteSprite
       value: 
       objectReference: {fileID: 4349874989898575965, guid: 0581e9e94a6a1494a832a4d22b139fc6, type: 3}
+    - target: {fileID: 2450658272463514157, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
+      propertyPath: layer.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     - target: {fileID: 2450658272463514157, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
       propertyPath: neutralSprite
       value: 
