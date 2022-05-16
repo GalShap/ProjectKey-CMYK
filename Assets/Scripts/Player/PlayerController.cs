@@ -11,9 +11,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float linearDrag = 5f;
     
     [Header("Jumping Physics")]
-    [SerializeField] private float jumpSpeed = 5f;
-    [SerializeField] private float fallMultiplier = 4f;
-    [SerializeField] private float gravityScale = 1f;
+    // [SerializeField] private float jumpSpeed = 5f;
+    [SerializeField] private float jumpHeight = 4f;
+    [SerializeField] private float jumpTime = 1f;
+    [SerializeField] private float fallMultiplier = 1f;
+    // [SerializeField] private float gravityScale = 1f;
     [SerializeField] private float jumpDelay = 0.25f;
     private float jumpTimer;
     private bool jumping;
@@ -54,7 +56,7 @@ public class PlayerController : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _renderer = GetComponentInChildren<SpriteRenderer>();
         _animator = GetComponentInChildren<Animator>();
-        collisionOffset = Vector2.right * transform.lossyScale.x / 2;
+        collisionOffset = Vector2.right * (_renderer.sprite.rect.width/_renderer.sprite.pixelsPerUnit) / 2;
     }
 
     private void Update()
@@ -80,6 +82,8 @@ public class PlayerController : MonoBehaviour
                        height * 0.5f + 0.05f,
                        groundLayers);
         
+        print(onGround);
+
         if (jumpTimer > Time.time && onGround)
         {
             Jump();
@@ -102,8 +106,10 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
         _rigidbody2D.drag = 0;
-        _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0);
-        _rigidbody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+        float y = (2 * jumpHeight) / jumpTime;
+        _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, y);
+        // _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0);
+        // _rigidbody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
         jumpTimer = 0;
     }
 
@@ -126,18 +132,25 @@ public class PlayerController : MonoBehaviour
         else
         {
             _rigidbody2D.drag = 0;
-            float scale = gravityScale;
-            
-            if (_rigidbody2D.velocity.y < 0)
+            float scale = (-2 * jumpHeight) / (Mathf.Pow(jumpTime, 2));
+            if (_rigidbody2D.velocity.y > 0 && !jumping)
             {
                 scale *= fallMultiplier;
             }
-            else if (_rigidbody2D.velocity.y > 0 && !jumping)
-            {
-                scale *= fallMultiplier / 2;
-            }
 
-            _rigidbody2D.gravityScale = scale;
+            // _rigidbody2D.drag = 0;
+            // float scale = gravityScale;
+            //
+            // if (_rigidbody2D.velocity.y < 0)
+            // {
+            //     scale *= fallMultiplier;
+            // }
+            // else if (_rigidbody2D.velocity.y > 0 && !jumping)
+            // {
+            //     scale *= fallMultiplier / 2;
+            // }
+
+            _rigidbody2D.gravityScale = scale / Physics2D.gravity.y;
         }
     }
 

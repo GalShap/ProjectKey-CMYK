@@ -417,17 +417,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3e46774b6e4f6e4cb14e6958bf2c9e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 10
-  moveSpeed: 7
+  maxSpeed: 5
+  moveSpeed: 9
   linearDrag: 10
-  jumpSpeed: 9
-  fallMultiplier: 5
-  gravityScale: 1
+  jumpHeight: 2.75
+  jumpTime: 0.5
+  fallMultiplier: 1.7
   jumpDelay: 0.15
   groundLayers:
     serializedVersion: 2
     m_Bits: 1921
-  attackTimer: 0.25
+  attackTimer: 0.2
   attackCollider: {fileID: 7119172714136712465}
   isTutorial: 0
 --- !u!114 &8863397447226026587
