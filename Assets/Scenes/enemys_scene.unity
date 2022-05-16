@@ -623,8 +623,8 @@ BoxCollider2D:
   m_Offset: {x: 1, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0.5}
-    oldSize: {x: 2, y: 0.48292682}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.25, y: 0.81}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -790,23 +790,13 @@ MonoBehaviour:
   Player: {fileID: 1101694609}
   CurWorldColor: -1
   Background: {fileID: 863351002}
-  layers:
-  - layer:
-      serializedVersion: 2
-      m_Bits: 256
-    color: {r: 1, g: 0.9529412, b: 0.17254902, a: 1}
-  - layer:
-      serializedVersion: 2
-      m_Bits: 512
-    color: {r: 0, g: 0.63529414, b: 0.8666667, a: 1}
-  - layer:
-      serializedVersion: 2
-      m_Bits: 128
-    color: {r: 0.8666667, g: 0.29411766, b: 0.54509807, a: 1}
+  AllLayers: []
   Neutral:
     serializedVersion: 2
     m_Bits: 1024
   PlayerHUD: {fileID: 288396972}
+  startWith: []
+  startWithAll: 0
 --- !u!4 &844166070
 Transform:
   m_ObjectHideFlags: 0
@@ -876,7 +866,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1554363825
-  m_SortingLayer: 1
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 0.37254903, g: 0.37254903, b: 0.37254903, a: 0}
@@ -1447,6 +1437,10 @@ PrefabInstance:
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -2891919172482978356, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
+      propertyPath: aimAtPlayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2891919172482978356, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
       propertyPath: attackAngleFromPlayer
       value: 2
       objectReference: {fileID: 0}
@@ -1502,6 +1496,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 440380642072613309, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1101694609}
     - target: {fileID: 440380642072613309, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
       propertyPath: timerCounter
       value: 0.5
@@ -1763,6 +1761,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1356387341348248899, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 1356387341348248899, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.48
+      objectReference: {fileID: 0}
     - target: {fileID: 8863397447226026584, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
       propertyPath: m_Name
       value: Player

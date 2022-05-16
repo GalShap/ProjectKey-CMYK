@@ -17,10 +17,11 @@ public class RoundMonster : EnemyObject
     [SerializeField] float smooth = 1.0f;
     [SerializeField] float tiltAngle = 60.0f;
     private float tiltAngle_ = 60.0f;
-    [SerializeField] float attackAngleFromPlayer = 3.0f;
+    [SerializeField] float attackAngleFromPlayer = 10.0f;
     Quaternion start;
     Quaternion target;
     private float len = 0;
+    [SerializeField] private bool aimAtPlayer;
 
     void Awake()
     {
@@ -36,8 +37,8 @@ public class RoundMonster : EnemyObject
     {
         if (!isAlive()) UponDead();
         // Move the player around the scene.
-        // if (IsInDegreeRange(attackAngleFromPlayer))
-            // return;
+        if (aimAtPlayer && IsInDegreeRange(attackAngleFromPlayer))
+            return;
         Move();
     }
 
@@ -60,7 +61,10 @@ public class RoundMonster : EnemyObject
     {
         Vector3 playerPosition = player.transform.position;
         Vector3 dir = playerPosition - transform.position;
+        // return dir.GetAngleBetweenXZ(playerPosition) <= attackAngleFromPlayer;
+        
         float angle = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg;
+        // return angle <= Math.Abs(attackAngleFromPlayer);
         return transform.rotation == Quaternion.AngleAxis(angle, Vector3.forward);
         // float deg = transform.position.x - transform.position.y
     }

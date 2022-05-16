@@ -2594,12 +2594,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 698624158}
     m_Modifications:
     - target: {fileID: -2891919172482978356, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 315701121}
+    - target: {fileID: -2891919172482978356, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
       propertyPath: smooth
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: -2891919172482978356, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
       propertyPath: tiltAngle
       value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: -2891919172482978356, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
+      propertyPath: aimAtPlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2891919172482978356, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
+      propertyPath: attackAngleFromPlayer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 218664447055370143, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
       propertyPath: m_RootOrder
@@ -2859,12 +2871,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 698624158}
     m_Modifications:
     - target: {fileID: -2891919172482978356, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 315701121}
+    - target: {fileID: -2891919172482978356, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
       propertyPath: smooth
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: -2891919172482978356, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
       propertyPath: tiltAngle
       value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: -2891919172482978356, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
+      propertyPath: aimAtPlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2891919172482978356, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
+      propertyPath: attackAngleFromPlayer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 218664447055370143, guid: f81905311abe21c438e477b2a25d44e5, type: 3}
       propertyPath: m_RootOrder
