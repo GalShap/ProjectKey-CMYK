@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EnemyObject : MonoBehaviour
+public abstract class EnemyObject : MonoBehaviour, ColorChangeListener
 {
     protected int lifeCount = 3;
     protected abstract void UponDead();
@@ -13,7 +10,7 @@ public abstract class EnemyObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        ColorManager.RegisterColorListener(this);
     }
     
     public bool isAlive()
@@ -25,7 +22,9 @@ public abstract class EnemyObject : MonoBehaviour
         return false;
     }
 
-    
 
-
+    public void OnColorChange(ColorManager.ColorLayer layer)
+    {
+        return;
+    }
 }

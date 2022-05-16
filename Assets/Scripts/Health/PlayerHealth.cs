@@ -45,7 +45,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
-        if (lives == MIN_LIVES)
+        if (lives <= MIN_LIVES)
         {
             Dead();
         }
@@ -95,9 +95,12 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     /// the collision with an enemy. 
     /// </param>
     private void PlayerKickBack(Collision2D other)
-    {   
-        Debug.Log("kick back!");
+    {
         Rigidbody2D enemyRigidBody = other.gameObject.GetComponent<Rigidbody2D>();
+        if (enemyRigidBody == null)
+            enemyRigidBody = other.gameObject.GetComponentInParent<Rigidbody2D>();
+        if (enemyRigidBody)
+            return;
         _playerRigidBody.AddForce((_playerRigidBody.position - enemyRigidBody.position).normalized * _bounce, 
             ForceMode2D.Impulse);
         _isBouncing = false;

@@ -87,7 +87,7 @@ MonoBehaviour:
   health: 100
   enemySpriteRenderer: {fileID: 3408794512140380931}
   timeToAnimate: 0.2
-  bounce: 6
+  bounce: 7
   _timeToBounce: 0.2
 --- !u!114 &-5422545807513706614
 MonoBehaviour:

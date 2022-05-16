@@ -101,6 +101,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        _rigidbody2D.drag = 0;
         _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0);
         _rigidbody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
         jumpTimer = 0;

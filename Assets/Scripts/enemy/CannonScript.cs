@@ -40,4 +40,5 @@ public class CannonScript : MonoBehaviour
     {
         return (transform.position.x - player.transform.position.x);
     }
+    
 }

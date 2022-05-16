@@ -48,6 +48,8 @@ public class ColorManager : MonoBehaviour
 
     private List<ColorLayer> availableLayers;
 
+    private HashSet<ColorChangeListener> colorListeners = new HashSet<ColorChangeListener>();
+
     public static LayerMask GroundLayers
     {
         get
@@ -156,6 +158,18 @@ public class ColorManager : MonoBehaviour
 
         return null;
     }
+
+    public static void RegisterColorListener(ColorChangeListener l)
+    {
+        if(!_shared.colorListeners.Contains(l))
+            _shared.colorListeners.Add(l);
+    }
+    
+    public static void UnregisterColorListener(ColorChangeListener l)
+    {
+        if(_shared.colorListeners.Contains(l))
+            _shared.colorListeners.Remove(l);
+    }
     
     public static ColorLayer? GetColorLayer(Color color)
     {
@@ -203,6 +217,10 @@ public class ColorManager : MonoBehaviour
         ColorLayer cl = availableLayers[color];
         SetBackGroundColor(cl.color);
         CancelCollisionLayer(cl);
+        foreach (var l in colorListeners)
+        {
+            l.OnColorChange(cl);
+        }
         // PlayerHUD.SetCurColorUI(color);
     }
 

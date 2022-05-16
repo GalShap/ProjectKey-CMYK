@@ -97,9 +97,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("AttackCollider"))
-        {   
-           
-            print("damage");
+        {
             Damage(50);
             
             if (!_isBouncing)
@@ -112,9 +110,9 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     private void EnemyKickBack(Collider2D other)
     {
-       
-
         Rigidbody2D _playerRigidBody = other.gameObject.GetComponent<Rigidbody2D>();
+        if (_playerRigidBody == null)
+            _playerRigidBody = other.gameObject.GetComponentInParent<Rigidbody2D>();
         _playerRigidBody.AddForce((_enemyRigidBody.position - _playerRigidBody.position).normalized * bounce,
             ForceMode2D.Impulse);
         _isBouncing = false;
@@ -126,7 +124,10 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         StartCoroutine(DamageFlashAnimation(1));
         health -= amount;
         if (health < MIN_HEALTH)
+        {
             health = MIN_HEALTH;
+            Dead();
+        }
     }
 
     public void Heal(int amount)
@@ -153,6 +154,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     public void Dead()
     {
-        Debug.Log("Enemy is Dead!");
+        Destroy(gameObject);
     }
 }
