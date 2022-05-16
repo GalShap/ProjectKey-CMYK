@@ -154,6 +154,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     public void Dead()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }
