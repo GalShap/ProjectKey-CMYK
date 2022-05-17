@@ -50,6 +50,8 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private Image speakerImage;
 
+    [SerializeField] private GameObject Arrow;
+
     [SerializeField] private TextMeshProUGUI TextBox;
 
     // the string is the dialogue the character says
@@ -220,7 +222,8 @@ public class DialogueManager : MonoBehaviour
             hasDialogue = false;
     }
     private IEnumerator DisplayNextLine(Sentence next)
-    {
+    {   
+        Arrow.SetActive(false);
         speakerImage.sprite = SpeakersSprites[next.ID];
         TextBox.text = "";
         foreach (var letter in next.Sentence1)
@@ -228,6 +231,8 @@ public class DialogueManager : MonoBehaviour
             TextBox.text += letter;
             yield return new WaitForSecondsRealtime(0.05f);
         }
+        Arrow.SetActive(true);
+        
     }
     private IEnumerator ResizeDialogueBox(float start, float end)
     {
@@ -269,7 +274,7 @@ public class DialogueManager : MonoBehaviour
     }
     
     public void LoadDialogue(Dialogues d, bool enable = true, Action onEnd = null)
-    {
+    {   
         LoadNewDialog((List<Sentence>) dialogues[d], enable, onEnd);
     }
     

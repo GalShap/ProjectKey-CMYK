@@ -45,6 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   CurWorldColor: 0
+  BackgroundMachine: {fileID: 0}
   Background: {fileID: 0}
   AllLayers:
   - layer:
@@ -74,4 +75,11 @@ MonoBehaviour:
   startWith:
   - serializedVersion: 2
     m_Bits: 1024
+  - serializedVersion: 2
+    m_Bits: 512
+  Backgrounds:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   startWithAll: 0
