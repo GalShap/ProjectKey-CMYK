@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
                        height * 0.5f + 0.05f,
                        groundLayers);
         
-        print(onGround);
+        //print(onGround);
 
         if (jumpTimer > Time.time && onGround)
         {

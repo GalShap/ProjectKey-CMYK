@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 public class ColorManager : MonoBehaviour
 {
@@ -18,6 +20,8 @@ public class ColorManager : MonoBehaviour
             Mathf.RoundToInt(Mathf.Log(layer.value,
                 2));
     }
+
+  
     
     #region Inspector
     
@@ -25,6 +29,8 @@ public class ColorManager : MonoBehaviour
 
     [SerializeField] private int CurWorldColor = -1;
 
+    [SerializeField] private GameObject BackgroundMachine;
+    
     [SerializeField] private SpriteRenderer Background;
 
     [SerializeField] private List<ColorLayer> AllLayers;
@@ -34,6 +40,8 @@ public class ColorManager : MonoBehaviour
     [SerializeField] private PlayerHUD PlayerHUD;
 
     [SerializeField] private List<LayerMask> startWith;
+
+    [SerializeField] private List<GameObject> Backgrounds;
     
     [SerializeField] private bool startWithAll;
     #endregion
@@ -43,13 +51,14 @@ public class ColorManager : MonoBehaviour
     public static int CurrLayer => _shared.AllLayers[_shared.CurWorldColor].index;
 
     private static ColorManager _shared;
-
     private int TotalColors => AllLayers.Count;
 
     private List<ColorLayer> availableLayers;
 
     private HashSet<ColorChangeListener> colorListeners = new HashSet<ColorChangeListener>();
 
+    private bool _afterAwake = false;
+    
     public static LayerMask GroundLayers
     {
         get
@@ -68,14 +77,26 @@ public class ColorManager : MonoBehaviour
 
     public static LayerMask NeutralLayer => _shared.Neutral;
 
-    #endregion
-
+    
     public enum ColorName
     {
-        Neutral, Cyan, Magenta, Yellow
+        Neutral, Cyan, Yellow, Magenta        
     }
     
-    // Start is called before the first frame update
+    #endregion
+    
+    #region Constants
+
+    private const int NoColors = 1;
+    private const float NeutralRot = 0f;
+    private const float CyanRot = 90f;
+    private const float YellowRot = 180f;
+    private const float MagentaRot = 270f;
+    private const float FullTime = 1f;
+    private const float HalfTime = 0.5f;
+
+    #endregion
+    
     void Awake()
     {
         if (_shared == null)
@@ -86,8 +107,26 @@ public class ColorManager : MonoBehaviour
             if (CurWorldColor != -1)
                 SetWorldColor(CurWorldColor);
         }
+        
+        DeactivateBackgrounds();
+        _afterAwake = true;
     }
-
+  
+   
+    #region Private Methods
+    
+    /// <summary>
+    ///  called on awake, deactivates background that represents unavailable color.
+    /// </summary>
+    private void DeactivateBackgrounds()
+    {
+        int count = availableLayers.Count;
+        for (int i = count; i < Backgrounds.Count; i++)
+        {
+            Backgrounds[i].SetActive(false);
+        }
+    } 
+    
     private void InitAvailable()
     {
         if (startWithAll)
@@ -105,10 +144,7 @@ public class ColorManager : MonoBehaviour
                 availableLayers.Add((ColorLayer) cl);
             }
         }
-    }
-
-    #region Private Methods
-    
+    } 
     // function disables the given layer and enables all other layers. 
     private void CancelCollisionLayer(ColorLayer layer)
     {
@@ -132,6 +168,81 @@ public class ColorManager : MonoBehaviour
         Background.color = color;
     }
 
+    private (float, float, float) CalcRotations(int count)
+    {
+
+        int world = CurWorldColor - 1;
+        switch (count)
+        {
+        
+            // neutral + cyan
+            case 2:
+                
+                //  neutral -> cyan
+                if (world == (int) ColorName.Neutral)
+                    return (NeutralRot, CyanRot, FullTime);
+                
+                // cyan -> neutral
+                else if (world == (int) ColorName.Cyan || world == -1) 
+                    return (CyanRot, NeutralRot , HalfTime);
+                
+                break;
+            
+            // neutral + cyan + magenta
+            case 3:
+                //  neutral -> cyan
+                if (world == (int) ColorName.Neutral)
+                    return (NeutralRot, CyanRot, FullTime);
+                
+                // cyan -> yellow
+                else if (world == (int) ColorName.Cyan)
+                    return (CyanRot, YellowRot, FullTime);
+                
+                // yellow -> neutral
+                else if (world == (int) ColorName.Yellow || world == -1)
+                    return (YellowRot, NeutralRot, HalfTime);
+
+                break;
+
+            // all colors
+            case 4:
+
+                //  neutral -> cyan
+                if (world == (int) ColorName.Neutral)
+                    return (NeutralRot, CyanRot, FullTime);
+                
+                // cyan -> yellow
+                else if (world == (int) ColorName.Cyan)
+                    return (CyanRot, YellowRot, FullTime);
+                
+                //  yellow -> magenta
+                else if (world == (int) ColorName.Yellow)
+                    return (YellowRot, MagentaRot ,FullTime);
+                
+                // magenta -> neutral
+                else if (world == (int) ColorName.Magenta || world == -1)
+                    return (MagentaRot, NeutralRot, HalfTime);
+                
+                break;
+        }
+
+        return (NeutralRot, NeutralRot, FullTime);
+    }
+    
+    private void ChangeBackGround()
+    {   
+        if (availableLayers.Count == NoColors) return;
+        
+        (float, float, float) rotations = CalcRotations(availableLayers.Count);
+        float start = rotations.Item1;
+        float end = rotations.Item2;
+        float time = rotations.Item3;
+        StartCoroutine(RotateBackground(start, end, time));
+        
+        // todo add audio here!!!
+
+    }
+
     public static void RotateColor()
     {
         _shared.CurWorldColor = (_shared.CurWorldColor + 1) % _shared.availableLayers.Count;
@@ -144,8 +255,12 @@ public class ColorManager : MonoBehaviour
         if(cl == null || _shared.availableLayers.Contains((ColorLayer) cl))
             return;
         
+        
         _shared.availableLayers.Add((ColorLayer) cl);
+        _shared.Backgrounds[_shared.availableLayers.Count - 1].SetActive(true);
+        
 //        _shared.PlayerHUD.AddColor((ColorLayer) cl);
+        
     }
 
     public static ColorLayer? GetColorLayer(int layerValue)
@@ -215,13 +330,19 @@ public class ColorManager : MonoBehaviour
     public void SetWorldColor(int color)
     {
         ColorLayer cl = availableLayers[color];
-        SetBackGroundColor(cl.color);
+        
+ 
         CancelCollisionLayer(cl);
         foreach (var l in colorListeners)
         {
             l.OnColorChange(cl);
         }
+        
+        if (_afterAwake) ChangeBackGround();
+        //SetBackGroundColor(cl.color);
         // PlayerHUD.SetCurColorUI(color);
+     
+        
     }
 
     public static void SetColor(ColorName c)
@@ -229,10 +350,44 @@ public class ColorManager : MonoBehaviour
         int index = _shared.AllLayers.FindIndex(cl => cl.name == c);
         if(index == -1)
             return;
-        _shared.SetBackGroundColor(_shared.AllLayers[index].color);
+        //_shared.SetBackGroundColor(_shared.AllLayers[index].color);
+        _shared.ChangeBackGround();
+        
         _shared.CancelCollisionLayer(_shared.AllLayers[index]);
     }
     
+    #endregion
+    
+    #region Corutines
+
+    IEnumerator RotateBackground(float start, float end, float time)
+    {   
+        
+        float cyclicEnd = (end == 0) ? 360 : end;
+        float elapsedTime = 0;
+        float duration = time;
+        float x = BackgroundMachine.transform.rotation.eulerAngles.x;
+        float y = BackgroundMachine.transform.rotation.eulerAngles.y;
+        float z;
+        Vector3 rotation = new Vector3(0,0,0);
+        
+        //Debug.Log("start: " + start + " end: " + end);
+
+        while (elapsedTime < duration)
+        {
+            z = Mathf.Lerp(start, cyclicEnd, elapsedTime / duration);
+            rotation = new Vector3(x, y, z);
+            BackgroundMachine.transform.rotation = Quaternion.Euler(rotation);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        rotation.z = cyclicEnd;
+        BackgroundMachine.transform.rotation = Quaternion.Euler(rotation);
+        
+        
+    }
+
     #endregion
     
 }
