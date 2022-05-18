@@ -38,6 +38,7 @@ public class spikeEnemy : PatrolEnemy
     
     public override void OnColorChange(ColorManager.ColorLayer layer)
     {
+        print("ok");
         base.OnColorChange(layer);
         colored = layer.index == gameObject.layer;
     }
