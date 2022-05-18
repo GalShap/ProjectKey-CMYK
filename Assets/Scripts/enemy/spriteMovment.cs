@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class spriteMovment : MonoBehaviour
 {
-    
+    private SpriteRenderer ren;
+    private Rigidbody2D rig;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        ren = gameObject.GetComponentInChildren<SpriteRenderer>();
+        rig = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        gameObject.GetComponentInChildren<SpriteRenderer>().flipX = gameObject.GetComponent<Rigidbody2D>().velocity.x < 0;
+        ren.flipX = rig.velocity.x < 0;
     }
 }
