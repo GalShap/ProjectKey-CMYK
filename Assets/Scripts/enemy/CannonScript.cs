@@ -18,7 +18,6 @@ public class CannonScript : EnemyObject
     [SerializeField] private float len = 4f;
     [SerializeField] private float timerCounter = 3;
     private float timer = 0;
-    private bool colored;
 
 
     /// <summary>
@@ -49,14 +48,7 @@ public class CannonScript : EnemyObject
     public override void OnColorChange(ColorManager.ColorLayer layer)
     {
         base.OnColorChange(layer);
-        if (layer.index == gameObject.layer)
-        {
-            colored = true;
-        }
-        else
-        {
-            colored = false;
-        }
+        colored = layer.index == gameObject.layer;
     }
     protected override void UponDead()
     {

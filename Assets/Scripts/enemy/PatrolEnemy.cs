@@ -16,12 +16,16 @@ public class PatrolEnemy : EnemyObject
         movement = gameObject.transform.position;
         rb = GetComponent<Rigidbody2D>();
         counter = 0;
+        _renderer = GetComponentInChildren<SpriteRenderer>();
+        collisionOffset = Vector2.right * (_renderer.sprite.rect.width/_renderer.sprite.pixelsPerUnit) / 2;
+
     }
     
     // physics is best, when activating it in Fixed update. 
     private void FixedUpdate()
     {
         if (!isAlive()) UponDead();
+        isOnGround();
         Move();
     }
 
