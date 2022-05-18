@@ -74,13 +74,13 @@ public class PlayerController : MonoBehaviour
                        _rigidbody2D.position + collisionOffset,
                        Vector2.down,
                         height * 0.5f + 0.05f,
-                       groundLayers) 
+                       ColorManager.GroundLayers | LayerMask.GetMask("Default")) 
                    || 
                    Physics2D.Raycast(
                        _rigidbody2D.position - collisionOffset,
                        Vector2.down,
                        height * 0.5f + 0.05f,
-                       groundLayers);
+                       ColorManager.GroundLayers | LayerMask.GetMask("Default"));
         
         print(onGround);
 
