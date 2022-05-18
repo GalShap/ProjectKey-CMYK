@@ -14,6 +14,6 @@ public class spriteMovment : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.GetComponent<SpriteRenderer>().flipX = gameObject.GetComponent<Rigidbody2D>().velocity.x < 0;
+        gameObject.GetComponentInChildren<SpriteRenderer>().flipX = gameObject.GetComponent<Rigidbody2D>().velocity.x < 0;
     }
 }

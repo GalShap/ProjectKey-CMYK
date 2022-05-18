@@ -15,7 +15,7 @@ public abstract class EnemyObject : MonoBehaviour, ColorChangeListener
     protected bool colored;
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         ColorManager.RegisterColorListener(this);
     }
@@ -33,8 +33,6 @@ public abstract class EnemyObject : MonoBehaviour, ColorChangeListener
 
     public virtual void OnColorChange(ColorManager.ColorLayer layer)
     {
-        // base.OnColorChange(layer);
-        print("okidoki");
         colored = layer.index == gameObject.layer;
     }
 
