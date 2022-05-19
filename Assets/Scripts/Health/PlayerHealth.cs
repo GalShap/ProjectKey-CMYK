@@ -45,10 +45,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
-        if (lives <= MIN_LIVES)
-        {
-            Dead();
-        }
+        // if (lives <= MIN_LIVES)
+        // {
+        //     Dead();
+        // }
       
       
         if (_isBouncing)
@@ -121,8 +121,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         lives -= amount;
         if (lives < MIN_LIVES)
+        {
             lives = MIN_LIVES;
-        
+            Dead();
+        }
+
         playerHUD.removeLifeOnUI(amount);
 
     }
@@ -174,7 +177,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     public void Dead()
     {
-        
+        print("respawn");
+        SetHealth(MAX_LIVES);
+        GameManager.Manager.Respawn();
     }
     
     #endregion

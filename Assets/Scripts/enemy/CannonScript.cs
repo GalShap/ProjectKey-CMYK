@@ -58,6 +58,7 @@ public class CannonScript : EnemyObject
             colored = false;
         }
     }
+    
     protected override void UponDead()
     {
         gameObject.SetActive(false);

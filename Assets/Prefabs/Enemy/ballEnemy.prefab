@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -582505551
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 4349874989898575965, guid: 0581e9e94a6a1494a832a4d22b139fc6, type: 3}
   m_Color: {r: 0.35686275, g: 0.29411766, b: 0.27058825, a: 1}
@@ -136,7 +136,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.79, y: 2.16}
+    oldSize: {x: 1.4916667, y: 1.8}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -450,6 +450,7 @@ MonoBehaviour:
   smooth: 5
   tiltAngle: 60
   attackAngleFromPlayer: 3
+  aimAtPlayer: 0
 --- !u!212 &7129580432990768439
 SpriteRenderer:
   m_ObjectHideFlags: 0

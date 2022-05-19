@@ -18,6 +18,18 @@ public class Door : MonoBehaviour
         rightRoom.Camera.Priority += right;
     }
 
+    public void EnterLeftRoom()
+    {
+        GameManager.Manager.SetRoom(leftRoom);
+        SetLeftCamera();
+    }
+    
+    public void EnterRightRoom()
+    {
+        GameManager.Manager.SetRoom(rightRoom);
+        SetRightCamera();
+    }
+
     public void SetLeftCamera() => SetPriorities(1,-1);
     public void SetRightCamera() => SetPriorities(-1,1);
 

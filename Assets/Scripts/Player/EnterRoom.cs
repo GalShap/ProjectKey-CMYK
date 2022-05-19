@@ -12,11 +12,11 @@ public class EnterRoom : MonoBehaviour
             Door door = other.gameObject.GetComponent<Door>();
             if (transform.position.x >= other.gameObject.transform.position.x)
             {
-                door.SetRightCamera();
+                door.EnterRightRoom();
             }
             else
             {
-                door.SetLeftCamera();
+                door.EnterLeftRoom();
             }
         }
     }

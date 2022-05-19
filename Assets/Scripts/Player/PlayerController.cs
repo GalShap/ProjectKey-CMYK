@@ -81,8 +81,6 @@ public class PlayerController : MonoBehaviour
                        Vector2.down,
                        height * 0.5f + 0.05f,
                        ColorManager.GroundLayers | LayerMask.GetMask("Default"));
-        
-        print(onGround);
 
         if (jumpTimer > Time.time && onGround)
         {
@@ -155,6 +153,15 @@ public class PlayerController : MonoBehaviour
             // }
 
             _rigidbody2D.gravityScale = scale / Physics2D.gravity.y;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Respawn"))
+        {
+            print(other.gameObject);
+            GameManager.Manager.SetRespawn(other.gameObject);
         }
     }
 
