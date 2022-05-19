@@ -8,9 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Manager;
 
     [SerializeField] private PlayerController playerController;
-
+    [SerializeField] private Room currRoom;
     private Room respawnRoom;
-    private Room currRoom;
     private GameObject respawnPoint;
 
     private void Awake()

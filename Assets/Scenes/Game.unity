@@ -4145,11 +4145,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2580455824727483274, guid: 79473d2f8a24f52488f75ffefcf19fad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18.2
+      value: -18
       objectReference: {fileID: 0}
     - target: {fileID: 2580455824727483274, guid: 79473d2f8a24f52488f75ffefcf19fad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22.7
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 2580455824727483274, guid: 79473d2f8a24f52488f75ffefcf19fad, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4597,6 +4597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 315701122}
+  currRoom: {fileID: 899260242}
 --- !u!1001 &2044677362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4895,6 +4896,10 @@ PrefabInstance:
     - target: {fileID: 5049997012961090000, guid: bc151bf407770e5448dff437004c6afd, type: 3}
       propertyPath: m_Name
       value: Respawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 5049997012961090000, guid: bc151bf407770e5448dff437004c6afd, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5049997012961090000, guid: bc151bf407770e5448dff437004c6afd, type: 3}
       propertyPath: m_TagString
