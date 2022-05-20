@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 9074842717555958716}
   - component: {fileID: 1848259307985945461}
   - component: {fileID: 4077122111839912163}
+  - component: {fileID: -6406245334297346206}
   m_Layer: 0
   m_Name: PatrolEnemy
   m_TagString: Monster
@@ -150,6 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65048c842ea5fee4f916c86f33d5eff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 0
   player: {fileID: 8863397447226026584, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
   speed: 2
   places: []
@@ -235,3 +239,15 @@ MonoBehaviour:
     m_Bits: 1024
   neutralSprite: {fileID: 2731795287329381114, guid: 0581e9e94a6a1494a832a4d22b139fc6, type: 3}
   whiteSprite: {fileID: 2731795287329381114, guid: 0581e9e94a6a1494a832a4d22b139fc6, type: 3}
+--- !u!114 &-6406245334297346206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8953315103178594193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 182fe32eb1a94c6479b2011dfd10bcde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -12,13 +12,15 @@ public class FollowPlayerEnemy : EnemyObject
     [SerializeField] private float len = 4f;
 
     [SerializeField] private int counter;
-
-   
+    
     private void Awake()
     {
         movement = gameObject.transform.position;
         rb = GetComponent<Rigidbody2D>();
         counter = 0;
+        _renderer = GetComponentInChildren<SpriteRenderer>();
+        collisionOffset = Vector2.right * (_renderer.sprite.rect.width/_renderer.sprite.pixelsPerUnit) / 2;
+
     }
 
     
@@ -26,12 +28,12 @@ public class FollowPlayerEnemy : EnemyObject
     protected void FixedUpdate()
     {
         if (!isAlive()) UponDead();
-        if (Math.Abs(PositionY()) <= len)
-        {
+        isOnGround();
+        if(Math.Abs(PositionY()) < len)
             Move();
-        }
+        
     }
-
+    
     protected override void UponDead()
     {
         gameObject.SetActive(false);
@@ -43,7 +45,8 @@ public class FollowPlayerEnemy : EnemyObject
      */
     protected void Move()
     {
-        rb.velocity = new Vector2((PositionX() < 0 ? speed : -speed),
+        float i =onGround ? 1f : -1f;
+        rb.velocity = new Vector2((PositionX() < 0 ? speed : -speed) * i,
             rb.velocity.y);
     }
     

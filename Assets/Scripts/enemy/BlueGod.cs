@@ -63,6 +63,8 @@ public class BlueGod : MonoBehaviour
         toggle = true;
     }
     
+    
+    
     public void EndDialogue()
     {
         toggle = false;
