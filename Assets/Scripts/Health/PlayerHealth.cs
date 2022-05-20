@@ -119,7 +119,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     /// </param>
     public void Damage(int amount)
     {
-        print($"Damage: {amount}");
         lives -= amount;
         if (lives <= MIN_LIVES)
         {
@@ -139,7 +138,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     /// </param>
     public void Heal(int amount)
     {
-        print($"Heal: {amount}");
         lives += amount;
         if (lives >= MAX_LIVES)
             lives = MAX_LIVES;
