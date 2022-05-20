@@ -161,7 +161,6 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Respawn"))
         {
-            print(other.gameObject);
             GameManager.Manager.SetRespawn(other.gameObject);
         }
     }

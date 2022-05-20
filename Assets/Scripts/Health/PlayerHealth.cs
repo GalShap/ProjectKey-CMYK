@@ -119,8 +119,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     /// </param>
     public void Damage(int amount)
     {
+        print($"Damage: {amount}");
         lives -= amount;
-        if (lives < MIN_LIVES)
+        if (lives <= MIN_LIVES)
         {
             lives = MIN_LIVES;
             Dead();
@@ -138,12 +139,12 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     /// </param>
     public void Heal(int amount)
     {
+        print($"Heal: {amount}");
         lives += amount;
-        if (lives > MAX_LIVES)
+        if (lives >= MAX_LIVES)
             lives = MAX_LIVES;
         
         playerHUD.addLifeOnUI(amount);
-        Debug.Log("Heal! Cur Health is: " + lives);
     }
 
     public void SetHealth(int amount)
@@ -177,7 +178,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     public void Dead()
     {
-        print("respawn");
         SetHealth(MAX_LIVES);
         GameManager.Manager.Respawn();
     }

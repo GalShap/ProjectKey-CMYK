@@ -169,13 +169,11 @@ public class DialogueManager : MonoBehaviour
         // singleton stuff
         if (Manager == null)
         {
-            print("init");
             Manager = this;
             time = timer;
         }
         else if (Manager != this)
         {
-            print("destroy");
             Destroy(gameObject);
         }
         
@@ -323,7 +321,6 @@ public class DialogueManager : MonoBehaviour
         _dialogueLines = new Queue<Sentence>();
         for (int i = 0; i < sentences.Count; i++)
         {
-            print(sentences[i].Sentence1);
             _dialogueLines.Enqueue(sentences[i]);
         }
 
