@@ -3514,6 +3514,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1463007477}
     - target: {fileID: 8678579278286296369, guid: ca5b3aad73bfb364e9575860b07aa82d, type: 3}
+      propertyPath: startWithAll
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8678579278286296369, guid: ca5b3aad73bfb364e9575860b07aa82d, type: 3}
+      propertyPath: Neutral.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 8678579278286296369, guid: ca5b3aad73bfb364e9575860b07aa82d, type: 3}
       propertyPath: BackgroundMachine
       value: 
       objectReference: {fileID: 186283300}
@@ -3528,11 +3536,11 @@ PrefabInstance:
     - target: {fileID: 8678579278286296369, guid: ca5b3aad73bfb364e9575860b07aa82d, type: 3}
       propertyPath: Backgrounds.Array.data[2]
       value: 
-      objectReference: {fileID: 2116911950}
+      objectReference: {fileID: 236571919}
     - target: {fileID: 8678579278286296369, guid: ca5b3aad73bfb364e9575860b07aa82d, type: 3}
       propertyPath: Backgrounds.Array.data[3]
       value: 
-      objectReference: {fileID: 236571919}
+      objectReference: {fileID: 2116911950}
     - target: {fileID: 8678579278286296369, guid: ca5b3aad73bfb364e9575860b07aa82d, type: 3}
       propertyPath: startWith.Array.data[2].m_Bits
       value: 0
@@ -4920,6 +4928,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 656610111}
     m_Modifications:
+    - target: {fileID: 9168477405687445924, guid: ed34558d6cd30ab489fa30ca0d074b78, type: 3}
+      propertyPath: m_Color.b
+      value: 0.17254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168477405687445924, guid: ed34558d6cd30ab489fa30ca0d074b78, type: 3}
+      propertyPath: m_Color.g
+      value: 0.9529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168477405687445924, guid: ed34558d6cd30ab489fa30ca0d074b78, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9168477405737795984, guid: ed34558d6cd30ab489fa30ca0d074b78, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -4967,6 +4987,18 @@ PrefabInstance:
     - target: {fileID: 9168477405737795985, guid: ed34558d6cd30ab489fa30ca0d074b78, type: 3}
       propertyPath: m_Name
       value: BackgroundMachine
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168477405952980965, guid: ed34558d6cd30ab489fa30ca0d074b78, type: 3}
+      propertyPath: m_Color.b
+      value: 0.54509807
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168477405952980965, guid: ed34558d6cd30ab489fa30ca0d074b78, type: 3}
+      propertyPath: m_Color.g
+      value: 0.29411766
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168477405952980965, guid: ed34558d6cd30ab489fa30ca0d074b78, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8666667
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed34558d6cd30ab489fa30ca0d074b78, type: 3}

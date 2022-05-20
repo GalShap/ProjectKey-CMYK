@@ -80,7 +80,7 @@ public class ColorManager : MonoBehaviour
     
     public enum ColorName
     {
-        Neutral, Cyan, Yellow, Magenta        
+        Neutral, Cyan, Magenta, Yellow        
     }
     
     #endregion
@@ -90,8 +90,8 @@ public class ColorManager : MonoBehaviour
     private const int NoColors = 1;
     private const float NeutralRot = 0f;
     private const float CyanRot = 90f;
-    private const float YellowRot = 180f;
-    private const float MagentaRot = 270f;
+    private const float MagentaRot = 180f;
+    private const float YellowRot = 270f;
     private const float FullTime = 1f;
     private const float HalfTime = 0.5f;
 
@@ -170,8 +170,9 @@ public class ColorManager : MonoBehaviour
 
     private (float, float, float) CalcRotations(int count)
     {
-
-        int world = CurWorldColor - 1;
+         int world = CurWorldColor - 1;
+        Debug.Log("world color: " + world);
+       
         switch (count)
         {
         
@@ -196,11 +197,11 @@ public class ColorManager : MonoBehaviour
                 
                 // cyan -> yellow
                 else if (world == (int) ColorName.Cyan)
-                    return (CyanRot, YellowRot, FullTime);
+                    return (CyanRot, MagentaRot, FullTime);
                 
-                // yellow -> neutral
-                else if (world == (int) ColorName.Yellow || world == -1)
-                    return (YellowRot, NeutralRot, HalfTime);
+                // magenta -> neutral
+                else if (world == (int) ColorName.Magenta || world == -1)
+                    return (MagentaRot, NeutralRot, HalfTime);
 
                 break;
 
@@ -211,17 +212,17 @@ public class ColorManager : MonoBehaviour
                 if (world == (int) ColorName.Neutral)
                     return (NeutralRot, CyanRot, FullTime);
                 
-                // cyan -> yellow
+                // cyan -> magenta
                 else if (world == (int) ColorName.Cyan)
-                    return (CyanRot, YellowRot, FullTime);
+                    return (CyanRot, MagentaRot, FullTime);
                 
-                //  yellow -> magenta
-                else if (world == (int) ColorName.Yellow)
-                    return (YellowRot, MagentaRot ,FullTime);
+                //  magenta -> yellow
+                else if (world == (int) ColorName.Magenta)
+                    return (MagentaRot, YellowRot ,FullTime);
                 
                 // magenta -> neutral
-                else if (world == (int) ColorName.Magenta || world == -1)
-                    return (MagentaRot, NeutralRot, HalfTime);
+                else if (world == (int) ColorName.Yellow || world == -1)
+                    return (YellowRot, NeutralRot, HalfTime);
                 
                 break;
         }
@@ -361,8 +362,8 @@ public class ColorManager : MonoBehaviour
     #region Corutines
 
     IEnumerator RotateBackground(float start, float end, float time)
-    {   
-        
+    {
+        Debug.Log("start: " + start + " end: " + end);
         float cyclicEnd = (end == 0) ? 360 : end;
         float elapsedTime = 0;
         float duration = time;
