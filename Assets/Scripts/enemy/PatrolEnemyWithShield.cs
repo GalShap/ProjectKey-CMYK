@@ -22,8 +22,14 @@ public class PatrolEnemyWithShield : PatrolEnemy
 
     private void MoveShield()
     {
+        if (x < 0 && rb.velocity.x > 0)
+        {
+            rb.transform.Rotate(0, 180, 0);
+        }
+        if (x > 0 && rb.velocity.x < 0)
+        {
+            rb.transform.Rotate(0, -180, 0);
+        }
         x = rb.velocity.x;
-        rig.transform.position = x < 0 ? place1.position : place2.position;
-        shield.GetComponent<SpriteRenderer>().flipX = x < 0 ? true: false;
     }
 }
