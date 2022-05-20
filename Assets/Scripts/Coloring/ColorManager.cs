@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 
@@ -37,8 +38,6 @@ public class ColorManager : MonoBehaviour
 
     [SerializeField] private LayerMask Neutral;
 
-    [SerializeField] private PlayerHUD PlayerHUD;
-
     [SerializeField] private List<LayerMask> startWith;
 
     [SerializeField] private List<GameObject> Backgrounds;
@@ -50,7 +49,7 @@ public class ColorManager : MonoBehaviour
 
     public static int CurrLayer => _shared.AllLayers[_shared.CurWorldColor].index;
 
-    private static ColorManager _shared;
+    public static ColorManager _shared;
     private int TotalColors => AllLayers.Count;
 
     private List<ColorLayer> availableLayers;
@@ -98,7 +97,7 @@ public class ColorManager : MonoBehaviour
     #endregion
     
     void Awake()
-    {
+    {  
         if (_shared == null)
         {
             _shared = this;
@@ -110,8 +109,16 @@ public class ColorManager : MonoBehaviour
         
         DeactivateBackgrounds();
         _afterAwake = true;
+
+       
+        int numOfColors = _shared.availableLayers.Count;
+        if (numOfColors != NoColors)
+        {   
+            Debug.Log("colors available: " + numOfColors);
+            PlayerHUD.sharedHud.SetColorPallete(numOfColors - 2);
+        }
     }
-  
+
    
     #region Private Methods
     
@@ -144,7 +151,11 @@ public class ColorManager : MonoBehaviour
                 availableLayers.Add((ColorLayer) cl);
             }
         }
-    } 
+
+       
+    }
+
+    
     // function disables the given layer and enables all other layers. 
     private void CancelCollisionLayer(ColorLayer layer)
     {
@@ -239,7 +250,7 @@ public class ColorManager : MonoBehaviour
         float end = rotations.Item2;
         float time = rotations.Item3;
         StartCoroutine(RotateBackground(start, end, time));
-        
+        PlayerHUD.sharedHud.HighlightColor();
         // todo add audio here!!!
 
     }
@@ -255,12 +266,11 @@ public class ColorManager : MonoBehaviour
         ColorLayer? cl = GetColorLayer(l.value);
         if(cl == null || _shared.availableLayers.Contains((ColorLayer) cl))
             return;
-        
-        
+
         _shared.availableLayers.Add((ColorLayer) cl);
         _shared.Backgrounds[_shared.availableLayers.Count - 1].SetActive(true);
-        
-//        _shared.PlayerHUD.AddColor((ColorLayer) cl);
+        PlayerHUD.sharedHud.SetColorPallete(_shared.availableLayers.Count);
+
         
     }
 
@@ -275,6 +285,8 @@ public class ColorManager : MonoBehaviour
         return null;
     }
 
+   
+    
     public static void RegisterColorListener(ColorChangeListener l)
     {
         if(!_shared.colorListeners.Contains(l))
@@ -340,6 +352,8 @@ public class ColorManager : MonoBehaviour
         }
         
         if (_afterAwake) ChangeBackGround();
+        
+        PlayerHUD.sharedHud.HighlightColor();
         //SetBackGroundColor(cl.color);
         // PlayerHUD.SetCurColorUI(color);
      
@@ -353,7 +367,6 @@ public class ColorManager : MonoBehaviour
             return;
         //_shared.SetBackGroundColor(_shared.AllLayers[index].color);
         _shared.ChangeBackGround();
-        
         _shared.CancelCollisionLayer(_shared.AllLayers[index]);
     }
     
@@ -389,6 +402,11 @@ public class ColorManager : MonoBehaviour
         
     }
 
+    IEnumerator LateAwake()
+    {
+        yield return new WaitForSeconds(1f);
+    }
+    
     #endregion
     
 }

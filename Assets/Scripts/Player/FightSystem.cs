@@ -12,7 +12,7 @@ public class FightSystem : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        lives = PlayerHUD.MAX_LIFE;
+        lives = PlayerHUD.MaxLife;
     }
 
     private void OnCollisionEnter2D(Collision2D other)

@@ -8,9 +8,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     #region Inspector
 
     [SerializeField] private int lives = 6;
-    
-    [SerializeField] private PlayerHUD playerHUD;
-    
+
     [SerializeField] private float _bounce = 6f;
     
     #endregion
@@ -39,7 +37,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     void Awake()
     {
         _playerRigidBody = GetComponent<Rigidbody2D>();
-        lives = PlayerHUD.MAX_LIFE;
+        lives = PlayerHUD.MaxLife;
     }
 
     // Update is called once per frame
@@ -123,7 +121,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         if (lives < MIN_LIVES)
             lives = MIN_LIVES;
         
-        playerHUD.removeLifeOnUI(amount);
+        PlayerHUD.sharedHud.removeLifeOnUI(amount);
 
     }
     
@@ -139,7 +137,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         if (lives > MAX_LIVES)
             lives = MAX_LIVES;
         
-        playerHUD.addLifeOnUI(amount);
+        PlayerHUD.sharedHud.addLifeOnUI(amount);
         Debug.Log("Heal! Cur Health is: " + lives);
     }
 
@@ -150,12 +148,12 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
         if (amount < lives)
         {
-            playerHUD.removeLifeOnUI(lives - amount);
+            PlayerHUD.sharedHud.removeLifeOnUI(lives - amount);
         }
 
         else if (amount > lives)
         {
-            playerHUD.addLifeOnUI(amount - lives);
+            PlayerHUD.sharedHud.addLifeOnUI(amount - lives);
         } 
         
         lives = amount;
