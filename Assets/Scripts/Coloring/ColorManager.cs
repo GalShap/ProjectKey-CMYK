@@ -111,15 +111,26 @@ public class ColorManager : MonoBehaviour
         _afterAwake = true;
 
        
-        int numOfColors = _shared.availableLayers.Count;
-        if (numOfColors != NoColors)
-        {   
-            Debug.Log("colors available: " + numOfColors);
-            PlayerHUD.sharedHud.SetColorPallete(numOfColors - 2);
-        }
+        
     }
 
-   
+    private void Start()
+    {
+        int numOfColors = availableLayers.Count;
+        
+       
+        if (numOfColors != NoColors)
+        {   
+            
+            PlayerHUD.sharedHud.SetColorPallete(numOfColors - 2);
+        }
+        
+        PlayerHUD.sharedHud.HighlightColor();
+                
+       
+    }
+
+
     #region Private Methods
     
     /// <summary>
@@ -353,7 +364,8 @@ public class ColorManager : MonoBehaviour
         
         if (_afterAwake) ChangeBackGround();
         
-        PlayerHUD.sharedHud.HighlightColor();
+      
+        //PlayerHUD.sharedHud.HighlightColor();
         //SetBackGroundColor(cl.color);
         // PlayerHUD.SetCurColorUI(color);
      

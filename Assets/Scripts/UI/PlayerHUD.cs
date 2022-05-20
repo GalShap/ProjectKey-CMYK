@@ -108,7 +108,7 @@ public class PlayerHUD : MonoBehaviour
         
         for (int i = 0; i < levelColors.Count; i++)
         {
-            if (i == level - 1) levelColors[i].toggleColors(true);
+            if (i == level) levelColors[i].toggleColors(true);
             else levelColors[i].toggleColors(false);
         }
 
@@ -121,10 +121,13 @@ public class PlayerHUD : MonoBehaviour
     /// </summary>
     public void HighlightColor()
     {   
-        Debug.Log("got here");
+       
         int newColor = ColorManager.CurrLayer;
+       
         int indexToHighlight = sharedHud._layerToColor[newColor];
-        StartCoroutine(Highlight(newColor, indexToHighlight));
+        
+      
+        StartCoroutine(Highlight(indexToHighlight, _currColorPallete));
     }
 
     /// <summary>
@@ -135,7 +138,7 @@ public class PlayerHUD : MonoBehaviour
     private IEnumerator Highlight(int newColor, int level)
     {
         
-        List<Image> colors = levelColors[level - 1].get();
+        List<Image> colors = levelColors[level].get();
         float time = 0;
         int oldColor = 0;
 
@@ -143,14 +146,16 @@ public class PlayerHUD : MonoBehaviour
         {
             for (int i = 0; i < colors.Count; i++)
             {
-                float alpha = colors[i].color.a;
+                float alpha;
                 
                 //cur color, needs to be highlighted
                 if (i == newColor)
                 {
                     var cur = colors[i].color;
-                    alpha = Mathf.Lerp(0.5f, 1, time / _timeToScaleColor);
+                    alpha = Mathf.Lerp(0.3f, 1, time / _timeToScaleColor);
+                    Debug.Log("up: " + alpha);
                     cur.a = alpha;
+                    colors[i].color = cur;
                 }
 
                 else
@@ -161,7 +166,9 @@ public class PlayerHUD : MonoBehaviour
                     {
                         var cur = colors[i].color;
                         alpha = Mathf.Lerp(1, 0.5f, time / _timeToScaleColor);
+                        Debug.Log("down: " + alpha);
                         cur.a = alpha;
+                        colors[i].color = cur;
                     }
                 }
                 
@@ -173,8 +180,10 @@ public class PlayerHUD : MonoBehaviour
 
         var old = colors[oldColor].color;
         var new1 = colors[newColor].color;
-        old.a = 0.5f;
+        old.a = 0.3f;
         new1.a = 1f;
+        colors[oldColor].color = old;
+        colors[oldColor].color = new1;
 
 
     }  
