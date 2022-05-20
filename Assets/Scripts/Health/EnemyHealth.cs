@@ -15,7 +15,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     [Tooltip("How much time the animation takes for every blip?")] 
     [SerializeField] private float timeToAnimate = 0.1f;
 
-    [SerializeField] private float bounce = 6f;
+    [SerializeField] private float bounce = 100f;
 
     [SerializeField] private float _timeToBounce = 0.2f;
     
@@ -113,6 +113,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         Rigidbody2D _playerRigidBody = other.gameObject.GetComponent<Rigidbody2D>();
         if (_playerRigidBody == null)
             _playerRigidBody = other.gameObject.GetComponentInParent<Rigidbody2D>();
+        
+       
         _playerRigidBody.AddForce((_enemyRigidBody.position - _playerRigidBody.position).normalized * bounce,
             ForceMode2D.Impulse);
         _isBouncing = false;

@@ -1,24 +1,46 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 public class PlayerHUD : MonoBehaviour
-{
+{    
+    
+    [Serializable]
+    private class ColorPallete
+    {
+        [SerializeField] private GameObject pallete;
+        [SerializeField] private List<Image> colorsInPallete;
+ 
+         public List<Image> get()
+         {
+             return colorsInPallete;
+         }
+
+         public void toggleColors(bool toggle)
+         {
+             pallete.SetActive(toggle);
+         }
+     }
+
     [SerializeField] private Slider lifeFill;
 
-    [SerializeField] private List<Image> colorRenderers;
-
+    [SerializeField] private List<ColorPallete> levelColors = new List<ColorPallete>();
+   
     private float _timeToScaleLife = 0.3f;
 
     private float _timeToScaleColor = 0.5f;
     
-    private int _currLife = MAX_LIFE;
+    private int _currLife = MaxLife;
 
-    private int _curActiveColor = (int) Colors.Neutral;
+    private static int _currColorPallete = 0;
 
+    private int _currColor;
+    
     private Dictionary<int, Tuple<int, int>> _lifeFillVal = new Dictionary<int, Tuple<int, int>>()
     {
         {1, new Tuple<int, int>(0, 21)},
@@ -29,26 +51,127 @@ public class PlayerHUD : MonoBehaviour
         {6, new Tuple<int, int>(95, 120)}
     };
 
+    private Dictionary<int, int> _layerToColor = new Dictionary<int, int>()
+    {
+        {10, 0}, {9, 1}, {8,2}, {7, 3}
+    };
+
     private enum Colors
     {
-        Magneta, Yellow, Cyan, Neutral
+        Neutral = 10, Cyan = 9, Magenta = 8, Yellow = 7
     }
 
+    private enum Level
+    {
+        One = 1, Two = 2, Three = 3
+    }
+
+    public static PlayerHUD sharedHud;
+    
     #region Constants
 
-    public const int MAX_LIFE = 6;
+    public const int MaxLife = 6;
 
-    private const int MAX_LIFE_VALUE = 120;
+    private const int MaxLifeValue = 120;
 
-    private const int MAX_ALPHA = 255;
+    private const int MaxAlpha = 255;
 
-    private const int MIN_ALPHA = 100;
+    private const int MinAlpha = 100;
     
     #endregion
 
-    void Start()
+    void Awake()
     {
-        lifeFill.value = MAX_LIFE_VALUE;
+        lifeFill.value = MaxLifeValue;
+        if (sharedHud == null)
+        {
+             sharedHud = this;
+             sharedHud._currColor = ColorManager.CurrLayer;
+             sharedHud.levelColors = levelColors;
+             sharedHud.lifeFill = lifeFill;
+             
+        }
+       
+        
+    }
+
+    /// <summary>
+    /// method is called when player has acquired a new color. gets the number of level(which is basically colors
+    /// available) and sets it's whell color active. it then gets the current color and plays a coroutine that highlights
+    /// this color. 
+    /// </summary>
+    /// <param name="level">
+    /// the new level
+    /// </param>
+    public void SetColorPallete(int level)
+    {   
+        
+        for (int i = 0; i < levelColors.Count; i++)
+        {
+            if (i == level) levelColors[i].toggleColors(true);
+            else levelColors[i].toggleColors(false);
+        }
+
+        _currColorPallete = level;
+    }
+
+    
+    /// <summary>
+    ///  method gets the current color and highlights it on the hud. 
+    /// </summary>
+    public void HighlightColor()
+    {   
+       
+        int newColor = ColorManager.CurrLayer;
+       
+        int indexToHighlight = sharedHud._layerToColor[newColor];
+        
+      
+        StartCoroutine(Highlight(indexToHighlight, _currColorPallete));
+    }
+    
+    
+    /// <summary>
+    ///  coroutine gets a level and current color and highlights the color while reducing the alpha and scale for all
+    ///  other colors.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator Highlight(int newColor, int level)
+    {
+        List<Image> colors = levelColors[level].get();
+        float time = 0;
+        int oldColor = -1;
+
+        var oldOne = new Color();
+        var newOne = new Color();
+        for (int i = 0; i < colors.Count; i++)
+        {
+            if (i == newColor) newOne = colors[i].color;
+            
+            else if ((math.abs(colors[i].color.a - 1) < (1e-9)))
+            {
+                oldColor = i;
+                oldOne = colors[i].color;
+            }
+            
+        }
+        
+        while (time <  _timeToScaleColor)
+        {
+
+            oldOne.a = Mathf.Lerp(1, 0.3f, time / _timeToScaleColor);
+            newOne.a = Mathf.Lerp(0.3f, 1, time / _timeToScaleColor);
+            colors[newColor].color = newOne;
+            colors[oldColor].color = oldOne;
+            
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        oldOne.a = 0.3f;
+        newOne.a = 1;
+        colors[newColor].color = newOne;
+        colors[oldColor].color = oldOne;
     }
 
     public void removeLifeOnUI(int livesToRemove)
@@ -67,37 +190,18 @@ public class PlayerHUD : MonoBehaviour
     {   
         
         int lives = livesToAdd;
-        if (_currLife == MAX_LIFE)
+        if (_currLife == MaxLife)
             return;
 
-        if (lives + _currLife > MAX_LIFE)
-            lives = MAX_LIFE - _currLife;
+        if (lives + _currLife > MaxLife)
+            lives = MaxLife - _currLife;
         
       
         StartCoroutine(FillLifeSlider(_currLife + 1 , lives));
         _currLife += lives;
     }
 
-    public void SetCurColorUI(int newColor)
-    {
-        StartCoroutine(ChangeColor(_curActiveColor, newColor));
-        _curActiveColor = newColor;
-    }
-
-    private IEnumerator ChangeColor(int curColor, int newColor)
-    { 
-        var curColorVec = colorRenderers[newColor].color;
-        var newColorVec = colorRenderers[curColor].color;
-        float elapsedTime = 0;
-        while (elapsedTime < _timeToScaleLife)
-        {
-            curColorVec.a = Mathf.Lerp(MAX_ALPHA, MIN_ALPHA, (elapsedTime / _timeToScaleColor));
-            newColorVec.a = Mathf.Lerp(MIN_ALPHA, MAX_ALPHA, (elapsedTime / _timeToScaleColor));
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-    }
-    
+   
     private IEnumerator FillLifeSlider(int barKey, int livesToAdd)
     {
         int key = barKey;
