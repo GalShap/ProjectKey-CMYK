@@ -109,9 +109,6 @@ public class ColorManager : MonoBehaviour
         
         DeactivateBackgrounds();
         _afterAwake = true;
-
-       
-        
     }
 
     private void Start()
@@ -258,7 +255,7 @@ public class ColorManager : MonoBehaviour
         float start = rotations.Item1;
         float end = rotations.Item2;
         float time = rotations.Item3;
-        StartCoroutine(RotateBackground(start, end, time));
+        StartCoroutine(RotateBackground(start, end, 0.5f));
         PlayerHUD.sharedHud.HighlightColor();
         // todo add audio here!!!
 
@@ -394,7 +391,9 @@ public class ColorManager : MonoBehaviour
         float y = BackgroundMachine.transform.rotation.eulerAngles.y;
         float z;
         Vector3 rotation = new Vector3(0,0,0);
-        
+
+        start = BackgroundMachine.transform.eulerAngles.z;
+        cyclicEnd = start - 180;
         //Debug.Log("start: " + start + " end: " + end);
 
         while (elapsedTime < duration)

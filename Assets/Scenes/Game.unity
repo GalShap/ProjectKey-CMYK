@@ -8566,11 +8566,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 9168477404906308048, guid: ed34558d6cd30ab489fa30ca0d074b78, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 55.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9168477404906308048, guid: ed34558d6cd30ab489fa30ca0d074b78, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -55.2
       objectReference: {fileID: 0}
     - target: {fileID: 9168477405687445924, guid: ed34558d6cd30ab489fa30ca0d074b78, type: 3}
       propertyPath: m_Color.b
@@ -8659,6 +8659,10 @@ PrefabInstance:
     - target: {fileID: 9168477405952980986, guid: ed34558d6cd30ab489fa30ca0d074b78, type: 3}
       propertyPath: m_LocalPosition.y
       value: -55.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168477405952980987, guid: ed34558d6cd30ab489fa30ca0d074b78, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed34558d6cd30ab489fa30ca0d074b78, type: 3}
