@@ -126,8 +126,6 @@ public class ColorManager : MonoBehaviour
         }
         
         PlayerHUD.sharedHud.HighlightColor();
-                
-       
     }
 
 

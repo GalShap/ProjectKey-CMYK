@@ -86,13 +86,14 @@ public class PlayerHUD : MonoBehaviour
         if (sharedHud == null)
         {
              sharedHud = this;
-             sharedHud._currColor = ColorManager.CurrLayer;
-             sharedHud.levelColors = levelColors;
-             sharedHud.lifeFill = lifeFill;
-             
         }
-       
-        
+    }
+
+    private void Start()
+    {
+        sharedHud._currColor = ColorManager.CurrLayer;
+        sharedHud.levelColors = levelColors;
+        sharedHud.lifeFill = lifeFill;
     }
 
     /// <summary>
@@ -141,7 +142,7 @@ public class PlayerHUD : MonoBehaviour
         List<Image> colors = levelColors[level].get();
         float time = 0;
         int oldColor = -1;
-
+        //
         var oldOne = new Color();
         var newOne = new Color();
         for (int i = 0; i < colors.Count; i++)
@@ -158,7 +159,7 @@ public class PlayerHUD : MonoBehaviour
         
         while (time <  _timeToScaleColor)
         {
-
+        
             oldOne.a = Mathf.Lerp(1, 0.3f, time / _timeToScaleColor);
             newOne.a = Mathf.Lerp(0.3f, 1, time / _timeToScaleColor);
             colors[newColor].color = newOne;
@@ -167,7 +168,7 @@ public class PlayerHUD : MonoBehaviour
             time += Time.deltaTime;
             yield return null;
         }
-
+        
         oldOne.a = 0.3f;
         newOne.a = 1;
         colors[newColor].color = newOne;
