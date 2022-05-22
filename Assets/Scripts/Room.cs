@@ -22,12 +22,12 @@ public class Room : MonoBehaviour
 
     public void DisableContents()
     {
-        contents.SetActive(false);
+        // contents.SetActive(false);
     }
     
     public void EnableContents()
     {
-        contents.SetActive(true);
+        // contents.SetActive(true);
     }
 
     public Color Color

@@ -29,7 +29,7 @@
                     "id": "92f46c52-3309-4a78-90fa-6ec8562b25cb",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "initialStateCheck": false
                 },
                 {
@@ -160,6 +160,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
+                    "action": "Change Color",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c3c6c1cd-60bc-4dc3-b250-506dc21c0a97",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Change Color",
                     "isComposite": false,
                     "isPartOfComposite": false

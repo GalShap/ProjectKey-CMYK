@@ -16,7 +16,7 @@ public class BackgroundMachine : MonoBehaviour
     private IEnumerator RotateBackground(float time)
     {
         float start = machine.transform.eulerAngles.z;
-        float end = start - 180;
+        float end = start - 180 - (start % 180);
         float elapsedTime = 0;
         float x = machine.transform.rotation.eulerAngles.x;
         float y = machine.transform.rotation.eulerAngles.y;

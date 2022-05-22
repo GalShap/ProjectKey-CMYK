@@ -19,7 +19,7 @@ public class MovingPlatform : MonoBehaviour
 
     private int _curIndex = 0;
 
-    private const float MIN_DISTANCE = 0.02f;
+    private const float MIN_DISTANCE = 0.035f;
 
     private const int INITAL_POS_IDX = 0;
 
@@ -28,6 +28,8 @@ public class MovingPlatform : MonoBehaviour
     private HashSet<Rigidbody2D> colliding = new HashSet<Rigidbody2D>();
 
     private Vector2 lastPos;
+
+    public Vector3 nextLoc;
 
     private void Awake()
     {
@@ -66,6 +68,7 @@ public class MovingPlatform : MonoBehaviour
     {
         if (Vector3.Distance(points[_curIndex], transform.localPosition) < MIN_DISTANCE)
         {
+            transform.localPosition = points[_curIndex];
             _curIndex++;
             if (_curIndex == points.Count)
             {

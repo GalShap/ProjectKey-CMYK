@@ -36,7 +36,7 @@ public class TutorialManager : MonoBehaviour
 
     public void ShowTutorial()
     {
-        tutorial.gameObject.SetActive(true);
+        // tutorial.gameObject.SetActive(true);
     }
     
     public void HideTutorial()

@@ -124,7 +124,7 @@ public class PlayerHUD : MonoBehaviour
     {   
        
         int newColor = ColorManager.CurrLayer;
-       
+
         int indexToHighlight = sharedHud._layerToColor[newColor];
         
       
@@ -156,15 +156,18 @@ public class PlayerHUD : MonoBehaviour
             }
             
         }
-        
+
         while (time <  _timeToScaleColor)
         {
         
             oldOne.a = Mathf.Lerp(1, 0.3f, time / _timeToScaleColor);
             newOne.a = Mathf.Lerp(0.3f, 1, time / _timeToScaleColor);
             colors[newColor].color = newOne;
-            colors[oldColor].color = oldOne;
-            
+            if (oldColor >= 0)
+            {
+                colors[oldColor].color = oldOne;   
+            }
+
             time += Time.deltaTime;
             yield return null;
         }
@@ -172,7 +175,7 @@ public class PlayerHUD : MonoBehaviour
         oldOne.a = 0.3f;
         newOne.a = 1;
         colors[newColor].color = newOne;
-        colors[oldColor].color = oldOne;
+        if(oldColor >= 0) colors[oldColor].color = oldOne;
     }
 
     public void removeLifeOnUI(int livesToRemove)
