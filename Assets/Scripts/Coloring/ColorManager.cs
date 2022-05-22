@@ -67,8 +67,10 @@ public class ColorManager : MonoBehaviour
             LayerMask m = _shared.Neutral;
             foreach (var layer in _shared.AllLayers)
             {
-                if(_shared.CurWorldColor != -1 && layer.index == CurrLayer)
+                if (_shared.CurWorldColor != -1 && layer.index == CurrLayer)
+                {
                     continue;
+                }
                 m |= layer.layer;
             }
 
@@ -255,6 +257,7 @@ public class ColorManager : MonoBehaviour
     public void SetWorldColor(int color)
     {
         ColorLayer cl = availableLayers[color];
+        PlayerHUD.sharedHud.HighlightColor();
         SetColor(cl.name);
     }
 
@@ -263,8 +266,8 @@ public class ColorManager : MonoBehaviour
         int index = _shared.AllLayers.FindIndex(cl => cl.name == c);
         if(index == -1)
             return;
+        _shared.CurWorldColor = index;
         ColorLayer cl = _shared.AllLayers[index];
-        PlayerHUD.sharedHud.HighlightColor();
         _shared.bgMachine.Rotate(cl.color, () =>
         {
             _shared.CancelCollisionLayer(_shared.AllLayers[index]);
