@@ -1756,7 +1756,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 338476741952683296, guid: 962da75b0ea76864fa449b19040b89f7, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.64155
+      value: 0.502607
       objectReference: {fileID: 0}
     - target: {fileID: 338476741952683296, guid: 962da75b0ea76864fa449b19040b89f7, type: 3}
       propertyPath: m_LocalScale.y
@@ -1764,7 +1764,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 338476741952683296, guid: 962da75b0ea76864fa449b19040b89f7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.3473
+      value: -16.2829
       objectReference: {fileID: 0}
     - target: {fileID: 338476741952683296, guid: 962da75b0ea76864fa449b19040b89f7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2407,10 +2407,6 @@ PrefabInstance:
     - target: {fileID: 315701124, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
       propertyPath: isTutorial
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 315701124, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
-      propertyPath: groundLayers.m_Bits
-      value: 1921
       objectReference: {fileID: 0}
     - target: {fileID: 1154897993, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
       propertyPath: blueCollider

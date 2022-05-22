@@ -420,7 +420,7 @@ MonoBehaviour:
   maxSpeed: 5
   moveSpeed: 40
   linearDrag: 0.15
-  jumpHeight: 2.65
+  jumpHeight: 2.5
   jumpTime: 0.5
   fallMultiplier: 2
   jumpDelay: 0.15
