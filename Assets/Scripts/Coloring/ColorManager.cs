@@ -30,7 +30,7 @@ public class ColorManager : MonoBehaviour
 
     [SerializeField] private int CurWorldColor = -1;
 
-    [SerializeField] private GameObject BackgroundMachine;
+    // [SerializeField] private GameObject BackgroundMachine;
     
     [SerializeField] private SpriteRenderer Background;
 
@@ -40,7 +40,9 @@ public class ColorManager : MonoBehaviour
 
     [SerializeField] private List<LayerMask> startWith;
 
-    [SerializeField] private List<GameObject> Backgrounds;
+    // [SerializeField] private List<GameObject> Backgrounds;
+
+    [SerializeField] private BackgroundMachine bgMachine;
     
     [SerializeField] private bool startWithAll;
     #endregion
@@ -65,8 +67,10 @@ public class ColorManager : MonoBehaviour
             LayerMask m = _shared.Neutral;
             foreach (var layer in _shared.AllLayers)
             {
-                if(_shared.CurWorldColor != -1 && layer.index == CurrLayer)
+                if (_shared.CurWorldColor != -1 && layer.index == CurrLayer)
+                {
                     continue;
+                }
                 m |= layer.layer;
             }
 
@@ -103,25 +107,22 @@ public class ColorManager : MonoBehaviour
             _shared = this;
             InitAvailable();
             Background.color = Color.white;
-            if (CurWorldColor != -1)
-                SetWorldColor(CurWorldColor);
         }
         
-        DeactivateBackgrounds();
-        _afterAwake = true;
-
-       
-        
+        // DeactivateBackgrounds();
+        // _afterAwake = true;
     }
 
     private void Start()
     {
+        if (CurWorldColor != -1)
+            SetWorldColor(CurWorldColor);
+        
         int numOfColors = availableLayers.Count;
         
        
         if (numOfColors != NoColors)
-        {   
-            
+        {
             PlayerHUD.sharedHud.SetColorPallete(numOfColors - 2);
         }
         
@@ -130,19 +131,7 @@ public class ColorManager : MonoBehaviour
 
 
     #region Private Methods
-    
-    /// <summary>
-    ///  called on awake, deactivates background that represents unavailable color.
-    /// </summary>
-    private void DeactivateBackgrounds()
-    {
-        int count = availableLayers.Count;
-        for (int i = count; i < Backgrounds.Count; i++)
-        {
-            Backgrounds[i].SetActive(false);
-        }
-    } 
-    
+
     private void InitAvailable()
     {
         if (startWithAll)
@@ -164,7 +153,6 @@ public class ColorManager : MonoBehaviour
        
     }
 
-    
     // function disables the given layer and enables all other layers. 
     private void CancelCollisionLayer(ColorLayer layer)
     {
@@ -182,88 +170,6 @@ public class ColorManager : MonoBehaviour
         }
     }
 
-    // color: the index of the color in the Colors list
-    private void SetBackGroundColor(Color color)
-    {
-        Background.color = color;
-    }
-
-    private (float, float, float) CalcRotations(int count)
-    {
-         int world = CurWorldColor - 1;
-        Debug.Log("world color: " + world);
-       
-        switch (count)
-        {
-        
-            // neutral + cyan
-            case 2:
-                
-                //  neutral -> cyan
-                if (world == (int) ColorName.Neutral)
-                    return (NeutralRot, CyanRot, FullTime);
-                
-                // cyan -> neutral
-                else if (world == (int) ColorName.Cyan || world == -1) 
-                    return (CyanRot, NeutralRot , HalfTime);
-                
-                break;
-            
-            // neutral + cyan + magenta
-            case 3:
-                //  neutral -> cyan
-                if (world == (int) ColorName.Neutral)
-                    return (NeutralRot, CyanRot, FullTime);
-                
-                // cyan -> yellow
-                else if (world == (int) ColorName.Cyan)
-                    return (CyanRot, MagentaRot, FullTime);
-                
-                // magenta -> neutral
-                else if (world == (int) ColorName.Magenta || world == -1)
-                    return (MagentaRot, NeutralRot, HalfTime);
-
-                break;
-
-            // all colors
-            case 4:
-
-                //  neutral -> cyan
-                if (world == (int) ColorName.Neutral)
-                    return (NeutralRot, CyanRot, FullTime);
-                
-                // cyan -> magenta
-                else if (world == (int) ColorName.Cyan)
-                    return (CyanRot, MagentaRot, FullTime);
-                
-                //  magenta -> yellow
-                else if (world == (int) ColorName.Magenta)
-                    return (MagentaRot, YellowRot ,FullTime);
-                
-                // magenta -> neutral
-                else if (world == (int) ColorName.Yellow || world == -1)
-                    return (YellowRot, NeutralRot, HalfTime);
-                
-                break;
-        }
-
-        return (NeutralRot, NeutralRot, FullTime);
-    }
-    
-    private void ChangeBackGround()
-    {   
-        if (availableLayers.Count == NoColors) return;
-        
-        (float, float, float) rotations = CalcRotations(availableLayers.Count);
-        float start = rotations.Item1;
-        float end = rotations.Item2;
-        float time = rotations.Item3;
-        StartCoroutine(RotateBackground(start, end, time));
-        PlayerHUD.sharedHud.HighlightColor();
-        // todo add audio here!!!
-
-    }
-
     public static void RotateColor()
     {
         _shared.CurWorldColor = (_shared.CurWorldColor + 1) % _shared.availableLayers.Count;
@@ -277,7 +183,6 @@ public class ColorManager : MonoBehaviour
             return;
 
         _shared.availableLayers.Add((ColorLayer) cl);
-        _shared.Backgrounds[_shared.availableLayers.Count - 1].SetActive(true);
         PlayerHUD.sharedHud.SetColorPallete(_shared.availableLayers.Count);
 
         
@@ -352,22 +257,8 @@ public class ColorManager : MonoBehaviour
     public void SetWorldColor(int color)
     {
         ColorLayer cl = availableLayers[color];
-        
- 
-        CancelCollisionLayer(cl);
-        foreach (var l in colorListeners)
-        {
-            l.OnColorChange(cl);
-        }
-        
-        if (_afterAwake) ChangeBackGround();
-        
-      
-        //PlayerHUD.sharedHud.HighlightColor();
-        //SetBackGroundColor(cl.color);
-        // PlayerHUD.SetCurColorUI(color);
-     
-        
+        PlayerHUD.sharedHud.HighlightColor();
+        SetColor(cl.name);
     }
 
     public static void SetColor(ColorName c)
@@ -375,42 +266,21 @@ public class ColorManager : MonoBehaviour
         int index = _shared.AllLayers.FindIndex(cl => cl.name == c);
         if(index == -1)
             return;
-        //_shared.SetBackGroundColor(_shared.AllLayers[index].color);
-        _shared.ChangeBackGround();
-        _shared.CancelCollisionLayer(_shared.AllLayers[index]);
+        _shared.CurWorldColor = index;
+        ColorLayer cl = _shared.AllLayers[index];
+        _shared.bgMachine.Rotate(cl.color, () =>
+        {
+            _shared.CancelCollisionLayer(_shared.AllLayers[index]);
+            foreach (var l in _shared.colorListeners)
+            {
+                l.OnColorChange(cl);
+            }
+        });
     }
-    
+
     #endregion
     
     #region Corutines
-
-    IEnumerator RotateBackground(float start, float end, float time)
-    {
-        Debug.Log("start: " + start + " end: " + end);
-        float cyclicEnd = (end == 0) ? 360 : end;
-        float elapsedTime = 0;
-        float duration = time;
-        float x = BackgroundMachine.transform.rotation.eulerAngles.x;
-        float y = BackgroundMachine.transform.rotation.eulerAngles.y;
-        float z;
-        Vector3 rotation = new Vector3(0,0,0);
-        
-        //Debug.Log("start: " + start + " end: " + end);
-
-        while (elapsedTime < duration)
-        {
-            z = Mathf.Lerp(start, cyclicEnd, elapsedTime / duration);
-            rotation = new Vector3(x, y, z);
-            BackgroundMachine.transform.rotation = Quaternion.Euler(rotation);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        rotation.z = cyclicEnd;
-        BackgroundMachine.transform.rotation = Quaternion.Euler(rotation);
-        
-        
-    }
 
     IEnumerator LateAwake()
     {

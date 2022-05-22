@@ -21,12 +21,16 @@ public class Door : MonoBehaviour
     public void EnterLeftRoom()
     {
         GameManager.Manager.SetRoom(leftRoom);
+        leftRoom.EnableContents();
+        rightRoom.DisableContents();
         SetLeftCamera();
     }
     
     public void EnterRightRoom()
     {
         GameManager.Manager.SetRoom(rightRoom);
+        rightRoom.EnableContents();
+        leftRoom.DisableContents();
         SetRightCamera();
     }
 

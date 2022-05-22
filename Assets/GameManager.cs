@@ -24,6 +24,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        currRoom.Camera.Priority = 1;
+        currRoom.EnableContents();
+    }
+
     public void SetRespawn(GameObject respawn)
     {
         respawnPoint = respawn;

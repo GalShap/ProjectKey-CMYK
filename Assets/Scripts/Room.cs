@@ -8,6 +8,7 @@ public class Room : MonoBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera camera;
     [SerializeField] private Door[] doors;
+    [SerializeField] private GameObject contents;
 
     private SpriteRenderer _renderer;
     private Color _color;
@@ -18,6 +19,16 @@ public class Room : MonoBehaviour
     }
 
     public CinemachineVirtualCamera Camera => camera;
+
+    public void DisableContents()
+    {
+        contents.SetActive(false);
+    }
+    
+    public void EnableContents()
+    {
+        contents.SetActive(true);
+    }
 
     public Color Color
     {
