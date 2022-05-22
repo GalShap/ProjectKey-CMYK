@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     [Header("Running Physics")] 
     [SerializeField] private float maxSpeed = 7f;
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float linearDrag = 5f;
+    [SerializeField] private float linearDrag = 0.2f;
     
     [Header("Jumping Physics")]
     // [SerializeField] private float jumpSpeed = 5f;
@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
             if ((Math.Abs(movement.x) < 0.4 && _rigidbody2D.velocity.x != 0) || changingDirection)
             {
                 // _rigidbody2D.drag = linearDrag;
-                _rigidbody2D.velocity = Vector2.Lerp(_rigidbody2D.velocity, _rigidbody2D.velocity * Vector2.up, 0.1f);
+                _rigidbody2D.velocity = Vector2.Lerp(_rigidbody2D.velocity, _rigidbody2D.velocity * Vector2.up, linearDrag);
             }
             if (Math.Abs(movement.x) == 0 && Math.Abs(_rigidbody2D.velocity.x) < 0.2f)
             {
