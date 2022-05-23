@@ -418,11 +418,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 5
-  moveSpeed: 40
-  linearDrag: 0.15
-  jumpHeight: 2.5
+  moveSpeed: 10
+  linearDrag: 10
+  jumpHeight: 2.65
   jumpTime: 0.5
-  fallMultiplier: 2
+  fallMultiplier: 1.7
   jumpDelay: 0.15
   groundLayers:
     serializedVersion: 2
