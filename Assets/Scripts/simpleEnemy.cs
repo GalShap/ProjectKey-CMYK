@@ -10,7 +10,7 @@ public class simpleEnemy : EnemyObject
     [SerializeField] public GameObject player;
 
     [SerializeField] private float speed = 2f;
-    [SerializeField] private float len = 4f;
+    [SerializeField] private float radius = 4f;
     [SerializeField] private Transform[] places;
 
     [SerializeField] private int counter;
@@ -18,6 +18,11 @@ public class simpleEnemy : EnemyObject
     // Start is called before the first frame update
     void Start()
     {
+        _renderer = GetComponent<SpriteRenderer>();
+        if (_renderer == null)
+            _renderer = GetComponentInChildren<SpriteRenderer>();
+        
+        collisionOffset = Vector2.right * (_renderer.sprite.rect.width / _renderer.sprite.pixelsPerUnit) / 2;
     }
 
     private void Awake()
@@ -37,7 +42,9 @@ public class simpleEnemy : EnemyObject
     private void FixedUpdate()
     {
         if (!isAlive()) UponDead();
-        if (Math.Abs(PositionX()) <= len && Math.Abs(PositionY()) <= 0.3f)
+        isOnGround();
+        // if (Math.Abs(PositionX()) <= len && Math.Abs(PositionY()) <= 0.3f && onGround)
+        if (Vector3.Distance(transform.position, player.transform.position) < radius && onGround)
         {
             move();
         }
@@ -67,6 +74,9 @@ public class simpleEnemy : EnemyObject
      */
     void moveByTarget()
     {
+        if (!onGround)
+            counter = (counter >= places.Length - 1) ? 0 : counter + 1;
+        
         var x = transform.position.x - places[counter].position.x;
         rb.velocity = new Vector2((x <= 0 ? speed : -speed),
             rb.velocity.y);

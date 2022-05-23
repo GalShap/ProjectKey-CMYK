@@ -74,7 +74,7 @@ public class ColorManager : MonoBehaviour
                 m |= layer.layer;
             }
 
-            return m;
+            return m | LayerMask.GetMask("Default");
         }
     }
 

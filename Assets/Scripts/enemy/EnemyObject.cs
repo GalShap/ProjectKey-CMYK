@@ -10,7 +10,6 @@ public abstract class EnemyObject : MonoBehaviour, ColorChangeListener
     protected bool grounLeft;
     protected bool grountRight;
     protected Vector2 collisionOffset;
-    [SerializeField] protected LayerMask groundLayers;
     protected SpriteRenderer _renderer;
     protected bool colored;
 
@@ -43,13 +42,13 @@ public abstract class EnemyObject : MonoBehaviour, ColorChangeListener
             rb.position + collisionOffset,
             Vector2.down,
             height * 0.5f + 0.05f,
-            groundLayers);
+            ColorManager.GroundLayers);
 
         grountRight = Physics2D.Raycast(
             rb.position - collisionOffset,
             Vector2.down,
             height * 0.5f + 0.05f,
-            groundLayers);
+            ColorManager.GroundLayers);
 
         onGround = grounLeft && grountRight;
     }

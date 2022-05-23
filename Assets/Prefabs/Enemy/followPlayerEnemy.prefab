@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7631345788110696118}
   - component: {fileID: 8990586802292719292}
   - component: {fileID: -5422545807513706614}
+  - component: {fileID: 3014369444265404339}
   - component: {fileID: -6001195829918651135}
   m_Layer: 10
   m_Name: followPlayerEnemy
@@ -97,7 +98,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4350815766577247992}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 236067b249a2f5d439e067b2560cda13, type: 3}
   m_Name: 
@@ -109,6 +110,27 @@ MonoBehaviour:
   player: {fileID: 8863397447226026584, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
   speed: 2
   len: 4
+  counter: 0
+--- !u!114 &3014369444265404339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4350815766577247992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0531458495d16884f80400b27480b01a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  _currentTarget: {x: 0, y: 0, z: 0}
+  player: {fileID: 0}
+  speed: 2
+  len: 4
+  places: []
   counter: 0
 --- !u!114 &-6001195829918651135
 MonoBehaviour:
