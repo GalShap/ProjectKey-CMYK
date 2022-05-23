@@ -418,9 +418,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 5
-  moveSpeed: 40
+  moveSpeed: 10
   linearDrag: 0.15
-  jumpHeight: 2.5
+  jumpHeight: 2.7
   jumpTime: 0.5
   fallMultiplier: 2
   jumpDelay: 0.15
