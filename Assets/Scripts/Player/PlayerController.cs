@@ -43,11 +43,11 @@ public class PlayerController : MonoBehaviour
     private static readonly int Attack = Animator.StringToHash("Attack");
     private static readonly int Walking = Animator.StringToHash("Walking");
     private static readonly int Action = Animator.StringToHash("Action");
-    private static readonly int Jump1 = Animator.StringToHash("Jump");
+    private static readonly int Jump1 = Animator.StringToHash("jumping");
 
     #region Constants
     
-    private const float IDEAL = 0;
+    private const float IDLE = 0;
 
     private const float WALKING = 1f;
  
@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _renderer = GetComponentInChildren<SpriteRenderer>();
         _animator = GetComponentInChildren<Animator>();
+        _animator.SetFloat(Action,IDLE);
         collisionOffset = Vector2.right * ((_renderer.sprite.rect.width/_renderer.sprite.pixelsPerUnit) / 2 - collisionEps);
     }
 
@@ -71,19 +72,29 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float height = _renderer.sprite.rect.height / _renderer.sprite.pixelsPerUnit; 
-        onGround = Physics2D.Raycast(
-                       _rigidbody2D.position + collisionOffset,
-                       Vector2.down,
-                        height * 0.5f + 0.05f,
-                       ColorManager.GroundLayers | LayerMask.GetMask("Default")) 
-                   || 
-                   Physics2D.Raycast(
+        float height = _renderer.sprite.rect.height / _renderer.sprite.pixelsPerUnit;
+        collisionOffset = Vector2.right * ((_renderer.sprite.rect.width/_renderer.sprite.pixelsPerUnit) / 2 - collisionEps);
+        print($"{height}, {collisionOffset.x}");
+        RaycastHit2D hitr;
+        RaycastHit2D hitl;
+        hitr = Physics2D.Raycast(
+            _rigidbody2D.position + collisionOffset,
+            Vector2.down,
+            height * 0.5f,
+            ColorManager.GroundLayers); 
+                    
+        hitl = Physics2D.Raycast(
                        _rigidbody2D.position - collisionOffset,
                        Vector2.down,
-                       height * 0.5f + 0.05f,
-                       ColorManager.GroundLayers | LayerMask.GetMask("Default"));
+                       height * 0.5f,
+                       ColorManager.GroundLayers);
+        
+        bool checkGround = hitl || hitr;
+        if(!onGround && checkGround)
+            _animator.SetBool(Jump1, false);
 
+        print($"{onGround},{checkGround}");
+        onGround = checkGround;
         if (jumpTimer > Time.time && onGround)
         {
             Jump();
@@ -105,12 +116,10 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        _animator.SetTrigger(Jump1);
+        _animator.SetBool(Jump1,true);
         _rigidbody2D.drag = 0;
         float y = (2 * jumpHeight) / jumpTime;
         _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, y);
-        // _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0);
-        // _rigidbody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
         jumpTimer = 0;
     }
 
@@ -264,7 +273,7 @@ public class PlayerController : MonoBehaviour
             case InputActionPhase.Canceled:
                 movement = Vector2.zero;
                 //_animator.SetBool(Walking, false);
-                _animator.SetFloat(Action, IDEAL);
+                _animator.SetFloat(Action, IDLE);
                 break;
         }
     }
