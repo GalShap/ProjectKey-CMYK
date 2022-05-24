@@ -43,7 +43,8 @@ public class PlayerController : MonoBehaviour
     private static readonly int Attack = Animator.StringToHash("Attack");
     private static readonly int Walking = Animator.StringToHash("Walking");
     private static readonly int Action = Animator.StringToHash("Action");
-    
+    private static readonly int Jump1 = Animator.StringToHash("Jump");
+
     #region Constants
     
     private const float IDEAL = 0;
@@ -104,6 +105,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        _animator.SetTrigger(Jump1);
         _rigidbody2D.drag = 0;
         float y = (2 * jumpHeight) / jumpTime;
         _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, y);
