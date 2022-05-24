@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private bool jumping;
     
     [Header("Collision")]
-    [SerializeField] private LayerMask groundLayers;
+    [SerializeField] private float collisionEps;
     private Vector2 collisionOffset;
 
     [Header("Attack")] 
@@ -29,7 +29,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Collider2D attackCollider;
     private float attackCounter = 0;
 
-    [Header("Other")] [SerializeField] private bool isTutorial;
+    [Header("Other")]
+    [SerializeField] private bool isTutorial;
 
     private Rigidbody2D _rigidbody2D;
     private SpriteRenderer _renderer;
@@ -56,7 +57,7 @@ public class PlayerController : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _renderer = GetComponentInChildren<SpriteRenderer>();
         _animator = GetComponentInChildren<Animator>();
-        collisionOffset = Vector2.right * (_renderer.sprite.rect.width/_renderer.sprite.pixelsPerUnit) / 2;
+        collisionOffset = Vector2.right * ((_renderer.sprite.rect.width/_renderer.sprite.pixelsPerUnit) / 2 - collisionEps);
     }
 
     private void Update()

@@ -177,6 +177,28 @@
                 },
                 {
                     "name": "",
+                    "id": "33811538-e8f3-4873-8032-4096596b1944",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Change Color",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3dee739b-0072-4162-87ce-0a7f9fdad879",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Change Color",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "593662f6-508b-44c2-a449-e13220a633fe",
                     "path": "<Keyboard>/z",
                     "interactions": "",
