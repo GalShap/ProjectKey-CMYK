@@ -8,6 +8,8 @@ public class RedRun : StateMachineBehaviour
     private Rigidbody2D rb;
 
     private MagentaGod red;
+    [SerializeField] private float timerCounter = 3;
+    private float timer = 0;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -22,20 +24,25 @@ public class RedRun : StateMachineBehaviour
     {
         red.LookAtPlayer();
 
-        Vector2 target = new Vector2(player.transform.position.x, rb.transform.position.y);
-        Vector2 newPos = Vector2.MoveTowards(rb.position, target, red.speed * Time.fixedDeltaTime);
-        rb.MovePosition(newPos);
-
-        if (Vector2.Distance(player.transform.position, rb.position) <= red.attackRange)
+        // Vector2 target = new Vector2(player.transform.position.x, rb.transform.position.y);
+        // Vector2 newPos = Vector2.MoveTowards(rb.position, target, red.speed * Time.fixedDeltaTime);
+        // rb.MovePosition(newPos);
+        timer += Time.deltaTime;;
+        if (timer >= timerCounter)
         {
-            animator.SetTrigger("Attack");
+            timer = 0;
+            animator.SetTrigger("shoot");
         }
+        // if (Vector2.Distance(player.transform.position, rb.position) <= red.attackRange)
+        // {
+            // animator.SetTrigger("shoot");
+        // }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.ResetTrigger("Attack");
+        animator.ResetTrigger("shoot");
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -32,9 +32,9 @@ public class MagentaGod : EnemyObject
     //     timer = timerCounter;
     // }
 
-    private void Shoot()
-    { 
-        
+    public void Shoot()
+    {
+        Instantiate(m_Projectile, m_SpawnTransform.position, m_SpawnTransform.rotation);
     }
 
     protected override void UponDead()
@@ -46,20 +46,20 @@ public class MagentaGod : EnemyObject
 
     public void LookAtPlayer()
     {
-        Vector3 flipped = transform.localScale;
-        flipped.z *= -1f;
-
-        if (transform.position.x > player.transform.position.x && isFlipped)
-        {
-            transform.localScale = flipped;
-            transform.Rotate(0f, 180f, 0f);
-            isFlipped = false;
-        }
-        else if (transform.position.x < player.transform.position.x && !isFlipped)
-        {
-            transform.localScale = flipped;
-            transform.Rotate(0f, 180f, 0f);
-            isFlipped = true;
-        }
+        // Vector3 flipped = transform.localScale;
+        // flipped.z *= -1f;
+        //
+        // if (transform.position.x > player.transform.position.x && isFlipped)
+        // {
+        //     transform.localScale = flipped;
+        //     transform.Rotate(0f, 180f, 0f);
+        //     isFlipped = false;
+        // }
+        // else if (transform.position.x < player.transform.position.x && !isFlipped)
+        // {
+        //     transform.localScale = flipped;
+        //     transform.Rotate(0f, 180f, 0f);
+        //     isFlipped = true;
+        // }
     }
 }

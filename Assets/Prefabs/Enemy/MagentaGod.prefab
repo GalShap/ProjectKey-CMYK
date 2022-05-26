@@ -114,9 +114,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerCounter: 3
-  m_Projectile: {fileID: 0}
+  speed: 3
+  attackRange: 3
+  m_Projectile: {fileID: 1029945653412360208, guid: 3861ab19dab20a745beef6535de887fb, type: 3}
   m_SpawnTransform: {fileID: 0}
   player: {fileID: 0}
+  isFlipped: 0
 --- !u!1 &8167540969937659090
 GameObject:
   m_ObjectHideFlags: 0
