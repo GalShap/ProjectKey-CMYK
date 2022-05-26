@@ -116,7 +116,8 @@ MonoBehaviour:
   timerCounter: 3
   speed: 3
   attackRange: 3
-  m_Projectile: {fileID: 1029945653412360208, guid: 3861ab19dab20a745beef6535de887fb, type: 3}
+  b_Projectile: {fileID: 1029945653412360208, guid: 9c5b81ab9c1900a42ae97510e19a0e6e, type: 3}
+  r_Projectile: {fileID: 1029945653412360208, guid: c8a0c630ac6056042a398fc38ab913ca, type: 3}
   m_SpawnTransform:
   - {fileID: 0}
   - {fileID: 0}

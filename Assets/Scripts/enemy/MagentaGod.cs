@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class MagentaGod : EnemyObject
@@ -10,7 +11,8 @@ public class MagentaGod : EnemyObject
     [SerializeField] public float speed = 3;
     [SerializeField] public float attackRange = 3;
     private float timer = 0;
-    public GameObject m_Projectile; // this is a reference to your projectile prefab
+    [FormerlySerializedAs("m_Projectile")] public GameObject b_Projectile; // this is a reference to your projectile prefab
+    public GameObject r_Projectile; // this is a reference to your projectile prefab
     [SerializeField] private Transform [] m_SpawnTransform; // this is a reference to the transform where the prefab will spawn
     public GameObject player;
     
@@ -31,8 +33,21 @@ public class MagentaGod : EnemyObject
         var dir = player.transform.position - transform.position;
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         // m_SpawnTransform[k].rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        Instantiate(m_Projectile, m_SpawnTransform[k].position, Quaternion.AngleAxis(angle, Vector3.forward));
+        Instantiate(r_Projectile, m_SpawnTransform[k].position, Quaternion.AngleAxis(angle, Vector3.forward));
         // Instantiate(m_Projectile, m_SpawnTransform[k].position, m_SpawnTransform[k].rotation);
+    } public void ShootBlue()
+    {
+        int i = m_SpawnTransform.Length;
+        for (int k = 0; k < m_SpawnTransform.Length; k++)
+        {
+            Instantiate(b_Projectile, m_SpawnTransform[k].position, m_SpawnTransform[k].rotation);
+        }
+        // int k = Random.Range(0, i);
+        // var dir = player.transform.position - transform.position;
+        // var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        // m_SpawnTransform[k].rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        // Instantiate(m_Projectile, m_SpawnTransform[k].position, Quaternion.AngleAxis(angle, Vector3.forward));
+        
     }
 
     protected override void UponDead()
