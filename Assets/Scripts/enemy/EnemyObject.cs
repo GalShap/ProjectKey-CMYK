@@ -2,8 +2,8 @@ using UnityEngine;
 
 public abstract class EnemyObject : MonoBehaviour, ColorChangeListener
 {
+    [SerializeField] private bool oneHit;
     protected int lifeCount = 3;
-    protected abstract void UponDead();
     protected Rigidbody2D rb;
     protected Vector3 movement;
     protected bool onGround;
@@ -14,6 +14,7 @@ public abstract class EnemyObject : MonoBehaviour, ColorChangeListener
     protected bool colored;
 
     // Start is called before the first frame update
+    
     public virtual void Start()
     {
         ColorManager.RegisterColorListener(this);
@@ -28,6 +29,8 @@ public abstract class EnemyObject : MonoBehaviour, ColorChangeListener
 
         return false;
     }
+
+    public bool IsOneHit => oneHit;
 
 
     public virtual void OnColorChange(ColorManager.ColorLayer layer)
@@ -52,4 +55,6 @@ public abstract class EnemyObject : MonoBehaviour, ColorChangeListener
 
         onGround = grounLeft && grountRight;
     }
+
+    protected abstract void UponDead();
 }

@@ -114,7 +114,15 @@ public class PlayerController : MonoBehaviour
 
     private void MoveCharacter()
     {
-        _rigidbody2D.AddForce(Vector2.right * movement.x * moveSpeed);
+        // if (onGround)
+        // {
+        //     _rigidbody2D.AddForce(Vector2.right * movement.x * moveSpeed);
+        // }
+        // else
+        // {
+        //     _rigidbody2D.AddForce(Vector2.right * movement.x * moveSpeed * moveSpeed *2);
+        // }
+        _rigidbody2D.AddForce(Vector2.right * movement.x * moveSpeed, ForceMode2D.Impulse);
         
         if (Math.Abs(_rigidbody2D.velocity.x) > maxSpeed)
         {
@@ -163,18 +171,6 @@ public class PlayerController : MonoBehaviour
             {
                 scale *= fallMultiplier;
             }
-
-            // _rigidbody2D.drag = 0;
-            // float scale = gravityScale;
-            //
-            // if (_rigidbody2D.velocity.y < 0)
-            // {
-            //     scale *= fallMultiplier;
-            // }
-            // else if (_rigidbody2D.velocity.y > 0 && !jumping)
-            // {
-            //     scale *= fallMultiplier / 2;
-            // }
 
             _rigidbody2D.gravityScale = scale / Physics2D.gravity.y;
         }
@@ -277,13 +273,11 @@ public class PlayerController : MonoBehaviour
                 }
 
                 _renderer.flipX = movement.x <= 0;
-                //_animator.SetBool(Walking, movement.x != 0);
                 _animator.SetFloat(Action, WALKING);
                 
                 break;
             case InputActionPhase.Canceled:
                 movement = Vector2.zero;
-                //_animator.SetBool(Walking, false);
                 _animator.SetFloat(Action, IDLE);
                 break;
         }

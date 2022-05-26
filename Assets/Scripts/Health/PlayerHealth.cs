@@ -58,10 +58,23 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     void OnCollisionEnter2D(Collision2D other)
     {   
      
-        if (EnemyCollision(other)) 
+        if (EnemyCollision(other))
         {
-            Damage(1);
+            EnemyObject enemy = other.gameObject.GetComponent<EnemyObject>();
+            if (enemy == null)
+            {
+                enemy = other.gameObject.GetComponentInChildren<EnemyObject>();
+            }
+            
+            if(enemy == null)
+                return;
 
+            int damage = 1;
+            if (enemy.IsOneHit)
+            {
+                damage = lives;
+            }
+            Damage(damage);
             if (!_isBouncing)
             {
                 _isBouncing = true;
