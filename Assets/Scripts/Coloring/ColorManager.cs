@@ -30,8 +30,6 @@ public class ColorManager : MonoBehaviour
 
     [SerializeField] private int CurWorldColor = -1;
 
-    // [SerializeField] private GameObject BackgroundMachine;
-    
     [SerializeField] private SpriteRenderer Background;
 
     [SerializeField] private List<ColorLayer> AllLayers;
@@ -40,9 +38,7 @@ public class ColorManager : MonoBehaviour
 
     [SerializeField] private List<LayerMask> startWith;
 
-    // [SerializeField] private List<GameObject> Backgrounds;
-
-    [SerializeField] private BackgroundMachine bgMachine;
+    // [SerializeField] private BackgroundMachine bgMachine;
     
     [SerializeField] private bool startWithAll;
     #endregion
@@ -268,14 +264,21 @@ public class ColorManager : MonoBehaviour
             return;
         _shared.CurWorldColor = index;
         ColorLayer cl = _shared.AllLayers[index];
-        _shared.bgMachine.Rotate(cl.color, () =>
+        _shared.CancelCollisionLayer(_shared.AllLayers[index]);
+        foreach (var l in _shared.colorListeners)
         {
-            _shared.CancelCollisionLayer(_shared.AllLayers[index]);
-            foreach (var l in _shared.colorListeners)
-            {
-                l.OnColorChange(cl);
-            }
-        });
+            l.OnColorChange(cl);
+        }
+
+        _shared.Background.color = cl.color;
+        // _shared.bgMachine.Rotate(cl.color, () =>
+        // {
+        //     _shared.CancelCollisionLayer(_shared.AllLayers[index]);
+        //     foreach (var l in _shared.colorListeners)
+        //     {
+        //         l.OnColorChange(cl);
+        //     }
+        // });
     }
 
     #endregion

@@ -85,7 +85,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        print($"{height}, {collisionOffset.x}");
         RaycastHit2D hitr;
         RaycastHit2D hitl;
         hitr = Physics2D.Raycast(
@@ -103,8 +102,7 @@ public class PlayerController : MonoBehaviour
         bool checkGround = hitl || hitr;
         if(!onGround && checkGround)
             _animator.SetBool(Jump1, false);
-
-        print($"{onGround},{checkGround}");
+        
         onGround = checkGround;
         if (jumpTimer > Time.time && onGround)
         {
