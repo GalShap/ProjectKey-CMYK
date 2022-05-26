@@ -140,7 +140,9 @@ public class PlayerController : MonoBehaviour
             if ((Math.Abs(movement.x) < 0.4 && _rigidbody2D.velocity.x != 0) || changingDirection)
             {
                 // _rigidbody2D.drag = linearDrag;
-                _rigidbody2D.velocity = Vector2.Lerp(_rigidbody2D.velocity, _rigidbody2D.velocity * Vector2.up, linearDrag);
+                _rigidbody2D.velocity = Vector2.Lerp(_rigidbody2D.velocity, 
+                    _rigidbody2D.velocity * Vector2.up, 
+                    linearDrag * Time.fixedDeltaTime);
             }
             if (Math.Abs(movement.x) == 0 && Math.Abs(_rigidbody2D.velocity.x) < 0.2f)
             {
