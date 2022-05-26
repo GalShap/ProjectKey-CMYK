@@ -15,6 +15,8 @@ public class MagentaGod : EnemyObject
     public GameObject r_Projectile; // this is a reference to your projectile prefab
     [SerializeField] private Transform [] m_SpawnTransform; // this is a reference to the transform where the prefab will spawn
     public GameObject player;
+    public Transform right;
+    public Transform left;
     
     // Start is called before the first frame update
     private void Awake()
@@ -59,20 +61,20 @@ public class MagentaGod : EnemyObject
 
     public void LookAtPlayer()
     {
-        Vector3 flipped = transform.localScale;
-        flipped.z *= -1f;
-        
-        if (transform.position.x > player.transform.position.x && isFlipped)
-        {
-            transform.localScale = flipped;
-            transform.Rotate(0f, 180f, 0f);
-            isFlipped = false;
-        }
-        else if (transform.position.x < player.transform.position.x && !isFlipped)
-        {
-            transform.localScale = flipped;
-            transform.Rotate(0f, 180f, 0f);
-            isFlipped = true;
-        }
+    Vector3 flipped = transform.localScale;
+    flipped.z *= -1f;
+    
+    if (transform.position.x > player.transform.position.x && isFlipped)
+    {
+        transform.localScale = flipped;
+        transform.Rotate(0f, 180f, 0f);
+        isFlipped = false;
+    }
+    else if (transform.position.x < player.transform.position.x && !isFlipped)
+    {
+        transform.localScale = flipped;
+        transform.Rotate(0f, 180f, 0f);
+        isFlipped = true;
+    }
     }
 }

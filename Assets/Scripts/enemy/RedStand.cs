@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class firstMoveByRed : StateMachineBehaviour
+public class RedStand : StateMachineBehaviour
 {
-    [SerializeField] private float timerCounter = 6;
-    [SerializeField] private float timerToShoot = 1;
-    private float timerCoolDown = 0;
-    private float timerShoot = 0;
-    // public GameObject m_Projectile; // this is a reference to your projectile prefab
-    // public Transform m_SpawnTransform; // this is a reference to the transform where the prefab will spawn
     private GameObject player;
     private Rigidbody2D rb;
+    
     private MagentaGod red;
+    [SerializeField] public float timerCounter = 3;
+
+    private float timer = 0;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -24,26 +23,28 @@ public class firstMoveByRed : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        timerShoot += Time.deltaTime;
-        timerCoolDown += Time.deltaTime;
-        if (timerShoot >= timerToShoot)
-        {
-            timerShoot = 0;
-            red.Shoot();
-        }
-        if (timerCoolDown >= timerCounter)
-        {
-            timerCoolDown = 0;
-            animator.SetTrigger("coolDown");
-        }
-        
+        red.LookAtPlayer();
 
+        // Vector2 target = new Vector2(player.transform.position.x, rb.transform.position.y);
+        // Vector2 newPos = Vector2.MoveTowards(rb.position, target, red.speed * Time.fixedDeltaTime);
+        // rb.MovePosition(newPos);
+        timer += Time.deltaTime;
+        if (timer >= timerCounter)
+        {
+            timer = 0;
+            // rb.AddForce(Vector2.up);
+            animator.SetTrigger( "shoot");
+        }
+        // if (Vector2.Distance(player.transform.position, rb.position) <= red.attackRange)
+        // {
+        // animator.SetTrigger("shoot");
+        // }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.ResetTrigger("coolDown");
+        animator.ResetTrigger("shoot");
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
