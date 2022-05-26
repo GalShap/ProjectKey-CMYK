@@ -35,7 +35,7 @@ public class MoveRight : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.ResetTrigger("coolDown");
-        animator.ResetTrigger("right");
+        // animator.ResetTrigger("right");
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

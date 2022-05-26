@@ -26,23 +26,7 @@ public class RedStand : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         red.LookAtPlayer();
-        var hp = hl.GetHealth();
-        if (hp < 400)
-        {
-            animator.SetTrigger("right");
-        }
-        else if (hp < 300)
-        {
-            animator.SetTrigger("left");
-        }
-        else if (hp < 200)
-        {
-            animator.SetTrigger("right");
-        }
-        else if (hp < 100)
-        {
-            animator.SetTrigger("left");
-        }
+        red.healtChange();
         // Vector2 target = new Vector2(player.transform.position.x, rb.transform.position.y);
         // Vector2 newPos = Vector2.MoveTowards(rb.position, target, red.speed * Time.fixedDeltaTime);
         // rb.MovePosition(newPos);
@@ -53,18 +37,14 @@ public class RedStand : StateMachineBehaviour
             // rb.AddForce(Vector2.up);
             animator.SetTrigger( "shoot");
         }
-        // if (Vector2.Distance(player.transform.position, rb.position) <= red.attackRange)
-        // {
-        // animator.SetTrigger("shoot");
-        // }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.ResetTrigger("shoot");
-        animator.ResetTrigger("left");
-        animator.ResetTrigger("right");
+        // animator.ResetTrigger("left");
+        // animator.ResetTrigger("right");
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -11,26 +11,36 @@ public class MagentaGod : EnemyObject
     [SerializeField] public float speed = 3;
     [SerializeField] public float attackRange = 3;
     private float timer = 0;
-    [FormerlySerializedAs("m_Projectile")] public GameObject b_Projectile; // this is a reference to your projectile prefab
+    private bool flag1 = false;
+    private bool flag2 = false;
+    private bool flag3 = false;
+    private bool flag4 = false;
+
+    [FormerlySerializedAs("m_Projectile")]
+    public GameObject b_Projectile; // this is a reference to your projectile prefab
+
     public GameObject r_Projectile; // this is a reference to your projectile prefab
-    [SerializeField] private Transform [] m_SpawnTransform; // this is a reference to the transform where the prefab will spawn
+
+    [SerializeField]
+    private Transform[] m_SpawnTransform; // this is a reference to the transform where the prefab will spawn
+
     public GameObject player;
     public Transform right;
     public Transform left;
     public GameObject platformLeft;
     public GameObject platformRight;
-    
+
     // Start is called before the first frame update
     private void Awake()
     {
         movement = gameObject.transform.position;
         rb = GetComponent<Rigidbody2D>();
         _renderer = GetComponentInChildren<SpriteRenderer>();
-        collisionOffset = Vector2.right * (_renderer.sprite.rect.width / _renderer.sprite.pixelsPerUnit) / 2; 
+        collisionOffset = Vector2.right * (_renderer.sprite.rect.width / _renderer.sprite.pixelsPerUnit) / 2;
         platformLeft.SetActive(false);
         // platformRight.SetActive(false);
     }
-    
+
     public void Shoot()
     {
         int i = m_SpawnTransform.Length;
@@ -40,7 +50,9 @@ public class MagentaGod : EnemyObject
         // m_SpawnTransform[k].rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         Instantiate(r_Projectile, m_SpawnTransform[k].position, Quaternion.AngleAxis(angle, Vector3.forward));
         // Instantiate(m_Projectile, m_SpawnTransform[k].position, m_SpawnTransform[k].rotation);
-    } public void ShootBlue()
+    }
+
+    public void ShootBlue()
     {
         int i = m_SpawnTransform.Length;
         for (int k = 0; k < m_SpawnTransform.Length; k++)
@@ -52,32 +64,66 @@ public class MagentaGod : EnemyObject
         // var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         // m_SpawnTransform[k].rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         // Instantiate(m_Projectile, m_SpawnTransform[k].position, Quaternion.AngleAxis(angle, Vector3.forward));
-        
     }
 
     protected override void UponDead()
     {
         gameObject.SetActive(false);
     }
-    
+
     public bool isFlipped = false;
 
     public void LookAtPlayer()
     {
-    Vector3 flipped = transform.localScale;
-    flipped.z *= -1f;
-    
-    if (transform.position.x > player.transform.position.x && isFlipped)
-    {
-        transform.localScale = flipped;
-        transform.Rotate(0f, 180f, 0f);
-        isFlipped = false;
+        Vector3 flipped = transform.localScale;
+        flipped.z *= -1f;
+
+        if (transform.position.x > player.transform.position.x && isFlipped)
+        {
+            transform.localScale = flipped;
+            transform.Rotate(0f, 180f, 0f);
+            isFlipped = false;
+        }
+        else if (transform.position.x < player.transform.position.x && !isFlipped)
+        {
+            transform.localScale = flipped;
+            transform.Rotate(0f, 180f, 0f);
+            isFlipped = true;
+        }
     }
-    else if (transform.position.x < player.transform.position.x && !isFlipped)
+
+    public void healtChange()
     {
-        transform.localScale = flipped;
-        transform.Rotate(0f, 180f, 0f);
-        isFlipped = true;
-    }
+        var animator = gameObject.GetComponent<Animator>();
+        var hl = animator.GetComponent<EnemyHealth>();
+        var hp = hl.GetHealth();
+        if (hp <= 400 && !flag1)
+        // if (hp <= 400)
+        {
+            flag1 = true;
+            rb.AddForce(Vector2.up * 3);
+            animator.SetTrigger("right");
+        }
+        else if (hp <= 300 && !flag2)
+        // else if (hp <= 300)
+        {
+            flag2 = true;
+            rb.AddForce(Vector2.up * 3);
+            animator.SetTrigger("left");
+        }
+        else if (hp <= 200 && !flag3)
+        // else if (hp <= 200)
+        {
+            flag3 = true;
+            rb.AddForce(Vector2.up * 3);
+            animator.SetTrigger("right");
+        }
+        else if (hp <= 100 && !flag4)
+        // else if (hp <= 100)
+        {
+            flag4 = true;
+            rb.AddForce(Vector2.up * 3);
+            animator.SetTrigger("left");
+        }
     }
 }
