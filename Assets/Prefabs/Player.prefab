@@ -419,7 +419,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 5
   moveSpeed: 10
-  linearDrag: 10
+  deceleration: 10
+  acceleration: 10
   jumpHeight: 2.7
   jumpTime: 0.4
   fallMultiplier: 2

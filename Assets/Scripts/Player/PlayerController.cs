@@ -2,13 +2,15 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Running Physics")] 
     [SerializeField] private float maxSpeed = 7f;
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float linearDrag = 0.2f;
+    [SerializeField] private float deceleration = 10;
+    [SerializeField] private float acceleration = 10;
     
     [Header("Jumping Physics")]
     // [SerializeField] private float jumpSpeed = 5f;
@@ -122,7 +124,13 @@ public class PlayerController : MonoBehaviour
         // {
         //     _rigidbody2D.AddForce(Vector2.right * movement.x * moveSpeed * moveSpeed *2);
         // }
-        _rigidbody2D.AddForce(Vector2.right * movement.x * moveSpeed, ForceMode2D.Impulse);
+        
+        // _rigidbody2D.AddForce(Vector2.right * movement.x * moveSpeed, ForceMode2D.Impulse);
+
+        var desiredVel = new Vector2(movement.x * moveSpeed, _rigidbody2D.velocity.y);
+        _rigidbody2D.velocity = Vector2.Lerp(_rigidbody2D.velocity, 
+            desiredVel, 
+            acceleration * Time.fixedDeltaTime);
         
         if (Math.Abs(_rigidbody2D.velocity.x) > maxSpeed)
         {
@@ -150,7 +158,7 @@ public class PlayerController : MonoBehaviour
                 // _rigidbody2D.drag = linearDrag;
                 _rigidbody2D.velocity = Vector2.Lerp(_rigidbody2D.velocity, 
                     _rigidbody2D.velocity * Vector2.up, 
-                    linearDrag * Time.fixedDeltaTime);
+                    deceleration * Time.fixedDeltaTime);
             }
             if (Math.Abs(movement.x) == 0 && Math.Abs(_rigidbody2D.velocity.x) < 0.2f)
             {
