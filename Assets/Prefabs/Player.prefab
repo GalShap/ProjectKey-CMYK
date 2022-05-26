@@ -419,14 +419,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 5
   moveSpeed: 10
-  linearDrag: 0.15
+  linearDrag: 0.2
   jumpHeight: 2.7
-  jumpTime: 0.5
+  jumpTime: 0.35
   fallMultiplier: 2
   jumpDelay: 0.15
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 1921
+  collisionEps: 0.1
   attackTimer: 0.2
   attackCollider: {fileID: 7119172714136712465}
   isTutorial: 0

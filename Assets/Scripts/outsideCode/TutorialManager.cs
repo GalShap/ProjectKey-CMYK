@@ -55,8 +55,8 @@ public class TutorialManager : MonoBehaviour
         index++;
     }
 
-    public TutorialState State => (tutorial.gameObject.activeSelf) ? _state : TutorialState.OFF;
-
+    // public TutorialState State => (tutorial.gameObject.activeSelf) ? _state : TutorialState.OFF;
+    public TutorialState State => _state;
     public void RaiseImage()
     {
         var pos = tutorial.rectTransform.anchoredPosition;
