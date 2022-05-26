@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     
     private bool onGround;
     private Vector2 movement;
+    private float height;
    
     
     private static readonly int Attack = Animator.StringToHash("Attack");
@@ -68,12 +69,22 @@ public class PlayerController : MonoBehaviour
         {
             attackCounter -= Time.deltaTime;
         }
+        
+        height = _renderer.sprite.rect.height / _renderer.sprite.pixelsPerUnit + 0.1f;
+        collisionOffset = Vector2.right * ((_renderer.sprite.rect.width/_renderer.sprite.pixelsPerUnit) / 2 - collisionEps);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(_rigidbody2D.position + collisionOffset,
+            Vector2.down*height * 0.5f);
+        Gizmos.DrawRay(_rigidbody2D.position - collisionOffset,
+            Vector2.down*height * 0.5f);
     }
 
     private void FixedUpdate()
     {
-        float height = _renderer.sprite.rect.height / _renderer.sprite.pixelsPerUnit;
-        collisionOffset = Vector2.right * ((_renderer.sprite.rect.width/_renderer.sprite.pixelsPerUnit) / 2 - collisionEps);
         print($"{height}, {collisionOffset.x}");
         RaycastHit2D hitr;
         RaycastHit2D hitl;
@@ -204,7 +215,7 @@ public class PlayerController : MonoBehaviour
                 {
                    
                     _animator.SetTrigger(Attack);
-                    _rigidbody2D.velocity = Vector2.zero;
+                    // _rigidbody2D.velocity = Vector2.zero;
                     attackCollider.gameObject.SetActive(true);
                     attackCounter = attackTimer;
                     
