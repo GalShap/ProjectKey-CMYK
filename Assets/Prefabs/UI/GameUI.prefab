@@ -1366,7 +1366,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3504744799610682643
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1535,6 +1535,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeFill: {fileID: 432542587770140924}
   levelColors:
+  - pallete: {fileID: 6068884013107503788}
+    colorsInPallete:
+    - {fileID: 432542588734935922}
   - pallete: {fileID: 432542587988357171}
     colorsInPallete:
     - {fileID: 432542589168037037}

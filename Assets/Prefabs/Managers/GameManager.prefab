@@ -45,3 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
   currRoom: {fileID: 0}
+  shakeAmplitude: 2
+  shakeTime: 0.2
