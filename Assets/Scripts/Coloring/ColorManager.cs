@@ -86,7 +86,7 @@ public class ColorManager : MonoBehaviour
     
     #region Constants
 
-    private const int NoColors = 1;
+    private const int NoColors = 0;
     private const float NeutralRot = 0f;
     private const float CyanRot = 90f;
     private const float MagentaRot = 180f;
@@ -119,7 +119,7 @@ public class ColorManager : MonoBehaviour
        
         if (numOfColors != NoColors)
         {
-            PlayerHUD.sharedHud.SetColorPallete(numOfColors - 2);
+            PlayerHUD.sharedHud.SetColorPallete(numOfColors - 1);
         }
         
         PlayerHUD.sharedHud.HighlightColor();
@@ -179,7 +179,7 @@ public class ColorManager : MonoBehaviour
             return;
 
         _shared.availableLayers.Add((ColorLayer) cl);
-        PlayerHUD.sharedHud.SetColorPallete(_shared.availableLayers.Count);
+        PlayerHUD.sharedHud.SetColorPallete(_shared.availableLayers.Count-1);
 
         
     }

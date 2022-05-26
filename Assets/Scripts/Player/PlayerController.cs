@@ -295,10 +295,18 @@ public class PlayerController : MonoBehaviour
         switch (context.phase)
         {
             case InputActionPhase.Performed:
-                if (isTutorial && TutorialManager.Manager.State == TutorialManager.TutorialState.COLOR)
+                if (isTutorial)
                 {
-                    TutorialManager.Manager.HideTutorial();
-                    TutorialManager.Manager.SetState(TutorialManager.TutorialState.END);
+                    if (TutorialManager.Manager.State == TutorialManager.TutorialState.COLOR 
+                        || TutorialManager.Manager.State == TutorialManager.TutorialState.END)
+                    {
+                        TutorialManager.Manager.HideTutorial();
+                        TutorialManager.Manager.SetState(TutorialManager.TutorialState.END);   
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
                 ColorManager.RotateColor();
                 break;

@@ -6925,6 +6925,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameUI
       objectReference: {fileID: 0}
+    - target: {fileID: 6068884013107503788, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
 --- !u!1 &375888634
@@ -20752,7 +20756,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 315701124, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
       propertyPath: jumpTime
-      value: 0.35
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 315701124, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
       propertyPath: isTutorial
