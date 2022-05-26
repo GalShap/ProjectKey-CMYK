@@ -109,6 +109,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     /// </param>
     public void Damage(int amount)
     {
+        GameManager.Manager.ShakeCamera();
         lives -= amount;
         if (lives <= MIN_LIVES)
         {

@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private bool jumping;
     
     [Header("Collision")]
-    [SerializeField] private LayerMask groundLayers;
+    [SerializeField] private float collisionEps;
     private Vector2 collisionOffset;
 
     [Header("Attack")] 
@@ -29,7 +29,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Collider2D attackCollider;
     private float attackCounter = 0;
 
-    [Header("Other")] [SerializeField] private bool isTutorial;
+    [Header("Other")]
+    [SerializeField] private bool isTutorial;
 
     private Rigidbody2D _rigidbody2D;
     private SpriteRenderer _renderer;
@@ -37,15 +38,17 @@ public class PlayerController : MonoBehaviour
     
     private bool onGround;
     private Vector2 movement;
+    private float height;
    
     
     private static readonly int Attack = Animator.StringToHash("Attack");
     private static readonly int Walking = Animator.StringToHash("Walking");
     private static readonly int Action = Animator.StringToHash("Action");
-    
+    private static readonly int Jump1 = Animator.StringToHash("jumping");
+
     #region Constants
     
-    private const float IDEAL = 0;
+    private const float IDLE = 0;
 
     private const float WALKING = 1f;
  
@@ -56,7 +59,8 @@ public class PlayerController : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _renderer = GetComponentInChildren<SpriteRenderer>();
         _animator = GetComponentInChildren<Animator>();
-        collisionOffset = Vector2.right * (_renderer.sprite.rect.width/_renderer.sprite.pixelsPerUnit) / 2;
+        _animator.SetFloat(Action,IDLE);
+        collisionOffset = Vector2.right * ((_renderer.sprite.rect.width/_renderer.sprite.pixelsPerUnit) / 2 - collisionEps);
     }
 
     private void Update()
@@ -65,23 +69,41 @@ public class PlayerController : MonoBehaviour
         {
             attackCounter -= Time.deltaTime;
         }
+        
+        height = _renderer.sprite.rect.height / _renderer.sprite.pixelsPerUnit + 0.1f;
+        collisionOffset = Vector2.right * ((_renderer.sprite.rect.width/_renderer.sprite.pixelsPerUnit) / 2 - collisionEps);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(_rigidbody2D.position + collisionOffset,
+            Vector2.down*height * 0.5f);
+        Gizmos.DrawRay(_rigidbody2D.position - collisionOffset,
+            Vector2.down*height * 0.5f);
     }
 
     private void FixedUpdate()
     {
-        float height = _renderer.sprite.rect.height / _renderer.sprite.pixelsPerUnit; 
-        onGround = Physics2D.Raycast(
-                       _rigidbody2D.position + collisionOffset,
-                       Vector2.down,
-                        height * 0.5f + 0.05f,
-                       ColorManager.GroundLayers | LayerMask.GetMask("Default")) 
-                   || 
-                   Physics2D.Raycast(
+        RaycastHit2D hitr;
+        RaycastHit2D hitl;
+        hitr = Physics2D.Raycast(
+            _rigidbody2D.position + collisionOffset,
+            Vector2.down,
+            height * 0.5f,
+            ColorManager.GroundLayers); 
+                    
+        hitl = Physics2D.Raycast(
                        _rigidbody2D.position - collisionOffset,
                        Vector2.down,
-                       height * 0.5f + 0.05f,
-                       ColorManager.GroundLayers | LayerMask.GetMask("Default"));
-
+                       height * 0.5f,
+                       ColorManager.GroundLayers);
+        
+        bool checkGround = hitl || hitr;
+        if(!onGround && checkGround)
+            _animator.SetBool(Jump1, false);
+        
+        onGround = checkGround;
         if (jumpTimer > Time.time && onGround)
         {
             Jump();
@@ -103,11 +125,10 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        _animator.SetBool(Jump1,true);
         _rigidbody2D.drag = 0;
         float y = (2 * jumpHeight) / jumpTime;
         _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, y);
-        // _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0);
-        // _rigidbody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
         jumpTimer = 0;
     }
 
@@ -119,7 +140,9 @@ public class PlayerController : MonoBehaviour
             if ((Math.Abs(movement.x) < 0.4 && _rigidbody2D.velocity.x != 0) || changingDirection)
             {
                 // _rigidbody2D.drag = linearDrag;
-                _rigidbody2D.velocity = Vector2.Lerp(_rigidbody2D.velocity, _rigidbody2D.velocity * Vector2.up, linearDrag);
+                _rigidbody2D.velocity = Vector2.Lerp(_rigidbody2D.velocity, 
+                    _rigidbody2D.velocity * Vector2.up, 
+                    linearDrag * Time.fixedDeltaTime);
             }
             if (Math.Abs(movement.x) == 0 && Math.Abs(_rigidbody2D.velocity.x) < 0.2f)
             {
@@ -192,7 +215,7 @@ public class PlayerController : MonoBehaviour
                 {
                    
                     _animator.SetTrigger(Attack);
-                    _rigidbody2D.velocity = Vector2.zero;
+                    // _rigidbody2D.velocity = Vector2.zero;
                     attackCollider.gameObject.SetActive(true);
                     attackCounter = attackTimer;
                     
@@ -261,7 +284,7 @@ public class PlayerController : MonoBehaviour
             case InputActionPhase.Canceled:
                 movement = Vector2.zero;
                 //_animator.SetBool(Walking, false);
-                _animator.SetFloat(Action, IDEAL);
+                _animator.SetFloat(Action, IDLE);
                 break;
         }
     }
@@ -274,10 +297,18 @@ public class PlayerController : MonoBehaviour
         switch (context.phase)
         {
             case InputActionPhase.Performed:
-                if (isTutorial && TutorialManager.Manager.State == TutorialManager.TutorialState.COLOR)
+                if (isTutorial)
                 {
-                    TutorialManager.Manager.HideTutorial();
-                    TutorialManager.Manager.SetState(TutorialManager.TutorialState.END);
+                    if (TutorialManager.Manager.State == TutorialManager.TutorialState.COLOR 
+                        || TutorialManager.Manager.State == TutorialManager.TutorialState.END)
+                    {
+                        TutorialManager.Manager.HideTutorial();
+                        TutorialManager.Manager.SetState(TutorialManager.TutorialState.END);   
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
                 ColorManager.RotateColor();
                 break;
