@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 698381041426695215}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.02, y: 1.76, z: 0}
+  m_LocalPosition: {x: 1.02, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7042816991617788079}
@@ -160,6 +160,10 @@ MonoBehaviour:
   - {fileID: 4840610974397286146}
   - {fileID: 3839245157133312401}
   player: {fileID: 0}
+  right: {fileID: 0}
+  left: {fileID: 0}
+  platformLeft: {fileID: 0}
+  platformRight: {fileID: 0}
   isFlipped: 0
 --- !u!1 &2846623417541789017
 GameObject:
@@ -185,7 +189,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2846623417541789017}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.02, y: 0.99, z: 0}
+  m_LocalPosition: {x: 1.02, y: 1.78, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7042816991617788079}

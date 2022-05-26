@@ -15,6 +15,8 @@ public class MoveRight : StateMachineBehaviour
         red = animator.GetComponent<MagentaGod>();
         rb = animator.GetComponent<Rigidbody2D>();
         right = red.right;
+        red.platformLeft.SetActive(true);
+        red.platformRight.SetActive(false);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -30,10 +32,11 @@ public class MoveRight : StateMachineBehaviour
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        animator.ResetTrigger("coolDown");
+        animator.ResetTrigger("right");
+    }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

@@ -8,6 +8,7 @@ public class RedStand : StateMachineBehaviour
     private Rigidbody2D rb;
     
     private MagentaGod red;
+    private EnemyHealth hl;
     [SerializeField] public float timerCounter = 3;
 
     private float timer = 0;
@@ -17,6 +18,7 @@ public class RedStand : StateMachineBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         red = animator.GetComponent<MagentaGod>();
+        hl = animator.GetComponent<EnemyHealth>();
         rb = animator.GetComponent<Rigidbody2D>();
     }
 
@@ -24,7 +26,23 @@ public class RedStand : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         red.LookAtPlayer();
-
+        var hp = hl.GetHealth();
+        if (hp < 400)
+        {
+            animator.SetTrigger("right");
+        }
+        else if (hp < 300)
+        {
+            animator.SetTrigger("left");
+        }
+        else if (hp < 200)
+        {
+            animator.SetTrigger("right");
+        }
+        else if (hp < 100)
+        {
+            animator.SetTrigger("left");
+        }
         // Vector2 target = new Vector2(player.transform.position.x, rb.transform.position.y);
         // Vector2 newPos = Vector2.MoveTowards(rb.position, target, red.speed * Time.fixedDeltaTime);
         // rb.MovePosition(newPos);
@@ -45,6 +63,8 @@ public class RedStand : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.ResetTrigger("shoot");
+        animator.ResetTrigger("left");
+        animator.ResetTrigger("right");
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

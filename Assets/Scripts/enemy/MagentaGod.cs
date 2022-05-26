@@ -17,6 +17,8 @@ public class MagentaGod : EnemyObject
     public GameObject player;
     public Transform right;
     public Transform left;
+    public GameObject platformLeft;
+    public GameObject platformRight;
     
     // Start is called before the first frame update
     private void Awake()
@@ -24,8 +26,9 @@ public class MagentaGod : EnemyObject
         movement = gameObject.transform.position;
         rb = GetComponent<Rigidbody2D>();
         _renderer = GetComponentInChildren<SpriteRenderer>();
-        collisionOffset = Vector2.right * (_renderer.sprite.rect.width / _renderer.sprite.pixelsPerUnit) / 2;
-
+        collisionOffset = Vector2.right * (_renderer.sprite.rect.width / _renderer.sprite.pixelsPerUnit) / 2; 
+        platformLeft.SetActive(false);
+        // platformRight.SetActive(false);
     }
     
     public void Shoot()
