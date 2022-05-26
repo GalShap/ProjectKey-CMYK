@@ -30,8 +30,9 @@ public class MagentaGod : EnemyObject
         int k = Random.Range(0, i);
         var dir = player.transform.position - transform.position;
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        m_SpawnTransform[k].rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        Instantiate(m_Projectile, m_SpawnTransform[k].position, m_SpawnTransform[k].rotation);
+        // m_SpawnTransform[k].rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        Instantiate(m_Projectile, m_SpawnTransform[k].position, Quaternion.AngleAxis(angle, Vector3.forward));
+        // Instantiate(m_Projectile, m_SpawnTransform[k].position, m_SpawnTransform[k].rotation);
     }
 
     protected override void UponDead()
