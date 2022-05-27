@@ -11,7 +11,7 @@ public class RedStand : StateMachineBehaviour
     private EnemyHealth hl;
     [SerializeField] public float timerCounter = 5;
 
-    private float timer = 0;
+    private float timer = 2;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

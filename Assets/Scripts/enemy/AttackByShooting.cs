@@ -29,6 +29,7 @@ public class AttackByShooting : StateMachineBehaviour
         timerCoolDown += Time.deltaTime;
         if (timerShoot >= timerToShoot)
         {
+            red.LookAtPlayer();
             timerShoot = 0;
             int k = Random.Range(0, oddsToGetBlue);
             if (k == 1)
