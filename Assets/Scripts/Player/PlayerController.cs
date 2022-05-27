@@ -6,6 +6,8 @@ using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
+    #region Inspector
+
     [Header("Running Physics")] 
     [SerializeField] private float maxSpeed = 7f;
     [SerializeField] private float moveSpeed = 5f;
@@ -13,11 +15,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float acceleration = 10;
     
     [Header("Jumping Physics")]
-    // [SerializeField] private float jumpSpeed = 5f;
     [SerializeField] private float jumpHeight = 4f;
     [SerializeField] private float jumpTime = 1f;
     [SerializeField] private float fallMultiplier = 1f;
-    // [SerializeField] private float gravityScale = 1f;
     [SerializeField] private float jumpDelay = 0.25f;
     private float jumpTimer;
     private bool jumping;
@@ -34,6 +34,10 @@ public class PlayerController : MonoBehaviour
     [Header("Other")]
     [SerializeField] private bool isTutorial;
 
+    #endregion
+
+    #region Fields
+
     private Rigidbody2D _rigidbody2D;
     private SpriteRenderer _renderer;
     private Animator _animator;
@@ -41,20 +45,23 @@ public class PlayerController : MonoBehaviour
     private bool onGround;
     private Vector2 movement;
     private float height;
-   
-    
-    private static readonly int Attack = Animator.StringToHash("Attack");
-    private static readonly int Walking = Animator.StringToHash("Walking");
-    private static readonly int Action = Animator.StringToHash("Action");
-    private static readonly int Jump1 = Animator.StringToHash("jumping");
+
+    #endregion
 
     #region Constants
     
     private const float IDLE = 0;
 
     private const float WALKING = 1f;
+    
+    private static readonly int Attack = Animator.StringToHash("Attack");
+    private static readonly int Walking = Animator.StringToHash("Walking");
+    private static readonly int Action = Animator.StringToHash("Action");
+    private static readonly int Jump1 = Animator.StringToHash("jumping");
  
     #endregion
+
+    #region MonoBehavior
 
     private void Awake()
     {
@@ -96,10 +103,10 @@ public class PlayerController : MonoBehaviour
             ColorManager.GroundLayers); 
                     
         hitl = Physics2D.Raycast(
-                       _rigidbody2D.position - collisionOffset,
-                       Vector2.down,
-                       height * 0.5f,
-                       ColorManager.GroundLayers);
+            _rigidbody2D.position - collisionOffset,
+            Vector2.down,
+            height * 0.5f,
+            ColorManager.GroundLayers);
         
         bool checkGround = hitl || hitr;
         if(!onGround && checkGround)
@@ -113,20 +120,21 @@ public class PlayerController : MonoBehaviour
         MoveCharacter();
         ModifyPhysics();
     }
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Respawn"))
+        {
+            GameManager.Manager.SetRespawn(other.gameObject);
+        }
+    }
+
+    #endregion
+
+    #region Private Methods
 
     private void MoveCharacter()
     {
-        // if (onGround)
-        // {
-        //     _rigidbody2D.AddForce(Vector2.right * movement.x * moveSpeed);
-        // }
-        // else
-        // {
-        //     _rigidbody2D.AddForce(Vector2.right * movement.x * moveSpeed * moveSpeed *2);
-        // }
-        
-        // _rigidbody2D.AddForce(Vector2.right * movement.x * moveSpeed, ForceMode2D.Impulse);
-
         var desiredVel = new Vector2(movement.x * moveSpeed, _rigidbody2D.velocity.y);
         _rigidbody2D.velocity = Vector2.Lerp(_rigidbody2D.velocity, 
             desiredVel, 
@@ -168,8 +176,6 @@ public class PlayerController : MonoBehaviour
             {
                 _rigidbody2D.drag = 0f;
             }
-            
-            // _rigidbody2D.gravityScale = 0;
         }
         else
         {
@@ -183,15 +189,7 @@ public class PlayerController : MonoBehaviour
             _rigidbody2D.gravityScale = scale / Physics2D.gravity.y;
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Respawn"))
-        {
-            GameManager.Manager.SetRespawn(other.gameObject);
-        }
-    }
-
+    
     public void EndAttack()
     {
         attackCollider.gameObject.SetActive(false);
@@ -201,6 +199,10 @@ public class PlayerController : MonoBehaviour
     {
         movement = Vector2.zero;
     }
+
+    #endregion
+
+    #region On Input
 
     public void onAttack(InputAction.CallbackContext context)
     {
@@ -318,6 +320,6 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
-    
-    
+
+    #endregion
 }

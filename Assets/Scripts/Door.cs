@@ -23,7 +23,7 @@ public class Door : MonoBehaviour
         GameManager.Manager.SetRoom(leftRoom);
         leftRoom.EnableContents();
         rightRoom.DisableContents();
-        SetLeftCamera();
+        // SetLeftCamera();
     }
     
     public void EnterRightRoom()
@@ -31,7 +31,7 @@ public class Door : MonoBehaviour
         GameManager.Manager.SetRoom(rightRoom);
         rightRoom.EnableContents();
         leftRoom.DisableContents();
-        SetRightCamera();
+        // SetRightCamera();
     }
 
     public void SetLeftCamera() => SetPriorities(1,-1);

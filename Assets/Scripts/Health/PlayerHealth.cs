@@ -118,7 +118,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     ///  inflicts damage to player;
     /// </summary>
     /// <param name="amount">
-    /// how many lives to remove! not how much health. 
+    /// how many lives to remove! not how much health.
+    /// Alon: "Ma HaHevdel...?"
     /// </param>
     public void Damage(int amount)
     {

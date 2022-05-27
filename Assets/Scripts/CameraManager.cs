@@ -8,15 +8,15 @@ public class CameraManager : MonoBehaviour
     public static CameraManager Manager;
     
     [Header("Camera Shake")]
-    [SerializeField] private float shakeAmplitude;
-    [SerializeField] private float shakeTime;
+    [SerializeField] private float shakeAmplitude = 5;
+    [SerializeField] private float shakeTime = 0.2f;
     
     [Header("Look Ahead")]
-    [SerializeField] private float lookSpeed;
-    [SerializeField] private float lookDistance;
+    [SerializeField] private float lookSpeed = 1;
+    [SerializeField] private float lookDistance = 1;
 
     private CinemachineVirtualCamera _currCamera;
-    private CinemachineTransposer _transposer;
+    private CinemachineFramingTransposer _transposer;
     private CinemachineBasicMultiChannelPerlin _perlin;
     
     private float shakeCounter;
@@ -33,7 +33,7 @@ public class CameraManager : MonoBehaviour
             }
             _currCamera = value;
             _currCamera.Priority++;
-            _transposer = _currCamera.GetCinemachineComponent<CinemachineTransposer>();
+            _transposer = _currCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
             _perlin = _currCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         }
     }
@@ -66,11 +66,11 @@ public class CameraManager : MonoBehaviour
 
     private void MoveCamera()
     {
-        if (_transposer.m_FollowOffset == lookAhead) return;
+        if (_transposer.m_TrackedObjectOffset == lookAhead) return;
         
-        _transposer.m_FollowOffset = Vector3.Slerp(_transposer.m_FollowOffset, lookAhead, lookSpeed * Time.deltaTime);
-        if (Vector3.Distance(_transposer.m_FollowOffset, lookAhead) < 0.05)
-            _transposer.m_FollowOffset = lookAhead;
+        _transposer.m_TrackedObjectOffset = Vector3.Slerp(_transposer.m_TrackedObjectOffset, lookAhead, lookSpeed * Time.deltaTime);
+        if (Vector3.Distance(_transposer.m_TrackedObjectOffset, lookAhead) < 0.05)
+            _transposer.m_TrackedObjectOffset = lookAhead;
     }
     
     public void ShakeCamera()
@@ -89,7 +89,8 @@ public class CameraManager : MonoBehaviour
         switch (context.phase)
         {
             case InputActionPhase.Performed:
-                lookAhead = context.ReadValue<Vector2>();
+                lookAhead = context.ReadValue<Vector2>() * lookDistance;
+                print(lookAhead);
                 break;
             case InputActionPhase.Canceled:
                 lookAhead = Vector2.zero;
