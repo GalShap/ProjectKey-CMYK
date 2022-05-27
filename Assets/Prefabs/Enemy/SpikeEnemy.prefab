@@ -48,9 +48,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9abe1b74860f64a40be1ee70dd04d71f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 0
   player: {fileID: 0}
   speed: 2
   places:
