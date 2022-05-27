@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,11 +11,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private PlayerController playerController;
     [SerializeField] private Room currRoom;
-
-    [Header("Camera Shake")]
-    [SerializeField] private float shakeAmplitude;
-    [SerializeField] private float shakeTime;
+    
     private float shakeCounter;
+    private Vector3 look;
     
     private Room respawnRoom;
     private GameObject respawnPoint;
@@ -30,22 +29,10 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private void Update()
-    {
-        if (shakeCounter > 0)
-        {
-            shakeCounter -= Time.deltaTime;
-        }
-        else
-        {
-            StopShake();
-        }
-    }
-
+    
     private void Start()
     {
-        currRoom.Camera.Priority = 1;
+        CameraManager.Manager.Camera = currRoom.Camera;
         currRoom.EnableContents();
     }
 
@@ -62,22 +49,9 @@ public class GameManager : MonoBehaviour
 
     public void Respawn()
     {
-        currRoom.Camera.Priority--;
-        respawnRoom.Camera.Priority++;
+        CameraManager.Manager.Camera = respawnRoom.Camera;
+        currRoom = respawnRoom;
         
         playerController.transform.position = respawnPoint.transform.position;
-    }
-
-    public void ShakeCamera()
-    {
-        var perlin = currRoom.Camera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        perlin.m_AmplitudeGain = shakeAmplitude;
-        shakeCounter = shakeTime;
-    }
-    
-    private void StopShake()
-    {
-        var perlin = currRoom.Camera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        perlin.m_AmplitudeGain = 0;
     }
 }
