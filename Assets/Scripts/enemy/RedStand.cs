@@ -9,7 +9,7 @@ public class RedStand : StateMachineBehaviour
     
     private MagentaGod red;
     private EnemyHealth hl;
-    [SerializeField] public float timerCounter = 3;
+    [SerializeField] public float timerCounter = 5;
 
     private float timer = 0;
 
@@ -43,8 +43,6 @@ public class RedStand : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.ResetTrigger("shoot");
-        // animator.ResetTrigger("left");
-        // animator.ResetTrigger("right");
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

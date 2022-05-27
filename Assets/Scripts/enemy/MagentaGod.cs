@@ -11,7 +11,7 @@ public class MagentaGod : EnemyObject
     [SerializeField] public float speed = 3;
     [SerializeField] public float attackRange = 3;
     private float timer = 0;
-    private bool[] flag = { false, false, false, false };
+    private bool[] flag = {false, false, false, false};
 
     [FormerlySerializedAs("m_Projectile")]
     public GameObject b_Projectile; // this is a reference to your projectile prefab
@@ -20,7 +20,9 @@ public class MagentaGod : EnemyObject
 
     [SerializeField]
     private Transform[] m_SpawnTransform; // this is a reference to the transform where the prefab will spawn
-    [SerializeField] private Transform[] m_SpawnTransformBlue; // this is a reference to the transform where the prefab will spawn
+
+    [SerializeField]
+    private Transform[] m_SpawnTransformBlue; // this is a reference to the transform where the prefab will spawn
 
     public GameObject player;
     public Transform right;
@@ -45,9 +47,7 @@ public class MagentaGod : EnemyObject
         int k = Random.Range(0, i);
         var dir = player.transform.position - transform.position;
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        // m_SpawnTransform[k].rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         Instantiate(r_Projectile, m_SpawnTransform[k].position, Quaternion.AngleAxis(angle, Vector3.forward));
-        // Instantiate(m_Projectile, m_SpawnTransform[k].position, m_SpawnTransform[k].rotation);
     }
 
     public void ShootBlue()
@@ -57,11 +57,6 @@ public class MagentaGod : EnemyObject
         {
             Instantiate(b_Projectile, m_SpawnTransformBlue[k].position, m_SpawnTransformBlue[k].rotation);
         }
-        // int k = Random.Range(0, i);
-        // var dir = player.transform.position - transform.position;
-        // var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        // m_SpawnTransform[k].rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        // Instantiate(m_Projectile, m_SpawnTransform[k].position, Quaternion.AngleAxis(angle, Vector3.forward));
     }
 
     protected override void UponDead()
@@ -95,11 +90,10 @@ public class MagentaGod : EnemyObject
         var animator = gameObject.GetComponent<Animator>();
         var hl = animator.GetComponent<EnemyHealth>();
         var hp = hl.GetHealth();
-        if(directionAcordingToHp(hp, 400, 0, "right", animator)) return;
-        else if(directionAcordingToHp(hp, 300, 1, "left", animator))return;
-        else if(directionAcordingToHp(hp, 200, 2, "right", animator))return;
+        if (directionAcordingToHp(hp, 400, 0, "right", animator)) return;
+        if (directionAcordingToHp(hp, 300, 1, "left", animator)) return;
+        if (directionAcordingToHp(hp, 200, 2, "right", animator)) return;
         else directionAcordingToHp(hp, 100, 3, "left", animator);
-        
     }
 
     private bool directionAcordingToHp(float hp, float min, int index, string dir, Animator animator)
@@ -111,6 +105,7 @@ public class MagentaGod : EnemyObject
             flag[index] = true;
             return true;
         }
+
         return false;
     }
 }
