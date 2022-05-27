@@ -11,10 +11,7 @@ public class MagentaGod : EnemyObject
     [SerializeField] public float speed = 3;
     [SerializeField] public float attackRange = 3;
     private float timer = 0;
-    private bool flag1 = false;
-    private bool flag2 = false;
-    private bool flag3 = false;
-    private bool flag4 = false;
+    private bool[] flag = { false, false, false, false };
 
     [FormerlySerializedAs("m_Projectile")]
     public GameObject b_Projectile; // this is a reference to your projectile prefab
@@ -23,6 +20,7 @@ public class MagentaGod : EnemyObject
 
     [SerializeField]
     private Transform[] m_SpawnTransform; // this is a reference to the transform where the prefab will spawn
+    [SerializeField] private Transform[] m_SpawnTransformBlue; // this is a reference to the transform where the prefab will spawn
 
     public GameObject player;
     public Transform right;
@@ -54,10 +52,10 @@ public class MagentaGod : EnemyObject
 
     public void ShootBlue()
     {
-        int i = m_SpawnTransform.Length;
-        for (int k = 0; k < m_SpawnTransform.Length; k++)
+        int i = m_SpawnTransformBlue.Length;
+        for (int k = 0; k < m_SpawnTransformBlue.Length; k++)
         {
-            Instantiate(b_Projectile, m_SpawnTransform[k].position, m_SpawnTransform[k].rotation);
+            Instantiate(b_Projectile, m_SpawnTransformBlue[k].position, m_SpawnTransformBlue[k].rotation);
         }
         // int k = Random.Range(0, i);
         // var dir = player.transform.position - transform.position;
@@ -97,33 +95,22 @@ public class MagentaGod : EnemyObject
         var animator = gameObject.GetComponent<Animator>();
         var hl = animator.GetComponent<EnemyHealth>();
         var hp = hl.GetHealth();
-        if (hp <= 400 && !flag1)
-        // if (hp <= 400)
+        if(directionAcordingToHp(hp, 400, 0, "right", animator)) return;
+        else if(directionAcordingToHp(hp, 300, 1, "left", animator))return;
+        else if(directionAcordingToHp(hp, 200, 2, "right", animator))return;
+        else directionAcordingToHp(hp, 100, 3, "left", animator);
+        
+    }
+
+    private bool directionAcordingToHp(float hp, float min, int index, string dir, Animator animator)
+    {
+        if (hp <= min && !flag[index])
         {
-            flag1 = true;
             rb.AddForce(Vector2.up * 3);
-            animator.SetTrigger("right");
+            animator.SetTrigger(dir);
+            flag[index] = true;
+            return true;
         }
-        else if (hp <= 300 && !flag2)
-        // else if (hp <= 300)
-        {
-            flag2 = true;
-            rb.AddForce(Vector2.up * 3);
-            animator.SetTrigger("left");
-        }
-        else if (hp <= 200 && !flag3)
-        // else if (hp <= 200)
-        {
-            flag3 = true;
-            rb.AddForce(Vector2.up * 3);
-            animator.SetTrigger("right");
-        }
-        else if (hp <= 100 && !flag4)
-        // else if (hp <= 100)
-        {
-            flag4 = true;
-            rb.AddForce(Vector2.up * 3);
-            animator.SetTrigger("left");
-        }
+        return false;
     }
 }

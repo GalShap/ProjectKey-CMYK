@@ -9,6 +9,10 @@ public class MoveLeft : StateMachineBehaviour
     private GameObject player;
     private Rigidbody2D rb;
     private MagentaGod red;
+    private bool unactive;
+    [SerializeField] private float timerCounter = 3;
+
+    private float timer = 0;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -17,12 +21,21 @@ public class MoveLeft : StateMachineBehaviour
         rb = animator.GetComponent<Rigidbody2D>();
         left = red.left;
         red.platformRight.SetActive(true);
-        red.platformLeft.SetActive(false);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+       
+        if (timer >= timerCounter)
+        {
+            red.platformLeft.SetActive(false);
+            unactive = true;
+        }
+        else if(!unactive)
+        {
+             timer += Time.deltaTime;
+        }
         Vector2 target = new Vector2(left.transform.position.x, rb.transform.position.y);
         Vector2 newPos = Vector2.MoveTowards(rb.position, target, red.speed * Time.fixedDeltaTime);
         rb.MovePosition(newPos);
@@ -36,7 +49,7 @@ public class MoveLeft : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // animator.ResetTrigger("left");
+        animator.ResetTrigger("right");
         animator.ResetTrigger("coolDown");
     }
 
