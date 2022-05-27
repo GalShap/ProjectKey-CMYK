@@ -314,7 +314,7 @@ public class PlayerController : MonoBehaviour
                         return;
                     }
                 }
-                ColorManager.RotateColor(-1);
+                ColorManager.RotateColor(1);
                 break;
             case InputActionPhase.Canceled:
                 break;
