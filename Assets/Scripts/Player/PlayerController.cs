@@ -314,7 +314,63 @@ public class PlayerController : MonoBehaviour
                         return;
                     }
                 }
-                ColorManager.RotateColor();
+                ColorManager.RotateColor(-1);
+                break;
+            case InputActionPhase.Canceled:
+                break;
+        }
+    }
+    
+    public void OnRotateColorLeft(InputAction.CallbackContext context)
+    {
+        if (TimelineManager.Manager.IsPlaying)
+            return;
+        
+        switch (context.phase)
+        {
+            case InputActionPhase.Performed:
+                if (isTutorial)
+                {
+                    if (TutorialManager.Manager.State == TutorialManager.TutorialState.COLOR 
+                        || TutorialManager.Manager.State == TutorialManager.TutorialState.END)
+                    {
+                        TutorialManager.Manager.HideTutorial();
+                        TutorialManager.Manager.SetState(TutorialManager.TutorialState.END);   
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                ColorManager.RotateColorRight();
+                break;
+            case InputActionPhase.Canceled:
+                break;
+        }
+    }
+    
+    public void OnRotateColorRight(InputAction.CallbackContext context)
+    {
+        if (TimelineManager.Manager.IsPlaying)
+            return;
+        
+        switch (context.phase)
+        {
+            case InputActionPhase.Performed:
+                if (isTutorial)
+                {
+                    if (TutorialManager.Manager.State == TutorialManager.TutorialState.COLOR 
+                        || TutorialManager.Manager.State == TutorialManager.TutorialState.END)
+                    {
+                        TutorialManager.Manager.HideTutorial();
+                        TutorialManager.Manager.SetState(TutorialManager.TutorialState.END);   
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                ColorManager.RotateColorLeft();
                 break;
             case InputActionPhase.Canceled:
                 break;

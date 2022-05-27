@@ -49,6 +49,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Color Left",
+                    "type": "Button",
+                    "id": "ace77e96-9c7e-47eb-8ac5-126a0275e6cd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Color Right",
+                    "type": "Button",
+                    "id": "3572c2c4-349c-43b4-8958-48654bb1adcd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -186,28 +204,6 @@
                 },
                 {
                     "name": "",
-                    "id": "33811538-e8f3-4873-8032-4096596b1944",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Change Color",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3dee739b-0072-4162-87ce-0a7f9fdad879",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Change Color",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "593662f6-508b-44c2-a449-e13220a633fe",
                     "path": "<Keyboard>/z",
                     "interactions": "",
@@ -236,6 +232,28 @@
                     "processors": "StickDeadzone(min=0.2)",
                     "groups": "Gamepad",
                     "action": "Look Around",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "319b0640-3824-47a4-8b47-2af059c160ae",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Color Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "69b2add0-7bb2-4ca2-8770-e5258c538ad2",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Color Right",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

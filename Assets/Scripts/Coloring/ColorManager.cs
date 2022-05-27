@@ -47,7 +47,7 @@ public class ColorManager : MonoBehaviour
 
     public static int CurrLayer => _shared.AllLayers[_shared.CurWorldColor].index;
 
-    public static ColorManager _shared;
+    private static ColorManager _shared;
     private int TotalColors => AllLayers.Count;
 
     private List<ColorLayer> availableLayers;
@@ -166,9 +166,18 @@ public class ColorManager : MonoBehaviour
         }
     }
 
-    public static void RotateColor()
+    public static void RotateColor(int dir)
     {
-        _shared.CurWorldColor = (_shared.CurWorldColor + 1) % _shared.availableLayers.Count;
+        if(Math.Abs(dir) != 1) return;
+
+        if (dir == -1 && _shared.CurWorldColor == 0)
+        {
+            _shared.CurWorldColor = _shared.availableLayers.Count - 1;
+        }
+        else
+        {
+            _shared.CurWorldColor = (_shared.CurWorldColor + dir) % _shared.availableLayers.Count;   
+        }
         _shared.SetWorldColor(_shared.CurWorldColor);
     }
 
@@ -291,5 +300,14 @@ public class ColorManager : MonoBehaviour
     }
     
     #endregion
+
+    public static void RotateColorRight()
+    {
+        RotateColor(-1);
+    }
     
+    public static void RotateColorLeft()
+    {
+        RotateColor(1);
+    }
 }
