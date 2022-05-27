@@ -10,6 +10,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [SerializeField] private int lives = 6;
 
     [SerializeField] private float _bounce = 6f;
+
+    [SerializeField] private Animator playerAnimator; 
     
     #endregion
     
@@ -20,8 +22,19 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private float _timeToBounce = 0.2f;
     
     private Rigidbody2D _playerRigidBody;
+
+    private BoxCollider2D _playerCollider; 
     
     private bool _isBouncing = false;
+
+    private int _lastCollision = -1;
+    private static readonly int SpikesDeath = Animator.StringToHash("SpikesDeath");
+    private static readonly int MonsterDeath = Animator.StringToHash("MonsterDeath");
+
+    private enum CollisionWith
+    {
+        Monster , Spikes
+    }
     
     #endregion
     
@@ -37,6 +50,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     void Awake()
     {
         _playerRigidBody = GetComponent<Rigidbody2D>();
+        _playerCollider = GetComponent<BoxCollider2D>();
         lives = PlayerHUD.MaxLife;
     }
 
@@ -89,8 +103,19 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     #region Private Methods    
     private bool EnemyCollision(Collision2D other)
     {
-        return other.gameObject.CompareTag("Monster") || other.gameObject.CompareTag("Spikes"); //||
-        //other.gameObject.CompareTag("Projectile");
+        if (other.gameObject.CompareTag("Spikes"))
+        {
+            _lastCollision = (int) CollisionWith.Spikes;
+            return true;
+        }
+        
+        if (other.gameObject.CompareTag("Monster"))
+        {
+            _lastCollision = (int) CollisionWith.Monster;
+            return true;
+        }
+
+        return false;
     }
     
     /// <summary>
@@ -128,7 +153,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         if (lives <= MIN_LIVES)
         {
             lives = MIN_LIVES;
-            Dead();
+            //Dead();
+            StartCoroutine(DeathSequence(2f));
         }
 
         PlayerHUD.sharedHud.removeLifeOnUI(amount);
@@ -177,15 +203,45 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public int GetHealth()
     {
         return lives;
-    }
-
+    } 
+    
     public void Dead()
     {
         SetHealth(MAX_LIVES);
         GameManager.Manager.Respawn();
+        PlayerHUD.sharedHud.FullHealth();
     }
     
     #endregion
+    
+    
+    private IEnumerator DeathSequence(float time)
+    {
+        _playerRigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
+        _playerCollider.enabled = false;
+        switch (_lastCollision)
+        {
+            // play spikes death animation
+            case (int) CollisionWith.Spikes:
+                playerAnimator.SetTrigger(SpikesDeath);
+                break;
+            
+            
+            // play monster death animation
+            case (int) CollisionWith.Monster:
+                playerAnimator.SetTrigger(MonsterDeath);
+                break;
+            
+        }
+
+        yield return new WaitForSeconds(time);
+        
+        Dead();
+        _playerCollider.enabled = true;
+        var b = RigidbodyConstraints2D.FreezeRotation;
+        _playerRigidBody.constraints = b;
+    }   
+
     
     
 }
