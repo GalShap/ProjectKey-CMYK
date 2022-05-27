@@ -89,8 +89,7 @@ public class CameraManager : MonoBehaviour
         switch (context.phase)
         {
             case InputActionPhase.Performed:
-                lookAhead = context.ReadValue<Vector2>() * lookDistance;
-                print(lookAhead);
+                lookAhead = Vector2.up * (context.ReadValue<Vector2>().y * lookDistance);
                 break;
             case InputActionPhase.Canceled:
                 lookAhead = Vector2.zero;
