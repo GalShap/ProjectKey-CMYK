@@ -48,11 +48,15 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private List<Sprite> SpeakersSprites;
 
+    [SerializeField] private List<string> TalkerNames;
+
     [SerializeField] private Image speakerImage;
 
     [SerializeField] private GameObject Arrow;
 
     [SerializeField] private TextMeshProUGUI TextBox;
+
+    [SerializeField] private TextMeshProUGUI TalkerNameTextBox;
 
     // the string is the dialogue the character says
     // the int is the index of that character sprite in the SpeakersSprites list; 
@@ -223,6 +227,7 @@ public class DialogueManager : MonoBehaviour
     {   
         Arrow.SetActive(false);
         speakerImage.sprite = SpeakersSprites[next.ID];
+        TalkerNameTextBox.text = TalkerNames[next.ID];
         TextBox.text = "";
         foreach (var letter in next.Sentence1)
         {

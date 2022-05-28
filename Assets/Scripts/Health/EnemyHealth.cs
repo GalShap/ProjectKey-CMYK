@@ -94,11 +94,13 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("AttackCollider"))
-        {   
+    {   
+        Debug.Log("triggering!");
+        
+        if (other.gameObject.CompareTag("Player") && !PlayerController.onGround && PlayerController.attacking) {   
          
             Hit(other.gameObject);
+            other.gameObject.GetComponent<PlayerHealth>().PlayerKickBack(this.gameObject);
         }
     }
 
@@ -124,9 +126,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         EnemyObject enemy = GetComponent<EnemyObject>();
         enemy.SetKickBack(newKick);
         
-        //_enemyRigidBody.AddForce((_enemyRigidBody.position - playerRigidBody.position).normalized * bounce,
-           // ForceMode2D.Impulse);
-
+        
         _isBouncing = false;
     }
 

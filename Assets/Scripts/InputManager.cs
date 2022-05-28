@@ -52,4 +52,16 @@ public class InputManager : MonoBehaviour
         _playerMap.Enable();
         _dialogueMap.Disable();
     }
+
+    public void DisableAll()
+    {
+        _playerMap.Disable();
+        _dialogueMap.Disable();
+    }
+
+    public void EnableAll()
+    {
+        _playerMap.Enable();
+        _dialogueMap.Enable();
+    }
 }

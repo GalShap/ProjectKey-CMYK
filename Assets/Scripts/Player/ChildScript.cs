@@ -11,4 +11,9 @@ public class ChildScript : MonoBehaviour
         print("attack");
         parent.StartAttack();
     }
+
+    public void FinishAttack()
+    {
+        PlayerController.attacking = false;
+    }
 }

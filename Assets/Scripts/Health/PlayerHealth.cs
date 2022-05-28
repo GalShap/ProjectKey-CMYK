@@ -2,25 +2,25 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
     #region Inspector
 
     [SerializeField] private int lives = 6;
-
-    [SerializeField] private float _bounce = 6f;
-
+    
+    [SerializeField] private float bounce = 6f;
+    
+    [SerializeField] private float timeToBounce = 0.2f;
+    
+    [SerializeField] private float timeToHit = 0.8f;
     #endregion
     
     #region Private Field
     
     private float _time = 0;
 
-    private float _timeToBounce = 0.2f;
-
-    private float _timeToHit = 1f;
-    
     private Animator playerAnimator;
     
     private Rigidbody2D _playerRigidBody;
@@ -34,8 +34,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private float _timeToNextHit = 0;
 
     private int _lastCollision = -1;
-    private static readonly int SpikesDeath = Animator.StringToHash("SpikesDeath");
-    private static readonly int MonsterDeath = Animator.StringToHash("MonsterDeath");
+    
+    private static readonly int SpikesDeath = Animator.StringToHash("DeathBySpikes");
+    private static readonly int MonsterDeath = Animator.StringToHash("DeathByMonster");
 
     private enum CollisionWith
     {
@@ -68,7 +69,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         {
             _timeToNextHit += Time.deltaTime;
 
-            if (_timeToNextHit >= _timeToHit)
+            if (_timeToNextHit >= timeToHit)
             {
                 _hit = false;
                 _timeToNextHit = 0;
@@ -78,7 +79,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         if (_isBouncing)
         {
             _time += Time.deltaTime;
-            if (_time >= _timeToBounce)
+            if (_time >= timeToBounce)
             {
                 _isBouncing = false;
                 _time = 0;
@@ -89,6 +90,13 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     void OnCollisionEnter2D(Collision2D other)
     {   
+        
+        // it was a jump attack succka, no life lost! 
+        if (PlayerController.attacking && !PlayerController.onGround)
+        {   
+            return;
+        }
+
      
         if (EnemyCollision(other.gameObject) && !_hit)
         {
@@ -120,7 +128,14 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     }
 
     private void OnTriggerEnter2D(Collider2D other)
-    {
+    {   
+        
+        // it was a jump attack succka, no life lost! 
+        if (PlayerController.attacking && !PlayerController.onGround)
+        {   
+            return;
+        }
+        
         if (EnemyCollision(other.gameObject))
         {
             EnemyObject enemy = other.gameObject.GetComponent<EnemyObject>();
@@ -152,6 +167,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     #region Private Methods    
     private bool EnemyCollision(GameObject other)
     {
+       
+
         if (other.CompareTag("Spikes"))
         {
             _lastCollision = (int) CollisionWith.Spikes;
@@ -173,14 +190,14 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     /// <param name="other">
     /// the collision with an enemy. 
     /// </param>
-    private void PlayerKickBack(GameObject other)
+    public void PlayerKickBack(GameObject other)
     {   
         
         Rigidbody2D enemyRigidBody = other.GetComponent<Rigidbody2D>();
         
         if (enemyRigidBody == null)
             enemyRigidBody = other.GetComponentInParent<Rigidbody2D>();
-        PlayerController.SetKickBack((_playerRigidBody.position - enemyRigidBody.position).normalized * _bounce);
+        PlayerController.SetKickBack((_playerRigidBody.position - enemyRigidBody.position).normalized * bounce);
        
         _isBouncing = false;
     }
@@ -204,7 +221,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         if (lives <= MIN_LIVES)
         {
             lives = MIN_LIVES;
-            StartCoroutine(DeathSequence(2f));
+            StartCoroutine(DeathSequence(3.2f));
         }
 
         PlayerHUD.sharedHud.removeLifeOnUI(amount);
@@ -266,7 +283,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     
     
     private IEnumerator DeathSequence(float time)
-    {
+    {   
+        InputManager.Manager.DisableAll();
         _playerRigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
         _playerCollider.enabled = false;
         switch (_lastCollision)
@@ -290,6 +308,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         _playerCollider.enabled = true;
         var b = RigidbodyConstraints2D.FreezeRotation;
         _playerRigidBody.constraints = b;
+        InputManager.Manager.EnableAll();
     }   
 
     
