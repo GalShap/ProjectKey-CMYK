@@ -9,6 +9,7 @@ TagManager:
   - Monster
   - AttackCollider
   - Spikes
+  - Projectile
   layers:
   - Default
   - TransparentFX

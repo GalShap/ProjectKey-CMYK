@@ -58,7 +58,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     void OnCollisionEnter2D(Collision2D other)
     {   
      
-        if (EnemyCollision(other))
+        if (EnemyCollision(other.gameObject))
         {
             EnemyObject enemy = other.gameObject.GetComponent<EnemyObject>();
             if (enemy == null)
@@ -78,19 +78,46 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             if (!_isBouncing)
             {
                 _isBouncing = true;
-                PlayerKickBack(other);
+                PlayerKickBack(other.gameObject);
             }
             
         }
     }
-    
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (EnemyCollision(other.gameObject))
+        {
+            EnemyObject enemy = other.gameObject.GetComponent<EnemyObject>();
+            if (enemy == null)
+            {
+                enemy = other.gameObject.GetComponentInChildren<EnemyObject>();
+            }
+            
+            if(enemy == null)
+                return;
+
+            int damage = 1;
+            if (enemy.IsOneHit)
+            {
+                damage = lives;
+            }
+            Damage(damage);
+            if (!_isBouncing)
+            {
+                _isBouncing = true;
+                PlayerKickBack(other.gameObject);
+            }
+            
+        }
+    }
+
     #endregion
 
     #region Private Methods    
-    private bool EnemyCollision(Collision2D other)
+    private bool EnemyCollision(GameObject other)
     {
-        return other.gameObject.CompareTag("Monster") || other.gameObject.CompareTag("Spikes"); //||
-        //other.gameObject.CompareTag("Projectile");
+        return other.CompareTag("Monster") || other.gameObject.CompareTag("Spikes") || other.gameObject.CompareTag("Projectile");
     }
     
     /// <summary>
@@ -99,11 +126,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     /// <param name="other">
     /// the collision with an enemy. 
     /// </param>
-    private void PlayerKickBack(Collision2D other)
+    private void PlayerKickBack(GameObject other)
     {
-        Rigidbody2D enemyRigidBody = other.gameObject.GetComponent<Rigidbody2D>();
+        Rigidbody2D enemyRigidBody = other.GetComponent<Rigidbody2D>();
         if (enemyRigidBody == null)
-            enemyRigidBody = other.gameObject.GetComponentInParent<Rigidbody2D>();
+            enemyRigidBody = other.GetComponentInParent<Rigidbody2D>();
         _playerRigidBody.AddForce((_playerRigidBody.position - enemyRigidBody.position).normalized * _bounce, 
             ForceMode2D.Impulse);
         _isBouncing = false;

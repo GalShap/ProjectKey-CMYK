@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7403713091568666127}
   m_Layer: 12
   m_Name: bull
-  m_TagString: Monster
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,7 +82,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -97,11 +97,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.08}
-      - {x: -0.076084524, y: 0.024721358}
-      - {x: -0.047022812, y: -0.06472136}
-      - {x: 0.047022827, y: -0.06472135}
-      - {x: 0.07608452, y: 0.02472137}
+    - - {x: 0.3240744, y: 0.16709353}
+      - {x: 0.20695794, y: 0.32387495}
+      - {x: -0.095042445, y: 0.3126039}
+      - {x: -0.33501762, y: 0.13116416}
+      - {x: -0.32619622, y: -0.07782444}
+      - {x: -0.07953733, y: -0.31483305}
+      - {x: 0.12955968, y: -0.3098308}
+      - {x: 0.33620068, y: -0.16536354}
 --- !u!114 &8121963082488967721
 MonoBehaviour:
   m_ObjectHideFlags: 0
