@@ -6,8 +6,9 @@ public class ChildScript : MonoBehaviour
 {
     [SerializeField] private PlayerController parent;
 
-    public void EndAttack()
+    public void Attack()
     {
-        parent.EndAttack();
+        print("attack");
+        parent.StartAttack();
     }
 }

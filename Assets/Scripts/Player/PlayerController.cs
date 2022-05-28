@@ -28,7 +28,10 @@ public class PlayerController : MonoBehaviour
 
     [Header("Attack")] 
     [SerializeField] private float attackTimer;
-    [SerializeField] private Collider2D attackCollider;
+    [SerializeField] private GameObject attackRange;
+
+    [SerializeField] private float attackRadius = 0.5f;
+    // [SerializeField] private Collider2D attackCollider;
     private float attackCounter = 0;
 
     [Header("Other")]
@@ -81,7 +84,7 @@ public class PlayerController : MonoBehaviour
             attackCounter -= Time.deltaTime;
         }
         
-        height = _renderer.sprite.rect.height / _renderer.sprite.pixelsPerUnit + 0.1f;
+        height = _renderer.sprite.rect.height / _renderer.sprite.pixelsPerUnit + 0.2f;
         collisionOffset = Vector2.right * ((_renderer.sprite.rect.width/_renderer.sprite.pixelsPerUnit) / 2 - collisionEps);
     }
 
@@ -92,6 +95,7 @@ public class PlayerController : MonoBehaviour
             Vector2.down*height * 0.5f);
         Gizmos.DrawRay(_rigidbody2D.position - collisionOffset,
             Vector2.down*height * 0.5f);
+        Gizmos.DrawWireSphere(attackRange.transform.position, attackRadius);
     }
 
     private void FixedUpdate()
@@ -211,9 +215,24 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    public void EndAttack()
+    // public void EndAttack()
+    // {
+    //     attackCollider.gameObject.SetActive(false);
+    // }
+    public void StartAttack()
     {
-        attackCollider.gameObject.SetActive(false);
+        var dir = attackRange.transform.position - transform.position;
+        var dir2 = new Vector2(dir.x, dir.y);
+        // var size = new Vector2(Math.Abs(attackRange.transform.position.x - transform.position.x), attackRadius);
+        // var hits = Physics2D.CapsuleCastAll(transform.position, size, CapsuleDirection2D.Horizontal, 0, dir2, size.x);
+
+        var hits = Physics2D.CircleCastAll(attackRange.transform.position, attackRadius, dir2);
+        foreach (var h in hits)
+        {
+            EnemyHealth enemy = h.collider.GetComponent<EnemyHealth>();
+            if (enemy == null) return;
+            enemy.Hit(gameObject);
+        }
     }
 
     public void Stop()
@@ -243,7 +262,7 @@ public class PlayerController : MonoBehaviour
                    
                     _animator.SetTrigger(Attack);
                     // _rigidbody2D.velocity = Vector2.zero;
-                    attackCollider.gameObject.SetActive(true);
+                    // attackCollider.gameObject.SetActive(true);
                     attackCounter = attackTimer;
                     
                 }
@@ -298,9 +317,12 @@ public class PlayerController : MonoBehaviour
                 bool changingDir = facingRight != movement.x <= 0;
                 if (changingDir)
                 {
-                    var pos = attackCollider.gameObject.transform.localPosition;
+                    // var pos = attackCollider.gameObject.transform.localPosition;
+                    // pos.x *= -1;
+                    // attackCollider.gameObject.transform.localPosition = pos;
+                    var pos = attackRange.transform.localPosition;
                     pos.x *= -1;
-                    attackCollider.gameObject.transform.localPosition = pos;
+                    attackRange.transform.localPosition = pos;
                 }
 
                 _renderer.flipX = movement.x <= 0;

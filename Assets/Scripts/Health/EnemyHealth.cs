@@ -91,28 +91,31 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
             alpha.a = MAX_ALPHA;
         }
-        
-        
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("AttackCollider"))
         {
-            Damage(50);
-            
-            if (!_isBouncing)
-            {
-                _isBouncing = true;
-                EnemyKickBack(other);
-            }
+            Hit(other.gameObject);
         }
     }
 
-    private void EnemyKickBack(Collider2D other)
+    public void Hit(GameObject hitter)
     {
-        Rigidbody2D _playerRigidBody = other.gameObject.GetComponent<Rigidbody2D>();
+        Damage(50);
+            
+        if (!_isBouncing)
+        {
+            _isBouncing = true;
+            EnemyKickBack(hitter);
+        }
+    }
+
+    private void EnemyKickBack(GameObject other)
+    {
+        Rigidbody2D _playerRigidBody = other.GetComponent<Rigidbody2D>();
         if (_playerRigidBody == null)
-            _playerRigidBody = other.gameObject.GetComponentInParent<Rigidbody2D>();
+            _playerRigidBody = other.GetComponentInParent<Rigidbody2D>();
         
        
         _playerRigidBody.AddForce((_enemyRigidBody.position - _playerRigidBody.position).normalized * bounce,
