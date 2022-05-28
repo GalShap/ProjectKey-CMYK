@@ -20,12 +20,18 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private float _time = 0;
 
     private float _timeToBounce = 0.2f;
+
+    private float _timeToHit = 1f;
     
     private Rigidbody2D _playerRigidBody;
 
     private BoxCollider2D _playerCollider; 
     
     private bool _isBouncing = false;
+
+    private bool _hit = false;
+
+    private float _timeToNextHit = 0;
 
     private int _lastCollision = -1;
     private static readonly int SpikesDeath = Animator.StringToHash("SpikesDeath");
@@ -57,6 +63,17 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
+        if (_hit)
+        {
+            _timeToNextHit += Time.deltaTime;
+
+            if (_timeToNextHit >= _timeToHit)
+            {
+                _hit = false;
+                _timeToNextHit = 0;
+            }
+        }
+        
         if (_isBouncing)
         {
             _time += Time.deltaTime;
@@ -72,8 +89,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     void OnCollisionEnter2D(Collision2D other)
     {   
      
-        if (EnemyCollision(other))
+        if (EnemyCollision(other.gameObject) && !_hit)
         {
+            _hit = true;
+            
             EnemyObject enemy = other.gameObject.GetComponent<EnemyObject>();
             if (enemy == null)
             {
@@ -89,9 +108,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable
                 damage = lives;
             }
             Damage(damage);
+            
             if (!_isBouncing)
             {
                 _isBouncing = true;
+                
                 PlayerKickBack(other);
             }
             
@@ -101,15 +122,15 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     #endregion
 
     #region Private Methods    
-    private bool EnemyCollision(Collision2D other)
+    private bool EnemyCollision(GameObject other)
     {
-        if (other.gameObject.CompareTag("Spikes"))
+        if (other.CompareTag("Spikes"))
         {
             _lastCollision = (int) CollisionWith.Spikes;
             return true;
         }
         
-        if (other.gameObject.CompareTag("Monster"))
+        if (other.CompareTag("Monster"))
         {
             _lastCollision = (int) CollisionWith.Monster;
             return true;
@@ -125,14 +146,17 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     /// the collision with an enemy. 
     /// </param>
     private void PlayerKickBack(Collision2D other)
-    {
+    {   
+        
         Rigidbody2D enemyRigidBody = other.gameObject.GetComponent<Rigidbody2D>();
+        
         if (enemyRigidBody == null)
             enemyRigidBody = other.gameObject.GetComponentInParent<Rigidbody2D>();
-        _playerRigidBody.AddForce((_playerRigidBody.position - enemyRigidBody.position).normalized * _bounce, 
-            ForceMode2D.Impulse);
+        PlayerController.SetKickBack((_playerRigidBody.position - enemyRigidBody.position).normalized * _bounce);
+       // _playerRigidBody.AddForce((_playerRigidBody.position - enemyRigidBody.position).normalized * _bounce, 
+         //   ForceMode2D.Impulse);
+         
         _isBouncing = false;
-
     }
     
     #endregion

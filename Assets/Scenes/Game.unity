@@ -11841,6 +11841,10 @@ PrefabInstance:
       propertyPath: places.Array.data[1]
       value: 
       objectReference: {fileID: 950043478}
+    - target: {fileID: 1848259307985945461, guid: 18e99341ca8a88048ad6d0d0baa5773c, type: 3}
+      propertyPath: bounce
+      value: 5000
+      objectReference: {fileID: 0}
     - target: {fileID: 3706917342700130943, guid: 18e99341ca8a88048ad6d0d0baa5773c, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -11857,17 +11861,25 @@ PrefabInstance:
       propertyPath: layer.m_Bits
       value: 512
       objectReference: {fileID: 0}
+    - target: {fileID: 4123525431797855058, guid: 18e99341ca8a88048ad6d0d0baa5773c, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4123525431797855058, guid: 18e99341ca8a88048ad6d0d0baa5773c, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7421738528283066169, guid: 18e99341ca8a88048ad6d0d0baa5773c, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7421738528283066169, guid: 18e99341ca8a88048ad6d0d0baa5773c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.610001
+      value: 91.97
       objectReference: {fileID: 0}
     - target: {fileID: 7421738528283066169, guid: 18e99341ca8a88048ad6d0d0baa5773c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.45000017
+      value: 14.95
       objectReference: {fileID: 0}
     - target: {fileID: 7421738528283066169, guid: 18e99341ca8a88048ad6d0d0baa5773c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14716,6 +14728,22 @@ PrefabInstance:
     - target: {fileID: 1356387341348248899, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5068568635469016541, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5068568635469016541, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5068568635469016541, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5946542345231676971, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
+      propertyPath: _bounce
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5946542345231676971, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
       propertyPath: playerHUD
