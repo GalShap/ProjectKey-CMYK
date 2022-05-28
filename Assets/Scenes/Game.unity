@@ -21589,19 +21589,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1970568794960266591, guid: ae90285e97a14b8479d003b533716d87, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.3003501
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1970568794960266591, guid: ae90285e97a14b8479d003b533716d87, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.7980927
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1970568794960266591, guid: ae90285e97a14b8479d003b533716d87, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.1276
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1970568794960266591, guid: ae90285e97a14b8479d003b533716d87, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0882
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2059006629927606298, guid: ae90285e97a14b8479d003b533716d87, type: 3}
       propertyPath: m_LocalRotation.w
@@ -21751,6 +21751,10 @@ PrefabInstance:
       propertyPath: m_Icon
       value: 
       objectReference: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 4485516322665370995, guid: ae90285e97a14b8479d003b533716d87, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4657242672338123464, guid: ae90285e97a14b8479d003b533716d87, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.49
@@ -21815,6 +21819,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 5548293618818400432, guid: ae90285e97a14b8479d003b533716d87, type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5584931211486657041, guid: ae90285e97a14b8479d003b533716d87, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -21839,6 +21847,10 @@ PrefabInstance:
       propertyPath: m_Icon
       value: 
       objectReference: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 6018145867276874385, guid: ae90285e97a14b8479d003b533716d87, type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6746811507698535828, guid: ae90285e97a14b8479d003b533716d87, type: 3}
       propertyPath: m_Icon
       value: 
