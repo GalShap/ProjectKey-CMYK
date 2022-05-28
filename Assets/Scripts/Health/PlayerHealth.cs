@@ -195,6 +195,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     /// <param name="amount">
     /// how many lives to remove! not how much health.
     /// Alon: "Ma HaHevdel...?"
+    /// Gal: that max life is 6 and max health on slider is 120, duh...
     /// </param>
     public void Damage(int amount)
     {
