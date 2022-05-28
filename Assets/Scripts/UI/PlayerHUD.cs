@@ -167,8 +167,9 @@ public class PlayerHUD : MonoBehaviour
       
         
     }
+
     
-    
+
     /// <summary>
     ///  coroutine gets a level and current color and highlights the color while reducing the alpha and scale for all
     ///  other colors.
@@ -181,8 +182,6 @@ public class PlayerHUD : MonoBehaviour
             List<Image> colors = levelColors[level].get();
             float time = 0;
             int oldColor = -1;
-
-
 
             var oldOne = new Color();
             var newOne = new Color();
@@ -218,9 +217,17 @@ public class PlayerHUD : MonoBehaviour
             colors[newColor].color = newOne;
             if (oldColor >= 0) colors[oldColor].color = oldOne;
 
-        
-           
-        
+            for (int i = 0; i < colors.Count; i++)
+            {
+                if (i != newColor && i != oldColor)
+                {   
+                    
+                    var color = colors[i].color;
+                    color.a = 0.6f;
+                    colors[i].color = color;
+                }
+            }
+
     }
 
     public void removeLifeOnUI(int livesToRemove)
