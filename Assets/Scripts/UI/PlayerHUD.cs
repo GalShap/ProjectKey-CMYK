@@ -249,6 +249,12 @@ public class PlayerHUD : MonoBehaviour
         
     }
 
+    public void FullHealth()
+    {
+        lifeFill.value = MaxLifeValue;
+        _currLife = MaxLife;
+    }
+
     public void AddColor(ColorManager.ColorLayer cl)
     {
         return;

@@ -46,6 +46,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 movement;
     private float height;
 
+    private static Vector2? kickbackVector2 = null;
+    
     #endregion
 
     #region Constants
@@ -117,7 +119,9 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
-        MoveCharacter();
+
+       
+        MoveCharacter(); 
         ModifyPhysics();
     }
     
@@ -135,16 +139,33 @@ public class PlayerController : MonoBehaviour
 
     private void MoveCharacter()
     {
+      
         var desiredVel = new Vector2(movement.x * moveSpeed, _rigidbody2D.velocity.y);
-        _rigidbody2D.velocity = Vector2.Lerp(_rigidbody2D.velocity, 
-            desiredVel, 
-            acceleration * Time.fixedDeltaTime);
         
-        if (Math.Abs(_rigidbody2D.velocity.x) > maxSpeed)
-        {
-            float sign = Mathf.Sign(_rigidbody2D.velocity.x);
-            _rigidbody2D.velocity = new Vector2(sign * maxSpeed, _rigidbody2D.velocity.y);
+        if (kickbackVector2 != null)
+        {   
+           
+                desiredVel =  kickbackVector2.Value;
+                _rigidbody2D.AddForce(desiredVel, ForceMode2D.Impulse);
+            kickbackVector2 = null;
         }
+        else
+        {   
+            
+            _rigidbody2D.velocity = Vector2.Lerp(_rigidbody2D.velocity, 
+                        desiredVel, 
+                        acceleration * Time.fixedDeltaTime);
+            
+            if (Math.Abs(_rigidbody2D.velocity.x) > maxSpeed)
+            {
+                float sign = Mathf.Sign(_rigidbody2D.velocity.x);
+                _rigidbody2D.velocity = new Vector2(sign * maxSpeed, _rigidbody2D.velocity.y);
+            }
+        }
+
+      
+
+        
     }
 
     private void Jump()
@@ -378,4 +399,12 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
+
+    public static void SetKickBack(Vector2 kickback)
+    {
+        kickbackVector2 = kickback;
+    }
+    
+        
+    
 }
