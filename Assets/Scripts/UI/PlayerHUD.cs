@@ -15,16 +15,46 @@ public class PlayerHUD : MonoBehaviour
     {
         [SerializeField] private GameObject pallete;
         [SerializeField] private List<Image> colorsInPallete;
- 
+
+        private void highlightColors(int active)
+        {
+            for (int i = 0; i < colorsInPallete.Count; i++)
+            {
+                var color = colorsInPallete[i].color;
+
+                if (i == active)
+                {
+                    color.a = 1;
+                }
+                else
+                {
+                    color.a = 0.3f;
+                }
+
+                colorsInPallete[i].color = color;
+
+            }
+        }
          public List<Image> get()
          {
              return colorsInPallete;
          }
 
-         public void toggleColors(bool toggle)
+         public void toggleColors(bool toggle, int index)
          {
              pallete.SetActive(toggle);
+             if (toggle) highlightColors(index);
          }
+
+         public void fadeColor(int index)
+         {
+             var color = colorsInPallete[index].color;
+             color.a = 0.6f;
+
+             colorsInPallete[index].color = color;
+         }
+         
+         
      }
 
     [SerializeField] private Slider lifeFill;
@@ -33,11 +63,14 @@ public class PlayerHUD : MonoBehaviour
    
     private float _timeToScaleLife = 0.3f;
 
-    private float _timeToScaleColor = 0.5f;
+    private float _timeToScaleColor = 0.2f;
     
     private int _currLife = MaxLife;
 
+    private bool switching = false;
+    
     private static int _currColorPallete = 0;
+    
 
     private int _currColor;
     
@@ -98,7 +131,7 @@ public class PlayerHUD : MonoBehaviour
 
     /// <summary>
     /// method is called when player has acquired a new color. gets the number of level(which is basically colors
-    /// available) and sets it's whell color active. it then gets the current color and plays a coroutine that highlights
+    /// available) and sets it's wheel color active. it then gets the current color and plays a coroutine that highlights
     /// this color. 
     /// </summary>
     /// <param name="level">
@@ -109,8 +142,8 @@ public class PlayerHUD : MonoBehaviour
         
         for (int i = 0; i < levelColors.Count; i++)
         {
-            if (i == level) levelColors[i].toggleColors(true);
-            else levelColors[i].toggleColors(false);
+            if (i == level) levelColors[i].toggleColors(true, _currColor);
+            else levelColors[i].toggleColors(false, _currColor);
         }
 
         _currColorPallete = level;
@@ -127,11 +160,16 @@ public class PlayerHUD : MonoBehaviour
 
         int indexToHighlight = sharedHud._layerToColor[newColor];
         
+        Debug.Log(indexToHighlight);
       
         StartCoroutine(Highlight(indexToHighlight, _currColorPallete));
+
+      
+        
     }
+
     
-    
+
     /// <summary>
     ///  coroutine gets a level and current color and highlights the color while reducing the alpha and scale for all
     ///  other colors.
@@ -139,43 +177,57 @@ public class PlayerHUD : MonoBehaviour
     /// <returns></returns>
     private IEnumerator Highlight(int newColor, int level)
     {
-        List<Image> colors = levelColors[level].get();
-        float time = 0;
-        int oldColor = -1;
-        //
-        var oldOne = new Color();
-        var newOne = new Color();
-        for (int i = 0; i < colors.Count; i++)
-        {
-            if (i == newColor) newOne = colors[i].color;
+       
             
-            else if ((math.abs(colors[i].color.a - 1) < (1e-9)))
-            {
-                oldColor = i;
-                oldOne = colors[i].color;
-            }
-            
-        }
+            List<Image> colors = levelColors[level].get();
+            float time = 0;
+            int oldColor = -1;
 
-        while (time <  _timeToScaleColor)
-        {
-        
-            oldOne.a = Mathf.Lerp(1, 0.3f, time / _timeToScaleColor);
-            newOne.a = Mathf.Lerp(0.3f, 1, time / _timeToScaleColor);
+            var oldOne = new Color();
+            var newOne = new Color();
+            for (int i = 0; i < colors.Count; i++)
+            {
+                if (i == newColor) newOne = colors[i].color;
+
+                else if ((math.abs(colors[i].color.a - 1) < (1e-9)))
+                {
+                    oldColor = i;
+                    oldOne = colors[i].color;
+                }
+
+            }
+
+            while (time < _timeToScaleColor)
+            {
+
+                oldOne.a = Mathf.Lerp(1, 0.6f, time / _timeToScaleColor);
+                newOne.a = Mathf.Lerp(0.6f, 1, time / _timeToScaleColor);
+                colors[newColor].color = newOne;
+                if (oldColor >= 0)
+                {
+                    colors[oldColor].color = oldOne;
+                }
+
+                time += Time.deltaTime;
+                yield return null;
+            }
+
+            oldOne.a = 0.6f;
+            newOne.a = 1;
             colors[newColor].color = newOne;
-            if (oldColor >= 0)
+            if (oldColor >= 0) colors[oldColor].color = oldOne;
+
+            for (int i = 0; i < colors.Count; i++)
             {
-                colors[oldColor].color = oldOne;   
+                if (i != newColor && i != oldColor)
+                {   
+                    
+                    var color = colors[i].color;
+                    color.a = 0.6f;
+                    colors[i].color = color;
+                }
             }
 
-            time += Time.deltaTime;
-            yield return null;
-        }
-        
-        oldOne.a = 0.3f;
-        newOne.a = 1;
-        colors[newColor].color = newOne;
-        if(oldColor >= 0) colors[oldColor].color = oldOne;
     }
 
     public void removeLifeOnUI(int livesToRemove)
