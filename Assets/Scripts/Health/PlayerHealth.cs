@@ -11,8 +11,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     [SerializeField] private float _bounce = 6f;
 
-    [SerializeField] private Animator playerAnimator; 
-    
     #endregion
     
     #region Private Field
@@ -22,6 +20,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private float _timeToBounce = 0.2f;
 
     private float _timeToHit = 1f;
+    
+    private Animator playerAnimator;
     
     private Rigidbody2D _playerRigidBody;
 
@@ -57,6 +57,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         _playerRigidBody = GetComponent<Rigidbody2D>();
         _playerCollider = GetComponent<BoxCollider2D>();
+        playerAnimator = GetComponentInChildren<Animator>();
         lives = PlayerHUD.MaxLife;
     }
 
@@ -202,7 +203,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         if (lives <= MIN_LIVES)
         {
             lives = MIN_LIVES;
-            //Dead();
             StartCoroutine(DeathSequence(2f));
         }
 
