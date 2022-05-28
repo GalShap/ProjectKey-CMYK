@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -5228919873361685709}
   - component: {fileID: 4546519656561499537}
   - component: {fileID: -4368005733874499527}
+  - component: {fileID: -163801283637082578}
   m_Layer: 12
   m_Name: SpikeEnemy
   m_TagString: Monster
@@ -48,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9abe1b74860f64a40be1ee70dd04d71f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oneHit: 0
   player: {fileID: 0}
   speed: 2
   places:
@@ -132,6 +134,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 182fe32eb1a94c6479b2011dfd10bcde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-163801283637082578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383166404756698402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cb8da92eff22fe499a09c1cc47a39fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  enemySpriteRenderer: {fileID: 0}
+  timeToAnimate: 0.05
+  bounce: 50
+  _timeToBounce: 0.2
 --- !u!1 &1193443174369208657
 GameObject:
   m_ObjectHideFlags: 0

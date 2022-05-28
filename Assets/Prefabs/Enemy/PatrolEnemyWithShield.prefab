@@ -233,9 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd06c6402a5887e4d9b2a0cc62a88475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 0
+  oneHit: 0
   player: {fileID: 8863397447226026584, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
   speed: 2
   places: []
@@ -259,7 +257,7 @@ MonoBehaviour:
   health: 100
   enemySpriteRenderer: {fileID: 8841769028957486263}
   timeToAnimate: 0.2
-  bounce: 6
+  bounce: 50
   _timeToBounce: 0.2
 --- !u!61 &1930204524048967671
 BoxCollider2D:

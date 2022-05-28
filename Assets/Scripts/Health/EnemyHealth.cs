@@ -15,7 +15,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     [Tooltip("How much time the animation takes for every blip?")] 
     [SerializeField] private float timeToAnimate = 0.05f;
 
-    [SerializeField] private float bounce = 100f;
+    [SerializeField] private float bounce = 50f;
 
     [SerializeField] private float _timeToBounce = 0.2f;
     

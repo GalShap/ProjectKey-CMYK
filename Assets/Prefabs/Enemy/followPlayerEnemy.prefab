@@ -89,7 +89,7 @@ MonoBehaviour:
   health: 100
   enemySpriteRenderer: {fileID: 3408794512140380931}
   timeToAnimate: 0.2
-  bounce: 7
+  bounce: 50
   _timeToBounce: 0.2
 --- !u!114 &-5422545807513706614
 MonoBehaviour:
@@ -103,9 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 236067b249a2f5d439e067b2560cda13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 0
+  oneHit: 0
   _currentTarget: {x: 0, y: 0, z: 0}
   player: {fileID: 8863397447226026584, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
   speed: 2
@@ -123,13 +121,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0531458495d16884f80400b27480b01a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 0
+  oneHit: 0
   _currentTarget: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
   speed: 2
-  len: 4
+  radius: 4
   places: []
   counter: 0
 --- !u!114 &-6001195829918651135
