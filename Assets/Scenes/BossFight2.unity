@@ -546,36 +546,6 @@ Transform:
   m_Father: {fileID: 1403093586}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &205423459
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 205423460}
-  m_Layer: 0
-  m_Name: right
-  m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &205423460
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 205423459}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.578363, y: -1.3288002, z: -1.1358124}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &241290215
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,14 +890,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: magentaBossFight
       objectReference: {fileID: 0}
+    - target: {fileID: 440080638842725768, guid: 4bec67c8d08dd69418dc529ce705d71a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 584955843389151788, guid: 4bec67c8d08dd69418dc529ce705d71a, type: 3}
       propertyPath: left
       value: 
-      objectReference: {fileID: 1684599404}
+      objectReference: {fileID: 0}
     - target: {fileID: 584955843389151788, guid: 4bec67c8d08dd69418dc529ce705d71a, type: 3}
       propertyPath: right
       value: 
-      objectReference: {fileID: 205423460}
+      objectReference: {fileID: 0}
     - target: {fileID: 584955843389151788, guid: 4bec67c8d08dd69418dc529ce705d71a, type: 3}
       propertyPath: player
       value: 
@@ -1514,36 +1488,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5760996184265680827, guid: 4482044c3a1223341adba33c24163f16, type: 3}
   m_PrefabInstance: {fileID: 1972985544}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1684599403
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1684599404}
-  m_Layer: 0
-  m_Name: left
-  m_TagString: Untagged
-  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1684599404
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1684599403}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.798363, y: -1.3288002, z: -1.1358124}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1972985544
 PrefabInstance:
   m_ObjectHideFlags: 0
