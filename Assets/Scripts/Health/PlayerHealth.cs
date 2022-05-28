@@ -267,7 +267,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     
     
     private IEnumerator DeathSequence(float time)
-    {
+    {   
+        InputManager.Manager.DisableAll();
         _playerRigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
         _playerCollider.enabled = false;
         switch (_lastCollision)
@@ -291,6 +292,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         _playerCollider.enabled = true;
         var b = RigidbodyConstraints2D.FreezeRotation;
         _playerRigidBody.constraints = b;
+        InputManager.Manager.EnableAll();
     }   
 
     
