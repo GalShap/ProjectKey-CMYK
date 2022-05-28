@@ -14,6 +14,7 @@ public class PatrolEnemy : EnemyObject
 
     private void Awake()
     {
+
         movement = gameObject.transform.position;
         rb = GetComponent<Rigidbody2D>();
         counter = 0;
@@ -35,11 +36,22 @@ public class PatrolEnemy : EnemyObject
      */
     protected void Move()
     {
-        var x = transform.position.x - places[counter].position.x;
-        rb.velocity = new Vector2((x <= 0 ? speed : -speed),
-            rb.velocity.y);
-        if (Math.Abs(x) > 0.1f) return;
-        counter = (counter >= places.Length - 1) ? 0 : counter + 1;
+        if (KickBackVector == null)
+        {
+             var x = transform.position.x - places[counter].position.x;
+                    rb.velocity = new Vector2((x <= 0 ? speed : -speed),
+                        rb.velocity.y);
+            if (Math.Abs(x) > 0.1f) return;
+            counter = (counter >= places.Length - 1) ? 0 : counter + 1;
+            
+        }
+
+        else
+        {   
+            rb.AddForce(KickBackVector.Value, ForceMode2D.Impulse);
+            KickBackVector = null;
+        }
+       
     }
 
     protected override void UponDead()

@@ -151,9 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65048c842ea5fee4f916c86f33d5eff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 0
+  oneHit: 0
   player: {fileID: 8863397447226026584, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
   speed: 2
   places: []
@@ -220,7 +218,7 @@ MonoBehaviour:
   health: 100
   enemySpriteRenderer: {fileID: 3706917342700130943}
   timeToAnimate: 0.2
-  bounce: 8
+  bounce: 50
   _timeToBounce: 0.2
 --- !u!114 &4077122111839912163
 MonoBehaviour:

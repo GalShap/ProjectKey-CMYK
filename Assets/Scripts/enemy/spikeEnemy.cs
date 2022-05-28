@@ -28,8 +28,8 @@ public class spikeEnemy : PatrolEnemy
         {
             Move();
         }
-
     }
+
 
     public override void OnColorChange(ColorManager.ColorLayer layer)
     {

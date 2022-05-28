@@ -13,14 +13,15 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     [SerializeField] private SpriteRenderer enemySpriteRenderer;
 
     [Tooltip("How much time the animation takes for every blip?")] 
-    [SerializeField] private float timeToAnimate = 0.1f;
+    [SerializeField] private float timeToAnimate = 0.05f;
 
     [SerializeField] private float bounce = 100f;
 
     [SerializeField] private float _timeToBounce = 0.2f;
     
     #endregion
-
+    
+    
     private Rigidbody2D _enemyRigidBody;
 
     private float _time = 0f;
@@ -95,7 +96,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("AttackCollider"))
-        {
+        {   
+         
             Hit(other.gameObject);
         }
     }
@@ -105,21 +107,26 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         Damage(50);
             
         if (!_isBouncing)
-        {
+        {   
             _isBouncing = true;
             EnemyKickBack(hitter);
         }
     }
 
     private void EnemyKickBack(GameObject other)
-    {
-        Rigidbody2D _playerRigidBody = other.GetComponent<Rigidbody2D>();
-        if (_playerRigidBody == null)
-            _playerRigidBody = other.GetComponentInParent<Rigidbody2D>();
+    {   
         
-       
-        _playerRigidBody.AddForce((_enemyRigidBody.position - _playerRigidBody.position).normalized * bounce,
-            ForceMode2D.Impulse);
+        Rigidbody2D playerRigidBody = other.GetComponent<Rigidbody2D>();
+        if (playerRigidBody == null)
+            playerRigidBody = other.GetComponentInParent<Rigidbody2D>();
+
+        var newKick = (_enemyRigidBody.position - playerRigidBody.position).normalized * bounce;
+        EnemyObject enemy = GetComponent<EnemyObject>();
+        enemy.SetKickBack(newKick);
+        
+        //_enemyRigidBody.AddForce((_enemyRigidBody.position - playerRigidBody.position).normalized * bounce,
+           // ForceMode2D.Impulse);
+
         _isBouncing = false;
     }
 

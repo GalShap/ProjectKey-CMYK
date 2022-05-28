@@ -45,9 +45,20 @@ public class FollowPlayerEnemy : EnemyObject
      */
     protected void Move()
     {
-        float i =onGround ? 1f : -1f;
-        rb.velocity = new Vector2((PositionX() < 0 ? speed : -speed) * i,
-            rb.velocity.y);
+        if (KickBackVector == null)
+        {
+             float i =onGround ? 1f : -1f;
+                    rb.velocity = new Vector2((PositionX() < 0 ? speed : -speed) * i,
+                        rb.velocity.y);
+        }
+
+        else
+        {
+            rb.AddForce(KickBackVector.Value, ForceMode2D.Impulse);
+            KickBackVector = null;
+        }
+        
+       
     }
     
     

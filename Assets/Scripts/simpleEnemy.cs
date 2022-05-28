@@ -18,6 +18,7 @@ public class simpleEnemy : EnemyObject
     // Start is called before the first frame update
     void Start()
     {
+  
         _renderer = GetComponent<SpriteRenderer>();
         if (_renderer == null)
             _renderer = GetComponentInChildren<SpriteRenderer>();
@@ -65,8 +66,17 @@ public class simpleEnemy : EnemyObject
      */
     void move()
     {
-        rb.velocity = new Vector2((PositionX() < 0 ? speed : -speed),
-            rb.velocity.y);
+        if (KickBackVector == null)
+        {
+            rb.velocity = new Vector2((PositionX() < 0 ? speed : -speed),
+                rb.velocity.y);
+        }
+
+        else
+        {
+            rb.AddForce(KickBackVector.Value, ForceMode2D.Impulse);
+            KickBackVector = null;
+        }
     }
 
     /**
@@ -74,14 +84,24 @@ public class simpleEnemy : EnemyObject
      */
     void moveByTarget()
     {
-        if (!onGround)
+        if (KickBackVector == null)
+        {
+
+            if (!onGround)
+                counter = (counter >= places.Length - 1) ? 0 : counter + 1;
+
+            var x = transform.position.x - places[counter].position.x;
+            rb.velocity = new Vector2((x <= 0 ? speed : -speed),
+                rb.velocity.y);
+            if (Math.Abs(x) > 0.1f) return;
             counter = (counter >= places.Length - 1) ? 0 : counter + 1;
-        
-        var x = transform.position.x - places[counter].position.x;
-        rb.velocity = new Vector2((x <= 0 ? speed : -speed),
-            rb.velocity.y);
-        if (Math.Abs(x) > 0.1f) return;
-        counter = (counter >= places.Length - 1) ? 0 : counter + 1;
+        }
+
+        else
+        {
+            rb.AddForce(KickBackVector.Value, ForceMode2D.Impulse);
+            KickBackVector = null;
+        }
     }
 
     private float PositionX()

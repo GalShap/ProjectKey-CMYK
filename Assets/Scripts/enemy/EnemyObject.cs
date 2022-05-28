@@ -12,6 +12,8 @@ public abstract class EnemyObject : MonoBehaviour, ColorChangeListener
     protected Vector2 collisionOffset;
     protected SpriteRenderer _renderer;
     protected bool colored;
+    protected Vector2? KickBackVector;
+ 
 
     // Start is called before the first frame update
     
@@ -56,5 +58,11 @@ public abstract class EnemyObject : MonoBehaviour, ColorChangeListener
         onGround = grounLeft && grountRight;
     }
 
+    public void SetKickBack(Vector2 newKick)
+    {
+        KickBackVector = newKick;
+    }
+
+   
     protected abstract void UponDead();
 }
