@@ -70,7 +70,6 @@ public class PlayerHUD : MonoBehaviour
     private bool switching = false;
     
     private static int _currColorPallete = 0;
-    
 
     private int _currColor;
     
