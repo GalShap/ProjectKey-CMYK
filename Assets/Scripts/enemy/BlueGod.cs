@@ -5,12 +5,24 @@ using UnityEngine;
 
 public class BlueGod : MonoBehaviour
 {
-    [SerializeField] private Transform playerAnim;
+    [SerializeField] private Transform godAnim;
     [SerializeField] private float toggleSpeed = 0.8f;
 
     private float counter;
     private bool blue;
     private bool toggle;
+    private Animator _animator;
+    private Rigidbody2D _rigidbody;
+    private CapsuleCollider2D _collider;
+    private static readonly int Almost = Animator.StringToHash("Almost");
+    private static readonly int Die = Animator.StringToHash("Die");
+
+    private void Start()
+    {
+        _animator = GetComponent<Animator>();
+        _collider = GetComponent<CapsuleCollider2D>();
+        _rigidbody = GetComponentInChildren<Rigidbody2D>();
+    }
 
     private void Update()
     {
@@ -70,15 +82,23 @@ public class BlueGod : MonoBehaviour
         toggle = false;
         ColorManager.SetColor(ColorManager.ColorName.Neutral);
         TimelineManager.Manager.Pause();
-        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.BLUE_END, true, () => { TutorialManager.Manager.ShowTutorial(); });
+        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.BLUE_END, true, () =>
+        {
+            TutorialManager.Manager.ShowTutorial();
+            _collider.enabled = true;
+            _rigidbody.bodyType = RigidbodyType2D.Dynamic;
+        });
     }
     
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("AttackCollider"))
         {
+            godAnim.localPosition = Vector3.zero;
+            _animator.SetTrigger(Almost);
             DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.BLUE_DEAD, true, () =>
             {
+                _animator.SetTrigger(Die);
                 TimelineManager.Manager.Play();
             });
         }

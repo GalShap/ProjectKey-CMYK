@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour, IDamageable
 {
@@ -14,16 +12,12 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     
     [SerializeField] private SpriteRenderer enemySpriteRenderer;
 
-    [SerializeField] [CanBeNull] private GameObject lifeBar;
-
     [Tooltip("How much time the animation takes for every blip?")] 
     [SerializeField] private float timeToAnimate = 0.1f;
 
     [SerializeField] private float bounce = 100f;
 
     [SerializeField] private float _timeToBounce = 0.2f;
-
-    [SerializeField] private float _timeToFillLife = 0.2f;
     
     #endregion
 
@@ -33,30 +27,21 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     private bool _isBouncing = false;
 
-    [CanBeNull] private Slider _lifeFill;
-
     #region Constants
     
-    private const int MaxHealth = 100;
+    private const int MAX_HEALTH = 100;
 
-    private const int MinHealth = 0;
+    private const int MIN_HEALTH = 0;
 
-    private const int MaxAlpha = 1;
+    private const int MAX_ALPHA = 1;
 
-    private const int MinAlpha = 0;
+    private const int MIN_ALPHA = 0;
     
     #endregion
-    
-    
+
     private void Start()
     {
         _enemyRigidBody = gameObject.GetComponent<Rigidbody2D>();
-        if (lifeBar != null)
-        {
-            _lifeFill = lifeBar.GetComponent<Slider>();
-            if (_lifeFill != null) _lifeFill.maxValue = health;
-           
-        }
     }
 
     private void Update()
@@ -73,19 +58,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         }
     }
 
-    private IEnumerator EnemyLife(int start, int end)
-    {
-        float time = 0f;
-
-        while (time <= _timeToFillLife)
-        {
-             _lifeFill.value = Mathf.Lerp(start, end, time / _timeToFillLife);
-            yield return null;
-        }
-
-        _lifeFill.value = end;
-    }
-
     private IEnumerator DamageFlashAnimation(int count)
     {   
         
@@ -98,49 +70,52 @@ public class EnemyHealth : MonoBehaviour, IDamageable
             elapsedTimeMin = 0;
             
             while (elapsedTimeMin < timeToAnimate)
-            {
-                alpha.a =  Mathf.Lerp(MaxAlpha, MinAlpha, (elapsedTimeMin / timeToAnimate));
+            {   
+      
+                alpha.a =  Mathf.Lerp(MAX_ALPHA, MIN_ALPHA, (elapsedTimeMin / timeToAnimate));
                 enemySpriteRenderer.color = alpha;
                 elapsedTimeMin += Time.deltaTime;
                 yield return null;
             }
 
-            alpha.a = MinAlpha;
+            alpha.a = MIN_ALPHA;
             
             while (elapsedTimeMax < timeToAnimate)
             {   
          
-                alpha.a =  Mathf.Lerp(MinAlpha, MaxAlpha, (elapsedTimeMax / timeToAnimate));
+                alpha.a =  Mathf.Lerp(MIN_ALPHA, MAX_ALPHA, (elapsedTimeMax / timeToAnimate));
                 enemySpriteRenderer.color = alpha;
                 elapsedTimeMax += Time.deltaTime;
                 yield return null;
             }
 
-            alpha.a = MaxAlpha;
+            alpha.a = MAX_ALPHA;
         }
-        
-        
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("AttackCollider"))
         {
-            Damage(50);
-           
-            
-            if (!_isBouncing)
-            {
-                _isBouncing = true;
-                EnemyKickBack(other);
-            }
+            Hit(other.gameObject);
         }
     }
 
-    private void EnemyKickBack(Collider2D other)
+    public void Hit(GameObject hitter)
     {
-        Rigidbody2D _playerRigidBody = other.gameObject.GetComponent<Rigidbody2D>();
+        Damage(50);
+            
+        if (!_isBouncing)
+        {
+            _isBouncing = true;
+            EnemyKickBack(hitter);
+        }
+    }
+
+    private void EnemyKickBack(GameObject other)
+    {
+        Rigidbody2D _playerRigidBody = other.GetComponent<Rigidbody2D>();
         if (_playerRigidBody == null)
-            _playerRigidBody = other.gameObject.GetComponentInParent<Rigidbody2D>();
+            _playerRigidBody = other.GetComponentInParent<Rigidbody2D>();
         
        
         _playerRigidBody.AddForce((_enemyRigidBody.position - _playerRigidBody.position).normalized * bounce,
@@ -152,35 +127,29 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     public void Damage(int amount)
     {
         StartCoroutine(DamageFlashAnimation(1));
-        int curHealth = health;
-        int newHealth = health - amount;
-        
-        if (lifeBar != null) StartCoroutine(EnemyLife(curHealth, newHealth));
-        health = newHealth;
-        if (health < MinHealth)
+        health -= amount;
+        if (health < MIN_HEALTH)
         {
-            health = MinHealth;
+            health = MIN_HEALTH;
             Dead();
         }
-        
-        
     }
 
     public void Heal(int amount)
     {
         health += amount;
-        if (health > MaxHealth)
-            health = MaxHealth;
+        if (health > MAX_HEALTH)
+            health = MAX_HEALTH;
     }
 
     public void SetHealth(int amount)
     {
         health = amount;
-        if (health > MaxHealth)
-            health = MaxHealth;
+        if (health > MAX_HEALTH)
+            health = MAX_HEALTH;
         
-        else if (health < MinHealth)
-            health = MinHealth;
+        else if (health < MIN_HEALTH)
+            health = MIN_HEALTH;
     }
 
     public int GetHealth()
@@ -191,11 +160,5 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     public void Dead()
     {
         gameObject.SetActive(false);
-    }
-
-    public void InitLifeBar()
-    {
-        lifeBar.SetActive(true);
-        StartCoroutine(EnemyLife(0, health));
     }
 }

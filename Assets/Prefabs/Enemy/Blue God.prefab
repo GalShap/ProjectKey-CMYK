@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4415069054189709994}
   - component: {fileID: 1405487004920875428}
   m_Layer: 10
-  m_Name: Blue God
+  m_Name: Blue God animated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,12 +71,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: bd3cb4af8406d4436a2ae8c2aafe1f8d, type: 3}
-  m_Color: {r: 0, g: 0.16692568, b: 0.9056604, a: 1}
+  m_Sprite: {fileID: 4275843420565566752, guid: 470a25abb3c089d499a2a5bb7ebdd2c0, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1.56, y: 2.38}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -111,7 +111,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8506370848499278281}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.489075, y: -2.0908964, z: 0}
+  m_LocalPosition: {x: -8.31, y: -2.090896, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4415069054189709994}
@@ -165,7 +165,7 @@ Animator:
   m_GameObject: {fileID: 8506370848499278281}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c00a3c5907375c4285b955f0aa05828, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
