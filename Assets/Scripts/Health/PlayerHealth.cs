@@ -90,6 +90,13 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     void OnCollisionEnter2D(Collision2D other)
     {   
+        
+        // it was a jump attack succka, no life lost! 
+        if (PlayerController.attacking && !PlayerController.onGround)
+        {   
+            return;
+        }
+
      
         if (EnemyCollision(other.gameObject) && !_hit)
         {
@@ -121,7 +128,14 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     }
 
     private void OnTriggerEnter2D(Collider2D other)
-    {
+    {   
+        
+        // it was a jump attack succka, no life lost! 
+        if (PlayerController.attacking && !PlayerController.onGround)
+        {   
+            return;
+        }
+        
         if (EnemyCollision(other.gameObject))
         {
             EnemyObject enemy = other.gameObject.GetComponent<EnemyObject>();
@@ -153,6 +167,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     #region Private Methods    
     private bool EnemyCollision(GameObject other)
     {
+       
+
         if (other.CompareTag("Spikes"))
         {
             _lastCollision = (int) CollisionWith.Spikes;
@@ -174,7 +190,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     /// <param name="other">
     /// the collision with an enemy. 
     /// </param>
-    private void PlayerKickBack(GameObject other)
+    public void PlayerKickBack(GameObject other)
     {   
         
         Rigidbody2D enemyRigidBody = other.GetComponent<Rigidbody2D>();

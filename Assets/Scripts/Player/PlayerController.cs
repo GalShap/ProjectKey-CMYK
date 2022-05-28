@@ -45,7 +45,8 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _renderer;
     private Animator _animator;
     
-    private bool onGround;
+    public static bool onGround;
+    public static bool attacking = false; 
     private Vector2 movement;
     private float height;
 
@@ -100,6 +101,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+      
+        
         RaycastHit2D hitr;
         RaycastHit2D hitl;
         hitr = Physics2D.Raycast(
@@ -123,6 +126,8 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
+        
+        
 
        
         MoveCharacter(); 
@@ -166,10 +171,6 @@ public class PlayerController : MonoBehaviour
                 _rigidbody2D.velocity = new Vector2(sign * maxSpeed, _rigidbody2D.velocity.y);
             }
         }
-
-      
-
-        
     }
 
     private void Jump()
@@ -179,6 +180,7 @@ public class PlayerController : MonoBehaviour
         float y = (2 * jumpHeight) / jumpTime;
         _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, y);
         jumpTimer = 0;
+     
     }
 
     private void ModifyPhysics()
@@ -221,6 +223,7 @@ public class PlayerController : MonoBehaviour
     // }
     public void StartAttack()
     {
+       
         var dir = attackRange.transform.position - transform.position;
         var dir2 = new Vector2(dir.x, dir.y);
         // var size = new Vector2(Math.Abs(attackRange.transform.position.x - transform.position.x), attackRadius);
@@ -245,7 +248,8 @@ public class PlayerController : MonoBehaviour
     #region On Input
 
     public void onAttack(InputAction.CallbackContext context)
-    {
+    {   
+        attacking = true;
         if (TimelineManager.Manager.IsPlaying)
             return;
         
@@ -422,6 +426,9 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+
+    
+   
     public static void SetKickBack(Vector2 kickback)
     {
         kickbackVector2 = kickback;
