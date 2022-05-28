@@ -124,9 +124,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         EnemyObject enemy = GetComponent<EnemyObject>();
         enemy.SetKickBack(newKick);
         
-        //_enemyRigidBody.AddForce((_enemyRigidBody.position - playerRigidBody.position).normalized * bounce,
-           // ForceMode2D.Impulse);
-
+        
         _isBouncing = false;
     }
 
