@@ -13,10 +13,10 @@ public class MagentaGod : EnemyObject
     private float timer = 0;
     private bool[] flag = {false, false, false, false};
 
-    [FormerlySerializedAs("m_Projectile")]
-    public GameObject b_Projectile; // this is a reference to your projectile prefab
+    // [FormerlySerializedAs("m_Projectile")]
+    [SerializeField] public GameObject b_Projectile; // this is a reference to your projectile prefab
 
-    public GameObject r_Projectile; // this is a reference to your projectile prefab
+    [SerializeField] public GameObject r_Projectile; // this is a reference to your projectile prefab
 
     [SerializeField]
     private Transform[] m_SpawnTransform; // this is a reference to the transform where the prefab will spawn
@@ -37,8 +37,8 @@ public class MagentaGod : EnemyObject
         rb = GetComponent<Rigidbody2D>();
         _renderer = GetComponentInChildren<SpriteRenderer>();
         collisionOffset = Vector2.right * (_renderer.sprite.rect.width / _renderer.sprite.pixelsPerUnit) / 2;
-        platformLeft.SetActive(false);
-        // platformRight.SetActive(false);
+        // platformLeft.SetActive(false);
+        platformRight.SetActive(false);
     }
 
     public void Shoot()
@@ -90,17 +90,17 @@ public class MagentaGod : EnemyObject
         var animator = gameObject.GetComponent<Animator>();
         var hl = animator.GetComponent<EnemyHealth>();
         var hp = hl.GetHealth();
-        if (directionAcordingToHp(hp, 400, 0, "right", animator)) return;
-        if (directionAcordingToHp(hp, 300, 1, "left", animator)) return;
-        if (directionAcordingToHp(hp, 200, 2, "right", animator)) return;
-        else directionAcordingToHp(hp, 100, 3, "left", animator);
+        if (directionAcordingToHp(hp, 400, 0, "left", animator)) return;
+        if (directionAcordingToHp(hp, 300, 1, "right", animator)) return;
+        if (directionAcordingToHp(hp, 200, 2, "left", animator)) return;
+        else directionAcordingToHp(hp, 100, 3, "right", animator);
     }
 
     private bool directionAcordingToHp(float hp, float min, int index, string dir, Animator animator)
     {
         if (hp <= min && !flag[index])
         {
-            rb.AddForce(Vector2.up * 3);
+            // rb.AddForce(Vector2.up * 3);
             animator.SetTrigger(dir);
             flag[index] = true;
             return true;

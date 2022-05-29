@@ -143,20 +143,24 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         
         if (EnemyCollision(other.gameObject))
         {
-            EnemyObject enemy = other.gameObject.GetComponent<EnemyObject>();
-            if (enemy == null)
-            {
-                enemy = other.gameObject.GetComponentInChildren<EnemyObject>();
-            }
-            
-            if(enemy == null)
-                return;
-
             int damage = 1;
-            if (enemy.IsOneHit)
+            if (other.gameObject.CompareTag("Monster"))
             {
-                damage = lives;
+                EnemyObject enemy = other.gameObject.GetComponent<EnemyObject>();
+                if (enemy == null)
+                {
+                    enemy = other.gameObject.GetComponentInChildren<EnemyObject>();
+                }
+            
+                if(enemy == null)
+                    return;
+                
+                if (enemy.IsOneHit)
+                {
+                    damage = lives;
+                }
             }
+
             Damage(damage);
             if (!_isBouncing)
             {

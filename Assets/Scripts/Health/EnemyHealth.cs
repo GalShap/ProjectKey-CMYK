@@ -112,7 +112,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         }
     }
 
-    public void Hit(GameObject hitter)
+    public virtual void Hit(GameObject hitter)
     {
         Damage(50);
             
@@ -181,7 +181,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         return health;
     }
 
-    public void Dead()
+    public virtual void Dead()
     {
         gameObject.SetActive(false);
     }

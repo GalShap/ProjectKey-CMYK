@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class ShootBlueLine : StateMachineBehaviour
+public class BossDies : StateMachineBehaviour
 {
     private GameObject player;
     private Rigidbody2D rb;
     private MagentaGod red;
-    [SerializeField] private float timerToShoot = 1;
+    [SerializeField] private float timerToDie = 2;
     private float timerCoolDown = 0;
-    private float timerShoot = 0;
+    private float timeToDie = 0;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -22,12 +23,12 @@ public class ShootBlueLine : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        timerShoot += Time.deltaTime;
-        if (timerShoot >= timerToShoot)
+        timeToDie += Time.deltaTime;
+        if (timeToDie >= timerToDie)
         {
             red.ShootBlue();
-            timerShoot = 0;
-            animator.SetTrigger("coolDown");
+            timeToDie = 0;
+           red.gameObject.SetActive(false);
         }
         
     }
