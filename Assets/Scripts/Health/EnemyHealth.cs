@@ -104,6 +104,14 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Spikes"))
+        {
+            Damage(MAX_HEALTH);
+        }
+    }
+
     public void Hit(GameObject hitter)
     {
         Damage(50);
@@ -122,7 +130,16 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         if (playerRigidBody == null)
             playerRigidBody = other.GetComponentInParent<Rigidbody2D>();
 
-        var newKick = (_enemyRigidBody.position - playerRigidBody.position).normalized * bounce;
+        var newKick = Vector2.right;
+        if (playerRigidBody.position.x < _enemyRigidBody.position.x)
+        {
+            newKick *= bounce;
+        }
+        else
+        {
+            newKick *= -bounce;
+        }
+        // var newKick = (_enemyRigidBody.position - playerRigidBody.position).normalized * bounce;
         EnemyObject enemy = GetComponent<EnemyObject>();
         enemy.SetKickBack(newKick);
         

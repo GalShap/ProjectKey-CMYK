@@ -32,7 +32,11 @@ public abstract class EnemyObject : MonoBehaviour, ColorChangeListener
         return false;
     }
 
-    public bool IsOneHit => oneHit;
+    public bool IsOneHit
+    {
+        get => oneHit;
+        set => oneHit = value;
+    }
 
 
     public virtual void OnColorChange(ColorManager.ColorLayer layer)

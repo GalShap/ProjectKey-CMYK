@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
     public static bool onGround;
     public static bool jumpAttacking = false; 
     private Vector2 movement;
-    private float height;
+    private Vector2 height;
 
     private static Vector2? kickbackVector2 = null;
     
@@ -83,17 +83,17 @@ public class PlayerController : MonoBehaviour
             attackCounter -= Time.deltaTime;
         }
         
-        height = _renderer.sprite.rect.height / _renderer.sprite.pixelsPerUnit + 0.5f;
+        height = Vector2.up * _renderer.sprite.rect.height / _renderer.sprite.pixelsPerUnit;
         collisionOffset = Vector2.right * ((_renderer.sprite.rect.width/_renderer.sprite.pixelsPerUnit) / 2 - collisionEps);
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(_rigidbody2D.position + collisionOffset,
-            Vector2.down*height * 0.5f);
-        Gizmos.DrawRay(_rigidbody2D.position - collisionOffset,
-            Vector2.down*height * 0.5f);
+        Gizmos.DrawRay(_rigidbody2D.position + collisionOffset - height*0.5f,
+            Vector2.down*0.25f);
+        Gizmos.DrawRay(_rigidbody2D.position - collisionOffset - height*0.5f,
+            Vector2.down*0.25f);
         Gizmos.DrawWireSphere(attackRange.transform.position, attackRadius);
     }
 
@@ -104,15 +104,15 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D hitr;
         RaycastHit2D hitl;
         hitr = Physics2D.Raycast(
-            _rigidbody2D.position + collisionOffset,
+            _rigidbody2D.position + collisionOffset - height*0.5f,
             Vector2.down,
-            height * 0.5f,
+            0.25f,
             ColorManager.GroundLayers); 
                     
         hitl = Physics2D.Raycast(
-            _rigidbody2D.position - collisionOffset,
+            _rigidbody2D.position - collisionOffset - height*0.5f,
             Vector2.down,
-            height * 0.5f,
+            0.25f,
             ColorManager.GroundLayers);
         
         bool checkGround = hitl || hitr;
