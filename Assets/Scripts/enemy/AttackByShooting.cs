@@ -45,8 +45,10 @@ public class AttackByShooting : StateMachineBehaviour
         }
         if (timerCoolDown >= timerCounter)
         {
+            animator.SetTrigger("rel");
             timerCoolDown = 0;
             animator.SetTrigger("coolDown");
+            
         }
         
 

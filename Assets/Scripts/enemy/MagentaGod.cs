@@ -37,8 +37,8 @@ public class MagentaGod : EnemyObject
         rb = GetComponent<Rigidbody2D>();
         _renderer = GetComponentInChildren<SpriteRenderer>();
         collisionOffset = Vector2.right * (_renderer.sprite.rect.width / _renderer.sprite.pixelsPerUnit) / 2;
-        platformLeft.SetActive(false);
-        // platformRight.SetActive(false);
+        // platformLeft.SetActive(false);
+        platformRight.SetActive(false);
     }
 
     public void Shoot()
@@ -88,19 +88,19 @@ public class MagentaGod : EnemyObject
     public void healtChange()
     {
         var animator = gameObject.GetComponent<Animator>();
-        var hl = animator.GetComponent<RedBossHealth>();
+        var hl = animator.GetComponent<EnemyHealth>();
         var hp = hl.GetHealth();
-        if (directionAcordingToHp(hp, 400, 0, "right", animator)) return;
-        if (directionAcordingToHp(hp, 300, 1, "left", animator)) return;
-        if (directionAcordingToHp(hp, 200, 2, "right", animator)) return;
-        else directionAcordingToHp(hp, 100, 3, "left", animator);
+        if (directionAcordingToHp(hp, 400, 0, "left", animator)) return;
+        if (directionAcordingToHp(hp, 300, 1, "right", animator)) return;
+        if (directionAcordingToHp(hp, 200, 2, "left", animator)) return;
+        else directionAcordingToHp(hp, 100, 3, "right", animator);
     }
 
     private bool directionAcordingToHp(float hp, float min, int index, string dir, Animator animator)
     {
         if (hp <= min && !flag[index])
         {
-            rb.AddForce(Vector2.up * 3);
+            // rb.AddForce(Vector2.up * 3);
             animator.SetTrigger(dir);
             flag[index] = true;
             return true;
