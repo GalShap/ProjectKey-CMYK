@@ -21,7 +21,8 @@ public class bullet : MonoBehaviour
     /// </summary>
     private Rigidbody2D m_Rigidbody;
 
-    [SerializeField]private Vector2 vec2;
+    // [SerializeField]private Vector2 vec2;
+    private Vector2 vec2;
 
     /// <summary>
     /// Message that is called when the script instance is being loaded
