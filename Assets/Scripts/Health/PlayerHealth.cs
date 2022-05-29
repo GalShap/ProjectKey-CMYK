@@ -92,12 +92,17 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {   
         
         // it was a jump attack succka, no life lost! 
-        if (PlayerController.attacking && !PlayerController.onGround)
+        if (PlayerController.jumpAttacking && EnemyCollision(other.gameObject))
         {   
+            PlayerKickBack(Vector2.up*2);
+            if (!other.gameObject.CompareTag("Spikes"))
+            {
+                EnemyHealth enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
+                enemyHealth.Hit(gameObject);
+            }
             return;
         }
 
-     
         if (EnemyCollision(other.gameObject) && !_hit)
         {
             _hit = true;
@@ -131,7 +136,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {   
         
         // it was a jump attack succka, no life lost! 
-        if (PlayerController.attacking && !PlayerController.onGround)
+        if (PlayerController.jumpAttacking && !PlayerController.onGround)
         {   
             return;
         }
@@ -202,6 +207,13 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         _isBouncing = false;
     }
     
+    public void PlayerKickBack(Vector2 dir)
+    {
+        PlayerController.SetKickBack((dir * bounce));
+       
+        _isBouncing = false;
+    }
+
     #endregion
     
     #region Public Methods

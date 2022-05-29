@@ -8,12 +8,11 @@ public class ChildScript : MonoBehaviour
 
     public void Attack()
     {
-        print("attack");
         parent.StartAttack();
     }
 
-    public void FinishAttack()
-    {
-        PlayerController.attacking = false;
-    }
+    // public void FinishAttack()
+    // {
+    //     PlayerController.jumpAttacking = false;
+    // }
 }

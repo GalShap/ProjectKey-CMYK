@@ -97,7 +97,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {   
         Debug.Log("triggering!");
         
-        if (other.gameObject.CompareTag("Player") && !PlayerController.onGround && PlayerController.attacking) {   
+        if (other.gameObject.CompareTag("Player") && !PlayerController.onGround && PlayerController.jumpAttacking) {   
          
             Hit(other.gameObject);
             other.gameObject.GetComponent<PlayerHealth>().PlayerKickBack(this.gameObject);

@@ -29,9 +29,7 @@ public class PlayerController : MonoBehaviour
     [Header("Attack")] 
     [SerializeField] private float attackTimer;
     [SerializeField] private GameObject attackRange;
-
     [SerializeField] private float attackRadius = 0.5f;
-    // [SerializeField] private Collider2D attackCollider;
     private float attackCounter = 0;
 
     [Header("Other")]
@@ -46,7 +44,7 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
     
     public static bool onGround;
-    public static bool attacking = false; 
+    public static bool jumpAttacking = false; 
     private Vector2 movement;
     private float height;
 
@@ -85,7 +83,7 @@ public class PlayerController : MonoBehaviour
             attackCounter -= Time.deltaTime;
         }
         
-        height = _renderer.sprite.rect.height / _renderer.sprite.pixelsPerUnit + 0.2f;
+        height = _renderer.sprite.rect.height / _renderer.sprite.pixelsPerUnit + 0.5f;
         collisionOffset = Vector2.right * ((_renderer.sprite.rect.width/_renderer.sprite.pixelsPerUnit) / 2 - collisionEps);
     }
 
@@ -118,10 +116,21 @@ public class PlayerController : MonoBehaviour
             ColorManager.GroundLayers);
         
         bool checkGround = hitl || hitr;
-        if(!onGround && checkGround)
-            _animator.SetBool(Jump1, false);
-        
+        if (!onGround && checkGround)
+        {
+            bool hitMonster =
+                hitl && (hitl.collider.CompareTag("Monster") || hitl.collider.gameObject.CompareTag("Projectile")) ||
+                hitr && (hitr.collider.CompareTag("Monster") || hitr.collider.gameObject.CompareTag("Projectile"));
+            if (!hitMonster)
+            {
+                _animator.SetBool(Jump1, false);
+                if (jumpAttacking) jumpAttacking = false;   
+            }
+        }
+
         onGround = checkGround;
+        if(jumpAttacking && onGround)
+            print("bounce");
         if (jumpTimer > Time.time && onGround)
         {
             Jump();
@@ -133,7 +142,7 @@ public class PlayerController : MonoBehaviour
         MoveCharacter(); 
         ModifyPhysics();
     }
-    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Respawn"))
@@ -223,17 +232,14 @@ public class PlayerController : MonoBehaviour
     // }
     public void StartAttack()
     {
-       
         var dir = attackRange.transform.position - transform.position;
         var dir2 = new Vector2(dir.x, dir.y);
-        // var size = new Vector2(Math.Abs(attackRange.transform.position.x - transform.position.x), attackRadius);
-        // var hits = Physics2D.CapsuleCastAll(transform.position, size, CapsuleDirection2D.Horizontal, 0, dir2, size.x);
 
         var hits = Physics2D.CircleCastAll(attackRange.transform.position, attackRadius, dir2);
         foreach (var h in hits)
         {
             EnemyHealth enemy = h.collider.GetComponent<EnemyHealth>();
-            if (enemy == null) return;
+            if (enemy == null) continue;
             enemy.Hit(gameObject);
         }
     }
@@ -248,8 +254,7 @@ public class PlayerController : MonoBehaviour
     #region On Input
 
     public void onAttack(InputAction.CallbackContext context)
-    {   
-        attacking = true;
+    {
         if (TimelineManager.Manager.IsPlaying)
             return;
         
@@ -263,12 +268,13 @@ public class PlayerController : MonoBehaviour
                 }
                 if (attackCounter <= 0)
                 {
+                   if(jumpAttacking) return;
                    
                     _animator.SetTrigger(Attack);
-                    // _rigidbody2D.velocity = Vector2.zero;
-                    // attackCollider.gameObject.SetActive(true);
                     attackCounter = attackTimer;
-                    
+                    if (!onGround)
+                        jumpAttacking = true;
+
                 }
                 break;
             case InputActionPhase.Canceled:
