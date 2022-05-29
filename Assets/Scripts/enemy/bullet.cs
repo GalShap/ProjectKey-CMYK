@@ -46,7 +46,7 @@ public class bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("Projectile")) return;
+        if(other.gameObject.CompareTag("Projectile") || other.gameObject.CompareTag("Monster")) return;
         Destroy(gameObject);
     }
 }
