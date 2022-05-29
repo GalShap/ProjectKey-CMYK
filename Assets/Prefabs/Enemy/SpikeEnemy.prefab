@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: -736992930557887591}
   - component: {fileID: -5228919873361685709}
   - component: {fileID: 4546519656561499537}
-  - component: {fileID: -4368005733874499527}
   - component: {fileID: -163801283637082578}
+  - component: {fileID: 9031972696612955502}
   m_Layer: 12
   m_Name: SpikeEnemy
   m_TagString: Monster
@@ -57,7 +57,7 @@ MonoBehaviour:
   - {fileID: 0}
   counter: 0
   monster: {fileID: 383166404756698402}
-  spikes: {fileID: 3212755522273711729, guid: 5ce85bf2230f78b4f88770ed8f48e9db, type: 3}
+  spikes: {fileID: 0}
 --- !u!50 &-736992930557887591
 Rigidbody2D:
   serializedVersion: 4
@@ -93,9 +93,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layer:
     serializedVersion: 2
-    m_Bits: 1024
-  neutralSprite: {fileID: -4535217547422562818, guid: 0581e9e94a6a1494a832a4d22b139fc6, type: 3}
-  whiteSprite: {fileID: -7373728255155398809, guid: 0581e9e94a6a1494a832a4d22b139fc6, type: 3}
+    m_Bits: 512
+  neutralSprite: {fileID: 6481584649568848959, guid: fc22fcd9f3dd2344ab9d3a77c09ac852, type: 3}
+  whiteSprite: {fileID: 6481584649568848959, guid: fc22fcd9f3dd2344ab9d3a77c09ac852, type: 3}
 --- !u!61 &4546519656561499537
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -109,7 +109,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.071998596, y: 0.042764604}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -120,20 +120,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.6416667, y: 1.7583333}
+  m_Size: {x: 1.1502228, y: 1.8351763}
   m_EdgeRadius: 0
---- !u!114 &-4368005733874499527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 383166404756698402}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 182fe32eb1a94c6479b2011dfd10bcde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-163801283637082578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,10 +135,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  enemySpriteRenderer: {fileID: 0}
+  enemySpriteRenderer: {fileID: 3043365054859347526}
   timeToAnimate: 0.05
   bounce: 50
   _timeToBounce: 0.2
+--- !u!95 &9031972696612955502
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383166404756698402}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3f3c233ce7a132c4e844566c8f966747, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1193443174369208657
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,7 +169,6 @@ GameObject:
   - component: {fileID: 612879596551047492}
   - component: {fileID: 3043365054859347526}
   - component: {fileID: 8050251305156101123}
-  - component: {fileID: 6089472588785118534}
   m_Layer: 12
   m_Name: Sprite
   m_TagString: Monster
@@ -224,7 +230,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7373728255155398809, guid: 0581e9e94a6a1494a832a4d22b139fc6, type: 3}
+  m_Sprite: {fileID: 6481584649568848959, guid: fc22fcd9f3dd2344ab9d3a77c09ac852, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -247,22 +253,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 182fe32eb1a94c6479b2011dfd10bcde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &6089472588785118534
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1193443174369208657}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0

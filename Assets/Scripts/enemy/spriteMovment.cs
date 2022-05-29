@@ -12,6 +12,8 @@ public class spriteMovment : MonoBehaviour
     {
         ren = gameObject.GetComponentInChildren<SpriteRenderer>();
         rig = gameObject.GetComponent<Rigidbody2D>();
+        if (rig == null)
+            rig = GetComponentInParent<Rigidbody2D>();
     }
 
     // Update is called once per frame
