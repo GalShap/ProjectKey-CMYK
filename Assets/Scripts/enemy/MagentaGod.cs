@@ -13,10 +13,10 @@ public class MagentaGod : EnemyObject
     private float timer = 0;
     private bool[] flag = {false, false, false, false};
 
-    [FormerlySerializedAs("m_Projectile")]
-    public GameObject b_Projectile; // this is a reference to your projectile prefab
+    // [FormerlySerializedAs("m_Projectile")]
+    [SerializeField] public GameObject b_Projectile; // this is a reference to your projectile prefab
 
-    public GameObject r_Projectile; // this is a reference to your projectile prefab
+    [SerializeField] public GameObject r_Projectile; // this is a reference to your projectile prefab
 
     [SerializeField]
     private Transform[] m_SpawnTransform; // this is a reference to the transform where the prefab will spawn
