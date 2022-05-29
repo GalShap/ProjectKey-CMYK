@@ -2229,17 +2229,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 962da75b0ea76864fa449b19040b89f7, type: 3}
---- !u!114 &74149171 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4976430232691957203, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
-  m_PrefabInstance: {fileID: 375241334}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0ad92a2c7856844082a0da2fd107ef6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &76856733
 GameObject:
   m_ObjectHideFlags: 0
@@ -10628,34 +10617,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameUI
       objectReference: {fileID: 0}
-    - target: {fileID: 4976430232691957203, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
-      propertyPath: hasDialogue
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4976430232691957203, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
-      propertyPath: SpeakersSprites.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: 0bd78c4fb5b274f4488e8a2e39cef1b5, type: 3}
-    - target: {fileID: 4976430232691957203, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
-      propertyPath: SpeakersSprites.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: 9b30df24e37073944bfd478fcf69873f, type: 3}
-    - target: {fileID: 4976430232828466528, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4976430232828466528, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4976430232828466528, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4976430232828466542, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
 --- !u!1 &375888634
@@ -18343,7 +18304,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &608760275
 Transform:
   m_ObjectHideFlags: 0
@@ -31852,7 +31813,7 @@ PrefabInstance:
     - target: {fileID: 8863397447226026587, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
       propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 74149171}
+      objectReference: {fileID: 0}
     - target: {fileID: 8863397447226026587, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
