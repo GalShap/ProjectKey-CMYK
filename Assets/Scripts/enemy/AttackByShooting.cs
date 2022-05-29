@@ -40,7 +40,7 @@ public class AttackByShooting : StateMachineBehaviour
             {
                 red.Shoot();
             }
-            animator.SetTrigger(k == 1 ? "blueWall" : "shoot");
+            // animator.SetTrigger(k == 1 ? "blueWall" : "shoot");
             
         }
         if (timerCoolDown >= timerCounter)

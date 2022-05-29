@@ -88,7 +88,7 @@ public class MagentaGod : EnemyObject
     public void healtChange()
     {
         var animator = gameObject.GetComponent<Animator>();
-        var hl = animator.GetComponent<EnemyHealth>();
+        var hl = animator.GetComponent<RedBossHealth>();
         var hp = hl.GetHealth();
         if (directionAcordingToHp(hp, 400, 0, "right", animator)) return;
         if (directionAcordingToHp(hp, 300, 1, "left", animator)) return;
