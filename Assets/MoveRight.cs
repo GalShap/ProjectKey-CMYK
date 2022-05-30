@@ -19,23 +19,23 @@ public class MoveRight : StateMachineBehaviour
         red = animator.GetComponent<MagentaGod>();
         rb = animator.GetComponent<Rigidbody2D>();
         right = red.right;
-        red.platformLeft.SetActive(true);
-        red.platformRight.SetActive(false);
+        // red.platformLeft.SetActive(true);
+        // red.platformRight.SetActive(false);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         
-        if (timer >= timerCounter)
-        {
-            red.platformRight.SetActive(false);
-            unactive = true;
-        }
-        else if(!unactive)
-        {
-            timer += Time.deltaTime;
-        }
+        // if (timer >= timerCounter)
+        // {
+        //     red.platformRight.SetActive(false);
+        //     unactive = true;
+        // }
+        // else if(!unactive)
+        // {
+        //     timer += Time.deltaTime;
+        // }
         Vector2 target = new Vector2(right.transform.position.x, rb.transform.position.y);
         Vector2 newPos = Vector2.MoveTowards(rb.position, target, red.speed * Time.fixedDeltaTime);
         rb.MovePosition(newPos);
