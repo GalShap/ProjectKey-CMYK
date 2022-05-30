@@ -28,9 +28,6 @@ public class RedStand : StateMachineBehaviour
     {
         red.LookAtPlayer();
         red.healtChange();
-        // Vector2 target = new Vector2(player.transform.position.x, rb.transform.position.y);
-        // Vector2 newPos = Vector2.MoveTowards(rb.position, target, red.speed * Time.fixedDeltaTime);
-        // rb.MovePosition(newPos);
         timer += Time.deltaTime;
         if (timer >= timerCounter)
         {
