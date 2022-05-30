@@ -15,8 +15,9 @@ public class BossHelath : EnemyHealth
 
    public override void Hit(GameObject hitter)
    {
-      base.Hit(hitter);
+      
       Animator anim = gameObject.GetComponent<Animator>();
       anim.SetTrigger("hit");
+      base.Hit(hitter);
    }
 }

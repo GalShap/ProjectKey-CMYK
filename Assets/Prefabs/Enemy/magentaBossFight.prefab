@@ -687,7 +687,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7042816991617788079, guid: ae90285e97a14b8479d003b533716d87, type: 3}
   m_PrefabInstance: {fileID: 5291130013162976107}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1439621540196333397
+--- !u!212 &1939188254657561082 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6018145867276874385, guid: ae90285e97a14b8479d003b533716d87, type: 3}
+  m_PrefabInstance: {fileID: 5291130013162976107}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6222404181345763824
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -696,13 +701,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6792033164535016590}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cb8da92eff22fe499a09c1cc47a39fd, type: 3}
+  m_Script: {fileID: 11500000, guid: eb502030d9eacbe458e9020583910d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 500
-  enemySpriteRenderer: {fileID: 0}
-  timeToAnimate: 0.1
-  bounce: 100
+  health: 600
+  enemySpriteRenderer: {fileID: 1939188254657561082}
+  timeToAnimate: 0.05
+  bounce: 50
   _timeToBounce: 0.2
 --- !u!1001 &7884463519382442629
 PrefabInstance:
