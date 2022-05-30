@@ -37,7 +37,7 @@ public class MagentaGod : EnemyObject
         rb = GetComponent<Rigidbody2D>();
         _renderer = GetComponentInChildren<SpriteRenderer>();
         collisionOffset = Vector2.right * (_renderer.sprite.rect.width / _renderer.sprite.pixelsPerUnit) / 2;
-        // platformLeft.SetActive(false);
+        platformLeft.SetActive(true);
         platformRight.SetActive(false);
     }
 
@@ -108,4 +108,18 @@ public class MagentaGod : EnemyObject
 
         return false;
     }
+
+    public void resetBoss()
+    {
+        var animator = gameObject.GetComponent<Animator>();
+        var hl = animator.GetComponent<EnemyHealth>();
+        hl.SetHealth(600);
+        animator.SetTrigger("coolDown");
+    }
+
+    public GameObject getPlayer()
+    {
+        return player;
+    }
+
 }

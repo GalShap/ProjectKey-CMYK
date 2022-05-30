@@ -19,6 +19,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     [SerializeField] private float _timeToBounce = 0.2f;
     
+    [SerializeField] private int MAX_HEALTH = 100;
     #endregion
     
     
@@ -30,7 +31,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     #region Constants
     
-    private const int MAX_HEALTH = 100;
+    // private const int MAX_HEALTH = 100;
 
     private const int MIN_HEALTH = 0;
 

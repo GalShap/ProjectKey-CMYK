@@ -95,10 +95,15 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.08}
-      - {x: -0.076084524, y: 0.024721358}
-      - {x: -0.047022812, y: -0.06472136}
-      - {x: 0.047022827, y: -0.06472135}
+    - - {x: -0.020931095, y: 0.06912628}
+      - {x: -0.37781253, y: 0.06345636}
+      - {x: -0.3671158, y: -0.082588606}
+      - {x: -0.29476535, y: -0.088635445}
+      - {x: -0.24084674, y: -0.076764286}
+      - {x: -0.117788404, y: -0.08861679}
+      - {x: 0.007488342, y: -0.049969077}
+      - {x: 0.2621775, y: -0.044653296}
+      - {x: 0.38754225, y: -0.005341677}
       - {x: 0.07608452, y: 0.02472137}
 --- !u!114 &8121963082488967721
 MonoBehaviour:
@@ -115,8 +120,8 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 512
-  neutralSprite: {fileID: 911881859052452035, guid: 0581e9e94a6a1494a832a4d22b139fc6, type: 3}
-  whiteSprite: {fileID: 911881859052452035, guid: 0581e9e94a6a1494a832a4d22b139fc6, type: 3}
+  neutralSprite: {fileID: 1816934906942412506, guid: 939ffc2ddf75ef14f907cee27c59b766, type: 3}
+  whiteSprite: {fileID: 1816934906942412506, guid: 939ffc2ddf75ef14f907cee27c59b766, type: 3}
 --- !u!1 &8204736946810322405
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,13 +146,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8204736946810322405}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6693362778650942862}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &53544167054652933
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -188,7 +193,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 911881859052452035, guid: 0581e9e94a6a1494a832a4d22b139fc6, type: 3}
+  m_Sprite: {fileID: 1816934906942412506, guid: 939ffc2ddf75ef14f907cee27c59b766, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

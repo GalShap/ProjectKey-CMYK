@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4226242264222835948}
   - component: {fileID: 8658065400526030673}
   - component: {fileID: 4970745343604866679}
+  - component: {fileID: 6155893985789760707}
   m_Layer: 0
   m_Name: MagentaGod
   m_TagString: Untagged
@@ -101,6 +102,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6155893985789760707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670827335478452197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb502030d9eacbe458e9020583910d83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 600
+  enemySpriteRenderer: {fileID: 6018145867276874385}
+  timeToAnimate: 0.05
+  bounce: 50
+  _timeToBounce: 0.2
 --- !u!1 &2674541009851794003
 GameObject:
   m_ObjectHideFlags: 0

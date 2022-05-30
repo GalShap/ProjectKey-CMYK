@@ -117,7 +117,7 @@ AnimatorStateMachine:
     m_Position: {x: -270, y: -10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7675650569708941705}
-    m_Position: {x: 180, y: 180, z: 0}
+    m_Position: {x: 180, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2903248811022055745}
     m_Position: {x: 380, y: 150, z: 0}
@@ -135,7 +135,7 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: -20, y: -40, z: 0}
+  m_AnyStatePosition: {x: 70, y: -90, z: 0}
   m_EntryPosition: {x: -130, y: 190, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81cb18194f0738543a5896c9e1ec8d57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerToDie: 2
+  timerToDie: 1
 --- !u!1102 &-2903248811022055745
 AnimatorState:
   serializedVersion: 6
@@ -448,7 +448,7 @@ AnimatorController:
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 1
+    m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: dead
     m_Type: 9
@@ -475,6 +475,12 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: rel
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: reset
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
