@@ -47,6 +47,9 @@ TagManager:
   - name: BackGround
     uniqueID: 2740603471
     locked: 0
+  - name: BG Juice
+    uniqueID: 397886371
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

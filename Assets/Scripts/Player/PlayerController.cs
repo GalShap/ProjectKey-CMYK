@@ -238,6 +238,13 @@ public class PlayerController : MonoBehaviour
         var hits = Physics2D.CircleCastAll(attackRange.transform.position, attackRadius, dir2);
         foreach (var h in hits)
         {
+            BlueGod god = h.collider.GetComponent<BlueGod>();
+            if (god != null)
+            {
+                god.Hit();
+                return;
+            }
+            
             EnemyHealth enemy = h.collider.GetComponent<EnemyHealth>();
             if (enemy == null) continue;
             enemy.Hit(gameObject);

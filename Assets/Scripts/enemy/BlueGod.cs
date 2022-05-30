@@ -103,4 +103,26 @@ public class BlueGod : MonoBehaviour
             });
         }
     }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        godAnim.localPosition = Vector3.zero;
+        _animator.SetTrigger(Almost);
+        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.BLUE_DEAD, true, () =>
+        {
+            _animator.SetTrigger(Die);
+            TimelineManager.Manager.Play();
+        });
+    }
+
+    public void Hit()
+    {
+        godAnim.localPosition = Vector3.zero;
+        _animator.SetTrigger(Almost);
+        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.BLUE_DEAD, true, () =>
+        {
+            _animator.SetTrigger(Die);
+            TimelineManager.Manager.Play();
+        });
+    }
 }

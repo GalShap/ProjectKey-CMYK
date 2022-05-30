@@ -5950,7 +5950,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1554363825
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -22238,10 +22238,8 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: -8.497821, y: -5.5860424}
-      - {x: 12.5, y: -5.6178565}
-      - {x: 12.5, y: 9.517435}
-      - {x: 14.442611, y: 9.500098}
-      - {x: 14.444447, y: 16.208248}
+      - {x: 13.537659, y: -5.6178565}
+      - {x: 13.291491, y: 16.265896}
       - {x: -8.573549, y: 16.391277}
 --- !u!4 &1424393940
 Transform:
@@ -30245,6 +30243,7 @@ MonoBehaviour:
   timeToAnimate: 0.1
   bounce: 100
   _timeToBounce: 0.2
+  MAX_HEALTH: 100
 --- !u!1 &2007337481
 GameObject:
   m_ObjectHideFlags: 0

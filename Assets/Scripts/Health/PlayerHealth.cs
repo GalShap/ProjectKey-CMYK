@@ -91,9 +91,16 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     void OnCollisionEnter2D(Collision2D other)
     {   
         
-        // it was a jump attack succka, no life lost! 
         if (PlayerController.jumpAttacking && EnemyCollision(other.gameObject))
-        {   
+        {
+            BlueGod god = other.collider.GetComponent<BlueGod>();
+            if (god != null)
+            {
+                PlayerKickBack(Vector2.right);
+                god.Hit();
+                return;
+            }
+            
             PlayerKickBack(Vector2.up*2);
             if (!other.gameObject.CompareTag("Spikes"))
             {
