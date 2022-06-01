@@ -139,6 +139,9 @@ MonoBehaviour:
   timeToAnimate: 0.05
   bounce: 50
   _timeToBounce: 0.2
+  MAX_HEALTH: 100
+  _rigidbody2D: {fileID: -736992930557887591}
+  damagable: 1
 --- !u!95 &9031972696612955502
 Animator:
   serializedVersion: 3

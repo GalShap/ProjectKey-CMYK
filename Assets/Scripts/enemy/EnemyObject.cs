@@ -11,6 +11,7 @@ public abstract class EnemyObject : MonoBehaviour, ColorChangeListener
     protected bool grountRight;
     protected Vector2 collisionOffset;
     protected SpriteRenderer _renderer;
+    protected Animator _animator;
     protected bool colored;
     protected Vector2? KickBackVector;
  

@@ -46,6 +46,7 @@ public class spikeEnemy : PatrolEnemy
                 DisableSpikes();
                 _animator.SetTrigger(Reappear);
                 _animator.SetBool(Walking, true);
+                colored = false;
             }
             else
             {
@@ -74,5 +75,10 @@ public class spikeEnemy : PatrolEnemy
         gameObject.layer = originalLayer;
         // tag = "Monster";
         IsOneHit = false;
+    }
+
+    public void OnDeathEnd()
+    {
+        gameObject.SetActive(false);
     }
 }

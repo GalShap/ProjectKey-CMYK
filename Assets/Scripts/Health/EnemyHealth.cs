@@ -20,14 +20,20 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     [SerializeField] private float _timeToBounce = 0.2f;
     
     [SerializeField] private int MAX_HEALTH = 100;
+
+    [SerializeField] private Rigidbody2D _rigidbody2D;
     #endregion
-    
+
+    public bool damagable = true;
     
     private Rigidbody2D _enemyRigidBody;
+
+    private Animator _animator;
 
     private float _time = 0f;
 
     private bool _isBouncing = false;
+    private static readonly int Death = Animator.StringToHash("Death");
 
     #region Constants
     
@@ -44,6 +50,9 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private void Start()
     {
         _enemyRigidBody = gameObject.GetComponent<Rigidbody2D>();
+        _animator = GetComponentInChildren<Animator>();
+        if (_animator == null)
+            _animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -59,6 +68,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable
             
         }
     }
+
+    public bool IsAlive => health > MIN_HEALTH;
 
     private IEnumerator DamageFlashAnimation(int count)
     {   
@@ -95,9 +106,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
-    {   
-        Debug.Log("triggering!");
-        
+    {
+
         if (other.gameObject.CompareTag("Player") && !PlayerController.onGround && PlayerController.jumpAttacking) {   
          
             Hit(other.gameObject);
@@ -151,9 +161,11 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     public void Damage(int amount)
     {
+        if(!damagable) return;
+        
         StartCoroutine(DamageFlashAnimation(1));
         health -= amount;
-        if (health < MIN_HEALTH)
+        if (health <= MIN_HEALTH)
         {
             health = MIN_HEALTH;
             Dead();
@@ -184,6 +196,18 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     public virtual void Dead()
     {
-        gameObject.SetActive(false);
+        damagable = false;
+        if (_rigidbody2D != null)
+        {
+            _rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;   
+        }
+        if (_animator == null)
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            _animator.SetTrigger(Death);
+        }
     }
 }

@@ -10,7 +10,6 @@ public class PatrolEnemy : EnemyObject
     [SerializeField] protected Transform[] places;
 
     [SerializeField] protected int counter;
-    // Start is called before the first frame update
 
     private void Awake()
     {
@@ -19,6 +18,7 @@ public class PatrolEnemy : EnemyObject
         rb = GetComponent<Rigidbody2D>();
         counter = 0;
         _renderer = GetComponentInChildren<SpriteRenderer>();
+        _animator = GetComponentInChildren<Animator>();
         collisionOffset = Vector2.right * (_renderer.sprite.rect.width / _renderer.sprite.pixelsPerUnit) / 2;
     }
 
