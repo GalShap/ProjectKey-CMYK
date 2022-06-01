@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class pillarScript : MonoBehaviour
+public abstract class pillarScript : MonoBehaviour
 {
     protected Rigidbody2D rb;
     private bool moveForwed;
@@ -39,14 +39,20 @@ public class pillarScript : MonoBehaviour
         }
     }
 
-    public void go()
-    {
-        moveForwed = true;
-        moveBack = false;
-    }
-    public void back()
-    {
-        moveForwed = false;
-        moveBack = true;
-    }
+    //set the block to move 
+    public abstract void GO();
+    // {
+    //     moveForwed = true;
+    //     moveBack = false;
+    // }
+    
+    // set the block to move back
+    public abstract void Back();
+    // {
+        // moveForwed = false;
+        // moveBack = true;
+    // }
+
+    // set the block to stop moving
+    public abstract void StopMovement();
 }
