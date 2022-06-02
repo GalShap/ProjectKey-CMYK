@@ -6,10 +6,12 @@ using UnityEngine;
 public abstract class pillarScript : MonoBehaviour
 {
     protected Rigidbody2D rb;
-    private bool moveForwed;
-    private bool moveBack;
-    [SerializeField] private Transform pointA;
-    [SerializeField] private Transform pointB;
+    protected bool moveForwed;
+    protected bool moveBack;
+
+    [SerializeField] protected GameObject OtherBlock;
+    // [SerializeField] private Transform pointA;
+    // [SerializeField] private Transform pointB;
     [SerializeField] private float speed = 3;
 
     private void Awake()
@@ -31,12 +33,24 @@ public abstract class pillarScript : MonoBehaviour
     {
         if (moveForwed)
         {
-            rb.position = Vector2.MoveTowards(transform.position, pointB.position, speed * Time.fixedDeltaTime);
+            MoveToMid();
         }
         else if (moveBack)
         {
-            rb.position = Vector2.MoveTowards(transform.position, pointA.position, speed * Time.fixedDeltaTime);
+            MoveBack();
         }
+    }
+
+    protected void MoveBack()
+    {
+        rb.velocity = Vector2.down * speed;
+        // rb.position = Vector2.MoveTowards(transform.position, pointA.position, speed * Time.fixedDeltaTime);
+    }
+
+    protected void MoveToMid()
+    {
+        rb.velocity = Vector2.up * speed;
+        // rb.position = Vector2.MoveTowards(transform.position, pointB.position, speed * Time.fixedDeltaTime);
     }
 
     //set the block to move 
@@ -55,4 +69,14 @@ public abstract class pillarScript : MonoBehaviour
 
     // set the block to stop moving
     public abstract void StopMovement();
+
+    public abstract void CollideWithOtherBlock(); 
+
+    public void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject == OtherBlock)
+        {
+            CollideWithOtherBlock();
+        }
+    }
 }

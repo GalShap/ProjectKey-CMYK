@@ -87,7 +87,7 @@ public class YellowGod : EnemyObject
         }
     }
     
-    
+    // public void 
     
     
     
