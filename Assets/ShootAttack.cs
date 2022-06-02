@@ -22,6 +22,7 @@ public class ShootAttack : StateMachineBehaviour
         yellow = animator.GetComponent<YellowGod>();
         size = yellow.getLeftPil().Length;
         yellow.HorizStart();
+        counter = 0;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -30,18 +31,18 @@ public class ShootAttack : StateMachineBehaviour
         timer += Time.deltaTime;
         timerBlock += Time.deltaTime;
         timerShoot += Time.deltaTime;
-        if (timer >= size + timerCounter)
+        if (timer > size + timerCounter)
         {
             yellow.HorizMoveBack();
             animator.SetTrigger("coolDown");
         }
-        else if (timerBlock > timerBlockWait && timer < size)
+        else if (timerBlock >= timerBlockWait && timer < size)
         {
             timerBlock = 0;
             yellow.HorizMoveBlock(counter);
             counter++;
         }
-        else if (timerShoot >= timerCounterShoot)
+        else if (timerShoot >= timerCounterShoot && timer > size)
         {
             timerShoot = 0;
             yellow.Shoot();
@@ -49,10 +50,10 @@ public class ShootAttack : StateMachineBehaviour
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        yellow.HorizEnd();
+    }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

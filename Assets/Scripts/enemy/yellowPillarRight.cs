@@ -15,12 +15,8 @@ public class yellowPillarRight : pillarScript
     // {
     //     
     // }
-    
-    public override void Back()
-    {
-        moveForwed = false;
-        moveBack = true;
-    }
+
+   
 
     public override void StopMovement()
     {
@@ -28,14 +24,22 @@ public class yellowPillarRight : pillarScript
         moveBack = false;
     }
 
-    public override void GO()
-    {
-        moveForwed = true;
-        moveBack = false;
-    }
+   
 
     public override void CollideWithOtherBlock()
     {
         StopMovement();
+    }
+    
+    protected override void MoveBack()
+    {
+        rb.velocity = Vector2.right * speed;
+        // rb.position = Vector2.MoveTowards(transform.position, pointA.position, speed * Time.fixedDeltaTime);
+    }
+
+    protected override void MoveToMid()
+    {
+        rb.velocity = Vector2.left * speed;
+        // rb.position = Vector2.MoveTowards(transform.position, pointB.position, speed * Time.fixedDeltaTime);
     }
 }

@@ -10,9 +10,10 @@ public abstract class pillarScript : MonoBehaviour
     protected bool moveBack;
 
     [SerializeField] protected GameObject OtherBlock;
+
     // [SerializeField] private Transform pointA;
     // [SerializeField] private Transform pointB;
-    [SerializeField] private float speed = 3;
+    [SerializeField] protected float speed = 3;
 
     private void Awake()
     {
@@ -29,7 +30,7 @@ public abstract class pillarScript : MonoBehaviour
     {
     }
 
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
         if (moveForwed)
         {
@@ -39,38 +40,42 @@ public abstract class pillarScript : MonoBehaviour
         {
             MoveBack();
         }
+        else
+        {
+            rb.velocity = Vector2.zero;
+        }
     }
 
-    protected void MoveBack()
-    {
-        rb.velocity = Vector2.down * speed;
+    protected abstract void MoveBack();
+    // {
+        // rb.velocity = Vector2.down * speed;
         // rb.position = Vector2.MoveTowards(transform.position, pointA.position, speed * Time.fixedDeltaTime);
-    }
+    // }
 
-    protected void MoveToMid()
-    {
-        rb.velocity = Vector2.up * speed;
+    protected abstract void MoveToMid();
+    // {
+        // rb.velocity = Vector2.up * speed;
         // rb.position = Vector2.MoveTowards(transform.position, pointB.position, speed * Time.fixedDeltaTime);
-    }
+    // }
 
     //set the block to move 
-    public abstract void GO();
-    // {
-    //     moveForwed = true;
-    //     moveBack = false;
-    // }
-    
+    public void GO()
+    {
+        moveForwed = true;
+        moveBack = false;
+    }
+
     // set the block to move back
-    public abstract void Back();
-    // {
-        // moveForwed = false;
-        // moveBack = true;
-    // }
+    public void Back()
+    {
+        moveForwed = false;
+        moveBack = true;
+    }
 
     // set the block to stop moving
     public abstract void StopMovement();
 
-    public abstract void CollideWithOtherBlock(); 
+    public abstract void CollideWithOtherBlock();
 
     public void OnCollisionEnter2D(Collision2D other)
     {
