@@ -8,6 +8,8 @@ using Random = UnityEngine.Random;
 public class YellowGod : EnemyObject
 {
     [SerializeField]private GameObject[] leftPillars;
+    [SerializeField]private GameObject leftBlocks;
+    [SerializeField]private GameObject rightBlocks;
     [SerializeField]private GameObject[] rightPillars;
     [SerializeField]private GameObject[] upperPillars;
     [SerializeField]private GameObject[] groundPillars;
@@ -38,16 +40,15 @@ public class YellowGod : EnemyObject
     {
         for (int i = 0; i < leftPillars.Length; i++)
         {
-            leftPillars[i].gameObject.SetActive(false);
-            rightPillars[i].gameObject.SetActive(false);
+            leftPillars[i].gameObject.GetComponent<pillarScript>().resetPostion();
+            rightPillars[i].gameObject.GetComponent<pillarScript>().resetPostion();
         }
+        leftBlocks.SetActive(false);
+        rightBlocks.SetActive(false);
     }public void HorizStart()
     {
-        for (int i = 0; i < leftPillars.Length; i++)
-        {
-            leftPillars[i].gameObject.SetActive(true);
-            rightPillars[i].gameObject.SetActive(true);
-        }
+        leftBlocks.SetActive(true);
+        rightBlocks.SetActive(true);
     }
     
     

@@ -8,6 +8,7 @@ public abstract class pillarScript : MonoBehaviour
     protected Rigidbody2D rb;
     protected bool moveForwed;
     protected bool moveBack;
+    protected Vector3 startPostion;
 
     [SerializeField] protected GameObject OtherBlock;
 
@@ -18,6 +19,7 @@ public abstract class pillarScript : MonoBehaviour
     private void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        startPostion = transform.position;
     }
 
     // Start is called before the first frame update
@@ -83,5 +85,10 @@ public abstract class pillarScript : MonoBehaviour
         {
             CollideWithOtherBlock();
         }
+    }
+
+    public void resetPostion()
+    {
+        transform.position = startPostion;
     }
 }
