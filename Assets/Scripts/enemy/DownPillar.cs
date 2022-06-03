@@ -19,13 +19,13 @@ public class DownPillar : pillarScript
 
     protected override void MoveBack()
     {
-        rb.velocity = Vector2.up * speed;
+        rb.velocity = Vector2.down * speed;
         // rb.position = Vector2.MoveTowards(transform.position, pointA.position, speed * Time.fixedDeltaTime);
     }
 
     protected override void MoveToMid()
     {
-        rb.velocity = Vector2.down * speed;
+        rb.velocity = Vector2.up * speed;
         // rb.position = Vector2.MoveTowards(transform.position, pointB.position, speed * Time.fixedDeltaTime);
     }
     

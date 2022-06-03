@@ -10,6 +10,8 @@ public class YellowGod : EnemyObject
     [SerializeField]private GameObject[] leftPillars;
     [SerializeField]private GameObject leftBlocks;
     [SerializeField]private GameObject rightBlocks;
+    [SerializeField]private GameObject downBlocks;
+    [SerializeField]private GameObject upBlocks;
     [SerializeField]private GameObject[] rightPillars;
     [SerializeField]private GameObject[] upperPillars;
     [SerializeField]private GameObject[] groundPillars;
@@ -21,6 +23,7 @@ public class YellowGod : EnemyObject
     private Transform[] m_SpawnTransform; // this is a reference to the transform where the prefab will spawn
 
     [SerializeField] private int oddsForRed = 2;
+    public GameObject player;
     private void Awake()
     {
         movement = gameObject.transform.position;
@@ -49,6 +52,22 @@ public class YellowGod : EnemyObject
     {
         leftBlocks.SetActive(true);
         rightBlocks.SetActive(true);
+    }
+    public void PillarStart()
+    {
+        downBlocks.SetActive(true);
+    }public void PillarEnd()
+    {
+        foreach (var t in groundPillars)
+        {
+            t.GetComponent<pillarScript>().resetPostion();
+        }foreach (var t in upperPillars)
+        {
+            t.GetComponent<pillarScript>().resetPostion();
+            t.SetActive(false);
+        }
+        downBlocks.SetActive(false);
+        rb.position = new Vector2(0, rb.position.y);
     }
     
     
@@ -92,11 +111,75 @@ public class YellowGod : EnemyObject
             Instantiate(proj, t.position, t.rotation);
         }
     }
+
+    public void sendThemUp()
+    {
+
+        foreach (var pillar in groundPillars)
+        {
+            pillar.GetComponent<pillarScript>().GO();
+            // ColorManager.ColorLayer
+            // pillar.layer = Random.Range(ColorManager.ColorLayer)
+                
+            // pillar.GetComponent<ColorObject>().la
+        }
+    } public void sendThemDown()
+    {
+        int i = Random.Range(0, upperPillars.Length);
+        for (int k = 0; k < upperPillars.Length; k++)
+        {
+            if (i != k)
+            {
+                upperPillars[k].SetActive(true);
+                upperPillars[k].GetComponent<pillarScript>().GO();
+            }
+            else
+            {
+                rb.position = new Vector2(upperPillars[k].transform.position.x, rb.position.y);
+            }
+            
+        }
+
+        foreach (var pillar in upperPillars)
+        {
+            pillar.GetComponent<pillarScript>().GO();
+            // ColorManager.ColorLayer
+            // pillar.layer = Random.Range(ColorManager.ColorLayer)
+                
+            // pillar.GetComponent<ColorObject>().la
+        }
+    }
     
-    // public void 
     
-    
-    
-    
-    
+    public bool isFlipped = false;
+    public void LookAtPlayer()
+    {
+        Vector3 flipped = transform.localScale;
+        flipped.z *= -1f;
+
+        if (transform.position.x > player.transform.position.x && isFlipped)
+        {
+            transform.localScale = flipped;
+            transform.Rotate(0f, 180f, 0f);
+            isFlipped = false;
+        }
+        else if (transform.position.x < player.transform.position.x && !isFlipped)
+        {
+            transform.localScale = flipped;
+            transform.Rotate(0f, 180f, 0f);
+            isFlipped = true;
+        }
+    }
+
+
+    public void healtChange()
+    {
+        var animator = gameObject.GetComponent<Animator>();
+        var hl = animator.GetComponent<EnemyHealth>();
+        var hp = hl.GetHealth();
+        if (hp <= 400)
+        {
+            animator.SetBool("rage", true);
+        }
+    }
 }

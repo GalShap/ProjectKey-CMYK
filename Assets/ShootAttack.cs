@@ -42,7 +42,7 @@ public class ShootAttack : StateMachineBehaviour
             yellow.HorizMoveBlock(counter);
             counter++;
         }
-        else if (timerShoot >= timerCounterShoot && timer > size)
+        if (timerShoot >= timerCounterShoot && timer >= size)
         {
             timerShoot = 0;
             yellow.Shoot();
@@ -52,6 +52,10 @@ public class ShootAttack : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        timerShoot = 0;
+        timerBlock = 0;
+        counter = 0;
+        timer = 0;
         yellow.HorizEnd();
     }
 

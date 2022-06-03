@@ -2,55 +2,64 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class horizAttack : StateMachineBehaviour
+public class YellowGodStandState : StateMachineBehaviour
 {
-    private YellowGod yellow;
-    // private EnemyHealth hl;
-    [SerializeField] public float timerCounter = 5;
-    [SerializeField] public float timerBlockWait = 1;
-    private int size;
-    private int counter = 0;
-
-    private float timer = 0;
+    private GameObject player;
+    private Rigidbody2D rb;
     
-    private float timerBlock = 0;
+    private YellowGod yellow;
+    private EnemyHealth hl;
+    [SerializeField] public float timerCounter = 5;
+
+    private float timer = 2;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        // player = GameObject.FindGameObjectWithTag("Player");
         yellow = animator.GetComponent<YellowGod>();
-        size = yellow.getLeftPil().Length;
-        yellow.HorizStart();
+        player = yellow.player;
+        hl = animator.GetComponent<EnemyHealth>();
+        rb = animator.GetComponent<Rigidbody2D>();
+        yellow.healtChange();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        yellow.LookAtPlayer();
         timer += Time.deltaTime;
-        timerBlock += Time.deltaTime;
-        if (timer >= size + timerCounter)
+        if (timer >= timerCounter)
         {
-            yellow.HorizMoveBack();
-            animator.SetTrigger("coolDown");
+            timer = 0;
+            int k = Random.Range(0, 3);
+            switch (k)
+            {
+                case 0 :
+                    animator.SetTrigger("attackOneStairs");
+                    break;
+                case 1:
+                    animator.SetTrigger("upAndDownAttack");
+                    break;
+                case 2:
+                    animator.SetTrigger("shoot");
+                    break;
+                default:
+                    animator.SetTrigger("attackOneStairs");
+                    break;
+                
+            }
+            // rb.AddForce(Vector2.up);
+            // animator.SetTrigger( "shoot");
         }
-        else if (timerBlock >= timerBlockWait)
-        {
-            timerBlock = 0;
-            yellow.HorizMoveBlock(counter);
-            counter++;
-        }
-
-        
     }
+    
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        yellow.HorizEnd();
-        animator.ResetTrigger("coolDown");
-        counter = 0;
-        timer = 0;
-        timerBlock = 0;
-    }
+    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    
+    //}
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
