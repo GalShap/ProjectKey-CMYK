@@ -17,6 +17,9 @@ TextureImporter:
   - first:
       213: 7537371228030489297
     second: Shield enemy_4
+  - first:
+      213: 566508853524908399
+    second: Shield enemy_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -206,6 +209,27 @@ TextureImporter:
       bones: []
       spriteID: 1d2d10b723f1a9860800000000000000
       internalID: 7537371228030489297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shield enemy_5
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 0
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6947700dc4acd700800000000000000
+      internalID: 566508853524908399
       vertices: []
       indices: 
       edges: []
