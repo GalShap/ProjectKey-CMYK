@@ -318,11 +318,6 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void PlayDialogue(Dialogues d, UnityEvent onEnd)
-    {
-        LoadDialogue(d,true,(() => onEnd.Invoke()));
-    }
-    
     public void LoadDialogue(Dialogues d, bool enable = true, Action onEnd = null)
     {   
         LoadNewDialog((List<Sentence>) dialogues[d], enable, onEnd);

@@ -8,6 +8,7 @@ public class PlayerDialogues : MonoBehaviour
 {
     [SerializeField] private Collider2D playerCollider;
     [SerializeField] private Collider2D blueCollider;
+    [SerializeField] private MagentaGod pinky;
 
     private void Start()
     {
@@ -37,5 +38,25 @@ public class PlayerDialogues : MonoBehaviour
     {
         DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.ONE_DOWN, true,
             () => { SceneManager.LoadScene("Game");});
+    }
+
+    public void BeforePink()
+    {
+        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.BEFORE_PINK);
+    }
+
+    public void PinkFirst()
+    {
+        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.PINK);
+    }
+    
+    public void PinkAgain()
+    {
+        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.PINK_AGAIN);
+    }
+    
+    public void PinkDead()
+    {
+        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.PINK_DEAD, true);
     }
 }
