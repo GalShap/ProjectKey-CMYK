@@ -176,9 +176,7 @@ public class PlayerHUD : MonoBehaviour
     /// <returns></returns>
     private IEnumerator Highlight(int newColor, int level)
     {
-       
-            
-            List<Image> colors = levelColors[level].get();
+        List<Image> colors = levelColors[level].get();
             float time = 0;
             int oldColor = -1;
 
