@@ -205,6 +205,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             if (b != null && b.IsActive)
             {
                 _lastCollision = (int) CollisionWith.Monster;
+                b.Unactive();
                 return true;
             }
         }

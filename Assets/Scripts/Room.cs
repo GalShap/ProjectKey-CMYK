@@ -28,7 +28,7 @@ public class Room : MonoBehaviour
 
     public void DisableContents()
     {
-        contents.SetActive(false);
+        // contents.SetActive(false);
     }
     
     public void EnableContents()

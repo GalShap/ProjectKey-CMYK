@@ -51,6 +51,10 @@ public class bullet : MonoBehaviour
         if(other.gameObject.CompareTag("Projectile") || other.gameObject.CompareTag("Monster")) return;
         _animator.SetTrigger("Death");
         m_Rigidbody.velocity = Vector2.zero;
+    }
+
+    public void Unactive()
+    {
         active = false;
     }
 
