@@ -234,7 +234,7 @@ public class PlayerController : MonoBehaviour
         var dir = attackRange.transform.position - transform.position;
         var dir2 = new Vector2(dir.x, dir.y);
 
-        var hits = Physics2D.CircleCastAll(attackRange.transform.position, attackRadius, dir2);
+        var hits = Physics2D.CircleCastAll(attackRange.transform.position, attackRadius, dir2, 0.05f);
         foreach (var h in hits)
         {
             BlueGod god = h.collider.GetComponent<BlueGod>();
