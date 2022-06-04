@@ -163,12 +163,18 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {
         if(!damagable) return;
         
-        StartCoroutine(DamageFlashAnimation(1));
+       
         health -= amount;
         if (health <= MIN_HEALTH)
         {
             health = MIN_HEALTH;
             Dead();
+        }
+
+        else
+        {
+            StartCoroutine(DamageFlashAnimation(1));
+            AudioManager.SharedAudioManager.PlayEnemySounds((int) AudioManager.EnemySounds.Hit);
         }
     }
 
@@ -209,5 +215,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         {
             _animator.SetTrigger(Death);
         }
+        
+        AudioManager.SharedAudioManager.PlayEnemySounds((int) AudioManager.EnemySounds.Death);
     }
 }

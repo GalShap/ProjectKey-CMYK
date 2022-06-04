@@ -247,6 +247,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             StartCoroutine(DeathSequence(3.2f));
         }
 
+        else
+        {
+            AudioManager.SharedAudioManager.PlayKeyActionSound((int) AudioManager.KeySounds.Hit);
+        }
+
         PlayerHUD.sharedHud.removeLifeOnUI(amount);
 
     }
@@ -324,6 +329,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
                 break;
             
         }
+        AudioManager.SharedAudioManager.PlayKeyActionSound((int) AudioManager.KeySounds.Death);
 
         yield return new WaitForSeconds(time);
         

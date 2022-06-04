@@ -135,10 +135,8 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
-        
-        
 
-       
+
         MoveCharacter(); 
         ModifyPhysics();
     }
@@ -183,7 +181,8 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Jump()
-    {
+    {   
+        AudioManager.SharedAudioManager.PlayKeyActionSound((int) AudioManager.KeySounds.Jump);
         _animator.SetBool(Jump1,true);
         _rigidbody2D.drag = 0;
         float y = (2 * jumpHeight) / jumpTime;
@@ -276,7 +275,8 @@ public class PlayerController : MonoBehaviour
                 if (attackCounter <= 0)
                 {
                    if(jumpAttacking) return;
-                   
+                    
+                    AudioManager.SharedAudioManager.PlayKeyActionSound((int)AudioManager.KeySounds.Attack);
                     _animator.SetTrigger(Attack);
                     attackCounter = attackTimer;
                     if (!onGround)
@@ -286,6 +286,8 @@ public class PlayerController : MonoBehaviour
                 break;
             case InputActionPhase.Canceled:
                 break;
+            
+            
         }
     }
 
@@ -375,6 +377,7 @@ public class PlayerController : MonoBehaviour
                     }
                 }
                 ColorManager.RotateColor(1);
+                AudioManager.SharedAudioManager.PlayKeyActionSound((int) AudioManager.KeySounds.ColorSwitch);
                 break;
             case InputActionPhase.Canceled:
                 break;

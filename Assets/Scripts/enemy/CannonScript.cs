@@ -35,6 +35,7 @@ public class CannonScript : EnemyObject
     {
         if (!colored)
         {
+            AudioManager.SharedAudioManager.PlayEnemySounds((int) AudioManager.EnemySounds.Shoot);
             Instantiate(m_Projectile, m_SpawnTransform.position, m_SpawnTransform.rotation);
         }
         
