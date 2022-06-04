@@ -11,9 +11,9 @@ public class AudioManager : MonoBehaviour
     {   
         [Tooltip("drag all the game soundtrack to here")]
         [SerializeField] private List<AudioClip> tracks;
-        
-        [Tooltip("Drag the audio source that plays the game tracks to here")]
-        [SerializeField] private AudioSource tracksAudioSource;
+
+        [Tooltip("Drag the audio source that plays the game tracks to here")] [SerializeField]
+        private AudioSource tracksAudioSource; 
 
         private static int _curTrackIndex = 0;
         
@@ -56,23 +56,103 @@ public class AudioManager : MonoBehaviour
             tracksAudioSource.Play();
             _curTrackIndex = index;
         }
+
+        public AudioSource GetMusicAudioSrc()
+        {
+            return tracksAudioSource;
+        }
     }
     
     [Tooltip("drag all tracks in the game to here")]
-    [SerializeField] private MusicAudioQueue _musicAudioQueue;
+    [SerializeField] private MusicAudioQueue musicAudioQueue;
 
-    [SerializeField] private AudioSource _enemyAudioSource;
+    [SerializeField] private AudioSource enemyAudioSource;
 
-    [SerializeField] private AudioSource _keyAudioSource;
+    [SerializeField] private AudioSource keyAudioSource;
+
+    [SerializeField] private List<AudioClip> keyAudioClips;
+
+    [SerializeField] private List<AudioClip> enemyAudioClips;
     
     public static AudioManager SharedAudioManager;
+    
+    public enum KeySounds
+    {
+        Jump, Attack, Hit, ColorSwitch, Death
+    }
+
+    public enum EnemySounds
+    {
+        Hit, Shoot, Death
+    }
     // Start is called before the first frame update
 
     private void Awake()
     {
         SharedAudioManager = this;
+        if (this != SharedAudioManager)
+            Destroy(this);
+        
+    }
+    public void LoadNextMusic()
+    {
+        musicAudioQueue.PlayNextTrack();
+    }
+
+    public void StopMusic()
+    {
+        musicAudioQueue.GetMusicAudioSrc().Stop();
+    }
+    
+    /// <summary>
+    /// call this when an enemy is being hit by key.
+    /// </summary>
+    public void PlayEnemyHitSound()
+    {
+        enemyAudioSource.Play();
+    }
+    
+    /// <summary>
+    /// needs to be called when key is making an action. gets an action index and plays the sound accordingly. 
+    /// </summary>
+    /// <param name="action">
+    /// 0 - Jump
+    /// 1 - Attack
+    /// 2 - Hit
+    /// </param>
+    public void PlayKeyActionSound(int action)
+    {   
+        
+        print("Sound: " + action);
+        // illegal action!
+        if (action < (int) KeySounds.Jump || action > keyAudioClips.Count - 1)
+            return;
+        
+    
+        keyAudioSource.clip = keyAudioClips[action];
+        keyAudioSource.PlayOneShot(keyAudioSource.clip);
     }
 
 
-   
+    /// <summary>
+    /// needs to be called when enemy sound needs to be played. gets an action index and plays the sound accordingly. 
+    /// </summary>
+    /// <param name="action">
+    /// 0 - Hit
+    /// 1 - Shoot
+    ///  </param>
+    public void PlayEnemySounds(int action)
+    {
+        if (action < (int) EnemySounds.Hit || action > enemyAudioClips.Count - 1)
+            return;
+
+        enemyAudioSource.clip = enemyAudioClips[action];
+        enemyAudioSource.PlayOneShot(enemyAudioSource.clip);
+
+
+    }
+    
+    
+
+
 }

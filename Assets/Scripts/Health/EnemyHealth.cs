@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyHealth : MonoBehaviour, IDamageable
 {
@@ -22,6 +23,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     [SerializeField] private int MAX_HEALTH = 100;
 
     [SerializeField] private Rigidbody2D _rigidbody2D;
+
+    [SerializeField] private UnityEvent onDeath;
     #endregion
 
     public bool damagable = true;
@@ -163,12 +166,18 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {
         if(!damagable) return;
         
-        StartCoroutine(DamageFlashAnimation(1));
+       
         health -= amount;
         if (health <= MIN_HEALTH)
         {
             health = MIN_HEALTH;
             Dead();
+        }
+
+        else
+        {
+            StartCoroutine(DamageFlashAnimation(1));
+            AudioManager.SharedAudioManager.PlayEnemySounds((int) AudioManager.EnemySounds.Hit);
         }
     }
 
@@ -209,5 +218,9 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         {
             _animator.SetTrigger(Death);
         }
+        
+
+        onDeath.Invoke();
+        AudioManager.SharedAudioManager.PlayEnemySounds((int) AudioManager.EnemySounds.Death);
     }
 }
