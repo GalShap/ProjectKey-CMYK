@@ -15,6 +15,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [SerializeField] private float timeToBounce = 0.2f;
     
     [SerializeField] private float timeToHit = 0.8f;
+
+    [SerializeField] private float timeToDie = 1f;
     #endregion
     
     #region Private Field
@@ -244,7 +246,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         if (lives <= MIN_LIVES)
         {
             lives = MIN_LIVES;
-            StartCoroutine(DeathSequence(3.2f));
+            StartCoroutine(DeathSequence());
         }
 
         else
@@ -310,7 +312,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     #endregion
     
     
-    private IEnumerator DeathSequence(float time)
+    private IEnumerator DeathSequence()
     {   
         InputManager.Manager.DisableAll();
         _playerRigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -331,7 +333,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         }
         AudioManager.SharedAudioManager.PlayKeyActionSound((int) AudioManager.KeySounds.Death);
 
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(timeToDie);
         
         Dead();
         _playerCollider.enabled = true;
