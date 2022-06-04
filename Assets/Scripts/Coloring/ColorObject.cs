@@ -24,6 +24,11 @@ public class ColorObject : MonoBehaviour
         SetLayer();
     }
 
+    public void ChangeColor(ColorManager.ColorName c)
+    {
+        ColorManager.ColorLayer layer = ColorManager.GetColorLayer(c);
+    }
+
     protected void SetLayer()
     {
         gameObject.layer = (int) Mathf.Log(layer.value, 2);

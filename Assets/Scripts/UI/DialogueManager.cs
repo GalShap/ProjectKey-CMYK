@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.iOS;
 using UnityEngine.Serialization;
@@ -20,7 +21,11 @@ public class DialogueManager : MonoBehaviour
         BLUE_END,
         BLUE_DEAD,
         TAKE_ORB,
-        ONE_DOWN
+        ONE_DOWN,
+        BEFORE_PINK,
+        PINK,
+        PINK_AGAIN,
+        PINK_DEAD
     }
 
     [Serializable]
@@ -72,15 +77,15 @@ public class DialogueManager : MonoBehaviour
             Dialogues.CHASE_BLUE, 
             new List<Sentence>()
             {
-                new Sentence("*Pant*...\n*Pant*...",1),
-                new Sentence("... Fuck...",1)
+                new Sentence("*Huff*...\n*Huff*...",1),
+                new Sentence("... Damn...",1)
             }
         },
         {
             Dialogues.CHASE_KEY, 
             new List<Sentence>()
             {
-                new Sentence("*Pant*...\n*Pant*...",0),
+                new Sentence("*Huff*...\n*Huff*...",0),
                 new Sentence("Get back here!",0)
             }
         },
@@ -110,8 +115,8 @@ public class DialogueManager : MonoBehaviour
             Dialogues.BLUE_END,
             new List<Sentence>()
             {
-                new Sentence("*Pant*...\n*Pant*...",1),
-                new Sentence("*Pant*...\n*Pant*...",1),
+                new Sentence("*Huff*...\n*Huff*...",1),
+                new Sentence("*Huff*...\n*Huff*...",1),
                 new Sentence("Rats. Seems like you got me...",1),
                 new Sentence("You know I have to do this...",0),
                 new Sentence("So you say...",1),
@@ -142,8 +147,45 @@ public class DialogueManager : MonoBehaviour
             {
                 new Sentence("One down, two more to go...",0)
             }
+        },
+        {
+            Dialogues.BEFORE_PINK,
+            new List<Sentence>()
+            {
+                new Sentence("What the hell is this music?",0)
+            }
+        },
+        {
+            Dialogues.PINK,
+            new List<Sentence>()
+            {
+                new Sentence("What the hell?",0),
+                new Sentence("Oh ho ho... Look who we have here! Are you lost my dear?",1),
+                new Sentence("Do I know you?",0),
+                new Sentence("Nah. I don't think you do. But my brother took a little beating by you.",1),
+                new Sentence("Your... brother...?",0),
+                new Sentence("Hell yeah, little cyan dude, more piano and brass. Seems it'll Take more distortion to kick your ass",1),
+                new Sentence("What's with the rhymes?",0),
+                new Sentence("Ain't nothing to it, just adding some groove. C'mon princess, let's see you move",1)
+            }
+        },
+        {
+            Dialogues.PINK_AGAIN,
+            new List<Sentence>()
+            {
+                new Sentence("Back again? Sucks for you. Get ready for round two!",1),
+                new Sentence("Lets just get this over with...",0)
+            }
+        },
+        {
+            Dialogues.PINK_DEAD,
+            new List<Sentence>()
+            {
+                new Sentence("Nice going kid, you've got some spark. And here I am only left with the bark",1),
+                new Sentence("You've had a good run, I'll give you that. But there are some grudges no rhymes can bat",0),
+                new Sentence("You're not quite done, there's a way to go",1),
+            }
         }
-        
     };
 
     private float _timeToScaleBox = 0.5f;
@@ -274,6 +316,11 @@ public class DialogueManager : MonoBehaviour
             _onEnd.Invoke();
             _onEnd = null;
         }
+    }
+
+    public void PlayDialogue(Dialogues d, UnityEvent onEnd)
+    {
+        LoadDialogue(d,true,(() => onEnd.Invoke()));
     }
     
     public void LoadDialogue(Dialogues d, bool enable = true, Action onEnd = null)

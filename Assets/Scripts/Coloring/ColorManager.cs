@@ -229,6 +229,17 @@ public class ColorManager : MonoBehaviour
         return null;
     }
     
+    public static ColorLayer GetColorLayer(ColorName name)
+    {
+        foreach (var layer in _shared.AllLayers)
+        {
+            if (layer.name == name)
+                return layer;
+        }
+
+        return _shared.availableLayers[0];
+    }
+    
     public static int GetLayer(Color c)
     {
         foreach (var layer in _shared.AllLayers)
