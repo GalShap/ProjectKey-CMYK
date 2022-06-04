@@ -11,6 +11,8 @@ public class MagentaGod : EnemyObject
     [SerializeField] public float speed = 3;
     [SerializeField] public float attackRange = 3;
     private float timer = 0;
+    [SerializeField] private float lifeToGoDiffMode = 200;
+    [SerializeField]private bool isLeft = false;
     private bool[] flag = {false, false, false, false};
 
     // [FormerlySerializedAs("m_Projectile")]
@@ -38,7 +40,7 @@ public class MagentaGod : EnemyObject
         _renderer = GetComponentInChildren<SpriteRenderer>();
         collisionOffset = Vector2.right * (_renderer.sprite.rect.width / _renderer.sprite.pixelsPerUnit) / 2;
         platformLeft.SetActive(true);
-        platformRight.SetActive(false);
+        platformRight.SetActive(true);
     }
 
     public void Shoot()
@@ -90,10 +92,14 @@ public class MagentaGod : EnemyObject
         var animator = gameObject.GetComponent<Animator>();
         var hl = animator.GetComponent<EnemyHealth>();
         var hp = hl.GetHealth();
-        if (directionAcordingToHp(hp, 400, 0, "left", animator)) return;
-        if (directionAcordingToHp(hp, 300, 1, "right", animator)) return;
-        if (directionAcordingToHp(hp, 200, 2, "left", animator)) return;
-        else directionAcordingToHp(hp, 100, 3, "right", animator);
+        if (hp <= lifeToGoDiffMode)
+        {
+            rb.transform.position = new Vector3(rb.transform.position.x,platformLeft.transform.position.y +1, rb.transform.position.z) ;
+        }
+        // if (directionAcordingToHp(hp, 400, 0, "left", animator)) return;
+        // if (directionAcordingToHp(hp, 300, 1, "right", animator)) return;
+        // if (directionAcordingToHp(hp, 200, 2, "left", animator)) return;
+        // else directionAcordingToHp(hp, 100, 3, "right", animator);
     }
 
     private bool directionAcordingToHp(float hp, float min, int index, string dir, Animator animator)
@@ -120,6 +126,13 @@ public class MagentaGod : EnemyObject
     public GameObject getPlayer()
     {
         return player;
+    }
+
+    public void Move()
+    {
+        var animator = gameObject.GetComponent<Animator>();
+        animator.SetTrigger(isLeft ? "left" : "right");
+        isLeft = isLeft != true;
     }
 
 }
