@@ -121,9 +121,7 @@ public class AudioManager : MonoBehaviour
     /// 2 - Hit
     /// </param>
     public void PlayKeyActionSound(int action)
-    {   
-        
-        print("Sound: " + action);
+    {
         // illegal action!
         if (action < (int) KeySounds.Jump || action > keyAudioClips.Count - 1)
             return;

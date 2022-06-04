@@ -102,8 +102,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
                 god.Hit();
                 return;
             }
-            
-            PlayerKickBack(Vector2.up*2);
+
+            Vector2 kickback = GetKickback(other);
+            PlayerKickBack(kickback);
             if (!other.gameObject.CompareTag("Spikes"))
             {
                 EnemyHealth enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
@@ -139,6 +140,16 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             }
             
         }
+    }
+
+    private Vector2 GetKickback(Collision2D otherContact)
+    {
+        var playerPos = transform.position;
+        var enemyPos = otherContact.collider.gameObject.transform.position;
+        var normal = otherContact.contacts[0].normal;
+
+        var pushBack = Vector2.right * Mathf.Sign(playerPos.x-enemyPos.x) * 4;
+        return (normal.y >= 0) ? normal + pushBack : pushBack;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

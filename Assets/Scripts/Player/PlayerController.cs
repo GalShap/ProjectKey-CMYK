@@ -124,13 +124,12 @@ public class PlayerController : MonoBehaviour
             if (!hitMonster)
             {
                 _animator.SetBool(Jump1, false);
-                if (jumpAttacking) jumpAttacking = false;   
+                if (jumpAttacking) jumpAttacking = false;
+                onGround = checkGround;
             }
         }
-
-        onGround = checkGround;
-        if(jumpAttacking && onGround)
-            print("bounce");
+        if(!jumpAttacking) 
+            onGround = checkGround;
         if (jumpTimer > Time.time && onGround)
         {
             Jump();
@@ -225,10 +224,6 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    // public void EndAttack()
-    // {
-    //     attackCollider.gameObject.SetActive(false);
-    // }
     public void StartAttack()
     {
         var dir = attackRange.transform.position - transform.position;
@@ -286,8 +281,6 @@ public class PlayerController : MonoBehaviour
                 break;
             case InputActionPhase.Canceled:
                 break;
-            
-            
         }
     }
 
