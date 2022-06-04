@@ -25,6 +25,8 @@ public class ColorObject : MonoBehaviour
         SetLayer();
     }
 
+    public int LayerIndex => (int) Mathf.Log(layer, 2);
+
     public void ChangeColor(ColorManager.ColorName cname)
     {
         ColorManager.ColorLayer clayer = ColorManager.GetColorLayer(cname);

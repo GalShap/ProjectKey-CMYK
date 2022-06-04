@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4546519656561499537}
   - component: {fileID: -163801283637082578}
   - component: {fileID: 9031972696612955502}
-  m_Layer: 12
+  m_Layer: 10
   m_Name: SpikeEnemy
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -96,6 +96,7 @@ MonoBehaviour:
     m_Bits: 512
   neutralSprite: {fileID: 6481584649568848959, guid: fc22fcd9f3dd2344ab9d3a77c09ac852, type: 3}
   whiteSprite: {fileID: 6481584649568848959, guid: fc22fcd9f3dd2344ab9d3a77c09ac852, type: 3}
+  neutralColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!61 &4546519656561499537
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -141,6 +142,9 @@ MonoBehaviour:
   _timeToBounce: 0.2
   MAX_HEALTH: 100
   _rigidbody2D: {fileID: -736992930557887591}
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
   damagable: 1
 --- !u!95 &9031972696612955502
 Animator:
@@ -172,7 +176,7 @@ GameObject:
   - component: {fileID: 612879596551047492}
   - component: {fileID: 3043365054859347526}
   - component: {fileID: 8050251305156101123}
-  m_Layer: 12
+  m_Layer: 10
   m_Name: Sprite
   m_TagString: Monster
   m_Icon: {fileID: 0}
