@@ -8,7 +8,7 @@ public class spikeEnemy : PatrolEnemy
     [SerializeField] private GameObject monster;
     [SerializeField] private GameObject spikes;
     // private Rigidbody2D reg;
-    private Animator _animator;
+    private Animator _animatorr;
     private LayerMask originalLayer;
     
     private static readonly int Walking = Animator.StringToHash("Walking");
@@ -20,7 +20,7 @@ public class spikeEnemy : PatrolEnemy
     { 
         base.Start();
         // reg = spikes.GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
+        _animatorr = GetComponent<Animator>();
         originalLayer = gameObject.layer;
         // if (_animator == null)
         //     _animator = GetComponentInChildren<Animator>();
@@ -44,22 +44,22 @@ public class spikeEnemy : PatrolEnemy
             if (IsOneHit)
             {
                 DisableSpikes();
-                _animator.SetTrigger(Reappear);
-                _animator.SetBool(Walking, true);
+                _animatorr.SetTrigger(Reappear);
+                _animatorr.SetBool(Walking, true);
                 colored = false;
             }
             else
             {
-                _animator.SetBool(Walking, false);
-                _animator.SetTrigger(Disappear);   
+                _animatorr.SetBool(Walking, false);
+                _animatorr.SetTrigger(Disappear);   
             }
             // reg.transform.position = rb.transform.position;
         }
         else
         {
             DisableSpikes();
-            _animator.SetTrigger(Reappear);
-            _animator.SetBool(Walking, true);
+            _animatorr.SetTrigger(Reappear);
+            _animatorr.SetBool(Walking, true);
         }
     }
 
