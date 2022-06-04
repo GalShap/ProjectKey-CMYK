@@ -49,6 +49,7 @@ public class bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.CompareTag("Projectile") || other.gameObject.CompareTag("Monster")) return;
+        if(!other.gameObject.CompareTag("Player")) Unactive();
         _animator.SetTrigger("Death");
         m_Rigidbody.velocity = Vector2.zero;
     }
