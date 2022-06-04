@@ -183,7 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1024
   neutralSprite: {fileID: -8689009931745917929, guid: d5104e2ba29b063478cf35073b9705aa, type: 3}
   whiteSprite: {fileID: -8689009931745917929, guid: d5104e2ba29b063478cf35073b9705aa, type: 3}
 --- !u!50 &4869845441258507805
@@ -280,6 +280,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftRoom: {fileID: 0}
   rightRoom: {fileID: 0}
+  onEnterLeft:
+    m_PersistentCalls:
+      m_Calls: []
+  onEnterRight:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!50 &3746891282148579364
 Rigidbody2D:
   serializedVersion: 4

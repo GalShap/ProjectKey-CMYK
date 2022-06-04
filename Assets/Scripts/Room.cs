@@ -16,7 +16,7 @@ public class Room : MonoBehaviour
 
     private void OnEnable()
     {
-        DisableContents();    
+        // DisableContents();    
     }
 
     private void Awake()
