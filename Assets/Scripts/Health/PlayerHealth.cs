@@ -39,6 +39,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     
     private static readonly int SpikesDeath = Animator.StringToHash("DeathBySpikes");
     private static readonly int MonsterDeath = Animator.StringToHash("DeathByMonster");
+    private static readonly int Hit = Animator.StringToHash("Hit");
 
     private enum CollisionWith
     {
@@ -270,10 +271,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             lives = MIN_LIVES;
             StartCoroutine(DeathSequence());
         }
-
         else
         {
             AudioManager.SharedAudioManager.PlayKeyActionSound((int) AudioManager.KeySounds.Hit);
+            playerAnimator.SetTrigger(Hit);
         }
 
         PlayerHUD.sharedHud.removeLifeOnUI(amount);
