@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyHealth : MonoBehaviour, IDamageable
 {
@@ -22,6 +23,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     [SerializeField] private int MAX_HEALTH = 100;
 
     [SerializeField] private Rigidbody2D _rigidbody2D;
+
+    [SerializeField] private UnityEvent onDeath;
     #endregion
 
     public bool damagable = true;
@@ -209,5 +212,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         {
             _animator.SetTrigger(Death);
         }
+        
+        onDeath.Invoke();
     }
 }

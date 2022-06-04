@@ -396,7 +396,7 @@ Animator:
   m_GameObject: {fileID: 1670827335478452197}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 804187ada7d74484297e910d2ee44bf9, type: 2}
+  m_Controller: {fileID: 9100000, guid: 30bf7def2a96e8c44b9c485715e74c9b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -421,6 +421,8 @@ MonoBehaviour:
   timerCounter: 3
   speed: 3
   attackRange: 3
+  lifeToGoDiffMode: 200
+  isLeft: 0
   b_Projectile: {fileID: 1029945653412360208, guid: 9c5b81ab9c1900a42ae97510e19a0e6e, type: 3}
   r_Projectile: {fileID: 1029945653412360208, guid: c8a0c630ac6056042a398fc38ab913ca, type: 3}
   m_SpawnTransform:
@@ -444,6 +446,7 @@ MonoBehaviour:
   - {fileID: 2648508187575044710}
   - {fileID: 67445009510677243}
   - {fileID: 3678904150410425645}
+  orb: {fileID: 0}
   player: {fileID: 0}
   right: {fileID: 0}
   left: {fileID: 0}

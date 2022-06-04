@@ -28,9 +28,12 @@ public class ColorOrb : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        ColorManager.AddColor(layer);
-        if(onTake != null)
-            onTake.Invoke();
-        Destroy(gameObject);
+        if (other.CompareTag("Player"))
+        {
+            ColorManager.AddColor(layer);
+            if(onTake != null)
+                onTake.Invoke();
+            Destroy(gameObject);   
+        }
     }
 }

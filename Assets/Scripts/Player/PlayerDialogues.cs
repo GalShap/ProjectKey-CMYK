@@ -47,16 +47,11 @@ public class PlayerDialogues : MonoBehaviour
 
     public void PinkFirst()
     {
-        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.PINK);
+        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.PINK, true, (() => { pinky.Playing = true;}));
     }
     
     public void PinkAgain()
     {
-        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.PINK_AGAIN);
-    }
-    
-    public void PinkDead()
-    {
-        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.PINK_DEAD, true);
+        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.PINK_AGAIN, true, (() => { pinky.Playing = true;}));
     }
 }

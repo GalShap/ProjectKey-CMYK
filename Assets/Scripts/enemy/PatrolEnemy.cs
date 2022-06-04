@@ -19,6 +19,8 @@ public class PatrolEnemy : EnemyObject
         counter = 0;
         _renderer = GetComponentInChildren<SpriteRenderer>();
         _animator = GetComponentInChildren<Animator>();
+        if (_animator == null)
+            _animator = GetComponent<Animator>();
         collisionOffset = Vector2.right * (_renderer.sprite.rect.width / _renderer.sprite.pixelsPerUnit) / 2;
     }
 
