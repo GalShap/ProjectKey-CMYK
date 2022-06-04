@@ -166,7 +166,7 @@ MonoBehaviour:
   player: {fileID: 8863397447226026584, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
   cannon: {fileID: 7958470730386325621}
   shootingSpot: {fileID: 7337950989626264123}
-  smooth: 5
+  smooth: 50
   tiltAngle: 60
   attackAngleFromPlayer: 3
   aimAtPlayer: 0

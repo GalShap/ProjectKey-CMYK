@@ -27,7 +27,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     
     private Rigidbody2D _playerRigidBody;
 
-    private BoxCollider2D _playerCollider; 
+    private BoxCollider2D _playerCollider;
+
+    private PlayerController _player;
     
     private bool _isBouncing = false;
 
@@ -62,6 +64,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         _playerRigidBody = GetComponent<Rigidbody2D>();
         _playerCollider = GetComponent<BoxCollider2D>();
         playerAnimator = GetComponentInChildren<Animator>();
+        _player = GetComponent<PlayerController>();
         lives = PlayerHUD.MaxLife;
     }
 
@@ -106,6 +109,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
             Vector2 kickback = GetKickback(other);
             PlayerKickBack(kickback);
+            _player.JumpHit();
             if (!other.gameObject.CompareTag("Spikes"))
             {
                 EnemyHealth enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
@@ -149,7 +153,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         var enemyPos = otherContact.collider.gameObject.transform.position;
         var normal = otherContact.contacts[0].normal;
 
-        var pushBack = Vector2.right * Mathf.Sign(playerPos.x-enemyPos.x) * 4;
+        var pushBack = Vector2.right * Mathf.Sign(playerPos.x-enemyPos.x) * 3;
         return (normal.y >= 0) ? normal + pushBack : pushBack;
     }
 

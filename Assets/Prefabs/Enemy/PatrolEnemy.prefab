@@ -177,7 +177,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8953315103178594193}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -235,6 +235,9 @@ MonoBehaviour:
   _timeToBounce: 0.2
   MAX_HEALTH: 100
   _rigidbody2D: {fileID: 4123525431797855058}
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
   damagable: 1
 --- !u!114 &4077122111839912163
 MonoBehaviour:
@@ -253,6 +256,7 @@ MonoBehaviour:
     m_Bits: 1024
   neutralSprite: {fileID: 2731795287329381114, guid: 0581e9e94a6a1494a832a4d22b139fc6, type: 3}
   whiteSprite: {fileID: 2731795287329381114, guid: 0581e9e94a6a1494a832a4d22b139fc6, type: 3}
+  neutralColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &-6406245334297346206
 MonoBehaviour:
   m_ObjectHideFlags: 0

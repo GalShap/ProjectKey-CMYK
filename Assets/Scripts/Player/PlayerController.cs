@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
     public static bool jumpAttacking = false; 
     private Vector2 movement;
     private Vector2 height;
+    private bool jumpHit;
 
     private static Vector2? kickbackVector2 = null;
     
@@ -124,7 +125,11 @@ public class PlayerController : MonoBehaviour
             if (!hitMonster)
             {
                 _animator.SetBool(Jump1, false);
-                if (jumpAttacking) jumpAttacking = false;
+                if (jumpAttacking)
+                {
+                    jumpAttacking = false;
+                    jumpHit = false;
+                }
                 onGround = checkGround;
             }
         }
@@ -170,12 +175,14 @@ public class PlayerController : MonoBehaviour
             kickbackVector2 = null;
         }
         else
-        {   
-            
-            _rigidbody2D.velocity = Vector2.Lerp(_rigidbody2D.velocity, 
-                        desiredVel, 
-                        acceleration * Time.fixedDeltaTime);
-            
+        {
+            if (!jumpHit)
+            {
+                _rigidbody2D.velocity = Vector2.Lerp(_rigidbody2D.velocity, 
+                    desiredVel, 
+                    acceleration * Time.fixedDeltaTime);   
+            }
+
             if (Math.Abs(_rigidbody2D.velocity.x) > maxSpeed)
             {
                 float sign = Mathf.Sign(_rigidbody2D.velocity.x);
@@ -447,7 +454,10 @@ public class PlayerController : MonoBehaviour
     {
         kickbackVector2 = kickback;
     }
-    
-        
-    
+
+
+    public void JumpHit()
+    {
+        jumpHit = true;
+    }
 }
