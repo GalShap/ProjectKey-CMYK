@@ -140,6 +140,11 @@ public class PlayerController : MonoBehaviour
         ModifyPhysics();
     }
 
+    public void ToIdle()
+    {
+        _animator.SetFloat(Action, IDLE);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Respawn"))
