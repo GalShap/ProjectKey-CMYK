@@ -280,24 +280,33 @@ public class PlayerHUD : MonoBehaviour
 
     private IEnumerator ReduceLifeSlider(int bar, int livesToRemove)
     {
-        int key = bar;
-        for (int i = 0; i < livesToRemove; ++i)
+        if (livesToRemove >= _currLife)
         {
-            int startVal = _lifeFillVal[key].Item2;
-            int endVal =  _lifeFillVal[key].Item1;
-            float elapsedTime = 0;
-            lifeFill.value = startVal;
-            while (elapsedTime < _timeToScaleLife)
-            {
-                lifeFill.value = Mathf.Lerp(startVal, endVal, (elapsedTime / _timeToScaleLife));
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
-
-            lifeFill.value = endVal;
-            key -= 1;
+            lifeFill.value = 0;
+            
         }
-        
+        else
+        {
+
+            int key = bar;
+            for (int i = 0; i < livesToRemove; ++i)
+            {
+                int startVal = _lifeFillVal[key].Item2;
+                int endVal = _lifeFillVal[key].Item1;
+                float elapsedTime = 0;
+                lifeFill.value = startVal;
+                while (elapsedTime < _timeToScaleLife)
+                {
+                    lifeFill.value = Mathf.Lerp(startVal, endVal, (elapsedTime / _timeToScaleLife));
+                    elapsedTime += Time.deltaTime;
+                    yield return null;
+                }
+
+                lifeFill.value = endVal;
+                key -= 1;
+            }
+        }
+
     }
 
     public void FullHealth()
