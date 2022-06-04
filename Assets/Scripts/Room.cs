@@ -27,13 +27,15 @@ public class Room : MonoBehaviour
     public CinemachineVirtualCamera Camera => camera;
 
     public void DisableContents()
-    {
-        contents.SetActive(false);
+    {   
+        if (contents != null)
+            contents.SetActive(false);
     }
     
     public void EnableContents()
-    { 
-        contents.SetActive(true);
+    {   
+        if (contents != null)
+            contents.SetActive(true);
     }
 
     public Color Color

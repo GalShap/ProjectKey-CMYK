@@ -106,9 +106,9 @@ TextureImporter:
       name: talking heads_0
       rect:
         serializedVersion: 2
-        x: 56
+        x: 55
         y: 769
-        width: 261
+        width: 262
         height: 261
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -127,9 +127,9 @@ TextureImporter:
       name: talking heads_1
       rect:
         serializedVersion: 2
-        x: 369
+        x: 368
         y: 769
-        width: 261
+        width: 262
         height: 261
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -148,9 +148,9 @@ TextureImporter:
       name: talking heads_2
       rect:
         serializedVersion: 2
-        x: 686
+        x: 685
         y: 769
-        width: 261
+        width: 262
         height: 261
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -169,9 +169,9 @@ TextureImporter:
       name: talking heads_3
       rect:
         serializedVersion: 2
-        x: 1004
+        x: 1003
         y: 769
-        width: 261
+        width: 262
         height: 261
       alignment: 0
       pivot: {x: 0, y: 0}
