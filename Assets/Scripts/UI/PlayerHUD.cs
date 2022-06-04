@@ -75,12 +75,12 @@ public class PlayerHUD : MonoBehaviour
     
     private Dictionary<int, Tuple<int, int>> _lifeFillVal = new Dictionary<int, Tuple<int, int>>()
     {
-        {1, new Tuple<int, int>(0, 21)},
-        {2, new Tuple<int, int>(21, 40)},
-        {3, new Tuple<int, int>(40, 59)},
-        {4, new Tuple<int, int>(59, 77)},
-        {5, new Tuple<int, int>(77, 95)},
-        {6, new Tuple<int, int>(95, 120)}
+        {1, new Tuple<int, int>(0, 25)},
+        {2, new Tuple<int, int>(25, 42)},
+        {3, new Tuple<int, int>(42, 60)},
+        {4, new Tuple<int, int>(60, 80)},
+        {5, new Tuple<int, int>(80, 98)},
+        {6, new Tuple<int, int>(98, 120)}
     };
 
     private Dictionary<int, int> _layerToColor = new Dictionary<int, int>()
