@@ -33,7 +33,7 @@ public class Room : MonoBehaviour
     
     public void EnableContents()
     { 
-        contents.SetActive(true);
+        if(contents!=null)contents.SetActive(true);
     }
 
     public Color Color
