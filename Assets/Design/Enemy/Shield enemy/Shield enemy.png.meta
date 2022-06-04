@@ -1,43 +1,25 @@
 fileFormatVersion: 2
-guid: ff2cdbe1dda930e44aceaf90f0ffec33
+guid: 7c5c538518b51694a88bb2f5f8073a80
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 542294333602425124
-    second: SPIKE death_0
+      213: 4258844865129183908
+    second: Shield enemy_0
   - first:
-      213: 8202464212474155913
-    second: SPIKE death_1
+      213: 5576331597808223393
+    second: Shield enemy_1
   - first:
-      213: 5927963529273739745
-    second: SPIKE death_2
+      213: 8562625667962990213
+    second: Shield enemy_2
   - first:
-      213: 9067389427775802831
-    second: SPIKE death_3
+      213: 1632663966056739162
+    second: Shield enemy_3
   - first:
-      213: 3663741428988497122
-    second: SPIKE death_4
+      213: 7537371228030489297
+    second: Shield enemy_4
   - first:
-      213: 342653311559284866
-    second: SPIKE death_5
-  - first:
-      213: -3753532929840896617
-    second: SPIKE death_6
-  - first:
-      213: -6336300107084632879
-    second: SPIKE death_7
-  - first:
-      213: -238069926543263772
-    second: SPIKE death_8
-  - first:
-      213: -2440365066193643673
-    second: SPIKE death_9
-  - first:
-      213: -9039539995163159705
-    second: SPIKE death_10
-  - first:
-      213: -8258635122017371485
-    second: SPIKE death_11
+      213: 566508853524908399
+    second: Shield enemy_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -68,7 +50,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -82,7 +64,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 150
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -104,7 +86,7 @@ TextureImporter:
     maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -116,7 +98,7 @@ TextureImporter:
     maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -127,127 +109,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SPIKE death_0
+      name: Shield enemy_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 300
-        width: 340
+        y: 0
+        width: 300
         height: 300
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 429641eb2dd968700800000000000000
-      internalID: 542294333602425124
+      spriteID: 4aa758b27d47a1b30800000000000000
+      internalID: 4258844865129183908
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SPIKE death_1
+      name: Shield enemy_1
       rect:
         serializedVersion: 2
-        x: 340
-        y: 300
-        width: 340
+        x: 300
+        y: 0
+        width: 300
         height: 300
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98350632eb105d170800000000000000
-      internalID: 8202464212474155913
+      spriteID: 1a445252b0c136d40800000000000000
+      internalID: 5576331597808223393
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SPIKE death_2
+      name: Shield enemy_2
       rect:
         serializedVersion: 2
-        x: 680
-        y: 300
-        width: 340
+        x: 600
+        y: 0
+        width: 300
         height: 300
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e905d31c6b544250800000000000000
-      internalID: 5927963529273739745
+      spriteID: 58e6393adae84d670800000000000000
+      internalID: 8562625667962990213
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SPIKE death_3
+      name: Shield enemy_3
       rect:
         serializedVersion: 2
-        x: 1020
-        y: 300
-        width: 340
+        x: 900
+        y: 0
+        width: 300
         height: 300
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fcd85bab4a6d5dd70800000000000000
-      internalID: 9067389427775802831
+      spriteID: a5174661a3368a610800000000000000
+      internalID: 1632663966056739162
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SPIKE death_4
+      name: Shield enemy_4
       rect:
         serializedVersion: 2
-        x: 1360
-        y: 300
-        width: 340
+        x: 1200
+        y: 0
+        width: 300
         height: 300
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2eccdb71b6938d230800000000000000
-      internalID: 3663741428988497122
+      spriteID: 1d2d10b723f1a9860800000000000000
+      internalID: 7537371228030489297
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SPIKE death_5
+      name: Shield enemy_5
       rect:
         serializedVersion: 2
-        x: 1700
-        y: 300
-        width: 340
+        x: 1500
+        y: 0
+        width: 300
         height: 300
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2883a941f5951c400800000000000000
-      internalID: 342653311559284866
+      spriteID: f6947700dc4acd700800000000000000
+      internalID: 566508853524908399
       vertices: []
       indices: 
       edges: []

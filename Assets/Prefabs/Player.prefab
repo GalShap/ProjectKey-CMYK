@@ -518,7 +518,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lives: 6
-  _bounce: 7
+  bounce: 6
+  timeToBounce: 0.2
+  timeToHit: 0.8
 --- !u!114 &1154897993
 MonoBehaviour:
   m_ObjectHideFlags: 0
