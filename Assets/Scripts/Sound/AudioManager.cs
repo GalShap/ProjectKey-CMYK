@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -23,6 +24,19 @@ public class AudioManager : MonoBehaviour
         public void PlayNextTrack()
         {
             _curTrackIndex = (_curTrackIndex == tracks.Count - 1) ? 0 : _curTrackIndex++;
+            tracksAudioSource.Stop();
+            tracksAudioSource.clip = tracks[_curTrackIndex];
+            tracksAudioSource.Play();
+        }
+        
+        /// <summary>
+        /// plays the previous audio track. Used When we want to go between worlds and sounds. 
+        /// </summary>
+        public void PlayPrevTrack()
+        {
+            if (_curTrackIndex != 0)
+                _curTrackIndex--;
+            
             tracksAudioSource.Stop();
             tracksAudioSource.clip = tracks[_curTrackIndex];
             tracksAudioSource.Play();
@@ -70,11 +84,24 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] private AudioSource keyAudioSource;
 
+    [SerializeField] private AudioSource uiAudioSource;
+
     [SerializeField] private List<AudioClip> keyAudioClips;
 
     [SerializeField] private List<AudioClip> enemyAudioClips;
+
+    [SerializeField] private List<AudioClip> uiAudioClips;
+
+    [SerializeField] private float defaultVolume = 0.7f;
     
+    private const float MaxVolume = 1f;
+
     public static AudioManager SharedAudioManager;
+    
+    public enum UiSounds
+    {
+        DialogueLetters, NextDialogue    
+    }
     
     public enum KeySounds
     {
@@ -85,14 +112,18 @@ public class AudioManager : MonoBehaviour
     {
         Hit, Shoot, Death
     }
-    // Start is called before the first frame update
 
     private void Awake()
     {
         SharedAudioManager = this;
         if (this != SharedAudioManager)
             Destroy(this);
-        
+
+
+        enemyAudioSource.volume = defaultVolume;
+        keyAudioSource.volume = defaultVolume;
+        uiAudioSource.volume = defaultVolume;
+
     }
     public void LoadNextMusic()
     {
@@ -119,14 +150,15 @@ public class AudioManager : MonoBehaviour
     /// 0 - Jump
     /// 1 - Attack
     /// 2 - Hit
+    /// 3 - Color Switch
+    /// 4 - Death
     /// </param>
     public void PlayKeyActionSound(int action)
     {
         // illegal action!
         if (action < (int) KeySounds.Jump || action > keyAudioClips.Count - 1)
             return;
-        
-    
+
         keyAudioSource.clip = keyAudioClips[action];
         keyAudioSource.PlayOneShot(keyAudioSource.clip);
     }
@@ -138,6 +170,7 @@ public class AudioManager : MonoBehaviour
     /// <param name="action">
     /// 0 - Hit
     /// 1 - Shoot
+    /// 2 - Death
     ///  </param>
     public void PlayEnemySounds(int action)
     {
@@ -146,8 +179,27 @@ public class AudioManager : MonoBehaviour
 
         enemyAudioSource.clip = enemyAudioClips[action];
         enemyAudioSource.PlayOneShot(enemyAudioSource.clip);
+    }
+    
+    /// <summary>
+    /// needs to be called when ui sound needs to be played. gets an action index and plays the sound accordingly. 
+    /// </summary>
+    /// <param name="action">
+    /// 0 - dialogue letters effect
+    /// 1 - next line arrow
+    /// 2 - 
+    ///  </param>
+    public void PlayUiSounds(int action)
+    {
+        uiAudioSource.volume = 0.3f; 
+        if (action < (int) UiSounds.DialogueLetters || action > uiAudioClips.Count - 1)
+            return;
 
-
+        if (action == (int) UiSounds.NextDialogue) uiAudioSource.volume = MaxVolume;
+            
+        uiAudioSource.clip = enemyAudioClips[action];
+        uiAudioSource.PlayOneShot(uiAudioSource.clip);
+        
     }
     
     

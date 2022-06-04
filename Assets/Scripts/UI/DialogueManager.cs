@@ -271,9 +271,14 @@ public class DialogueManager : MonoBehaviour
         speakerImage.sprite = SpeakersSprites[next.ID];
         TalkerNameTextBox.text = TalkerNames[next.ID];
         TextBox.text = "";
+        int index = 0;
         foreach (var letter in next.Sentence1)
         {
             TextBox.text += letter;
+            index++;
+            if (index % 2 == 0)
+                AudioManager.SharedAudioManager.PlayUiSounds((int) AudioManager.UiSounds.DialogueLetters);
+            
             yield return new WaitForSecondsRealtime(0.05f);
         }
         Arrow.SetActive(true);
@@ -346,7 +351,9 @@ public class DialogueManager : MonoBehaviour
         if (context.phase == InputActionPhase.Started)
         {
             if (hasDialogue && (time <= 0))
-            {
+            {   
+               
+               
                 NextDialogue();
                 time = timer;
             }
@@ -355,7 +362,9 @@ public class DialogueManager : MonoBehaviour
             {
                 dialogueEnd = true;
                 DisableDialog();
-            }   
+            }    
+            
+            AudioManager.SharedAudioManager.PlayUiSounds((int) AudioManager.UiSounds.NextDialogue);
         }
     }
 

@@ -337,6 +337,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     
     private IEnumerator DeathSequence()
     {   
+       print("got here");
         InputManager.Manager.DisableAll();
         _playerRigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
         _playerCollider.enabled = false;
@@ -357,8 +358,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         AudioManager.SharedAudioManager.PlayKeyActionSound((int) AudioManager.KeySounds.Death);
 
         yield return new WaitForSeconds(timeToDie);
-        
         Dead();
+        
+        
         _playerCollider.enabled = true;
         var b = RigidbodyConstraints2D.FreezeRotation;
         _playerRigidBody.constraints = b;
