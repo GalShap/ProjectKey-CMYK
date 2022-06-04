@@ -193,10 +193,20 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             return true;
         }
         
-        if (other.CompareTag("Monster") || other.gameObject.CompareTag("Projectile"))
+        if (other.CompareTag("Monster"))
         {
             _lastCollision = (int) CollisionWith.Monster;
             return true;
+        }
+
+        if (other.gameObject.CompareTag("Projectile"))
+        {
+            bullet b = other.GetComponent<bullet>();
+            if (b != null && b.IsActive)
+            {
+                _lastCollision = (int) CollisionWith.Monster;
+                return true;
+            }
         }
 
         return false;
