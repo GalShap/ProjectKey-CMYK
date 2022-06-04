@@ -12,11 +12,11 @@ public class JuiceEffects : MonoBehaviour
 
     [SerializeField] private bool isMoving = false;
 
-    [SerializeField] private int rotateSpeed = 1;
+    [SerializeField] private float rotateSpeed = 1;
 
-    [SerializeField] private int moveSpeed = 1;
+    [SerializeField] private float moveSpeed = 1;
 
-    [SerializeField] private int moveRadius = 1;
+    [SerializeField] private float moveRadius = 1;
     
     [Tooltip("0 is move up and down, 1 is move left and right")]
     [SerializeField] private int moveDir;
