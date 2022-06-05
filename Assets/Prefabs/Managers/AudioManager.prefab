@@ -170,7 +170,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -451,6 +451,7 @@ MonoBehaviour:
   uiAudioClips:
   - {fileID: 8300000, guid: fe4aa0b8e6d09ce47b06259f5ba62601, type: 3}
   - {fileID: 8300000, guid: 8f00d3e97513bb54aa763910e1e749e6, type: 3}
+  defaultVolume: 0.5
 --- !u!82 &4030067401159533735
 AudioSource:
   m_ObjectHideFlags: 0
