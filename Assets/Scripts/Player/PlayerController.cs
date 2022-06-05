@@ -327,13 +327,17 @@ public class PlayerController : MonoBehaviour
         {
             case InputActionPhase.Performed:
 
+                var input = context.ReadValue<Vector2>();
+                if(Math.Abs(input.x) <= 0.1)
+                    return;
+                
                 if (isTutorial && TutorialManager.Manager.State == TutorialManager.TutorialState.MOVE)
                 {
                     TutorialManager.Manager.HideTutorial();
                     TutorialManager.Manager.SetState(TutorialManager.TutorialState.JUMP);
                 }
 
-                movement = context.ReadValue<Vector2>();
+                movement = input;
                 
                 bool facingRight = _renderer.flipX;
                 
