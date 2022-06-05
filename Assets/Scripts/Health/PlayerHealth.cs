@@ -266,7 +266,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     /// </param>
     public void Damage(int amount)
     {   
-        print("got damage!");
+        
         PlayerHUD.sharedHud.removeLifeOnUI(amount);
         CameraManager.Manager.ShakeCamera();
         lives -= amount;

@@ -239,7 +239,7 @@ public class PlayerHUD : MonoBehaviour
             for (int i = 0; i < lives; i++)
             {
                 StartCoroutine(RemoveSingleLifeOnUi());
-                print(lifeFill.value);
+                
             }
 
             _currLife -= lives;

@@ -16,11 +16,12 @@ public abstract class EnemyObject : MonoBehaviour, ColorChangeListener
     protected bool colored;
     protected Vector2? KickBackVector;
 
-    protected bool canPlayAudio = false; 
- 
+    protected bool CanPlayAudio = false;
 
+    protected Collider2D _collider2D;
+
+ 
     // Start is called before the first frame update
-    
     public virtual void Start()
     {
         ColorManager.RegisterColorListener(this);
@@ -71,24 +72,7 @@ public abstract class EnemyObject : MonoBehaviour, ColorChangeListener
         KickBackVector = newKick;
     }
 
-   
     protected abstract void UponDead();
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {   
-        
-        if (other.gameObject.CompareTag("cameraPhysics"))
-        {
-            canPlayAudio = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {   
-       
-        if (other.gameObject.CompareTag("cameraPhysics"))
-        {
-            canPlayAudio = false;
-        }
-    }
+    
 }

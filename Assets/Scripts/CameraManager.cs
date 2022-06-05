@@ -103,6 +103,8 @@ public class CameraManager : MonoBehaviour
     public bool CanCameraSee(Collider2D obj)
     {
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(UnityEngine.Camera.main);
-        return GeometryUtility.TestPlanesAABB(planes , obj.bounds);
+        Bounds colliderBounds = obj.bounds;
+        colliderBounds.Expand(8f);
+        return GeometryUtility.TestPlanesAABB(planes , colliderBounds);
     }
 }
