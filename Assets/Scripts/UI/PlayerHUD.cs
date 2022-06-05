@@ -158,12 +158,8 @@ public class PlayerHUD : MonoBehaviour
         int newColor = ColorManager.CurrLayer;
 
         int indexToHighlight = sharedHud._layerToColor[newColor];
-        
-        Debug.Log(indexToHighlight);
-      
-        StartCoroutine(Highlight(indexToHighlight, _currColorPallete));
-
-      
+                      
+        StartCoroutine(Highlight(indexToHighlight, _currColorPallete));      
         
     }
 
