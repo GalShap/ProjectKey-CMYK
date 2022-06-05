@@ -450,7 +450,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0cdac68dd496db44f9522b996b801224, type: 3}
   - {fileID: 8300000, guid: 034a858b94638da4aa277b11f9a9906b, type: 3}
   uiAudioClips:
-  - {fileID: 8300000, guid: fe4aa0b8e6d09ce47b06259f5ba62601, type: 3}
+  - {fileID: 8300000, guid: 0205ec99ee948994f835000c2ccee0b1, type: 3}
   - {fileID: 8300000, guid: 8f00d3e97513bb54aa763910e1e749e6, type: 3}
   defaultVolume: 0.5
 --- !u!82 &4030067401159533735

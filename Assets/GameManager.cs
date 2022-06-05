@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         CameraManager.Manager.Camera = currRoom.Camera;
+        AudioManager.SharedAudioManager.Play();
         currRoom.EnableContents();
     }
 

@@ -98,34 +98,30 @@ public class PlayerHUD : MonoBehaviour
         One = 1, Two = 2, Three = 3
     }
 
-    public static PlayerHUD sharedHud;
+    public static PlayerHUD SharedHud;
     
     #region Constants
 
     public const int MaxLife = 6;
 
     private const int MaxLifeValue = 120;
-
-    private const int MaxAlpha = 255;
-
-    private const int MinAlpha = 100;
     
     #endregion
 
     void Awake()
     {
         lifeFill.value = MaxLifeValue;
-        if (sharedHud == null)
+        if (SharedHud == null)
         {
-             sharedHud = this;
+             SharedHud = this;
         }
     }
 
     private void Start()
     {
-        sharedHud._currColor = ColorManager.CurrLayer;
-        sharedHud.levelColors = levelColors;
-        sharedHud.lifeFill = lifeFill;
+        SharedHud._currColor = ColorManager.CurrLayer;
+        SharedHud.levelColors = levelColors;
+        SharedHud.lifeFill = lifeFill;
     }
 
     /// <summary>
@@ -157,13 +153,11 @@ public class PlayerHUD : MonoBehaviour
        
         int newColor = ColorManager.CurrLayer;
 
-        int indexToHighlight = sharedHud._layerToColor[newColor];
+        int indexToHighlight = SharedHud._layerToColor[newColor];
                       
         StartCoroutine(Highlight(indexToHighlight, _currColorPallete)); 
         
     }
-
-    
 
     /// <summary>
     ///  coroutine gets a level and current color and highlights the color while reducing the alpha and scale for all
@@ -229,7 +223,7 @@ public class PlayerHUD : MonoBehaviour
         int lives = livesToRemove;
         if (lives >= _currLife)
         {
-            setLifeBar(0);
+            SetLifeBar(0);
             _currLife = 0;
         }
 
@@ -262,7 +256,6 @@ public class PlayerHUD : MonoBehaviour
         _currLife += lives;
     }
 
-   
     private IEnumerator FillLifeSlider(int barKey, int livesToAdd)
     {
         int key = barKey;
@@ -348,7 +341,7 @@ public class PlayerHUD : MonoBehaviour
         return;
     }
 
-    public void setLifeBar(int value)
+    public void SetLifeBar(int value)
     {
         lifeFill.value = value;
     }

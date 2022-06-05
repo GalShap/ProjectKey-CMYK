@@ -3,10 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using UnityEngine.iOS;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
@@ -267,6 +264,7 @@ public class DialogueManager : MonoBehaviour
     }
     private IEnumerator DisplayNextLine(Sentence next)
     {   
+        AudioManager.SharedAudioManager.PlayUiSounds((int) AudioManager.UiSounds.DialogueLetters);
         Arrow.SetActive(false);
         speakerImage.sprite = SpeakersSprites[next.ID];
         TalkerNameTextBox.text = TalkerNames[next.ID];
@@ -276,8 +274,8 @@ public class DialogueManager : MonoBehaviour
         {
             TextBox.text += letter;
             index++;
-            if (index % 2 == 0)
-                AudioManager.SharedAudioManager.PlayUiSounds((int) AudioManager.UiSounds.DialogueLetters);
+            //if (index % 2 == 0)
+               // 
             
             yield return new WaitForSecondsRealtime(0.025f);
         }

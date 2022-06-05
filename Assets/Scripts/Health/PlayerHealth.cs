@@ -267,7 +267,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public void Damage(int amount)
     {   
         
-        PlayerHUD.sharedHud.removeLifeOnUI(amount);
+        PlayerHUD.SharedHud.removeLifeOnUI(amount);
         CameraManager.Manager.ShakeCamera();
         lives -= amount;
         if (lives <= MIN_LIVES)
@@ -298,7 +298,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         if (lives >= MAX_LIVES)
             lives = MAX_LIVES;
 
-        PlayerHUD.sharedHud.addLifeOnUI(amount);
+        PlayerHUD.SharedHud.addLifeOnUI(amount);
     }
 
     public void SetHealth(int amount)
@@ -308,12 +308,12 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
         if (amount < lives)
         {
-            PlayerHUD.sharedHud.removeLifeOnUI(lives - amount);
+            PlayerHUD.SharedHud.removeLifeOnUI(lives - amount);
         }
 
         else if (amount > lives)
         {
-            PlayerHUD.sharedHud.addLifeOnUI(amount - lives);
+            PlayerHUD.SharedHud.addLifeOnUI(amount - lives);
         }
 
         lives = amount;
@@ -332,7 +332,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         SetHealth(MAX_LIVES);
         GameManager.Manager.Respawn();
-        PlayerHUD.sharedHud.FullHealth();
+        PlayerHUD.SharedHud.FullHealth();
         
     }
 
