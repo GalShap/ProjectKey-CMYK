@@ -279,7 +279,7 @@ public class DialogueManager : MonoBehaviour
             if (index % 2 == 0)
                 AudioManager.SharedAudioManager.PlayUiSounds((int) AudioManager.UiSounds.DialogueLetters);
             
-            yield return new WaitForSecondsRealtime(0.05f);
+            yield return new WaitForSecondsRealtime(0.025f);
         }
         Arrow.SetActive(true);
         
