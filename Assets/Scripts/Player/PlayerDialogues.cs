@@ -57,7 +57,7 @@ public class PlayerDialogues : MonoBehaviour
 
     public void YellowFirst()
     {
-        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.PINK_AGAIN, true, 
+        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.YELLOW_FIRST, true, 
             (() =>
             {
                 InputManager.Manager.DisableAll();
