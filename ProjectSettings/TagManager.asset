@@ -10,6 +10,7 @@ TagManager:
   - AttackCollider
   - Spikes
   - Projectile
+  - cameraPhysics
   layers:
   - Default
   - TransparentFX

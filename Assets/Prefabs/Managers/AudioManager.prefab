@@ -170,7 +170,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -444,13 +444,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4f833d099f69b4540a23f8a6d5646dac, type: 3}
   - {fileID: 8300000, guid: 3432b85b25a9d7946910c320f165e25e, type: 3}
   - {fileID: 8300000, guid: 4121e4f2524212e47bc0d1d71fd5bacb, type: 3}
+  - {fileID: 8300000, guid: 4253393c8c8b46c4296994da0cac44b1, type: 3}
   enemyAudioClips:
   - {fileID: 8300000, guid: ef97b9cac4530454196814b0ba90b18a, type: 3}
   - {fileID: 8300000, guid: 0cdac68dd496db44f9522b996b801224, type: 3}
   - {fileID: 8300000, guid: 034a858b94638da4aa277b11f9a9906b, type: 3}
   uiAudioClips:
-  - {fileID: 8300000, guid: fe4aa0b8e6d09ce47b06259f5ba62601, type: 3}
+  - {fileID: 8300000, guid: 0205ec99ee948994f835000c2ccee0b1, type: 3}
   - {fileID: 8300000, guid: 8f00d3e97513bb54aa763910e1e749e6, type: 3}
+  defaultVolume: 0.5
 --- !u!82 &4030067401159533735
 AudioSource:
   m_ObjectHideFlags: 0

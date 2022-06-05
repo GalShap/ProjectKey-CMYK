@@ -98,34 +98,30 @@ public class PlayerHUD : MonoBehaviour
         One = 1, Two = 2, Three = 3
     }
 
-    public static PlayerHUD sharedHud;
+    public static PlayerHUD SharedHud;
     
     #region Constants
 
     public const int MaxLife = 6;
 
     private const int MaxLifeValue = 120;
-
-    private const int MaxAlpha = 255;
-
-    private const int MinAlpha = 100;
     
     #endregion
 
     void Awake()
     {
         lifeFill.value = MaxLifeValue;
-        if (sharedHud == null)
+        if (SharedHud == null)
         {
-             sharedHud = this;
+             SharedHud = this;
         }
     }
 
     private void Start()
     {
-        sharedHud._currColor = ColorManager.CurrLayer;
-        sharedHud.levelColors = levelColors;
-        sharedHud.lifeFill = lifeFill;
+        SharedHud._currColor = ColorManager.CurrLayer;
+        SharedHud.levelColors = levelColors;
+        SharedHud.lifeFill = lifeFill;
     }
 
     /// <summary>
@@ -157,17 +153,11 @@ public class PlayerHUD : MonoBehaviour
        
         int newColor = ColorManager.CurrLayer;
 
-        int indexToHighlight = sharedHud._layerToColor[newColor];
-        
-        Debug.Log(indexToHighlight);
-      
-        StartCoroutine(Highlight(indexToHighlight, _currColorPallete));
-
-      
+        int indexToHighlight = SharedHud._layerToColor[newColor];
+                      
+        StartCoroutine(Highlight(indexToHighlight, _currColorPallete)); 
         
     }
-
-    
 
     /// <summary>
     ///  coroutine gets a level and current color and highlights the color while reducing the alpha and scale for all
@@ -229,14 +219,26 @@ public class PlayerHUD : MonoBehaviour
 
     public void removeLifeOnUI(int livesToRemove)
     {   
-     
-        int lives = livesToRemove;
-        if (lives > _currLife)
-            lives = _currLife;
         
-       
-        StartCoroutine(ReduceLifeSlider(_currLife, lives));
-        _currLife -= lives;
+        int lives = livesToRemove;
+        if (lives >= _currLife)
+        {
+            SetLifeBar(0);
+            _currLife = 0;
+        }
+
+
+        else
+        {
+            for (int i = 0; i < lives; i++)
+            {
+                StartCoroutine(RemoveSingleLifeOnUi());
+                
+            }
+
+            _currLife -= lives;
+        }
+
     }
 
     public void addLifeOnUI(int livesToAdd)
@@ -254,7 +256,6 @@ public class PlayerHUD : MonoBehaviour
         _currLife += lives;
     }
 
-   
     private IEnumerator FillLifeSlider(int barKey, int livesToAdd)
     {
         int key = barKey;
@@ -278,10 +279,11 @@ public class PlayerHUD : MonoBehaviour
 
     private IEnumerator ReduceLifeSlider(int bar, int livesToRemove)
     {
-        if (livesToRemove >= _currLife)
-        {
+        if (livesToRemove >= _currLife && _currLife >= 1)
+        {       
+            print("death!");
             lifeFill.value = 0;
-            
+            yield return new WaitForSeconds(_timeToScaleLife);
         }
         else
         {
@@ -289,8 +291,12 @@ public class PlayerHUD : MonoBehaviour
             int key = bar;
             for (int i = 0; i < livesToRemove; ++i)
             {
+              
+                
                 int startVal = _lifeFillVal[key].Item2;
                 int endVal = _lifeFillVal[key].Item1;
+                print("start val: " + startVal);
+                print("end val: " + endVal);
                 float elapsedTime = 0;
                 lifeFill.value = startVal;
                 while (elapsedTime < _timeToScaleLife)
@@ -307,6 +313,23 @@ public class PlayerHUD : MonoBehaviour
 
     }
 
+    private IEnumerator RemoveSingleLifeOnUi()
+    {
+        float startVal = lifeFill.value;
+        float endVal = lifeFill.value - 20;
+        float time = 0;
+        while (time < _timeToScaleColor)
+        {
+            time += Time.deltaTime;
+            lifeFill.value = Mathf.Lerp(startVal, endVal, time / _timeToScaleColor);
+            yield return null;
+        }
+
+        lifeFill.value = endVal;
+
+
+    }
+
     public void FullHealth()
     {
         lifeFill.value = MaxLifeValue;
@@ -316,5 +339,10 @@ public class PlayerHUD : MonoBehaviour
     public void AddColor(ColorManager.ColorLayer cl)
     {
         return;
+    }
+
+    public void SetLifeBar(int value)
+    {
+        lifeFill.value = value;
     }
 }

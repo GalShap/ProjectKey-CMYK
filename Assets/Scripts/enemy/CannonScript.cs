@@ -19,7 +19,14 @@ public class CannonScript : EnemyObject
     [SerializeField] private float timerCounter = 3;
     private float timer = 0;
 
+    
+    public override void Start()
+    {   
+        base.Start();
+        _collider2D = gameObject.GetComponent<Collider2D>();
+    }
 
+   
     /// <summary>
     /// Message that is called once per frame
     /// </summary>
@@ -29,16 +36,18 @@ public class CannonScript : EnemyObject
         if (!(timer <= 0)) return;
         Shoot();
         timer = timerCounter;
+
     }
     
     protected void Shoot()
     {
         if (!colored)
-        {
-            AudioManager.SharedAudioManager.PlayEnemySounds((int) AudioManager.EnemySounds.Shoot);
-            Instantiate(m_Projectile, m_SpawnTransform.position, m_SpawnTransform.rotation);
+        {   
+            if (CameraManager.Manager.CanCameraSee(_collider2D)){
+                AudioManager.SharedAudioManager.PlayEnemySounds((int) AudioManager.EnemySounds.Shoot);
+                Instantiate(m_Projectile, m_SpawnTransform.position, m_SpawnTransform.rotation);
+            }
         }
-        
     }
 
     private float PositionX()
@@ -56,4 +65,5 @@ public class CannonScript : EnemyObject
     {
         gameObject.SetActive(false);
     }
+  
 }

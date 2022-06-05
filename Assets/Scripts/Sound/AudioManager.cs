@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Build;
+
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -23,7 +23,7 @@ public class AudioManager : MonoBehaviour
         /// </summary>
         public void PlayNextTrack()
         {
-            _curTrackIndex = (_curTrackIndex == tracks.Count - 1) ? 0 : _curTrackIndex++;
+            _curTrackIndex = (_curTrackIndex == tracks.Count - 1) ? 0 : ++_curTrackIndex;
             tracksAudioSource.Stop();
             tracksAudioSource.clip = tracks[_curTrackIndex];
             tracksAudioSource.Play();
@@ -134,6 +134,11 @@ public class AudioManager : MonoBehaviour
     {
         musicAudioQueue.GetMusicAudioSrc().Stop();
     }
+
+    public void Play()
+    {
+        musicAudioQueue.PlayCurTrack();
+    }
     
     /// <summary>
     /// call this when an enemy is being hit by key.
@@ -198,7 +203,8 @@ public class AudioManager : MonoBehaviour
         if (action == (int) UiSounds.NextDialogue) uiAudioSource.volume = MaxVolume;
             
         uiAudioSource.clip = enemyAudioClips[action];
-        uiAudioSource.PlayOneShot(uiAudioSource.clip);
+        //uiAudioSource.PlayOneShot(uiAudioSource.clip);
+        uiAudioSource.Play();
         
     }
     
