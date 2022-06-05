@@ -1,14 +1,10 @@
-using System;
-using System.Collections;
+﻿
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
 using UnityEngine;
 
-public class MovingPlatform : MonoBehaviour
+public class MovingObject: MonoBehaviour
 {
-    
-    [Tooltip("The speed of the platform")]
+        [Tooltip("The speed of the platform")]
     [SerializeField] private int speed = 1;
     
     [Tooltip("The index of the starting position of the platform")]
@@ -24,8 +20,6 @@ public class MovingPlatform : MonoBehaviour
     private const int INITAL_POS_IDX = 0;
 
     private Rigidbody2D _rigidbody2D;
-
-    private HashSet<Rigidbody2D> colliding = new HashSet<Rigidbody2D>();
 
     private Vector2 lastPos;
 
@@ -43,28 +37,8 @@ public class MovingPlatform : MonoBehaviour
         _curIndex = startPos;
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        Rigidbody2D rb = other.collider.GetComponent<Rigidbody2D>();
-        if(rb == null)
-            return;
-    
-        if(!colliding.Contains(rb))
-            colliding.Add(rb);
-    }
-
-    private void OnCollisionExit2D(Collision2D other)
-    {
-        Rigidbody2D rb = other.collider.GetComponent<Rigidbody2D>();
-        if(rb == null)
-            return;
-        
-        if(colliding.Contains(rb))
-            colliding.Remove(rb);
-    }
-    
     // Update is called once per frame
-    void FixedUpdate()
+    protected  void FixedUpdate()
     {
         if (Vector3.Distance(points[_curIndex], transform.localPosition) < MIN_DISTANCE)
         {
@@ -78,16 +52,6 @@ public class MovingPlatform : MonoBehaviour
         
         _rigidbody2D.velocity = (points[_curIndex]-transform.localPosition).normalized * Time.fixedDeltaTime * speed;
         var delta = _rigidbody2D.position - lastPos;
-
-        if (colliding.Count > 0)
-        {
-            colliding = new HashSet<Rigidbody2D>(colliding.Where(r => r != null).ToList());
-            foreach (var rb in colliding)
-            {
-                rb.position += delta;
-            }   
-        }
-
         lastPos = _rigidbody2D.position;
     }
 }

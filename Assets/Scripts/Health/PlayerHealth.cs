@@ -127,12 +127,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             {
                 enemy = other.gameObject.GetComponentInChildren<EnemyObject>();
             }
-            
-            if(enemy == null)
-                return;
 
             int damage = 1;
-            if (enemy.IsOneHit)
+            if (enemy != null && enemy.IsOneHit)
             {
                 damage = lives;
             }
