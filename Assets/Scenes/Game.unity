@@ -9063,6 +9063,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1988015897410797630, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3504744799610682642, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
       propertyPath: TalkerNameTextBox
       value: 
@@ -9175,6 +9179,22 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: be5b5279ba7bc624c96f9eb3cce78015, type: 2}
+    - target: {fileID: 8113624229060983965, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.49999997
+      objectReference: {fileID: 0}
+    - target: {fileID: 8113624229060983965, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5862194
+      objectReference: {fileID: 0}
+    - target: {fileID: 8113624229060983965, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -51.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8113624229060983965, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -63.7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
 --- !u!1 &186283300 stripped
