@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class EnemyObject : MonoBehaviour, ColorChangeListener
@@ -14,6 +15,8 @@ public abstract class EnemyObject : MonoBehaviour, ColorChangeListener
     protected Animator _animator;
     protected bool colored;
     protected Vector2? KickBackVector;
+
+    protected bool canPlayAudio = false; 
  
 
     // Start is called before the first frame update
@@ -70,4 +73,22 @@ public abstract class EnemyObject : MonoBehaviour, ColorChangeListener
 
    
     protected abstract void UponDead();
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {   
+        
+        if (other.gameObject.CompareTag("cameraPhysics"))
+        {
+            canPlayAudio = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {   
+       
+        if (other.gameObject.CompareTag("cameraPhysics"))
+        {
+            canPlayAudio = false;
+        }
+    }
 }

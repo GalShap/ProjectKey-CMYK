@@ -19,7 +19,9 @@ public class CannonScript : EnemyObject
     [SerializeField] private float timerCounter = 3;
     private float timer = 0;
 
+    
 
+   
     /// <summary>
     /// Message that is called once per frame
     /// </summary>
@@ -35,7 +37,13 @@ public class CannonScript : EnemyObject
     {
         if (!colored)
         {
-            AudioManager.SharedAudioManager.PlayEnemySounds((int) AudioManager.EnemySounds.Shoot);
+
+            if (canPlayAudio)
+            {   
+                print("printing");
+                AudioManager.SharedAudioManager.PlayEnemySounds((int) AudioManager.EnemySounds.Shoot);
+            }
+
             Instantiate(m_Projectile, m_SpawnTransform.position, m_SpawnTransform.rotation);
         }
         

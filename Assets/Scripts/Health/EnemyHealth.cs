@@ -138,8 +138,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     }
 
     private void EnemyKickBack(GameObject other)
-    {   
-        
+    {
         Rigidbody2D playerRigidBody = other.GetComponent<Rigidbody2D>();
         if (playerRigidBody == null)
             playerRigidBody = other.GetComponentInParent<Rigidbody2D>();
@@ -165,8 +164,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     public void Damage(int amount)
     {
         if(!damagable) return;
-        
-       
         health -= amount;
         if (health <= MIN_HEALTH)
         {

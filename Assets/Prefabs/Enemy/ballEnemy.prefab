@@ -234,6 +234,7 @@ GameObject:
   - component: {fileID: 7868476777670369389}
   - component: {fileID: 5179236062697943825}
   - component: {fileID: 7188796895464278061}
+  - component: {fileID: 1366393352610159439}
   m_Layer: 12
   m_Name: Circle
   m_TagString: Untagged
@@ -341,7 +342,7 @@ MonoBehaviour:
   m_SpawnTransform: {fileID: 7337950989626264123}
   player: {fileID: 8863397447226026584, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
   len: 4
-  timerCounter: 3
+  timerCounter: 0.3
 --- !u!60 &7188796895464278061
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -410,3 +411,24 @@ PolygonCollider2D:
       - {x: 0.185, y: -1.27}
       - {x: 0.155, y: -1.27}
       - {x: 0.155, y: -1.26}
+--- !u!50 &1366393352610159439
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7958470730386325621}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7

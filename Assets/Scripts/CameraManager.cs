@@ -15,9 +15,12 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private float lookSpeed = 1;
     [SerializeField] private float lookDistance = 1;
 
+    //[SerializeField] private Camera mainCamera; 
+
     private CinemachineVirtualCamera _currCamera;
     private CinemachineFramingTransposer _transposer;
     private CinemachineBasicMultiChannelPerlin _perlin;
+    
     
     private float shakeCounter;
     private Vector3 lookAhead;
@@ -95,5 +98,11 @@ public class CameraManager : MonoBehaviour
                 lookAhead = Vector2.zero;
                 break;
         }
+    }
+
+    public bool CanCameraSee(Collider2D obj)
+    {
+        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(UnityEngine.Camera.main);
+        return GeometryUtility.TestPlanesAABB(planes , obj.bounds);
     }
 }

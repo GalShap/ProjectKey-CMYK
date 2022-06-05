@@ -159,7 +159,7 @@ public class PlayerHUD : MonoBehaviour
 
         int indexToHighlight = sharedHud._layerToColor[newColor];
                       
-        StartCoroutine(Highlight(indexToHighlight, _currColorPallete));      
+        StartCoroutine(Highlight(indexToHighlight, _currColorPallete)); 
         
     }
 
@@ -225,14 +225,26 @@ public class PlayerHUD : MonoBehaviour
 
     public void removeLifeOnUI(int livesToRemove)
     {   
-     
-        int lives = livesToRemove;
-        if (lives > _currLife)
-            lives = _currLife;
         
-       
-        StartCoroutine(ReduceLifeSlider(_currLife, lives));
-        _currLife -= lives;
+        int lives = livesToRemove;
+        if (lives >= _currLife)
+        {
+            setLifeBar(0);
+            _currLife = 0;
+        }
+
+
+        else
+        {
+            for (int i = 0; i < lives; i++)
+            {
+                StartCoroutine(RemoveSingleLifeOnUi());
+                print(lifeFill.value);
+            }
+
+            _currLife -= lives;
+        }
+
     }
 
     public void addLifeOnUI(int livesToAdd)
@@ -274,10 +286,11 @@ public class PlayerHUD : MonoBehaviour
 
     private IEnumerator ReduceLifeSlider(int bar, int livesToRemove)
     {
-        if (livesToRemove >= _currLife)
-        {
+        if (livesToRemove >= _currLife && _currLife >= 1)
+        {       
+            print("death!");
             lifeFill.value = 0;
-            
+            yield return new WaitForSeconds(_timeToScaleLife);
         }
         else
         {
@@ -285,8 +298,12 @@ public class PlayerHUD : MonoBehaviour
             int key = bar;
             for (int i = 0; i < livesToRemove; ++i)
             {
+              
+                
                 int startVal = _lifeFillVal[key].Item2;
                 int endVal = _lifeFillVal[key].Item1;
+                print("start val: " + startVal);
+                print("end val: " + endVal);
                 float elapsedTime = 0;
                 lifeFill.value = startVal;
                 while (elapsedTime < _timeToScaleLife)
@@ -303,6 +320,23 @@ public class PlayerHUD : MonoBehaviour
 
     }
 
+    private IEnumerator RemoveSingleLifeOnUi()
+    {
+        float startVal = lifeFill.value;
+        float endVal = lifeFill.value - 20;
+        float time = 0;
+        while (time < _timeToScaleColor)
+        {
+            time += Time.deltaTime;
+            lifeFill.value = Mathf.Lerp(startVal, endVal, time / _timeToScaleColor);
+            yield return null;
+        }
+
+        lifeFill.value = endVal;
+
+
+    }
+
     public void FullHealth()
     {
         lifeFill.value = MaxLifeValue;
@@ -312,5 +346,10 @@ public class PlayerHUD : MonoBehaviour
     public void AddColor(ColorManager.ColorLayer cl)
     {
         return;
+    }
+
+    public void setLifeBar(int value)
+    {
+        lifeFill.value = value;
     }
 }
