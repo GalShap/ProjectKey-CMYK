@@ -25,7 +25,8 @@ public class DialogueManager : MonoBehaviour
         BEFORE_PINK,
         PINK,
         PINK_AGAIN,
-        PINK_DEAD
+        PINK_DEAD,
+        YELLOW_FIRST
     }
 
     [Serializable]
@@ -160,20 +161,20 @@ public class DialogueManager : MonoBehaviour
             new List<Sentence>()
             {
                 new Sentence("What the hell?",0),
-                new Sentence("Oh ho ho... Look who we have here! Are you lost my dear?",1),
+                new Sentence("Oh ho ho... Look who we have here! Are you lost my dear?",2),
                 new Sentence("Do I know you?",0),
-                new Sentence("Nah. I don't think you do. But my brother took a little beating by you.",1),
+                new Sentence("Nah. I don't think you do. But my brother took a little beating by you.",2),
                 new Sentence("Your... brother...?",0),
-                new Sentence("Hell yeah, little cyan dude, more piano and brass. Seems it'll Take more distortion to kick your ass",1),
+                new Sentence("Hell yeah, little cyan dude, more piano and brass. Seems it'll Take more distortion to kick your ass",2),
                 new Sentence("What's with the rhymes?",0),
-                new Sentence("Ain't nothing to it, just adding some groove. C'mon princess, let's see you move",1)
+                new Sentence("Ain't nothing to it, just adding some groove. C'mon princess, let's see you move",2)
             }
         },
         {
             Dialogues.PINK_AGAIN,
             new List<Sentence>()
             {
-                new Sentence("Back again? Sucks for you. Get ready for round two!",1),
+                new Sentence("Back again? Sucks for you. Get ready for round two!",2),
                 new Sentence("Lets just get this over with...",0)
             }
         },
@@ -181,9 +182,21 @@ public class DialogueManager : MonoBehaviour
             Dialogues.PINK_DEAD,
             new List<Sentence>()
             {
-                new Sentence("Nice going kid, you've got some spark. And here I am only left with the bark",1),
+                new Sentence("Nice going kid, you've got some spark. And here I am only left with the bark",2),
                 new Sentence("You've had a good run, I'll give you that. But there are some grudges no rhymes can bat",0),
-                new Sentence("You're not quite done, there's a way to go",1),
+                new Sentence("You're not quite done, there's a way to go",2),
+            }
+        },
+        {
+            Dialogues.YELLOW_FIRST,
+            new List<Sentence>()
+            {
+                new Sentence("AW C'MON!",0),
+                new Sentence("Ah... We finally meet, child.",3),
+                new Sentence("Let's get this over with...",0),
+                new Sentence("You'd like that wouldn't you? For I am just another obstacle in your road to freedom.",3),
+                new Sentence("I am sorry to disappoint you child... We shall leave the battle to another time.",3),
+                new Sentence("Go. Enjoy your night. We shall resume our business next time we meet.",3)
             }
         }
     };

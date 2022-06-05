@@ -54,4 +54,13 @@ public class PlayerDialogues : MonoBehaviour
     {
         DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.PINK_AGAIN, true, (() => { pinky.Playing = true;}));
     }
+
+    public void YellowFirst()
+    {
+        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.PINK_AGAIN, true, 
+            (() =>
+            {
+                InputManager.Manager.DisableAll();
+            }));
+    }
 }
