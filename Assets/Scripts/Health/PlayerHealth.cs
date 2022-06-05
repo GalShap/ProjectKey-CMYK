@@ -341,20 +341,22 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         InputManager.Manager.DisableAll();
         _playerRigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
         _playerCollider.enabled = false;
-        switch (_lastCollision)
-        {
+        //switch (_lastCollision)
+        //{
             // play spikes death animation
-            case (int) CollisionWith.Spikes:
-                playerAnimator.SetTrigger(SpikesDeath);
-                break;
+           // case (int) CollisionWith.Spikes:
+              //  playerAnimator.SetTrigger(SpikesDeath);
+                //break;
             
             
             // play monster death animation
-            case (int) CollisionWith.Monster:
-                playerAnimator.SetTrigger(MonsterDeath);
-                break;
+            //case (int) CollisionWith.Monster:
+               // playerAnimator.SetTrigger(MonsterDeath);
+                //break;
             
-        }
+        //}
+        
+        playerAnimator.SetTrigger(MonsterDeath);
         AudioManager.SharedAudioManager.PlayKeyActionSound((int) AudioManager.KeySounds.Death);
 
         yield return new WaitForSeconds(timeToDie);
