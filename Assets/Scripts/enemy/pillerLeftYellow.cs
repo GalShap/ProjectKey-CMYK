@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class pillerLeftYellow : pillarScript
 {
+    
     // // Start is called before the first frame update
-    // void Start()
-    // {
-    //     
-    // }
+    void Start()
+    {
+        side = PilerSide.LEFT;
+    }
     //
     // // Update is called once per frame
     // void Update()

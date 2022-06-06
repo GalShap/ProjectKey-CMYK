@@ -5,6 +5,11 @@ using UnityEngine;
 public class DownPillar : pillarScript
 {
     
+    void Start()
+    {
+        side = PilerSide.DOWN;
+    }
+    
     public override void StopMovement()
     {
         moveForwed = false;

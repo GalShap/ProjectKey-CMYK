@@ -11,10 +11,17 @@ public abstract class pillarScript : MonoBehaviour
     protected Vector3 startPostion;
 
     [SerializeField] protected GameObject OtherBlock;
+    [SerializeField] protected GameObject blockToStop;
 
     // [SerializeField] private Transform pointA;
     // [SerializeField] private Transform pointB;
     [SerializeField] protected float speed = 3;
+    protected PilerSide side;
+
+    public enum PilerSide
+    {
+        LEFT, RIGHT, UP, DOWN
+    };
 
     private void Awake()
     {
@@ -22,10 +29,10 @@ public abstract class pillarScript : MonoBehaviour
         startPostion = transform.position;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+    // // Start is called before the first frame update
+    // void Start()
+    // {
+    // }
 
     // Update is called once per frame
     void Update()
@@ -44,6 +51,7 @@ public abstract class pillarScript : MonoBehaviour
         }
         else
         {
+            print("are We Here");
             rb.velocity = Vector2.zero;
         }
     }
@@ -86,9 +94,14 @@ public abstract class pillarScript : MonoBehaviour
             CollideWithOtherBlock();
         }
     }
-
+    
     public void resetPostion()
     {
         transform.position = startPostion;
+    }
+
+    public PilerSide getSide()
+    {
+        return side;
     }
 }

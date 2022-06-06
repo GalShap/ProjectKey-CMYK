@@ -5,10 +5,10 @@ using UnityEngine;
 public class yellowPillarRight : pillarScript
 {
     // // Start is called before the first frame update
-    // void Start()
-    // {
-    //     
-    // }
+    void Start()
+    {
+        side = PilerSide.RIGHT;
+    }
     //
     // // Update is called once per frame
     // void Update()

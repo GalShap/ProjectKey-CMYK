@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class upPillar : pillarScript
 {
+    void Start()
+    {
+        side = PilerSide.UP;
+    }
     
     public override void StopMovement()
     {
