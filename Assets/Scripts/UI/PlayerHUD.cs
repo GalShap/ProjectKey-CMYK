@@ -1,11 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
-using Debug = UnityEngine.Debug;
+
 
 public class PlayerHUD : MonoBehaviour
 {    
@@ -15,7 +14,13 @@ public class PlayerHUD : MonoBehaviour
     {
         [SerializeField] private GameObject pallete;
         [SerializeField] private List<Image> colorsInPallete;
-
+        
+        private Dictionary<int, float> RotatationValues = new Dictionary<int, float>()
+        {
+           
+            {3, 60f}
+            {4, }
+        }
         private void highlightColors(int active)
         {
             for (int i = 0; i < colorsInPallete.Count; i++)
@@ -52,6 +57,35 @@ public class PlayerHUD : MonoBehaviour
              color.a = 0.6f;
 
              colorsInPallete[index].color = color;
+         }
+
+         public void rotate(bool clockWise)
+         {
+             Vector3 rot;
+             float degrees = 360 / (float) colorsInPallete.Count;
+             if (clockWise == true)
+             {
+                  rot = new Vector3(0, 0, degrees);
+                 
+             }
+
+             else
+             {
+                  rot = new Vector3(0, 0, -degrees);
+             }
+                
+             pallete.transform.Rotate(rot);
+
+         }
+
+         public void ResetRotation()
+         {
+             for (int i = 0; i < colorsInPallete.Count; i++)
+             {
+                 var cur  = colorsInPallete[i].transform.rotation;
+                 cur.eulerAngles = Vector3.zero;
+                 colorsInPallete[i].transform.rotation = cur;
+             }
          }
          
          
@@ -142,6 +176,7 @@ public class PlayerHUD : MonoBehaviour
         }
 
         _currColorPallete = level;
+        
     }
 
     
@@ -155,7 +190,17 @@ public class PlayerHUD : MonoBehaviour
 
         int indexToHighlight = SharedHud._layerToColor[newColor];
                       
-        StartCoroutine(Highlight(indexToHighlight, _currColorPallete)); 
+        StartCoroutine(Highlight(indexToHighlight, _currColorPallete));
+
+        if (indexToHighlight > _currColor)
+        {
+            levelColors[_currColorPallete].rotate(true);
+        }
+
+        else
+        {
+            levelColors[_currColorPallete].rotate(false);
+        }
         
     }
 
@@ -187,8 +232,8 @@ public class PlayerHUD : MonoBehaviour
             while (time < _timeToScaleColor)
             {
 
-                oldOne.a = Mathf.Lerp(1, 0.6f, time / _timeToScaleColor);
-                newOne.a = Mathf.Lerp(0.6f, 1, time / _timeToScaleColor);
+                oldOne.a = Mathf.Lerp(1, 0.3f, time / _timeToScaleColor);
+                newOne.a = Mathf.Lerp(0.3f, 1, time / _timeToScaleColor);
                 colors[newColor].color = newOne;
                 if (oldColor >= 0)
                 {
@@ -199,7 +244,7 @@ public class PlayerHUD : MonoBehaviour
                 yield return null;
             }
 
-            oldOne.a = 0.6f;
+            oldOne.a = 0.3f;
             newOne.a = 1;
             colors[newColor].color = newOne;
             if (oldColor >= 0) colors[oldColor].color = oldOne;

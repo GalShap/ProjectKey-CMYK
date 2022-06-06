@@ -45,7 +45,9 @@ public class AudioManager : MonoBehaviour
         /// plays track of the current index
         /// </summary>
         public void PlayCurTrack()
-        {
+        {   
+            
+            print("index: " + _curTrackIndex); 
             tracksAudioSource.Stop();
             tracksAudioSource.clip = tracks[_curTrackIndex];
             tracksAudioSource.Play();
@@ -136,7 +138,8 @@ public class AudioManager : MonoBehaviour
     }
 
     public void Play()
-    {
+    {   
+        
         musicAudioQueue.PlayCurTrack();
     }
     
@@ -206,6 +209,11 @@ public class AudioManager : MonoBehaviour
         //uiAudioSource.PlayOneShot(uiAudioSource.clip);
         uiAudioSource.Play();
         
+    }
+
+    public void PlayByIndex(int index)
+    {
+        musicAudioQueue.PlayTrackByIndex(index);
     }
     
     
