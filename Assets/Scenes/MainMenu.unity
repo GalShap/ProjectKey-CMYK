@@ -1408,7 +1408,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2107683066}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: OnSelect
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1419,6 +1419,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e2231185-d115-45c1-bd88-9868f213f389
     m_ActionName: Menu/Select
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4e5fa134-f742-4fc6-931d-97a6d2214106
+    m_ActionName: Player/Reset[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Menu

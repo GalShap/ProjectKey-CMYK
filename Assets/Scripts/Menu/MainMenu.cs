@@ -34,11 +34,14 @@ public class MainMenu: MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        var val = context.ReadValue<Vector2>();
-        if (val.y > 0)
-            MoveUp();
-        else if (val.y < 0)
-            MoveDown();
+        if (context.phase == InputActionPhase.Started)
+        {
+            var val = context.ReadValue<Vector2>();
+            if (val.y > 0)
+                MoveUp();
+            else if (val.y < 0)
+                MoveDown();   
+        }
     }
     private void MoveDown()
     {   
@@ -77,17 +80,20 @@ public class MainMenu: MonoBehaviour
         }
     }
 
-    public void OnSelect()
+    public void OnSelect(InputAction.CallbackContext context)
     {
-        switch (_curMode)
+        if (context.phase == InputActionPhase.Started)
         {
-            case (int) Mode.Play:
-                LoadGame();
-                break;
+            switch (_curMode)
+            {
+                case (int) Mode.Play:
+                    LoadGame();
+                    break;
             
-            case (int) Mode.Exit:
-                Exit();
-                break;
+                case (int) Mode.Exit:
+                    Exit();
+                    break;
+            }   
         }
     }
     

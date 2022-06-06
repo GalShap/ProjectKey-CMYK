@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
@@ -316,6 +317,12 @@ public class PlayerController : MonoBehaviour
                 jumping = false;
                 break;
         }
+    }
+
+    public void OnReset(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+            SceneManager.LoadScene("MainMenu");
     }
 
     public void onMove(InputAction.CallbackContext context)
