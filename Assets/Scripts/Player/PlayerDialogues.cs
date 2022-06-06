@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class PlayerDialogues : MonoBehaviour
@@ -9,6 +10,7 @@ public class PlayerDialogues : MonoBehaviour
     [SerializeField] private Collider2D playerCollider;
     [SerializeField] private Collider2D blueCollider;
     [SerializeField] private MagentaGod pinky;
+    [SerializeField] private UnityEvent yellowBoss;
 
     private void Start()
     {
@@ -60,7 +62,7 @@ public class PlayerDialogues : MonoBehaviour
         DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.YELLOW_FIRST, true, 
             (() =>
             {
-                InputManager.Manager.DisableAll();
+                yellowBoss.Invoke();
             }));
     }
 }

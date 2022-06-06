@@ -113,6 +113,11 @@ public class AudioManager : MonoBehaviour
         Hit, Shoot, Death
     }
 
+    public void PlayPrev()
+    {
+        musicAudioQueue.PlayPrevTrack();
+    }
+    
     private void Awake()
     {
         SharedAudioManager = this;

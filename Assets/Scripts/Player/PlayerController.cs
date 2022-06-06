@@ -78,6 +78,12 @@ public class PlayerController : MonoBehaviour
         collisionOffset = Vector2.right * ((_renderer.sprite.rect.width/_renderer.sprite.pixelsPerUnit) / 2 - collisionEps);
     }
 
+    private void Start()
+    {
+        if(!isTutorial)
+            AudioManager.SharedAudioManager.LoadNextMusic();
+    }
+
     private void Update()
     {
         if (attackCounter > 0)

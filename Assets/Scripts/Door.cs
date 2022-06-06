@@ -28,7 +28,7 @@ public class Door : MonoBehaviour
         GameManager.Manager.SetRoom(leftRoom);
         leftRoom.EnableContents();
         rightRoom.DisableContents();
-       
+       EnterLeft();
         // SetLeftCamera();
     }
     
@@ -37,6 +37,7 @@ public class Door : MonoBehaviour
         GameManager.Manager.SetRoom(rightRoom);
         rightRoom.EnableContents();
         leftRoom.DisableContents();
+        EnterRight();
         
         // SetRightCamera();
     }

@@ -22,6 +22,7 @@ public class BlueGod : MonoBehaviour
         _animator = GetComponent<Animator>();
         _collider = GetComponent<CapsuleCollider2D>();
         _rigidbody = GetComponentInChildren<Rigidbody2D>();
+        
     }
 
     private void Update()
