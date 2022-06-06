@@ -55,6 +55,8 @@ public class ColorManager : MonoBehaviour
     private HashSet<ColorChangeListener> colorListeners = new HashSet<ColorChangeListener>();
 
     private bool _afterAwake = false;
+
+    private bool _afterStart = false;
     
     public static LayerMask GroundLayers
     {
@@ -274,6 +276,7 @@ public class ColorManager : MonoBehaviour
     {
         ColorLayer cl = availableLayers[color];
         PlayerHUD.SharedHud.HighlightColor();
+        PlayerHUD.SharedHud.rotate();
         SetColor(cl.name);
     }
 

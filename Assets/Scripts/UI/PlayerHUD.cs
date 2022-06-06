@@ -14,13 +14,13 @@ public class PlayerHUD : MonoBehaviour
     {
         [SerializeField] private GameObject pallete;
         [SerializeField] private List<Image> colorsInPallete;
-        
+
         private Dictionary<int, float> RotatationValues = new Dictionary<int, float>()
         {
-           
-            {3, 60f}
-            {4, }
-        }
+            {2, 180f},
+            {3, 120f},
+            {4, 90}
+        };
         private void highlightColors(int active)
         {
             for (int i = 0; i < colorsInPallete.Count; i++)
@@ -54,16 +54,18 @@ public class PlayerHUD : MonoBehaviour
          public void fadeColor(int index)
          {
              var color = colorsInPallete[index].color;
-             color.a = 0.6f;
+             color.a = 0.3f;
 
              colorsInPallete[index].color = color;
          }
 
          public void rotate(bool clockWise)
          {
+             if (colorsInPallete.Count <= 2) return;
              Vector3 rot;
-             float degrees = 360 / (float) colorsInPallete.Count;
-             if (clockWise == true)
+             float degrees = pallete.transform.rotation.z +  RotatationValues[colorsInPallete.Count];
+             print(degrees);
+             if (clockWise)
              {
                   rot = new Vector3(0, 0, degrees);
                  
@@ -78,18 +80,7 @@ public class PlayerHUD : MonoBehaviour
 
          }
 
-         public void ResetRotation()
-         {
-             for (int i = 0; i < colorsInPallete.Count; i++)
-             {
-                 var cur  = colorsInPallete[i].transform.rotation;
-                 cur.eulerAngles = Vector3.zero;
-                 colorsInPallete[i].transform.rotation = cur;
-             }
-         }
-         
-         
-     }
+    }
 
     [SerializeField] private Slider lifeFill;
 
@@ -106,6 +97,8 @@ public class PlayerHUD : MonoBehaviour
     private static int _currColorPallete = 0;
 
     private int _currColor;
+
+    private int _indexToHightlight;
     
     private Dictionary<int, Tuple<int, int>> _lifeFillVal = new Dictionary<int, Tuple<int, int>>()
     {
@@ -185,22 +178,28 @@ public class PlayerHUD : MonoBehaviour
     /// </summary>
     public void HighlightColor()
     {   
+        
        
         int newColor = ColorManager.CurrLayer;
 
-        int indexToHighlight = SharedHud._layerToColor[newColor];
+        _indexToHightlight = SharedHud._layerToColor[newColor];
                       
-        StartCoroutine(Highlight(indexToHighlight, _currColorPallete));
+        StartCoroutine(Highlight(_indexToHightlight, _currColorPallete));
 
-        if (indexToHighlight > _currColor)
+    }
+
+    public void rotate()
+    {
+        if (_indexToHightlight > _currColor)
         {
-            levelColors[_currColorPallete].rotate(true);
+            levelColors[_currColorPallete].rotate(false);
         }
 
         else
         {
-            levelColors[_currColorPallete].rotate(false);
+            levelColors[_currColorPallete].rotate(true);
         }
+
         
     }
 
