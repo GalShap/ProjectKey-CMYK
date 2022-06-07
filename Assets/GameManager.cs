@@ -11,6 +11,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private PlayerController playerController;
     [SerializeField] private Room currRoom;
+    
+    [Range(0, 4)]
+    [SerializeField] private int curMusicIndex;
+    
 
     #endregion
 
@@ -39,7 +43,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         CameraManager.Manager.Camera = currRoom.Camera;
-        AudioManager.SharedAudioManager.Play();
+        AudioManager.SharedAudioManager.PlayByIndex(curMusicIndex);
         currRoom.EnableContents();
     }
 

@@ -1,11 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
-using Debug = UnityEngine.Debug;
+
 
 public class PlayerHUD : MonoBehaviour
 {    
@@ -16,6 +15,12 @@ public class PlayerHUD : MonoBehaviour
         [SerializeField] private GameObject pallete;
         [SerializeField] private List<Image> colorsInPallete;
 
+        private Dictionary<int, float> RotatationValues = new Dictionary<int, float>()
+        {
+            {2, 180f},
+            {3, 120f},
+            {4, 90}
+        };
         private void highlightColors(int active)
         {
             for (int i = 0; i < colorsInPallete.Count; i++)
@@ -49,13 +54,33 @@ public class PlayerHUD : MonoBehaviour
          public void fadeColor(int index)
          {
              var color = colorsInPallete[index].color;
-             color.a = 0.6f;
+             color.a = 0.3f;
 
              colorsInPallete[index].color = color;
          }
-         
-         
-     }
+
+         public void rotate(bool clockWise)
+         {
+             if (colorsInPallete.Count <= 2) return;
+             Vector3 rot;
+             float degrees = pallete.transform.rotation.z +  RotatationValues[colorsInPallete.Count];
+             print(degrees);
+             if (clockWise)
+             {
+                  rot = new Vector3(0, 0, degrees);
+                 
+             }
+
+             else
+             {
+                  rot = new Vector3(0, 0, -degrees);
+             }
+                
+             pallete.transform.Rotate(rot);
+
+         }
+
+    }
 
     [SerializeField] private Slider lifeFill;
 
@@ -72,6 +97,8 @@ public class PlayerHUD : MonoBehaviour
     private static int _currColorPallete = 0;
 
     private int _currColor;
+
+    private int _indexToHightlight;
     
     private Dictionary<int, Tuple<int, int>> _lifeFillVal = new Dictionary<int, Tuple<int, int>>()
     {
@@ -142,6 +169,7 @@ public class PlayerHUD : MonoBehaviour
         }
 
         _currColorPallete = level;
+        
     }
 
     
@@ -150,12 +178,28 @@ public class PlayerHUD : MonoBehaviour
     /// </summary>
     public void HighlightColor()
     {   
+        
        
         int newColor = ColorManager.CurrLayer;
 
-        int indexToHighlight = SharedHud._layerToColor[newColor];
+        _indexToHightlight = SharedHud._layerToColor[newColor];
                       
-        StartCoroutine(Highlight(indexToHighlight, _currColorPallete)); 
+        StartCoroutine(Highlight(_indexToHightlight, _currColorPallete));
+
+    }
+
+    public void rotate()
+    {
+        if (_indexToHightlight > _currColor)
+        {
+            levelColors[_currColorPallete].rotate(false);
+        }
+
+        else
+        {
+            levelColors[_currColorPallete].rotate(true);
+        }
+
         
     }
 
@@ -187,8 +231,8 @@ public class PlayerHUD : MonoBehaviour
             while (time < _timeToScaleColor)
             {
 
-                oldOne.a = Mathf.Lerp(1, 0.6f, time / _timeToScaleColor);
-                newOne.a = Mathf.Lerp(0.6f, 1, time / _timeToScaleColor);
+                oldOne.a = Mathf.Lerp(1, 0.3f, time / _timeToScaleColor);
+                newOne.a = Mathf.Lerp(0.3f, 1, time / _timeToScaleColor);
                 colors[newColor].color = newOne;
                 if (oldColor >= 0)
                 {
@@ -199,7 +243,7 @@ public class PlayerHUD : MonoBehaviour
                 yield return null;
             }
 
-            oldOne.a = 0.6f;
+            oldOne.a = 0.3f;
             newOne.a = 1;
             colors[newColor].color = newOne;
             if (oldColor >= 0) colors[oldColor].color = oldOne;
