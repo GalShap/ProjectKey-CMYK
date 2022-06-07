@@ -131,9 +131,17 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             }
 
             int damage = 1;
-            if (enemy != null && enemy.IsOneHit)
+            if (enemy != null)
             {
-                damage = lives;
+                if (!enemy.doingDamage)
+                {
+                    return;
+                }
+                if (enemy.IsOneHit)
+                {
+                    damage = lives;
+                }
+                
             }
 
             Damage(damage);

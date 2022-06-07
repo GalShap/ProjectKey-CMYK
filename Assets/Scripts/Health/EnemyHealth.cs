@@ -36,6 +36,9 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private float _time = 0f;
 
     private bool _isBouncing = false;
+
+    private EnemyObject _enemyObject;
+    
     private static readonly int Death = Animator.StringToHash("Death");
 
     #region Constants
@@ -56,6 +59,10 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         _animator = GetComponentInChildren<Animator>();
         if (_animator == null)
             _animator = GetComponent<Animator>();
+        
+        _enemyObject = GetComponentInChildren<EnemyObject>();
+        if (_enemyObject == null)
+            _enemyObject = GetComponent<EnemyObject>();
     }
 
     private void Update()
@@ -202,6 +209,10 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     public virtual void Dead()
     {
+        if (_enemyObject != null)
+        {
+            _enemyObject.doingDamage = false;
+        }
         damagable = false;
         if (_rigidbody2D != null)
         {
