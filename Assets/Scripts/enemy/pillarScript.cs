@@ -11,7 +11,7 @@ public abstract class pillarScript : MonoBehaviour
     protected Vector3 startPostion;
 
     [SerializeField] protected GameObject OtherBlock;
-    [SerializeField] protected GameObject blockToStop;
+    // [SerializeField] protected GameObject blockToStop;
 
     // [SerializeField] private Transform pointA;
     // [SerializeField] private Transform pointB;
@@ -87,15 +87,15 @@ public abstract class pillarScript : MonoBehaviour
 
     public abstract void CollideWithOtherBlock();
 
-    public void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject == OtherBlock)
-        {
-            CollideWithOtherBlock();
-        }
-    }
+    // public void OnCollisionEnter2D(Collision2D other)
+    // {
+    //     if (other.gameObject == OtherBlock)
+    //     {
+    //         CollideWithOtherBlock();
+    //     }
+    // }
     
-    public void resetPostion()
+    public virtual void resetPostion()
     {
         transform.position = startPostion;
     }

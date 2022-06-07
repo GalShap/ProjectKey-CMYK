@@ -28,7 +28,8 @@ public class AttackUpDown : StateMachineBehaviour
         Yellow = animator.GetComponent<YellowGod>();
         rb = animator.GetComponent<Rigidbody2D>();
         Yellow.PillarStart();
-        // Yellow.sendThemUp();
+        Yellow.sendThemUp();
+        doDown = false;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -38,18 +39,19 @@ public class AttackUpDown : StateMachineBehaviour
         timerCoolDown += Time.deltaTime;
         if (timerCoolDown >= timerCounter)
         {
-            // timerCoolDown = 0;
+            timerCoolDown = 0;
+            timerShoot = 0;
             animator.SetTrigger("coolDown");
         }
 
-        if (!doAttack)
-        { 
-           Yellow.sendThemUp();
-           doAttack = true;
-        }
-       
+        // if (!doAttack)
+        // { 
+        //    Yellow.sendThemUp();
+        //    doAttack = true;
+        // }
+        //
         // int k = Random.Range(0, oddsToGetBlue);
-        if (timerShoot >= timerToSend && !doDown && doAttack)
+        if (timerShoot >= timerToSend && !doDown)
         {
             Yellow.sendThemDown();
             doDown = true;

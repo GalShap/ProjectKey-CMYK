@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class yellowPillarRight : pillarScript
 {
+    [SerializeField] private GameObject blockEdge;
     // // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +29,7 @@ public class yellowPillarRight : pillarScript
 
     public override void CollideWithOtherBlock()
     {
+        blockEdge.SetActive(false);
         StopMovement();
     }
     
@@ -41,5 +43,10 @@ public class yellowPillarRight : pillarScript
     {
         rb.velocity = Vector2.left * speed;
         // rb.position = Vector2.MoveTowards(transform.position, pointB.position, speed * Time.fixedDeltaTime);
+    }
+    public override void resetPostion()
+    {
+        base.resetPostion();
+        blockEdge.SetActive(true);
     }
 }

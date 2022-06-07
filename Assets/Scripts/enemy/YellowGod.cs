@@ -7,14 +7,14 @@ using Random = UnityEngine.Random;
 
 public class YellowGod : EnemyObject
 {
-    [SerializeField]private GameObject[] leftPillars;
-    [SerializeField]private GameObject leftBlocks;
-    [SerializeField]private GameObject rightBlocks;
-    [SerializeField]private GameObject downBlocks;
-    [SerializeField]private GameObject upBlocks;
-    [SerializeField]private GameObject[] rightPillars;
-    [SerializeField]private GameObject[] upperPillars;
-    [SerializeField]private GameObject[] groundPillars;
+    [SerializeField] private GameObject[] leftPillars;
+    [SerializeField] private GameObject leftBlocks;
+    [SerializeField] private GameObject rightBlocks;
+    [SerializeField] private GameObject downBlocks;
+    [SerializeField] private GameObject upBlocks;
+    [SerializeField] private GameObject[] rightPillars;
+    [SerializeField] private GameObject[] upperPillars;
+    [SerializeField] private GameObject[] groundPillars;
     [SerializeField] public GameObject b_Projectile; // this is a reference to your projectile prefab
 
     [SerializeField] public GameObject r_Projectile; // this is a reference to your projectile prefab
@@ -24,13 +24,13 @@ public class YellowGod : EnemyObject
 
     [SerializeField] private int oddsForRed = 2;
     public GameObject player;
+
     private void Awake()
     {
         movement = gameObject.transform.position;
         rb = GetComponent<Rigidbody2D>();
         _renderer = GetComponentInChildren<SpriteRenderer>();
         collisionOffset = Vector2.right * (_renderer.sprite.rect.width / _renderer.sprite.pixelsPerUnit) / 2;
-
     }
 
     // // Start is called before the first frame update
@@ -46,31 +46,48 @@ public class YellowGod : EnemyObject
             leftPillars[i].gameObject.GetComponent<pillarScript>().resetPostion();
             rightPillars[i].gameObject.GetComponent<pillarScript>().resetPostion();
         }
+
         leftBlocks.SetActive(false);
         rightBlocks.SetActive(false);
-    }public void HorizStart()
+
+        rb.position = new Vector2(0, rb.position.y);
+    }
+
+    public void HorizStart()
     {
         leftBlocks.SetActive(true);
         rightBlocks.SetActive(true);
     }
+
     public void PillarStart()
     {
         downBlocks.SetActive(true);
-    }public void PillarEnd()
+        foreach (var t in upperPillars)
+        {
+            // t.GetComponent<pillarScript>().resetPostion();
+            t.SetActive(true);
+        }
+    }
+
+    public void PillarEnd()
     {
         foreach (var t in groundPillars)
         {
             t.GetComponent<pillarScript>().resetPostion();
-        }foreach (var t in upperPillars)
+        }
+
+        foreach (var t in upperPillars)
         {
             t.GetComponent<pillarScript>().resetPostion();
             t.SetActive(false);
         }
+
         downBlocks.SetActive(false);
-        rb.position = new Vector2(0, rb.position.y);
+        // downBlocks.
+        rb.position = new Vector2(upperPillars[0].GetComponent<pillarScript>().transform.position.x, rb.position.y);
     }
-    
-    
+
+
     protected override void UponDead()
     {
         throw new System.NotImplementedException();
@@ -78,7 +95,7 @@ public class YellowGod : EnemyObject
 
     public void HorizMoveBlock(int i)
     {
-        if ( i < leftPillars.Length && i < rightPillars.Length)
+        if (i < leftPillars.Length && i < rightPillars.Length)
         {
             leftPillars[i].gameObject.GetComponent<pillarScript>().GO();
             rightPillars[i].gameObject.GetComponent<pillarScript>().GO();
@@ -97,12 +114,13 @@ public class YellowGod : EnemyObject
     public GameObject[] getLeftPil()
     {
         return leftPillars;
-    } 
+    }
+
     public GameObject[] getrightPil()
     {
         return rightPillars;
     }
-    
+
     public void Shoot()
     {
         var proj = Random.Range(0, oddsForRed) == 1 ? r_Projectile : b_Projectile;
@@ -114,44 +132,46 @@ public class YellowGod : EnemyObject
 
     public void sendThemUp()
     {
-
         foreach (var pillar in groundPillars)
         {
             pillar.GetComponent<pillarScript>().GO();
             // ColorManager.ColorLayer
             // pillar.layer = Random.Range(ColorManager.ColorLayer)
-                
+
             // pillar.GetComponent<ColorObject>().la
         }
-    } public void sendThemDown()
+    }
+
+    public void sendThemDown()
     {
         int i = Random.Range(0, upperPillars.Length);
         for (int k = 0; k < upperPillars.Length; k++)
         {
             if (i != k)
             {
-                upperPillars[k].SetActive(true);
+                // upperPillars[k].SetActive(true);
                 upperPillars[k].GetComponent<pillarScript>().GO();
+                print("go");
             }
             else
             {
                 rb.position = new Vector2(upperPillars[k].transform.position.x, rb.position.y);
             }
-            
         }
 
-        foreach (var pillar in upperPillars)
-        {
-            pillar.GetComponent<pillarScript>().GO();
-            // ColorManager.ColorLayer
-            // pillar.layer = Random.Range(ColorManager.ColorLayer)
-                
-            // pillar.GetComponent<ColorObject>().la
-        }
+        // foreach (var pillar in upperPillars)
+        // {
+        //     pillar.GetComponent<pillarScript>().GO();
+        //     // ColorManager.ColorLayer
+        //     // pillar.layer = Random.Range(ColorManager.ColorLayer)
+        //         
+        //     // pillar.GetComponent<ColorObject>().la
+        // }
     }
-    
-    
+
+
     public bool isFlipped = false;
+
     public void LookAtPlayer()
     {
         Vector3 flipped = transform.localScale;
