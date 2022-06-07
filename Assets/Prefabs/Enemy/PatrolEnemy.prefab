@@ -165,6 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   oneHit: 0
+  doingDamage: 1
   player: {fileID: 8863397447226026584, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
   speed: 2
   places: []
@@ -231,7 +232,7 @@ MonoBehaviour:
   health: 100
   enemySpriteRenderer: {fileID: 3706917342700130943}
   timeToAnimate: 0.2
-  bounce: 50
+  bounce: 100
   _timeToBounce: 0.2
   MAX_HEALTH: 100
   _rigidbody2D: {fileID: 4123525431797855058}

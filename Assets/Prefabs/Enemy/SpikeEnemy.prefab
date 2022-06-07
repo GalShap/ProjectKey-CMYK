@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   oneHit: 0
+  doingDamage: 1
   player: {fileID: 0}
   speed: 2
   places:
@@ -138,7 +139,7 @@ MonoBehaviour:
   health: 100
   enemySpriteRenderer: {fileID: 3043365054859347526}
   timeToAnimate: 0.05
-  bounce: 50
+  bounce: 100
   _timeToBounce: 0.2
   MAX_HEALTH: 100
   _rigidbody2D: {fileID: -736992930557887591}
