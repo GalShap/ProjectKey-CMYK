@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5690411770685105856}
   - component: {fileID: -356574099240749928}
   - component: {fileID: 8121963082488967721}
+  - component: {fileID: 4130130337913237540}
   m_Layer: 12
   m_Name: bull
   m_TagString: Projectile
@@ -49,7 +50,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Speed: 10
   m_Lifespan: 5
-  vec2: {x: 0, y: 0}
 --- !u!50 &5690411770685105856
 Rigidbody2D:
   serializedVersion: 4
@@ -121,6 +121,26 @@ MonoBehaviour:
     m_Bits: 1024
   neutralSprite: {fileID: 911881859052452035, guid: 0581e9e94a6a1494a832a4d22b139fc6, type: 3}
   whiteSprite: {fileID: 911881859052452035, guid: 0581e9e94a6a1494a832a4d22b139fc6, type: 3}
+  neutralColor: {r: 0, g: 0, b: 0, a: 1}
+--- !u!95 &4130130337913237540
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029945653412360208}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9a088b62316a70141901c47c33832e0b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8204736946810322405
 GameObject:
   m_ObjectHideFlags: 0

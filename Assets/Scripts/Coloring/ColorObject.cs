@@ -7,6 +7,7 @@ public class ColorObject : MonoBehaviour
     [SerializeField] protected LayerMask layer;
     [SerializeField] protected Sprite neutralSprite;
     [SerializeField] protected Sprite whiteSprite;
+    [SerializeField] protected Color neutralColor = Color.white;
 
     protected SpriteRenderer _renderer;
 
@@ -20,6 +21,16 @@ public class ColorObject : MonoBehaviour
         if (layer.value == 0)
             layer = ColorManager.NeutralLayer;
 
+        SetColor();
+        SetLayer();
+    }
+
+    public int LayerIndex => (int) Mathf.Log(layer, 2);
+
+    public void ChangeColor(ColorManager.ColorName cname)
+    {
+        ColorManager.ColorLayer clayer = ColorManager.GetColorLayer(cname);
+        layer = clayer.layer;
         SetColor();
         SetLayer();
     }
@@ -43,7 +54,7 @@ public class ColorObject : MonoBehaviour
         else
         {
             _renderer.sprite = neutralSprite;
-            _renderer.color = Color.white;
+            _renderer.color = neutralColor;
         }
     }
 }

@@ -441,6 +441,18 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 3572c2c4-349c-43b4-8958-48654bb1adcd
     m_ActionName: Player/Color Right
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4e5fa134-f742-4fc6-931d-97a6d2214106
+    m_ActionName: Player/Reset[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cfd64358-0e23-4cf3-817a-79fe361015be
+    m_ActionName: Menu/Move[/Keyboard/upArrow,/Keyboard/downArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e2231185-d115-45c1-bd88-9868f213f389
+    m_ActionName: Menu/Select[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Dialogue
@@ -518,7 +530,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lives: 6
-  _bounce: 7
+  bounce: 50
+  timeToBounce: 0.2
+  timeToHit: 0.8
+  timeToDie: 1
 --- !u!114 &1154897993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,3 +548,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCollider: {fileID: 315701123}
   blueCollider: {fileID: 0}
+  pinky: {fileID: 0}
+  yellowBoss:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2

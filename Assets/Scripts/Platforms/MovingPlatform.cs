@@ -48,7 +48,7 @@ public class MovingPlatform : MonoBehaviour
         Rigidbody2D rb = other.collider.GetComponent<Rigidbody2D>();
         if(rb == null)
             return;
-        
+    
         if(!colliding.Contains(rb))
             colliding.Add(rb);
     }
@@ -89,8 +89,5 @@ public class MovingPlatform : MonoBehaviour
         }
 
         lastPos = _rigidbody2D.position;
-
-        // transform.localPosition = Vector3.MoveTowards(transform.localPosition, points[_curIndex],
-        //     speed * Time.deltaTime);
     }
 }

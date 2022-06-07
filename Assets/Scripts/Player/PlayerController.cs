@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
@@ -47,6 +48,7 @@ public class PlayerController : MonoBehaviour
     public static bool jumpAttacking = false; 
     private Vector2 movement;
     private Vector2 height;
+    private bool jumpHit;
 
     private static Vector2? kickbackVector2 = null;
     
@@ -74,6 +76,12 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         _animator.SetFloat(Action,IDLE);
         collisionOffset = Vector2.right * ((_renderer.sprite.rect.width/_renderer.sprite.pixelsPerUnit) / 2 - collisionEps);
+    }
+
+    private void Start()
+    {
+        if(!isTutorial)
+            AudioManager.SharedAudioManager.LoadNextMusic();
     }
 
     private void Update()
@@ -124,23 +132,29 @@ public class PlayerController : MonoBehaviour
             if (!hitMonster)
             {
                 _animator.SetBool(Jump1, false);
-                if (jumpAttacking) jumpAttacking = false;   
+                if (jumpAttacking)
+                {
+                    jumpAttacking = false;
+                    jumpHit = false;
+                }
+                onGround = checkGround;
             }
         }
-
-        onGround = checkGround;
-        if(jumpAttacking && onGround)
-            print("bounce");
+        if(!jumpAttacking) 
+            onGround = checkGround;
         if (jumpTimer > Time.time && onGround)
         {
             Jump();
         }
-        
-        
 
-       
+
         MoveCharacter(); 
         ModifyPhysics();
+    }
+
+    public void ToIdle()
+    {
+        _animator.SetFloat(Action, IDLE);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -168,12 +182,14 @@ public class PlayerController : MonoBehaviour
             kickbackVector2 = null;
         }
         else
-        {   
-            
-            _rigidbody2D.velocity = Vector2.Lerp(_rigidbody2D.velocity, 
-                        desiredVel, 
-                        acceleration * Time.fixedDeltaTime);
-            
+        {
+            if (!jumpHit)
+            {
+                _rigidbody2D.velocity = Vector2.Lerp(_rigidbody2D.velocity, 
+                    desiredVel, 
+                    acceleration * Time.fixedDeltaTime);   
+            }
+
             if (Math.Abs(_rigidbody2D.velocity.x) > maxSpeed)
             {
                 float sign = Mathf.Sign(_rigidbody2D.velocity.x);
@@ -183,7 +199,8 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Jump()
-    {
+    {   
+        AudioManager.SharedAudioManager.PlayKeyActionSound((int) AudioManager.KeySounds.Jump);
         _animator.SetBool(Jump1,true);
         _rigidbody2D.drag = 0;
         float y = (2 * jumpHeight) / jumpTime;
@@ -226,16 +243,12 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    // public void EndAttack()
-    // {
-    //     attackCollider.gameObject.SetActive(false);
-    // }
     public void StartAttack()
     {
         var dir = attackRange.transform.position - transform.position;
         var dir2 = new Vector2(dir.x, dir.y);
 
-        var hits = Physics2D.CircleCastAll(attackRange.transform.position, attackRadius, dir2);
+        var hits = Physics2D.CircleCastAll(attackRange.transform.position, attackRadius, dir2, 0.05f);
         foreach (var h in hits)
         {
             BlueGod god = h.collider.GetComponent<BlueGod>();
@@ -276,7 +289,8 @@ public class PlayerController : MonoBehaviour
                 if (attackCounter <= 0)
                 {
                    if(jumpAttacking) return;
-                   
+                    
+                    AudioManager.SharedAudioManager.PlayKeyActionSound((int)AudioManager.KeySounds.Attack);
                     _animator.SetTrigger(Attack);
                     attackCounter = attackTimer;
                     if (!onGround)
@@ -311,6 +325,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnReset(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+            SceneManager.LoadScene("MainMenu");
+    }
+
     public void onMove(InputAction.CallbackContext context)
     {
         if (TimelineManager.Manager.IsPlaying)
@@ -320,13 +340,17 @@ public class PlayerController : MonoBehaviour
         {
             case InputActionPhase.Performed:
 
+                var input = context.ReadValue<Vector2>();
+                if(Math.Abs(input.x) <= 0.1)
+                    return;
+                
                 if (isTutorial && TutorialManager.Manager.State == TutorialManager.TutorialState.MOVE)
                 {
                     TutorialManager.Manager.HideTutorial();
                     TutorialManager.Manager.SetState(TutorialManager.TutorialState.JUMP);
                 }
 
-                movement = context.ReadValue<Vector2>();
+                movement = input;
                 
                 bool facingRight = _renderer.flipX;
                 
@@ -375,6 +399,7 @@ public class PlayerController : MonoBehaviour
                     }
                 }
                 ColorManager.RotateColor(1);
+                AudioManager.SharedAudioManager.PlayKeyActionSound((int) AudioManager.KeySounds.ColorSwitch);
                 break;
             case InputActionPhase.Canceled:
                 break;
@@ -446,7 +471,10 @@ public class PlayerController : MonoBehaviour
     {
         kickbackVector2 = kickback;
     }
-    
-        
-    
+
+
+    public void JumpHit()
+    {
+        jumpHit = true;
+    }
 }

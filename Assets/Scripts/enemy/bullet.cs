@@ -20,9 +20,9 @@ public class bullet : MonoBehaviour
     /// Private fields
     /// </summary>
     private Rigidbody2D m_Rigidbody;
-
-    // [SerializeField]private Vector2 vec2;
+    private Animator _animator;
     private Vector2 vec2;
+    private bool active = true;
 
     /// <summary>
     /// Message that is called when the script instance is being loaded
@@ -31,7 +31,7 @@ public class bullet : MonoBehaviour
     {
         m_Rigidbody = GetComponent<Rigidbody2D>();
         vec2 = Vector2.Lerp(transform.position, transform.right, m_Speed);
-        
+        _animator = GetComponent<Animator>();
     }
 
     /// <summary>
@@ -44,9 +44,23 @@ public class bullet : MonoBehaviour
         Destroy(gameObject, m_Lifespan);
     }
 
+    public bool IsActive => active;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.CompareTag("Projectile") || other.gameObject.CompareTag("Monster")) return;
+        if(!other.gameObject.CompareTag("Player")) Unactive();
+        _animator.SetTrigger("Death");
+        m_Rigidbody.velocity = Vector2.zero;
+    }
+
+    public void Unactive()
+    {
+        active = false;
+    }
+
+    public void DestroyObject()
+    {
         Destroy(gameObject);
     }
 }

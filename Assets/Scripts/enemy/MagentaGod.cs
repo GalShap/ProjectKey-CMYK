@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -11,6 +12,8 @@ public class MagentaGod : EnemyObject
     [SerializeField] public float speed = 3;
     [SerializeField] public float attackRange = 3;
     private float timer = 0;
+    [SerializeField] private float lifeToGoDiffMode = 200;
+    [SerializeField]private bool isLeft = false;
     private bool[] flag = {false, false, false, false};
 
     // [FormerlySerializedAs("m_Projectile")]
@@ -24,21 +27,30 @@ public class MagentaGod : EnemyObject
     [SerializeField]
     private Transform[] m_SpawnTransformBlue; // this is a reference to the transform where the prefab will spawn
 
+    [SerializeField] private ColorOrb orb;
+
     public GameObject player;
     public Transform right;
     public Transform left;
     public GameObject platformLeft;
     public GameObject platformRight;
+    private Vector3 initPos;
+
+    private bool playing;
 
     // Start is called before the first frame update
     private void Awake()
     {
+        initPos = transform.position;
         movement = gameObject.transform.position;
         rb = GetComponent<Rigidbody2D>();
         _renderer = GetComponentInChildren<SpriteRenderer>();
+        _animator = GetComponentInChildren<Animator>();
+        if (_animator == null)
+            _animator = GetComponent<Animator>();
         collisionOffset = Vector2.right * (_renderer.sprite.rect.width / _renderer.sprite.pixelsPerUnit) / 2;
         platformLeft.SetActive(true);
-        platformRight.SetActive(false);
+        platformRight.SetActive(true);
     }
 
     public void Shoot()
@@ -59,9 +71,43 @@ public class MagentaGod : EnemyObject
         }
     }
 
+    public bool Playing
+    {
+        get => playing;
+        set
+        {
+            playing = value;
+            _animator.SetBool("play",playing);
+        }
+    }
+
+    public void Die()
+    {
+        transform.position = initPos;
+        Playing = false;
+        gameObject.layer = (int) Mathf.Log(LayerMask.GetMask("Triggers"),2); // disable collision between player and boss
+        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.PINK_DEAD, true,
+            () =>
+            {
+                gameObject.SetActive(false);
+                orb.transform.position = transform.position + Vector3.up;
+                orb.gameObject.SetActive(true);
+            });
+    }
+    
     protected override void UponDead()
     {
-        gameObject.SetActive(false);
+        // DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.PINK_DEAD,true,
+        //     () =>
+        //     {
+        //         _animator.SetTrigger("dead");
+        //         playing = false;
+        //         DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.PINK_DEAD,true,(
+        //             () =>
+        //             {
+        //                 gameObject.SetActive(false);
+        //             }));
+        //     });
     }
 
     public bool isFlipped = false;
@@ -90,10 +136,14 @@ public class MagentaGod : EnemyObject
         var animator = gameObject.GetComponent<Animator>();
         var hl = animator.GetComponent<EnemyHealth>();
         var hp = hl.GetHealth();
-        if (directionAcordingToHp(hp, 400, 0, "left", animator)) return;
-        if (directionAcordingToHp(hp, 300, 1, "right", animator)) return;
-        if (directionAcordingToHp(hp, 200, 2, "left", animator)) return;
-        else directionAcordingToHp(hp, 100, 3, "right", animator);
+        if (hp <= lifeToGoDiffMode)
+        {
+            rb.transform.position = new Vector3(rb.transform.position.x,platformLeft.transform.position.y +1, rb.transform.position.z) ;
+        }
+        // if (directionAcordingToHp(hp, 400, 0, "left", animator)) return;
+        // if (directionAcordingToHp(hp, 300, 1, "right", animator)) return;
+        // if (directionAcordingToHp(hp, 200, 2, "left", animator)) return;
+        // else directionAcordingToHp(hp, 100, 3, "right", animator);
     }
 
     private bool directionAcordingToHp(float hp, float min, int index, string dir, Animator animator)
@@ -115,11 +165,19 @@ public class MagentaGod : EnemyObject
         var hl = animator.GetComponent<EnemyHealth>();
         hl.SetHealth(600);
         animator.SetTrigger("coolDown");
+        Playing = false;
     }
 
     public GameObject getPlayer()
     {
         return player;
+    }
+
+    public void Move()
+    {
+        var animator = gameObject.GetComponent<Animator>();
+        animator.SetTrigger(isLeft ? "left" : "right");
+        isLeft = isLeft != true;
     }
 
 }

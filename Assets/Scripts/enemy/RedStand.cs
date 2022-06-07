@@ -10,8 +10,10 @@ public class RedStand : StateMachineBehaviour
     private MagentaGod red;
     private EnemyHealth hl;
     [SerializeField] public float timerCounter = 5;
+    [SerializeField] public float timerMove = 2;
 
     private float timer = 2;
+    private float timerForMove = 2;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -29,11 +31,17 @@ public class RedStand : StateMachineBehaviour
         red.LookAtPlayer();
         red.healtChange();
         timer += Time.deltaTime;
+        timerMove += Time.deltaTime;
         if (timer >= timerCounter)
         {
             timer = 0;
             // rb.AddForce(Vector2.up);
             animator.SetTrigger( "shoot");
+        }
+        if (timerMove >= timerForMove)
+        {
+            timerMove = 0;
+            red.Move();
         }
     }
 

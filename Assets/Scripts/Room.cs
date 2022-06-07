@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Room : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class Room : MonoBehaviour
     private SpriteRenderer _renderer;
     private Color _color;
 
+    private void OnEnable()
+    {
+        // DisableContents();    
+    }
+
     private void Awake()
     {
         _renderer = GetComponent<SpriteRenderer>();
@@ -21,13 +27,15 @@ public class Room : MonoBehaviour
     public CinemachineVirtualCamera Camera => camera;
 
     public void DisableContents()
-    {
-        // contents.SetActive(false);
+    {   
+        // if (contents != null)
+        //     contents.SetActive(false);
     }
     
     public void EnableContents()
-    {
-        // contents.SetActive(true);
+    {   
+        // if (contents != null)
+        //     contents.SetActive(true);
     }
 
     public Color Color
@@ -39,4 +47,8 @@ public class Room : MonoBehaviour
             _renderer.color = value;
         }
     }
+    
+    
+
+  
 }

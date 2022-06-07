@@ -117,8 +117,14 @@ MonoBehaviour:
   health: 600
   enemySpriteRenderer: {fileID: 6018145867276874385}
   timeToAnimate: 0.05
-  bounce: 50
+  bounce: 100
   _timeToBounce: 0.2
+  MAX_HEALTH: 100
+  _rigidbody2D: {fileID: 0}
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  damagable: 1
 --- !u!1 &2674541009851794003
 GameObject:
   m_ObjectHideFlags: 0

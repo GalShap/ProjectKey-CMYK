@@ -1,11 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
-using Debug = UnityEngine.Debug;
+
 
 public class PlayerHUD : MonoBehaviour
 {    
@@ -16,6 +15,12 @@ public class PlayerHUD : MonoBehaviour
         [SerializeField] private GameObject pallete;
         [SerializeField] private List<Image> colorsInPallete;
 
+        private Dictionary<int, float> RotatationValues = new Dictionary<int, float>()
+        {
+            {2, 180f},
+            {3, 120f},
+            {4, 90}
+        };
         private void highlightColors(int active)
         {
             for (int i = 0; i < colorsInPallete.Count; i++)
@@ -49,13 +54,33 @@ public class PlayerHUD : MonoBehaviour
          public void fadeColor(int index)
          {
              var color = colorsInPallete[index].color;
-             color.a = 0.6f;
+             color.a = 0.3f;
 
              colorsInPallete[index].color = color;
          }
-         
-         
-     }
+
+         public void rotate(bool clockWise)
+         {
+             if (colorsInPallete.Count <= 2) return;
+             Vector3 rot;
+             float degrees = pallete.transform.rotation.z +  RotatationValues[colorsInPallete.Count];
+             print(degrees);
+             if (clockWise)
+             {
+                  rot = new Vector3(0, 0, degrees);
+                 
+             }
+
+             else
+             {
+                  rot = new Vector3(0, 0, -degrees);
+             }
+                
+             pallete.transform.Rotate(rot);
+
+         }
+
+    }
 
     [SerializeField] private Slider lifeFill;
 
@@ -72,15 +97,17 @@ public class PlayerHUD : MonoBehaviour
     private static int _currColorPallete = 0;
 
     private int _currColor;
+
+    private int _indexToHightlight;
     
     private Dictionary<int, Tuple<int, int>> _lifeFillVal = new Dictionary<int, Tuple<int, int>>()
     {
-        {1, new Tuple<int, int>(0, 21)},
-        {2, new Tuple<int, int>(21, 40)},
-        {3, new Tuple<int, int>(40, 59)},
-        {4, new Tuple<int, int>(59, 77)},
-        {5, new Tuple<int, int>(77, 95)},
-        {6, new Tuple<int, int>(95, 120)}
+        {1, new Tuple<int, int>(0, 25)},
+        {2, new Tuple<int, int>(25, 42)},
+        {3, new Tuple<int, int>(42, 60)},
+        {4, new Tuple<int, int>(60, 80)},
+        {5, new Tuple<int, int>(80, 98)},
+        {6, new Tuple<int, int>(98, 120)}
     };
 
     private Dictionary<int, int> _layerToColor = new Dictionary<int, int>()
@@ -98,34 +125,30 @@ public class PlayerHUD : MonoBehaviour
         One = 1, Two = 2, Three = 3
     }
 
-    public static PlayerHUD sharedHud;
+    public static PlayerHUD SharedHud;
     
     #region Constants
 
     public const int MaxLife = 6;
 
     private const int MaxLifeValue = 120;
-
-    private const int MaxAlpha = 255;
-
-    private const int MinAlpha = 100;
     
     #endregion
 
     void Awake()
     {
         lifeFill.value = MaxLifeValue;
-        if (sharedHud == null)
+        if (SharedHud == null)
         {
-             sharedHud = this;
+             SharedHud = this;
         }
     }
 
     private void Start()
     {
-        sharedHud._currColor = ColorManager.CurrLayer;
-        sharedHud.levelColors = levelColors;
-        sharedHud.lifeFill = lifeFill;
+        SharedHud._currColor = ColorManager.CurrLayer;
+        SharedHud.levelColors = levelColors;
+        SharedHud.lifeFill = lifeFill;
     }
 
     /// <summary>
@@ -146,6 +169,7 @@ public class PlayerHUD : MonoBehaviour
         }
 
         _currColorPallete = level;
+        
     }
 
     
@@ -154,20 +178,30 @@ public class PlayerHUD : MonoBehaviour
     /// </summary>
     public void HighlightColor()
     {   
+        
        
         int newColor = ColorManager.CurrLayer;
 
-        int indexToHighlight = sharedHud._layerToColor[newColor];
-        
-        Debug.Log(indexToHighlight);
-      
-        StartCoroutine(Highlight(indexToHighlight, _currColorPallete));
+        _indexToHightlight = SharedHud._layerToColor[newColor];
+                      
+        StartCoroutine(Highlight(_indexToHightlight, _currColorPallete));
 
-      
-        
     }
 
-    
+    public void rotate()
+    {
+        if (_indexToHightlight > _currColor)
+        {
+            levelColors[_currColorPallete].rotate(false);
+        }
+
+        else
+        {
+            levelColors[_currColorPallete].rotate(true);
+        }
+
+        
+    }
 
     /// <summary>
     ///  coroutine gets a level and current color and highlights the color while reducing the alpha and scale for all
@@ -176,9 +210,7 @@ public class PlayerHUD : MonoBehaviour
     /// <returns></returns>
     private IEnumerator Highlight(int newColor, int level)
     {
-       
-            
-            List<Image> colors = levelColors[level].get();
+        List<Image> colors = levelColors[level].get();
             float time = 0;
             int oldColor = -1;
 
@@ -199,8 +231,8 @@ public class PlayerHUD : MonoBehaviour
             while (time < _timeToScaleColor)
             {
 
-                oldOne.a = Mathf.Lerp(1, 0.6f, time / _timeToScaleColor);
-                newOne.a = Mathf.Lerp(0.6f, 1, time / _timeToScaleColor);
+                oldOne.a = Mathf.Lerp(1, 0.3f, time / _timeToScaleColor);
+                newOne.a = Mathf.Lerp(0.3f, 1, time / _timeToScaleColor);
                 colors[newColor].color = newOne;
                 if (oldColor >= 0)
                 {
@@ -211,7 +243,7 @@ public class PlayerHUD : MonoBehaviour
                 yield return null;
             }
 
-            oldOne.a = 0.6f;
+            oldOne.a = 0.3f;
             newOne.a = 1;
             colors[newColor].color = newOne;
             if (oldColor >= 0) colors[oldColor].color = oldOne;
@@ -231,14 +263,26 @@ public class PlayerHUD : MonoBehaviour
 
     public void removeLifeOnUI(int livesToRemove)
     {   
-     
-        int lives = livesToRemove;
-        if (lives > _currLife)
-            lives = _currLife;
         
-       
-        StartCoroutine(ReduceLifeSlider(_currLife, lives));
-        _currLife -= lives;
+        int lives = livesToRemove;
+        if (lives >= _currLife)
+        {
+            SetLifeBar(0);
+            _currLife = 0;
+        }
+
+
+        else
+        {
+            for (int i = 0; i < lives; i++)
+            {
+                StartCoroutine(RemoveSingleLifeOnUi());
+                
+            }
+
+            _currLife -= lives;
+        }
+
     }
 
     public void addLifeOnUI(int livesToAdd)
@@ -256,7 +300,6 @@ public class PlayerHUD : MonoBehaviour
         _currLife += lives;
     }
 
-   
     private IEnumerator FillLifeSlider(int barKey, int livesToAdd)
     {
         int key = barKey;
@@ -280,24 +323,55 @@ public class PlayerHUD : MonoBehaviour
 
     private IEnumerator ReduceLifeSlider(int bar, int livesToRemove)
     {
-        int key = bar;
-        for (int i = 0; i < livesToRemove; ++i)
-        {
-            int startVal = _lifeFillVal[key].Item2;
-            int endVal =  _lifeFillVal[key].Item1;
-            float elapsedTime = 0;
-            lifeFill.value = startVal;
-            while (elapsedTime < _timeToScaleLife)
-            {
-                lifeFill.value = Mathf.Lerp(startVal, endVal, (elapsedTime / _timeToScaleLife));
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
-
-            lifeFill.value = endVal;
-            key -= 1;
+        if (livesToRemove >= _currLife && _currLife >= 1)
+        {       
+            print("death!");
+            lifeFill.value = 0;
+            yield return new WaitForSeconds(_timeToScaleLife);
         }
-        
+        else
+        {
+
+            int key = bar;
+            for (int i = 0; i < livesToRemove; ++i)
+            {
+              
+                
+                int startVal = _lifeFillVal[key].Item2;
+                int endVal = _lifeFillVal[key].Item1;
+                print("start val: " + startVal);
+                print("end val: " + endVal);
+                float elapsedTime = 0;
+                lifeFill.value = startVal;
+                while (elapsedTime < _timeToScaleLife)
+                {
+                    lifeFill.value = Mathf.Lerp(startVal, endVal, (elapsedTime / _timeToScaleLife));
+                    elapsedTime += Time.deltaTime;
+                    yield return null;
+                }
+
+                lifeFill.value = endVal;
+                key -= 1;
+            }
+        }
+
+    }
+
+    private IEnumerator RemoveSingleLifeOnUi()
+    {
+        float startVal = lifeFill.value;
+        float endVal = lifeFill.value - 20;
+        float time = 0;
+        while (time < _timeToScaleColor)
+        {
+            time += Time.deltaTime;
+            lifeFill.value = Mathf.Lerp(startVal, endVal, time / _timeToScaleColor);
+            yield return null;
+        }
+
+        lifeFill.value = endVal;
+
+
     }
 
     public void FullHealth()
@@ -309,5 +383,10 @@ public class PlayerHUD : MonoBehaviour
     public void AddColor(ColorManager.ColorLayer cl)
     {
         return;
+    }
+
+    public void SetLifeBar(int value)
+    {
+        lifeFill.value = value;
     }
 }

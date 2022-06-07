@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class EnemyObject : MonoBehaviour, ColorChangeListener
@@ -11,12 +12,16 @@ public abstract class EnemyObject : MonoBehaviour, ColorChangeListener
     protected bool grountRight;
     protected Vector2 collisionOffset;
     protected SpriteRenderer _renderer;
+    protected Animator _animator;
     protected bool colored;
+    public bool doingDamage = true;
     protected Vector2? KickBackVector;
- 
+
+    protected bool CanPlayAudio = false;
+
+    protected Collider2D _collider2D;
 
     // Start is called before the first frame update
-    
     public virtual void Start()
     {
         ColorManager.RegisterColorListener(this);
@@ -67,6 +72,7 @@ public abstract class EnemyObject : MonoBehaviour, ColorChangeListener
         KickBackVector = newKick;
     }
 
-   
     protected abstract void UponDead();
+
+    
 }

@@ -102,6 +102,7 @@ MonoBehaviour:
     m_Bits: 512
   neutralSprite: {fileID: -771531970694122940, guid: 83d5df1d41a145941ba4ed4a75e5ebd1, type: 3}
   whiteSprite: {fileID: -771531970694122940, guid: 83d5df1d41a145941ba4ed4a75e5ebd1, type: 3}
+  neutralColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!50 &6813939725367928824
 Rigidbody2D:
   serializedVersion: 4
@@ -117,7 +118,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -136,16 +137,16 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.05932522}
+  m_Offset: {x: 0, y: -0.064617574}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.55, y: 2.55}
+    oldSize: {x: 2.72, y: 2.72}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.55, y: 2.4313493}
+  m_Size: {x: 2.72, y: 2.590765}
   m_EdgeRadius: 0

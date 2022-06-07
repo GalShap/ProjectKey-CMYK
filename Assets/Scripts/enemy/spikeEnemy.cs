@@ -8,8 +8,9 @@ public class spikeEnemy : PatrolEnemy
     [SerializeField] private GameObject monster;
     [SerializeField] private GameObject spikes;
     // private Rigidbody2D reg;
-    private Animator _animator;
-    private LayerMask originalLayer;
+    private Animator _animatorr;
+    private int originalLayer;
+    private ColorObject _colorObject;
     
     private static readonly int Walking = Animator.StringToHash("Walking");
     private static readonly int Disappear = Animator.StringToHash("Disappear");
@@ -20,8 +21,11 @@ public class spikeEnemy : PatrolEnemy
     { 
         base.Start();
         // reg = spikes.GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
-        originalLayer = gameObject.layer;
+        _animatorr = GetComponent<Animator>();
+        _colorObject = GetComponent<ColorObject>();
+        originalLayer = _colorObject.LayerIndex;
+        
+        _animatorr.SetBool(Walking, true);
         // if (_animator == null)
         //     _animator = GetComponentInChildren<Animator>();
     }
@@ -44,21 +48,25 @@ public class spikeEnemy : PatrolEnemy
             if (IsOneHit)
             {
                 DisableSpikes();
-                _animator.SetTrigger(Reappear);
-                _animator.SetBool(Walking, true);
+                _animatorr.SetTrigger(Reappear);
+                _animatorr.SetBool(Walking, true);
+                colored = false;
             }
             else
             {
-                _animator.SetBool(Walking, false);
-                _animator.SetTrigger(Disappear);   
+                _animatorr.SetBool(Walking, false);
+                _animatorr.SetTrigger(Disappear);   
             }
             // reg.transform.position = rb.transform.position;
         }
         else
         {
-            DisableSpikes();
-            _animator.SetTrigger(Reappear);
-            _animator.SetBool(Walking, true);
+            if (IsOneHit)
+            {
+                DisableSpikes();
+                _animatorr.SetTrigger(Reappear);
+                _animatorr.SetBool(Walking, true);
+            }
         }
     }
 
@@ -74,5 +82,10 @@ public class spikeEnemy : PatrolEnemy
         gameObject.layer = originalLayer;
         // tag = "Monster";
         IsOneHit = false;
+    }
+
+    public void OnDeathEnd()
+    {
+        gameObject.SetActive(false);
     }
 }

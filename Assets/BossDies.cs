@@ -26,9 +26,10 @@ public class BossDies : StateMachineBehaviour
         timeToDie += Time.deltaTime;
         if (timeToDie >= timerToDie)
         {
-            red.ShootBlue();
+            // red.ShootBlue();
+            red.Playing = false;
             timeToDie = 0;
-           red.gameObject.SetActive(false);
+           // red.gameObject.SetActive(false);
         }
         
     }

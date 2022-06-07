@@ -129,7 +129,7 @@ TextureImporter:
         width: 115
         height: 112
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -145,12 +145,12 @@ TextureImporter:
       name: UI 2_1
       rect:
         serializedVersion: 2
-        x: 171
-        y: 61
-        width: 194
-        height: 53
+        x: 172
+        y: 63
+        width: 192
+        height: 44
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

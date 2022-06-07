@@ -55,6 +55,8 @@ public class ColorManager : MonoBehaviour
     private HashSet<ColorChangeListener> colorListeners = new HashSet<ColorChangeListener>();
 
     private bool _afterAwake = false;
+
+    private bool _afterStart = false;
     
     public static LayerMask GroundLayers
     {
@@ -119,10 +121,10 @@ public class ColorManager : MonoBehaviour
        
         if (numOfColors != NoColors)
         {
-            PlayerHUD.sharedHud.SetColorPallete(numOfColors - 1);
+            PlayerHUD.SharedHud.SetColorPallete(numOfColors - 1);
         }
         
-        PlayerHUD.sharedHud.HighlightColor();
+        PlayerHUD.SharedHud.HighlightColor();
     }
 
 
@@ -188,7 +190,7 @@ public class ColorManager : MonoBehaviour
             return;
 
         _shared.availableLayers.Add((ColorLayer) cl);
-        PlayerHUD.sharedHud.SetColorPallete(_shared.availableLayers.Count-1);
+        PlayerHUD.SharedHud.SetColorPallete(_shared.availableLayers.Count-1);
 
         
     }
@@ -229,6 +231,17 @@ public class ColorManager : MonoBehaviour
         return null;
     }
     
+    public static ColorLayer GetColorLayer(ColorName name)
+    {
+        foreach (var layer in _shared.AllLayers)
+        {
+            if (layer.name == name)
+                return layer;
+        }
+
+        return _shared.availableLayers[0];
+    }
+    
     public static int GetLayer(Color c)
     {
         foreach (var layer in _shared.AllLayers)
@@ -262,7 +275,8 @@ public class ColorManager : MonoBehaviour
     public void SetWorldColor(int color)
     {
         ColorLayer cl = availableLayers[color];
-        PlayerHUD.sharedHud.HighlightColor();
+        PlayerHUD.SharedHud.HighlightColor();
+        PlayerHUD.SharedHud.rotate();
         SetColor(cl.name);
     }
 
