@@ -30,10 +30,13 @@ public class horizAttack : StateMachineBehaviour
         if (timer >= size + timerCounter)
         {
             yellow.HorizMoveBack();
+            timer = 0;
+            counter = 0;
             animator.SetTrigger("coolDown");
         }
         else if (timerBlock >= timerBlockWait)
         {
+            
             timerBlock = 0;
             yellow.HorizMoveBlock(counter);
             counter++;

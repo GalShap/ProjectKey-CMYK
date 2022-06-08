@@ -33,7 +33,7 @@ public class ShootAttack : StateMachineBehaviour
         timerShoot += Time.deltaTime;
         if (timer > size + timerCounter)
         {
-            yellow.HorizMoveBack();
+            // yellow.HorizMoveBack();
             animator.SetTrigger("coolDown");
         }
         else if (timerBlock >= timerBlockWait && timer < size)

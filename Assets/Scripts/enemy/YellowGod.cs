@@ -95,11 +95,14 @@ public class YellowGod : EnemyObject
 
     public void HorizMoveBlock(int i)
     {
+        var animator = gameObject.GetComponent<Animator>();
+        animator.SetTrigger("attack");
         if (i < leftPillars.Length && i < rightPillars.Length)
         {
             leftPillars[i].gameObject.GetComponent<pillarScript>().GO();
             rightPillars[i].gameObject.GetComponent<pillarScript>().GO();
         }
+        animator.SetTrigger("stopAttack");
     }
 
     public void HorizMoveBack()
@@ -132,6 +135,8 @@ public class YellowGod : EnemyObject
 
     public void sendThemUp()
     {
+        var animator = gameObject.GetComponent<Animator>();
+        animator.SetTrigger("attack");
         foreach (var pillar in groundPillars)
         {
             pillar.GetComponent<pillarScript>().GO();
@@ -140,10 +145,13 @@ public class YellowGod : EnemyObject
 
             // pillar.GetComponent<ColorObject>().la
         }
+        animator.SetTrigger("stopAttack");
     }
 
     public void sendThemDown()
     {
+        var animator = gameObject.GetComponent<Animator>();
+        animator.SetTrigger("attack");
         int i = Random.Range(0, upperPillars.Length);
         for (int k = 0; k < upperPillars.Length; k++)
         {
@@ -151,13 +159,14 @@ public class YellowGod : EnemyObject
             {
                 // upperPillars[k].SetActive(true);
                 upperPillars[k].GetComponent<pillarScript>().GO();
-                print("go");
+                // print("go");
             }
             else
             {
                 rb.position = new Vector2(upperPillars[k].transform.position.x, rb.position.y);
             }
         }
+        animator.SetTrigger("stopAttack");
 
         // foreach (var pillar in upperPillars)
         // {
@@ -202,4 +211,30 @@ public class YellowGod : EnemyObject
             animator.SetBool("rage", true);
         }
     }
+
+    public void resetBoss()
+    {
+        var animator = gameObject.GetComponent<Animator>();
+        var hl = animator.GetComponent<EnemyHealth>();
+        hl.SetHealth(1200);
+        animator.SetTrigger("reset");
+    }
+    
+    public void stopBoss()
+    {
+        var animator = gameObject.GetComponent<Animator>();
+        // var hl = animator.GetComponent<EnemyHealth>();
+        // hl.SetHealth(1200);
+        animator.SetTrigger("stop");
+    }
+    
+    public void resumeBoss()
+    {
+        var animator = gameObject.GetComponent<Animator>();
+        // var hl = animator.GetComponent<EnemyHealth>();
+        // hl.SetHealth(1200);
+        animator.SetTrigger("resume");
+    }
+    
+    
 }
