@@ -88,9 +88,10 @@ public class MagentaGod : EnemyObject
 
     public void Die()
     {
-        transform.position = initPos;
+        // transform.position = initPos;
+        rb.bodyType = RigidbodyType2D.Dynamic;
         Playing = false;
-        gameObject.layer = (int) Mathf.Log(LayerMask.GetMask("Triggers"),2); // disable collision between player and boss
+        doingDamage = false;
         DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.PINK_DEAD, true,
             () =>
             {

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa3c0245f1207f24495dc9c5f7542dd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Speed: 4
+  m_Speed: 3.5
   m_Lifespan: 5
 --- !u!50 &5690411770685105856
 Rigidbody2D:
@@ -122,6 +122,7 @@ MonoBehaviour:
     m_Bits: 512
   neutralSprite: {fileID: 1816934906942412506, guid: 939ffc2ddf75ef14f907cee27c59b766, type: 3}
   whiteSprite: {fileID: 1816934906942412506, guid: 939ffc2ddf75ef14f907cee27c59b766, type: 3}
+  neutralColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &8204736946810322405
 GameObject:
   m_ObjectHideFlags: 0

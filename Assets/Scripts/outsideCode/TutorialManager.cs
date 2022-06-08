@@ -41,7 +41,7 @@ public class TutorialManager : MonoBehaviour
     
     public void HideTutorial()
     {
-        tutorial.gameObject.SetActive(false);
+        // tutorial.gameObject.SetActive(false);
     }
 
     public void SetState(TutorialState s)
@@ -59,8 +59,8 @@ public class TutorialManager : MonoBehaviour
     public TutorialState State => _state;
     public void RaiseImage()
     {
-        var pos = tutorial.rectTransform.anchoredPosition;
-        pos.y += 100;
-        tutorial.rectTransform.anchoredPosition = pos;
+        // var pos = tutorial.rectTransform.anchoredPosition;
+        // pos.y += 100;
+        // tutorial.rectTransform.anchoredPosition = pos;
     }
 }

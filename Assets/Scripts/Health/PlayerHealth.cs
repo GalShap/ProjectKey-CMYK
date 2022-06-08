@@ -23,6 +23,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     
     [SerializeField] private UnityEvent OnYellowDie;
 
+    [SerializeField] private float bounceMult = 1;
+
     #endregion
 
     #region Private Field
@@ -128,7 +130,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (PlayerController.jumpAttacking && EnemyCollision(other.gameObject))
+        if (_player.jumpAttacking && EnemyCollision(other.gameObject))
         {
             BlueGod god = other.collider.GetComponent<BlueGod>();
             if (god != null)
@@ -138,7 +140,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
                 return;
             }
 
-            Vector2 kickback = GetKickback(other);
+            Vector2 kickback = GetKickback(other).normalized * bounceMult;
             PlayerKickBack(kickback);
             _player.JumpHit();
             if (!other.gameObject.CompareTag("Spikes"))
@@ -191,7 +193,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         var enemyPos = otherContact.collider.gameObject.transform.position;
         var normal = otherContact.contacts[0].normal;
 
-        var pushBack = Vector2.right * Mathf.Sign(playerPos.x-enemyPos.x) * 3;
+        var pushBack = Vector2.right * Mathf.Sign(playerPos.x-enemyPos.x);
         return (normal.y >= 0) ? normal + pushBack : pushBack;
     }
 
@@ -199,7 +201,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
 
         // it was a jump attack succka, no life lost! 
-        if (PlayerController.jumpAttacking && !PlayerController.onGround)
+        if (_player.jumpAttacking && !_player.onGround)
         {
             return;
         }
@@ -279,7 +281,12 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
         if (enemyRigidBody == null)
             enemyRigidBody = other.GetComponentInParent<Rigidbody2D>();
-        PlayerController.SetKickBack((_playerRigidBody.position - enemyRigidBody.position).normalized * bounce);
+
+        var kick = (_playerRigidBody.position - enemyRigidBody.position).normalized * bounce;
+        bool isBellow = other.transform.position.y < (_player.transform.position.y - _player.height.y / 2);
+        if (!_player.onGround || other.transform)
+            kick *= bounceMult*bounceMult;
+        PlayerController.SetKickBack(kick);
 
         _isBouncing = false;
     }

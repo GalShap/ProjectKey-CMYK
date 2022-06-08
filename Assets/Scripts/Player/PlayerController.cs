@@ -44,10 +44,10 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _renderer;
     private Animator _animator;
     
-    public static bool onGround;
-    public static bool jumpAttacking = false; 
+    public bool onGround;
+    public bool jumpAttacking = false; 
     private Vector2 movement;
-    private Vector2 height;
+    public Vector2 height;
     private bool jumpHit;
 
     private static Vector2? kickbackVector2 = null;

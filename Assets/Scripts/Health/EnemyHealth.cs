@@ -118,10 +118,14 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private void OnTriggerEnter2D(Collider2D other)
     {
 
-        if (other.gameObject.CompareTag("Player") && !PlayerController.onGround && PlayerController.jumpAttacking) {   
-         
-            Hit(other.gameObject);
-            other.gameObject.GetComponent<PlayerHealth>().PlayerKickBack(this.gameObject);
+        if (other.gameObject.CompareTag("Player")) {
+            PlayerController p = other.gameObject.GetComponent<PlayerController>();
+            if (p == null) return;
+            if (!p.onGround && p.jumpAttacking)
+            {
+                Hit(other.gameObject);
+                other.gameObject.GetComponent<PlayerHealth>().PlayerKickBack(this.gameObject);   
+            }
         }
     }
 
