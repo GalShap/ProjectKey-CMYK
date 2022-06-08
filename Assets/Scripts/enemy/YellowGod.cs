@@ -45,6 +45,8 @@ public class YellowGod : EnemyObject
         {
             leftPillars[i].gameObject.GetComponent<pillarScript>().resetPostion();
             rightPillars[i].gameObject.GetComponent<pillarScript>().resetPostion();
+            rightPillars[i].gameObject.GetComponent<ColorObject>().ChangeColor(ColorManager.ColorName.Yellow);
+            leftPillars[i].gameObject.GetComponent<ColorObject>().ChangeColor(ColorManager.ColorName.Yellow);
         }
 
         leftBlocks.SetActive(false);
@@ -102,7 +104,19 @@ public class YellowGod : EnemyObject
             leftPillars[i].gameObject.GetComponent<pillarScript>().GO();
             rightPillars[i].gameObject.GetComponent<pillarScript>().GO();
         }
+
         animator.SetTrigger("stopAttack");
+    }
+
+    public void ChangeColorOfBlock(int i)
+    {
+        // ColorManager.ColorName color_ = Random.Range(0,1) == 0? ColorManager.ColorName.Cyan: ColorManager.ColorName.Magenta;
+        leftPillars[i].gameObject.GetComponent<ColorObject>().ChangeColor((int) Random.Range(0, 2) == 1
+            ? ColorManager.ColorName.Cyan
+            : ColorManager.ColorName.Magenta);
+        rightPillars[i].gameObject.GetComponent<ColorObject>().ChangeColor((int) Random.Range(0, 2) == 1
+            ? ColorManager.ColorName.Cyan
+            : ColorManager.ColorName.Magenta);
     }
 
     public void HorizMoveBack()
@@ -139,12 +153,12 @@ public class YellowGod : EnemyObject
         animator.SetTrigger("attack");
         foreach (var pillar in groundPillars)
         {
+            pillar.gameObject.GetComponent<ColorObject>().ChangeColor((int) Random.Range(0, 2) == 1
+                ? ColorManager.ColorName.Cyan
+                : ColorManager.ColorName.Magenta);
             pillar.GetComponent<pillarScript>().GO();
-            // ColorManager.ColorLayer
-            // pillar.layer = Random.Range(ColorManager.ColorLayer)
-
-            // pillar.GetComponent<ColorObject>().la
         }
+
         animator.SetTrigger("stopAttack");
     }
 
@@ -166,6 +180,7 @@ public class YellowGod : EnemyObject
                 rb.position = new Vector2(upperPillars[k].transform.position.x, rb.position.y);
             }
         }
+
         animator.SetTrigger("stopAttack");
 
         // foreach (var pillar in upperPillars)
@@ -219,22 +234,27 @@ public class YellowGod : EnemyObject
         hl.SetHealth(1200);
         animator.SetTrigger("reset");
     }
-    
+
     public void stopBoss()
     {
         var animator = gameObject.GetComponent<Animator>();
-        // var hl = animator.GetComponent<EnemyHealth>();
-        // hl.SetHealth(1200);
         animator.SetTrigger("stop");
     }
-    
+
     public void resumeBoss()
     {
         var animator = gameObject.GetComponent<Animator>();
-        // var hl = animator.GetComponent<EnemyHealth>();
-        // hl.SetHealth(1200);
         animator.SetTrigger("resume");
     }
-    
-    
+
+    public void resetBossActive()
+    {
+        var animator = gameObject.GetComponent<Animator>();
+        if (player.GetComponent<PlayerHealth>().GetHealth() <= 0)
+        {
+            PillarEnd();
+            HorizEnd();
+            resetBoss();
+        }
+    }
 }

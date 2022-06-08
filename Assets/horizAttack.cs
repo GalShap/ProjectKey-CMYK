@@ -25,6 +25,7 @@ public class horizAttack : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        yellow.resetBossActive();
         timer += Time.deltaTime;
         timerBlock += Time.deltaTime;
         if (timer >= size + timerCounter)

@@ -28,18 +28,21 @@ public class ShootAttack : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        yellow.resetBossActive();
         timer += Time.deltaTime;
         timerBlock += Time.deltaTime;
         timerShoot += Time.deltaTime;
+        int[] set_ = {0, 2, 4 };
         if (timer > size + timerCounter)
         {
             // yellow.HorizMoveBack();
             animator.SetTrigger("coolDown");
         }
-        else if (timerBlock >= timerBlockWait && timer < size)
+        else if (timerBlock >= timerBlockWait && timer < size && counter <= set_.Length)
         {
             timerBlock = 0;
-            yellow.HorizMoveBlock(counter);
+            yellow.HorizMoveBlock(set_[counter]);
+            yellow.ChangeColorOfBlock(set_[counter]);
             counter++;
         }
         if (timerShoot >= timerCounterShoot && timer >= size)

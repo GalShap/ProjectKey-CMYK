@@ -27,6 +27,7 @@ public class YellowGodStandState : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        yellow.resetBossActive();
         yellow.LookAtPlayer();
         timer += Time.deltaTime;
         if (timer >= timerCounter)
@@ -52,6 +53,7 @@ public class YellowGodStandState : StateMachineBehaviour
             // rb.AddForce(Vector2.up);
             // animator.SetTrigger( "shoot");
         }
+        
     }
     
 

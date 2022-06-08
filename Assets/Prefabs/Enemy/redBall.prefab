@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5690411770685105856}
   - component: {fileID: -356574099240749928}
   - component: {fileID: 8121963082488967721}
-  - component: {fileID: -6774737075960271852}
   m_Layer: 12
   m_Name: redBall
   m_TagString: Projectile
@@ -124,25 +123,6 @@ MonoBehaviour:
   neutralSprite: {fileID: 1816934906942412506, guid: 939ffc2ddf75ef14f907cee27c59b766, type: 3}
   whiteSprite: {fileID: 1816934906942412506, guid: 939ffc2ddf75ef14f907cee27c59b766, type: 3}
   neutralColor: {r: 1, g: 1, b: 1, a: 1}
---- !u!95 &-6774737075960271852
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1029945653412360208}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9a088b62316a70141901c47c33832e0b, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8204736946810322405
 GameObject:
   m_ObjectHideFlags: 0
