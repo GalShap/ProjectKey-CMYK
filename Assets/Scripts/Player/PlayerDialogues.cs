@@ -65,4 +65,24 @@ public class PlayerDialogues : MonoBehaviour
                 yellowBoss.Invoke();
             }));
     }
+
+    public void YellowGive1()
+    {
+        TimelineManager.Manager.Pause();
+        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.YELLOW_GIVE_1, true,
+            (() => {
+            {
+                TimelineManager.Manager.Play();
+            }}));
+    }
+    
+    public void YellowGive2()
+    {
+        TimelineManager.Manager.Pause();
+        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.YELLOW_GIVE_2, true,
+            (() => {
+            {
+                TimelineManager.Manager.Play();
+            }}));
+    }
 }

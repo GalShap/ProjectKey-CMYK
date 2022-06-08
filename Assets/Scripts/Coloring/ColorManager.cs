@@ -151,6 +151,16 @@ public class ColorManager : MonoBehaviour
        
     }
 
+    public static void ColorYellow()
+    {
+        SetColor(ColorName.Yellow);
+    }
+
+    public static void ColorNeutral()
+    {
+        SetColor(ColorName.Neutral);
+    }
+
     // function disables the given layer and enables all other layers. 
     private void CancelCollisionLayer(ColorLayer layer)
     {

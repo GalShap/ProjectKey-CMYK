@@ -16,6 +16,7 @@ public class TimelineManager : MonoBehaviour
     private int currIndex = 0;
     private PlayableDirector _currTimeline;
     public static TimelineManager Manager;
+    public int startAt = 0;
     private int index = 0;
     public bool IsPlaying => Manager._currTimeline != null && Manager._currTimeline.state == PlayState.Playing;
 
@@ -25,6 +26,7 @@ public class TimelineManager : MonoBehaviour
         {
             Manager = this;
             _currTimeline = timelines[0];
+            index = startAt;
         }
         else
         {

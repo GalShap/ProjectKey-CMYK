@@ -23,7 +23,9 @@ public class DialogueManager : MonoBehaviour
         PINK,
         PINK_AGAIN,
         PINK_DEAD,
-        YELLOW_FIRST
+        YELLOW_FIRST,
+        YELLOW_GIVE_1,
+        YELLOW_GIVE_2
     }
 
     [Serializable]
@@ -194,6 +196,22 @@ public class DialogueManager : MonoBehaviour
                 new Sentence("You'd like that wouldn't you? For I am just another obstacle in your road to freedom.",3),
                 new Sentence("I am sorry to disappoint you child... We shall leave the battle to another time.",3),
                 new Sentence("Go. Enjoy your night. We shall resume our business next time we meet.",3)
+            }
+        },
+        {
+            Dialogues.YELLOW_GIVE_1,
+            new List<Sentence>()
+            {
+                new Sentence("FIRST KEY",0),
+                new Sentence("FIRST YELLOW",3)
+            }
+        },
+        {
+            Dialogues.YELLOW_GIVE_2,
+            new List<Sentence>()
+            {
+                new Sentence("SECOND KEY",0),
+                new Sentence("SECOND YELLOW",3)
             }
         }
     };
