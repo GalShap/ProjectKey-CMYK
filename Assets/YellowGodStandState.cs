@@ -2,54 +2,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RedStand : StateMachineBehaviour
+public class YellowGodStandState : StateMachineBehaviour
 {
     private GameObject player;
     private Rigidbody2D rb;
     
-    private MagentaGod red;
+    private YellowGod yellow;
     private EnemyHealth hl;
     [SerializeField] public float timerCounter = 5;
-    [SerializeField] public float timerMove = 2;
 
     private float timer = 2;
-    private float timerForMove = 2;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         // player = GameObject.FindGameObjectWithTag("Player");
-        red = animator.GetComponent<MagentaGod>();
-        player = red.getPlayer();
+        yellow = animator.GetComponent<YellowGod>();
+        player = yellow.player;
         hl = animator.GetComponent<EnemyHealth>();
         rb = animator.GetComponent<Rigidbody2D>();
+        yellow.healtChange();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        red.LookAtPlayer();
-        red.healtChange();
+        yellow.resetBossActive();
+        yellow.LookAtPlayer();
         timer += Time.deltaTime;
-        timerMove += Time.deltaTime;
         if (timer >= timerCounter)
         {
             timer = 0;
+            int k = Random.Range(0, 3);
+            switch (k)
+            {
+                case 0 :
+                    animator.SetTrigger("attackOneStairs");
+                    break;
+                case 1:
+                    animator.SetTrigger("upAndDownAttack");
+                    break;
+                case 2:
+                    animator.SetTrigger("shoot");
+                    break;
+                default:
+                    animator.SetTrigger("attackOneStairs");
+                    break;
+                
+            }
             // rb.AddForce(Vector2.up);
-            animator.SetTrigger( "shoot");
+            // animator.SetTrigger( "shoot");
         }
-        if (timerMove >= timerForMove)
-        {
-            timerMove = 0;
-            red.Move();
-        }
+        
     }
+    
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        animator.ResetTrigger("shoot");
-    }
+    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    
+    //}
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

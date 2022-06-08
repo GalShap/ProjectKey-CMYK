@@ -2,54 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RedStand : StateMachineBehaviour
+public class deathYellow : StateMachineBehaviour
 {
-    private GameObject player;
-    private Rigidbody2D rb;
-    
-    private MagentaGod red;
-    private EnemyHealth hl;
-    [SerializeField] public float timerCounter = 5;
-    [SerializeField] public float timerMove = 2;
-
-    private float timer = 2;
-    private float timerForMove = 2;
-
+    [SerializeField] private float timerToDie = 1;
+    private float timerCoolDown = 0;
+    private float timeToDie = 0;
+    private YellowGod yellow;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // player = GameObject.FindGameObjectWithTag("Player");
-        red = animator.GetComponent<MagentaGod>();
-        player = red.getPlayer();
-        hl = animator.GetComponent<EnemyHealth>();
-        rb = animator.GetComponent<Rigidbody2D>();
+        yellow = animator.GetComponent<YellowGod>();
+       
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        red.LookAtPlayer();
-        red.healtChange();
-        timer += Time.deltaTime;
-        timerMove += Time.deltaTime;
-        if (timer >= timerCounter)
+        timeToDie += Time.deltaTime;
+        if (timeToDie >= timerToDie)
         {
-            timer = 0;
-            // rb.AddForce(Vector2.up);
-            animator.SetTrigger( "shoot");
-        }
-        if (timerMove >= timerForMove)
-        {
-            timerMove = 0;
-            red.Move();
+            // red.ShootBlue();
+            timeToDie = 0;
+            yellow.gameObject.SetActive(false);
         }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        animator.ResetTrigger("shoot");
-    }
+    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    
+    //}
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
