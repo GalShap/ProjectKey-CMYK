@@ -49,8 +49,9 @@ public class PatrolEnemy : EnemyObject
         }
 
         else
-        {   
-            rb.AddForce(KickBackVector.Value, ForceMode2D.Impulse);
+        {
+            // rb.AddForce(KickBackVector.Value, ForceMode2D.Impulse);
+            rb.velocity += KickBackVector.Value;
             KickBackVector = null;
         }
        

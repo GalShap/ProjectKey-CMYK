@@ -232,7 +232,7 @@ MonoBehaviour:
   health: 100
   enemySpriteRenderer: {fileID: 3706917342700130943}
   timeToAnimate: 0.2
-  bounce: 100
+  bounce: 50
   _timeToBounce: 0.2
   MAX_HEALTH: 100
   _rigidbody2D: {fileID: 4123525431797855058}
