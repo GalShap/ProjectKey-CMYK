@@ -50,13 +50,14 @@ public class bullet : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Projectile") || other.gameObject.CompareTag("Monster")) return;
         if(!other.gameObject.CompareTag("Player")) Unactive();
-        _animator.SetTrigger("Death");
+        if(_animator!=null)_animator.SetTrigger("Death");
         m_Rigidbody.velocity = Vector2.zero;
     }
 
     public void Unactive()
     {
         active = false;
+        gameObject.SetActive(false);
     }
 
     public void DestroyObject()

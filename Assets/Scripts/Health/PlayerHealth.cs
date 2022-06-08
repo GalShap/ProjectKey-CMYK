@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
@@ -17,6 +18,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [SerializeField] private float timeToHit = 0.8f;
 
     [SerializeField] private float timeToDie = 1.2f;
+
+    [SerializeField] private UnityEvent OnPinkDie;
+    
+    [SerializeField] private UnityEvent OnYellowDie;
 
     #endregion
 
@@ -39,6 +44,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private float _timeToNextHit = 0;
 
     private int _lastCollision = -1;
+
+    private bool _fightingPink;
+    private bool _fightingYellow;
 
     private static readonly int SpikesDeath = Animator.StringToHash("DeathBySpikes");
     private static readonly int MonsterDeath = Animator.StringToHash("DeathByMonster");
@@ -94,6 +102,28 @@ public class PlayerHealth : MonoBehaviour, IDamageable
                 _time = 0;
             }
         }
+    }
+
+    public void StartFightPink()
+    {
+        _fightingPink = true;
+    }
+    
+    
+    public void StopFightPink()
+    {
+        _fightingPink = false;
+    }
+    
+    public void StartFightYellow()
+    {
+        _fightingYellow = true;
+    }
+    
+    
+    public void StopFightYellow()
+    {
+        _fightingYellow = false;
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -340,6 +370,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public void Dead()
     {
         SetHealth(MAX_LIVES);
+        if (_fightingPink)
+            OnPinkDie.Invoke();
+        if(_fightingYellow)
+            OnYellowDie.Invoke();
         GameManager.Manager.Respawn();
         PlayerHUD.SharedHud.FullHealth();
         

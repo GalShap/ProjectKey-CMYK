@@ -150,6 +150,7 @@ MonoBehaviour:
     m_Bits: 1024
   neutralSprite: {fileID: -7855626261214365963, guid: 5c5f6147d75dcfe48816dcbaede6224b, type: 3}
   whiteSprite: {fileID: -2880035774045676689, guid: 5c5f6147d75dcfe48816dcbaede6224b, type: 3}
+  neutralColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!251 &4003448062370439331
 PlatformEffector2D:
   m_ObjectHideFlags: 0

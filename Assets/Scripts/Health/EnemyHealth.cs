@@ -20,7 +20,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     [SerializeField] private float _timeToBounce = 0.2f;
     
-    [SerializeField] private int MAX_HEALTH = 100;
+    [SerializeField] public int MAX_HEALTH = 100;
 
     [SerializeField] private Rigidbody2D _rigidbody2D;
 

@@ -81,6 +81,11 @@ public class MagentaGod : EnemyObject
         }
     }
 
+    public void StartFight()
+    {
+        Playing = true;
+    }
+
     public void Die()
     {
         transform.position = initPos;
@@ -90,7 +95,7 @@ public class MagentaGod : EnemyObject
             () =>
             {
                 gameObject.SetActive(false);
-                orb.transform.position = transform.position + Vector3.up;
+                orb.transform.position = transform.position;
                 orb.gameObject.SetActive(true);
             });
     }
@@ -138,7 +143,7 @@ public class MagentaGod : EnemyObject
         var hp = hl.GetHealth();
         if (hp <= lifeToGoDiffMode)
         {
-            rb.transform.position = new Vector3(rb.transform.position.x,platformLeft.transform.position.y +1, rb.transform.position.z) ;
+            // rb.transform.position = new Vector3(rb.transform.position.x,platformLeft.transform.position.y +1, rb.transform.position.z) ;
         }
         // if (directionAcordingToHp(hp, 400, 0, "left", animator)) return;
         // if (directionAcordingToHp(hp, 300, 1, "right", animator)) return;
@@ -163,8 +168,10 @@ public class MagentaGod : EnemyObject
     {
         var animator = gameObject.GetComponent<Animator>();
         var hl = animator.GetComponent<EnemyHealth>();
-        hl.SetHealth(600);
+        hl.SetHealth(hl.MAX_HEALTH);
+        print($"health: {hl.GetHealth()}");
         animator.SetTrigger("coolDown");
+        transform.position = initPos;
         Playing = false;
     }
 
