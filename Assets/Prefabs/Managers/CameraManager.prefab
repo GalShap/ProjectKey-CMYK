@@ -45,5 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shakeAmplitude: 5
   shakeTime: 0.2
-  lookSpeed: 2
+  lookSpeed: 7
   lookDistance: 1

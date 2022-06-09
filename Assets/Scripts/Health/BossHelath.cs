@@ -22,4 +22,9 @@ public class BossHelath : EnemyHealth
       anim.SetTrigger("coolDown");  
       base.Dead();
    }
+
+   public void CoolDown()
+   {
+      anim.SetTrigger("coolDown");
+   }
 }
