@@ -24,6 +24,8 @@ public class YellowGod : EnemyObject
 
     [SerializeField] private int oddsForRed = 2;
     public GameObject player;
+    public GameObject leftBarrier;
+    public GameObject rightBarrier;
 
     private void Awake()
     {

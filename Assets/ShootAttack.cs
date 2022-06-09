@@ -21,6 +21,8 @@ public class ShootAttack : StateMachineBehaviour
     {
         yellow = animator.GetComponent<YellowGod>();
         size = yellow.getLeftPil().Length;
+        yellow.leftBarrier.SetActive(true);
+        yellow.rightBarrier.SetActive(true);
         yellow.HorizStart();
         counter = 0;
     }
@@ -55,6 +57,8 @@ public class ShootAttack : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        yellow.leftBarrier.SetActive(false);
+        yellow.rightBarrier.SetActive(false);
         timerShoot = 0;
         timerBlock = 0;
         counter = 0;
