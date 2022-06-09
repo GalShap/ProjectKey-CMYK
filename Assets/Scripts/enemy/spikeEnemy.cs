@@ -42,17 +42,17 @@ public class spikeEnemy : PatrolEnemy
 
     public override void OnColorChange(ColorManager.ColorLayer layer)
     {
-        base.OnColorChange(layer);
+        colored = layer.index == originalLayer; 
         if (colored)
         {
-            if (IsOneHit)
-            {
-                DisableSpikes();
-                _animatorr.SetTrigger(Reappear);
-                _animatorr.SetBool(Walking, true);
-                colored = false;
-            }
-            else
+            // if (IsOneHit)
+            // {
+            //     DisableSpikes();
+            //     _animatorr.SetTrigger(Reappear);
+            //     _animatorr.SetBool(Walking, true);
+            //     colored = false;
+            // }
+            // else
             {
                 _animatorr.SetBool(Walking, false);
                 _animatorr.SetTrigger(Disappear);   
@@ -61,12 +61,12 @@ public class spikeEnemy : PatrolEnemy
         }
         else
         {
-            if (IsOneHit)
-            {
+            // if (IsOneHit)
+            // {
                 DisableSpikes();
                 _animatorr.SetTrigger(Reappear);
                 _animatorr.SetBool(Walking, true);
-            }
+            // }
         }
     }
 
