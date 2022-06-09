@@ -224,17 +224,6 @@
                 },
                 {
                     "name": "",
-                    "id": "c3c6c1cd-60bc-4dc3-b250-506dc21c0a97",
-                    "path": "<Keyboard>/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Change Color",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "593662f6-508b-44c2-a449-e13220a633fe",
                     "path": "<Keyboard>/z",
                     "interactions": "",
@@ -367,11 +356,33 @@
                 },
                 {
                     "name": "",
+                    "id": "f39f9cdc-fc3c-4b6e-8d35-e51599e4899f",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Color Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "69b2add0-7bb2-4ca2-8770-e5258c538ad2",
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
+                    "action": "Color Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "52fe27aa-7938-4d52-acb8-8c3a77c02fe3",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Color Right",
                     "isComposite": false,
                     "isPartOfComposite": false
