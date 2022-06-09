@@ -5906,17 +5906,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &198919401 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3504744799610682642, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
-  m_PrefabInstance: {fileID: 375241334}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0ad92a2c7856844082a0da2fd107ef6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &199566467 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 338476741952683296, guid: 962da75b0ea76864fa449b19040b89f7, type: 3}
@@ -6718,7 +6707,7 @@ Transform:
   - {fileID: 81061024}
   - {fileID: 2032853842}
   - {fileID: 101128586}
-  - {fileID: 604261114}
+  - {fileID: 1677467586}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10780,6 +10769,10 @@ PrefabInstance:
     - target: {fileID: 432542587401132648, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 446198941022082097, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3504744800980125267, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
       propertyPath: m_Pivot.x
@@ -18718,11 +18711,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!224 &604261114 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3504744800980125267, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
-  m_PrefabInstance: {fileID: 375241334}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &608760274
 GameObject:
   m_ObjectHideFlags: 0
@@ -18985,17 +18973,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 338476741952683296, guid: 962da75b0ea76864fa449b19040b89f7, type: 3}
   m_PrefabInstance: {fileID: 610171625}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &610820671 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 432542587537215904, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
-  m_PrefabInstance: {fileID: 375241334}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &611872561
 GameObject:
   m_ObjectHideFlags: 0
@@ -32837,7 +32814,7 @@ PrefabInstance:
     - target: {fileID: 8863397447226026587, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
       propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 198919401}
+      objectReference: {fileID: 0}
     - target: {fileID: 8863397447226026587, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -49270,6 +49247,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!224 &1677467586 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 446198941022082097, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
+  m_PrefabInstance: {fileID: 375241334}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1678913952
 GameObject:
   m_ObjectHideFlags: 0
@@ -49706,7 +49688,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1685409449}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.81, y: -4.13, z: 0}
+  m_LocalPosition: {x: -2.52, y: -4.13, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.52101}
   m_Children: []
   m_Father: {fileID: 0}
@@ -64520,7 +64502,7 @@ PrefabInstance:
     - target: {fileID: 5760996184265680826, guid: 4482044c3a1223341adba33c24163f16, type: 3}
       propertyPath: tutorial
       value: 
-      objectReference: {fileID: 610820671}
+      objectReference: {fileID: 0}
     - target: {fileID: 5760996184265680826, guid: 4482044c3a1223341adba33c24163f16, type: 3}
       propertyPath: timelineEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
