@@ -105,7 +105,7 @@ public class BlueGod : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         godAnim.localPosition = Vector3.zero;
         _animator.SetTrigger(Almost);
