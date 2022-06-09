@@ -75,8 +75,18 @@ public class BlueGod : MonoBehaviour
         counter = toggleSpeed;
         toggle = true;
     }
-    
-    
+
+    public void StopToggle()
+    {
+        toggle = false;
+        ColorManager.SetColor(ColorManager.ColorName.Neutral);
+    }
+
+    public void StartToggle()
+    {
+        counter = toggleSpeed;
+        toggle = true;
+    }
     
     public void EndDialogue()
     {
@@ -107,13 +117,16 @@ public class BlueGod : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        godAnim.localPosition = Vector3.zero;
-        _animator.SetTrigger(Almost);
-        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.BLUE_DEAD, true, () =>
+        if (other.gameObject.CompareTag("Player"))
         {
-            _animator.SetTrigger(Die);
-            TimelineManager.Manager.Play();
-        });
+            godAnim.localPosition = Vector3.zero;
+            _animator.SetTrigger(Almost);
+            DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.BLUE_DEAD, true, () =>
+            {
+                _animator.SetTrigger(Die);
+                TimelineManager.Manager.Play();
+            });   
+        }
     }
 
     public void Hit()
