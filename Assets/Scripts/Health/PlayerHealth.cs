@@ -9,6 +9,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 {
     #region Inspector
 
+    [SerializeField] private bool godMode = false;
+
     [SerializeField] private int lives = 6;
 
     [SerializeField] private float bounce = 6f;
@@ -312,6 +314,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     /// </param>
     public void Damage(int amount)
     {   
+        if(godMode) return;
         
         PlayerHUD.SharedHud.removeLifeOnUI(amount);
         CameraManager.Manager.ShakeCamera();
