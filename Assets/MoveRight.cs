@@ -36,13 +36,22 @@ public class MoveRight : StateMachineBehaviour
         // {
         //     timer += Time.deltaTime;
         // }
-        Vector2 target = new Vector2(right.transform.position.x, rb.transform.position.y);
-        Vector2 newPos = Vector2.MoveTowards(rb.position, target, red.speed * Time.fixedDeltaTime);
-        rb.MovePosition(newPos);
-        if (newPos.x == right.position.x)
-        {
-            animator.SetTrigger("coolDown");
-        }
+        
+        // if (red.KickBackVector == null)
+        // {
+            Vector2 target = new Vector2(right.transform.position.x, rb.transform.position.y);
+            Vector2 newPos = Vector2.MoveTowards(rb.position, target, red.speed * Time.fixedDeltaTime);
+            rb.MovePosition(newPos);
+            if (newPos.x == right.position.x)
+            {
+                animator.SetTrigger("coolDown");
+            }
+        // }
+        // else
+        // {
+        //     rb.velocity += red.KickBackVector.Value;
+        //     red.KickBackVector = null;
+        // }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

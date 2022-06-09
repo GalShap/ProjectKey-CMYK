@@ -15,7 +15,7 @@ public abstract class EnemyObject : MonoBehaviour, ColorChangeListener
     protected Animator _animator;
     protected bool colored;
     public bool doingDamage = true;
-    protected Vector2? KickBackVector;
+    public Vector2? KickBackVector;
 
     protected bool CanPlayAudio = false;
 
