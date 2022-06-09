@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class BossHelath : EnemyHealth
 {
-   // MaxHealth = 600;
-   // public override void Dead()
-   // {
-   //    Animator anim = gameObject.GetComponent<Animator>();
-   //    anim.SetTrigger("Death");
-   //    // base.Dead();
-   //    
-   // }
+   private Animator anim;
+   protected override void Start()
+   {
+      anim = gameObject.GetComponent<Animator>();
+      base.Start();
+   }
 
    public override void Hit(GameObject hitter)
    {
-      
-      Animator anim = gameObject.GetComponent<Animator>();
       anim.SetTrigger("hit");
       base.Hit(hitter);
+   }
+
+   public override void Dead()
+   {
+      anim.SetTrigger("coolDown");  
+      base.Dead();
    }
 }

@@ -376,6 +376,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     public void Dead()
     {
+        playerAnimator.SetBool("jumping",false);
         SetHealth(MAX_LIVES);
         if (_fightingPink)
             OnPinkDie.Invoke();

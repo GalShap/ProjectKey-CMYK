@@ -53,7 +53,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     
     #endregion
 
-    private void Start()
+    protected virtual void Start()
     {
         _enemyRigidBody = gameObject.GetComponent<Rigidbody2D>();
         _animator = GetComponentInChildren<Animator>();
@@ -115,19 +115,19 @@ public class EnemyHealth : MonoBehaviour, IDamageable
             alpha.a = MAX_ALPHA;
         }
     }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-
-        if (other.gameObject.CompareTag("Player")) {
-            PlayerController p = other.gameObject.GetComponent<PlayerController>();
-            if (p == null) return;
-            if (!p.onGround && p.jumpAttacking)
-            {
-                Hit(other.gameObject);
-                other.gameObject.GetComponent<PlayerHealth>().PlayerKickBack(this.gameObject);   
-            }
-        }
-    }
+    // private void OnTriggerEnter2D(Collider2D other)
+    // {
+    //
+    //     if (other.gameObject.CompareTag("Player")) {
+    //         PlayerController p = other.gameObject.GetComponent<PlayerController>();
+    //         if (p == null) return;
+    //         if (!p.onGround && p.jumpAttacking)
+    //         {
+    //             Hit(other.gameObject);
+    //             other.gameObject.GetComponent<PlayerHealth>().PlayerKickBack(this.gameObject);   
+    //         }
+    //     }
+    // }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -139,6 +139,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     public virtual void Hit(GameObject hitter)
     {
+        print("hit");
         Damage(50);
             
         if (!_isBouncing)
