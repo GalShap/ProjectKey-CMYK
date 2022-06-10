@@ -139,7 +139,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     public virtual void Hit(GameObject hitter)
     {
-        print("hit");
         Damage(50);
             
         if (!_isBouncing)

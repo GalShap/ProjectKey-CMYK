@@ -37,8 +37,6 @@ public class MoveLeft : StateMachineBehaviour
         //      timer += Time.deltaTime;
         // }
         
-        // if (red.KickBackVector == null)
-        // {
             Vector2 target = new Vector2(left.transform.position.x, rb.transform.position.y);
             Vector2 newPos = Vector2.MoveTowards(rb.position, target, red.speed * Time.fixedDeltaTime);
             rb.MovePosition(newPos);
@@ -46,14 +44,7 @@ public class MoveLeft : StateMachineBehaviour
             {
                 animator.SetTrigger("coolDown");
             }
-        // }
-        // else
-        // {
-        //     // rb.AddForce(KickBackVector.Value, ForceMode2D.Impulse);
-        //     rb.velocity += red.KickBackVector.Value;
-        //     red.KickBackVector = null;
-        // }
-        
+
     }
     
 
