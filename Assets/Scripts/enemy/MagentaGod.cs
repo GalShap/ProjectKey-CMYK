@@ -46,6 +46,7 @@ public class MagentaGod : EnemyObject
         rb = GetComponent<Rigidbody2D>();
         _renderer = GetComponentInChildren<SpriteRenderer>();
         _animator = GetComponentInChildren<Animator>();
+        
         if (_animator == null)
             _animator = GetComponent<Animator>();
         collisionOffset = Vector2.right * (_renderer.sprite.rect.width / _renderer.sprite.pixelsPerUnit) / 2;
@@ -78,6 +79,22 @@ public class MagentaGod : EnemyObject
         {
             playing = value;
             _animator.SetBool("play",playing);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (playing)
+        {
+            if (KickBackVector != null)
+            {
+                rb.velocity = KickBackVector.Value;
+                KickBackVector = null;
+            }
+            else
+            {
+                rb.velocity = Vector2.zero;
+            }   
         }
     }
 

@@ -36,13 +36,15 @@ public class MoveLeft : StateMachineBehaviour
         // {
         //      timer += Time.deltaTime;
         // }
-        Vector2 target = new Vector2(left.transform.position.x, rb.transform.position.y);
-        Vector2 newPos = Vector2.MoveTowards(rb.position, target, red.speed * Time.fixedDeltaTime);
-        rb.MovePosition(newPos);
-        if (newPos.x == left.position.x)
-        {
-            animator.SetTrigger("coolDown");
-        }
+        
+            Vector2 target = new Vector2(left.transform.position.x, rb.transform.position.y);
+            Vector2 newPos = Vector2.MoveTowards(rb.position, target, red.speed * Time.fixedDeltaTime);
+            rb.MovePosition(newPos);
+            if (newPos.x == left.position.x)
+            {
+                animator.SetTrigger("coolDown");
+            }
+
     }
     
 

@@ -90,4 +90,12 @@ public class MovingPlatform : MonoBehaviour
 
         lastPos = _rigidbody2D.position;
     }
+
+    public void Detach(Rigidbody2D rb)
+    {
+        if (colliding.Contains(rb))
+        {
+            colliding.Remove(rb);
+        }
+    }
 }

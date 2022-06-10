@@ -40,7 +40,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private BoxCollider2D _playerCollider;
 
     private PlayerController _player;
-    
+
+    private HashSet<MovingPlatform> _platforms = new HashSet<MovingPlatform>();
+
     private bool _isBouncing = false;
 
     private bool _hit = false;
@@ -132,6 +134,15 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     void OnCollisionEnter2D(Collision2D other)
     {
+        MovingPlatform platform = other.gameObject.GetComponent<MovingPlatform>();
+        if (platform != null)
+        {
+            if (!_platforms.Contains(platform))
+            {
+                _platforms.Add(platform);
+            }
+        }
+        
         if (_player.jumpAttacking && EnemyCollision(other.gameObject))
         {
             BlueGod god = other.collider.GetComponent<BlueGod>();
@@ -379,6 +390,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     public void Dead()
     {
+        foreach (var platform in _platforms)
+        {
+            platform.Detach(_playerRigidBody);
+        }
+        
         playerAnimator.SetBool("jumping",false);
         SetHealth(MAX_LIVES);
         if (_fightingPink)
