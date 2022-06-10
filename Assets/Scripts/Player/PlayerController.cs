@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpTime = 1f;
     [SerializeField] private float fallMultiplier = 1f;
     [SerializeField] private float jumpDelay = 0.25f;
+    [SerializeField] private ParticleSystem jumpDust;
+    
     private float jumpTimer;
     private bool jumping;
     
@@ -200,6 +202,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {   
+        jumpDust.Play();
         AudioManager.SharedAudioManager.PlayKeyActionSound((int) AudioManager.KeySounds.Jump);
         _animator.SetBool(Jump1,true);
         _rigidbody2D.drag = 0;
