@@ -6,8 +6,11 @@ public class yellowPillarRight : pillarScript
 {
     [SerializeField] private GameObject blockEdge;
     // // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject left;
+    [SerializeField] private GameObject right;
+    protected override void Awake()
     {
+        base.Awake();
         side = PilerSide.RIGHT;
     }
     //
@@ -35,13 +38,19 @@ public class yellowPillarRight : pillarScript
     
     protected override void MoveBack()
     {
-        rb.velocity = Vector2.right * speed;
+        Vector2 target = new Vector2(right.transform.position.x, rb.transform.position.y);
+        Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
+        rb.MovePosition(newPos);
+        // rb.velocity = Vector2.right * speed;
         // rb.position = Vector2.MoveTowards(transform.position, pointA.position, speed * Time.fixedDeltaTime);
     }
 
     protected override void MoveToMid()
     {
-        rb.velocity = Vector2.left * speed;
+        Vector2 target = new Vector2(left.transform.position.x, rb.transform.position.y);
+        Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
+        rb.MovePosition(newPos);
+        // rb.velocity = Vector2.left * speed;
         // rb.position = Vector2.MoveTowards(transform.position, pointB.position, speed * Time.fixedDeltaTime);
     }
     public override void resetPostion()

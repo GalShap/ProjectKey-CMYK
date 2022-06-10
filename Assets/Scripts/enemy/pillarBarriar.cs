@@ -19,7 +19,7 @@ public class pillarBarriar : MonoBehaviour
     
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Floor" )
+        if (other.gameObject.CompareTag("pillar") )
         {
             print("gotIt");
             pillarScript pil = other.GetComponent<pillarScript>();

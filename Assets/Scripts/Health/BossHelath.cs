@@ -17,7 +17,7 @@ public class BossHelath : EnemyHealth
    {
       
       Animator anim = gameObject.GetComponent<Animator>();
-      anim.SetTrigger("hit");
       base.Hit(hitter);
+      anim.SetTrigger("hit");
    }
 }

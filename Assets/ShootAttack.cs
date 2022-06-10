@@ -16,6 +16,8 @@ public class ShootAttack : StateMachineBehaviour
     private float timerBlock = 0;
 
     private float timerShoot = 0;
+    private int[] set_ = {0, 2, 4 };
+    
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -34,13 +36,17 @@ public class ShootAttack : StateMachineBehaviour
         timer += Time.deltaTime;
         timerBlock += Time.deltaTime;
         timerShoot += Time.deltaTime;
-        int[] set_ = {0, 2, 4 };
         if (timer > size + timerCounter)
         {
             // yellow.HorizMoveBack();
+            timerShoot = 0;
+            timerBlock = 0;
+            counter = 0;
+            timer = 0;
+            yellow.HorizEnd();
             animator.SetTrigger("coolDown");
         }
-        else if (timerBlock >= timerBlockWait && timer < size && counter <= set_.Length)
+        else if (timerBlock >= timerBlockWait && timer < size && counter < set_.Length)
         {
             timerBlock = 0;
             yellow.HorizMoveBlock(set_[counter]);

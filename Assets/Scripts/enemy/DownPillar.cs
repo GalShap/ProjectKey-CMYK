@@ -5,8 +5,9 @@ using UnityEngine;
 public class DownPillar : pillarScript
 {
     
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
         side = PilerSide.DOWN;
     }
     

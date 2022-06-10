@@ -56,12 +56,7 @@ public class AttackUpDown : StateMachineBehaviour
             Yellow.sendThemDown();
             doDown = true;
         }
-        else
-        {
-            // Yellow.Shoot();
-        }
-
-
+       
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -71,6 +66,7 @@ public class AttackUpDown : StateMachineBehaviour
             timerShoot = 0;
             timerCoolDown = 0;
             doAttack = false;
+            doDown = false;
             animator.ResetTrigger("coolDown");
         }
 
