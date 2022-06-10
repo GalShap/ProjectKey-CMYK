@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 119415427}
   m_Layer: 12
   m_Name: leftYellowPillar (3)
-  m_TagString: Floor
+  m_TagString: pillar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7772,7 +7772,7 @@ GameObject:
   - component: {fileID: 3986267946414545456}
   m_Layer: 12
   m_Name: yellowGod
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7785,7 +7785,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4856604360154299098}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.39, z: 0}
+  m_LocalPosition: {x: 0, y: 1.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8262279002987762248}
@@ -7820,7 +7820,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   neutralSprite: {fileID: -7018538304808151304, guid: 4ca13c0c3744d644cac6305dc1615dd7, type: 3}
   whiteSprite: {fileID: 4442104396813035183, guid: 4ca13c0c3744d644cac6305dc1615dd7, type: 3}
   neutralColor: {r: 1, g: 1, b: 1, a: 1}
@@ -7844,7 +7844,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 7
 --- !u!114 &4307249033983480090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7867,8 +7867,8 @@ MonoBehaviour:
   - {fileID: 971370730}
   leftBlocks: {fileID: 8752951031433758249}
   rightBlocks: {fileID: 8613473265748224602}
-  downBlocks: {fileID: 0}
-  upBlocks: {fileID: 0}
+  downBlocks: {fileID: 5878691842785909514}
+  upBlocks: {fileID: 9063599682926637663}
   rightPillars:
   - {fileID: 41660290}
   - {fileID: 802905488}
@@ -7903,7 +7903,7 @@ MonoBehaviour:
   player: {fileID: 0}
   leftBarrier: {fileID: 4506797036658763344}
   rightBarrier: {fileID: 3940293217553729924}
-  isFlipped: 0
+  isFlipped: 1
 --- !u!95 &7163835451763069559
 Animator:
   serializedVersion: 3
