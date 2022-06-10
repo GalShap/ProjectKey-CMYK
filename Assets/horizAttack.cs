@@ -38,7 +38,7 @@ public class horizAttack : StateMachineBehaviour
         if (timer >= timerCounter +size && counter >= size && !doReturn)
         {
             yellow.horizMoveBack(counter2);
-            if (counter2 >= 0)
+            if (counter2 <= 0)
             {
                 doReturn = true;
             }
