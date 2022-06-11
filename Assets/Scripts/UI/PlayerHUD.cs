@@ -82,7 +82,7 @@ public class PlayerHUD : MonoBehaviour
                  rot = new Vector3(0, 0, degrees);
              }
 
-             print(rot);
+           
            
              Quaternion quat = Quaternion.Euler(rot.x, rot.y, rot.z);
              pallete.transform.rotation = quat;
