@@ -41,7 +41,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private void EnableDialogue()
+    public void EnableDialogue()
     {
         _playerMap.Disable();
         _dialogueMap.Enable();

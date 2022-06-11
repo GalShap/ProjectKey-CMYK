@@ -81,17 +81,21 @@ public class AudioManager : MonoBehaviour
     [Tooltip("drag all tracks in the game to here")]
     [SerializeField] private MusicAudioQueue musicAudioQueue;
 
-    [SerializeField] private AudioSource enemyAudioSource;
+    [SerializeField] public AudioSource enemyAudioSource;
 
-    [SerializeField] private AudioSource keyAudioSource;
+    [SerializeField] public AudioSource keyAudioSource;
 
-    [SerializeField] private AudioSource uiAudioSource;
+    [SerializeField] public AudioSource uiAudioSource;
+
+    [SerializeField] public AudioSource bossAudioSource;
 
     [SerializeField] private List<AudioClip> keyAudioClips;
 
     [SerializeField] private List<AudioClip> enemyAudioClips;
 
     [SerializeField] private List<AudioClip> uiAudioClips;
+
+    [SerializeField] private List<AudioClip> bossAudioClips;
 
     [SerializeField] public float defaultVolume = 0.7f;
     
@@ -101,7 +105,7 @@ public class AudioManager : MonoBehaviour
     
     public enum UiSounds
     {
-        DialogueLetters, NextDialogue    
+        DialogueLetters, NextDialogue, LoadNewColor, NewColorEnd    
     }
     
     public enum KeySounds
@@ -114,9 +118,14 @@ public class AudioManager : MonoBehaviour
         Hit, Shoot, Death
     }
     
+    public enum BossSounds
+    {
+        CyanTalk, CyanColorChange, MagentaTalk, MagentaAttack, YellowTalk, YellowAttack     
+    }
+    
     public enum AudioSources
     {
-        Music, Key, Enemy, UI 
+        Music, Key, Enemy, UI, Boss 
     }
 
     public void PlayPrev()
@@ -212,13 +221,20 @@ public class AudioManager : MonoBehaviour
         uiAudioSource.volume = 0.3f; 
         if (action < (int) UiSounds.DialogueLetters || action > uiAudioClips.Count - 1)
             return;
-
-        if (action == (int) UiSounds.NextDialogue) uiAudioSource.volume = MaxVolume;
-            
-        uiAudioSource.clip = enemyAudioClips[action];
+       
+        uiAudioSource.clip = uiAudioClips[action];
         //uiAudioSource.PlayOneShot(uiAudioSource.clip);
         uiAudioSource.Play();
         
+    }
+
+    public void PlayBossSounds(int action)
+    {
+        if (action < (int) EnemySounds.Hit || action > enemyAudioClips.Count - 1)
+            return;
+
+        bossAudioSource.clip = bossAudioClips[action];
+        bossAudioSource.PlayOneShot(bossAudioSource.clip);
     }
 
     public void PlayByIndex(int index)

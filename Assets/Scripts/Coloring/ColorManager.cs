@@ -315,7 +315,8 @@ public class ColorManager : MonoBehaviour
     }
 
     public static void SetColor(ColorName c)
-    {
+    {   
+        
         int index = _shared.AllLayers.FindIndex(cl => cl.name == c);
         if(index == -1)
             return;
