@@ -200,17 +200,26 @@ public class DialogueManager : MonoBehaviour
         {
             Dialogues.YELLOW_GIVE_1,
             new List<Sentence>()
-            {
-                new Sentence("FIRST KEY",0),
-                new Sentence("FIRST YELLOW",3)
+            {   
+                new Sentence("Hello Daughter i've been waiting for you.",3),
+                new Sentence("Daughter? You're just as sick as everyone else",0),
+                new Sentence("Oh you don't mean that, don't be foolish", 3),
+                new Sentence("Anyway, i want you to have this key...", 3),
+                new Sentence("Why will you do this? what is this sick game", 0),
+                new Sentence("I just want you to get a taste of what you can do if you stop this madness!", 3),
+                new Sentence("If you truly knew me like you think you do, then you'd know i won't go back!", 0)
+                
+              
             }
         },
         {
             Dialogues.YELLOW_GIVE_2,
             new List<Sentence>()
             {
-                new Sentence("SECOND KEY",0),
-                new Sentence("SECOND YELLOW",3)
+                new Sentence("you made a great journey, but it will have to come to an end im afraid", 3),
+                new Sentence("funny, your bothers said the same...", 0),
+                new Sentence("Magenta and Cyan will be missed, but its a small price to pay...", 3),
+                new Sentence("I hope you make it alive my child, you truly are remarkable", 3)
             }
         },
         {

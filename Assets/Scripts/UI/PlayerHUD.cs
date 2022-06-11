@@ -68,16 +68,13 @@ public class PlayerHUD : MonoBehaviour
              
             
              if (clockWise)
-             { 
-               
+             {
                  degrees = pallete.transform.rotation.eulerAngles.z - RotatationValues[colorsInPallete.Count];
                  rot = new Vector3(0, 0, degrees);
              }
 
              else
-             {   
-             
-               
+             {
                  degrees = RotatationValues[colorsInPallete.Count] + pallete.transform.rotation.eulerAngles.z;
                  rot = new Vector3(0, 0, degrees);
              }
@@ -208,8 +205,6 @@ public class PlayerHUD : MonoBehaviour
         {
             levelColors[_currColorPallete].rotate(false);
         }
-
-        
     }
 
     /// <summary>
@@ -267,7 +262,6 @@ public class PlayerHUD : MonoBehaviour
                     colors[i].color = color;
                 }
             }
-
     }
 
     public void removeLifeOnUI(int livesToRemove)
