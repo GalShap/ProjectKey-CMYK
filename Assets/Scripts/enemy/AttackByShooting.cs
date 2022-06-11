@@ -10,14 +10,14 @@ public class AttackByShooting : StateMachineBehaviour
     private float timerShoot = 0;
     // public GameObject m_Projectile; // this is a reference to your projectile prefab
     // public Transform m_SpawnTransform; // this is a reference to the transform where the prefab will spawn
-    private GameObject player;
+    private GameObject _player;
     private Rigidbody2D rb;
     private MagentaGod red;
     [SerializeField] private int oddsToGetBlue = 5;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameObject.FindGameObjectWithTag("Player");
         red = animator.GetComponent<MagentaGod>();
         rb = animator.GetComponent<Rigidbody2D>();
     }

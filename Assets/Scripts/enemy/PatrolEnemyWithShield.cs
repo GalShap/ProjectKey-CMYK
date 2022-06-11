@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PatrolEnemyWithShield : PatrolEnemy
 {
@@ -12,10 +13,10 @@ public class PatrolEnemyWithShield : PatrolEnemy
     [SerializeField] private Transform place1;
     [SerializeField] private Transform place2;
 
-    [SerializeField] private Transform player;
+    [FormerlySerializedAs("player")] [SerializeField] private Transform playerTrans;
 
     private bool facingRight;
-    private bool FacingPlayer => facingRight && player.position.x > transform.position.x;
+    private bool FacingPlayer => facingRight && playerTrans.position.x > transform.position.x;
     private float x = 0f;
 
     private void Update()

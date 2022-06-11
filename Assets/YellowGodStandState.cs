@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class YellowGodStandState : StateMachineBehaviour
 {
-    private GameObject player;
+    private GameObject _player;
     private Rigidbody2D rb;
     
     private YellowGod yellow;
@@ -18,7 +18,7 @@ public class YellowGodStandState : StateMachineBehaviour
     {
         // player = GameObject.FindGameObjectWithTag("Player");
         yellow = animator.GetComponent<YellowGod>();
-        player = yellow.player;
+        _player = yellow.player;
         hl = animator.GetComponent<EnemyHealth>();
         rb = animator.GetComponent<Rigidbody2D>();
         yellow.healtChange();

@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PatrolEnemy : EnemyObject
 {
-    [SerializeField] public GameObject player;
+    [FormerlySerializedAs("player")] [SerializeField] public GameObject _player;
     [SerializeField] protected float speed = 2f;
     [SerializeField] protected Transform[] places;
 
