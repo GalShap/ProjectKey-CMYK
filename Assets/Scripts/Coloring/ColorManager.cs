@@ -119,7 +119,7 @@ public class ColorManager : MonoBehaviour
     private void Start()
     {
         if (CurWorldColor != -1)
-            SetWorldColor(CurWorldColor);
+            SetWorldColor(CurWorldColor, 1);
         
         int numOfColors = availableLayers.Count;
         
@@ -214,7 +214,7 @@ public class ColorManager : MonoBehaviour
         {
             _shared.CurWorldColor = (_shared.CurWorldColor + dir) % _shared.availableLayers.Count;   
         }
-        _shared.SetWorldColor(_shared.CurWorldColor);
+        _shared.SetWorldColor(_shared.CurWorldColor, dir);
     }
 
     public static void AddColor(LayerMask l)
@@ -306,11 +306,11 @@ public class ColorManager : MonoBehaviour
     
     #region Public Methods
     
-    public void SetWorldColor(int color)
+    public void SetWorldColor(int color, int dir)
     {
         ColorLayer cl = availableLayers[color];
         PlayerHUD.SharedHud.HighlightColor();
-        PlayerHUD.SharedHud.rotate();
+        PlayerHUD.SharedHud.rotate(dir);
         SetColor(cl.name);
     }
 

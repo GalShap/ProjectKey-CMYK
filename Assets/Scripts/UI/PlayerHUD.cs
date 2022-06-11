@@ -62,21 +62,30 @@ public class PlayerHUD : MonoBehaviour
          public void rotate(bool clockWise)
          {
              if (colorsInPallete.Count <= 1) return;
-             Vector3 rot;
-             float degrees = pallete.transform.rotation.z +  RotatationValues[colorsInPallete.Count];
+             Vector3 rot; 
+             float degrees;
+             //float degrees = pallete.transform.rotation.z +  RotatationValues[colorsInPallete.Count];
+             
             
              if (clockWise)
-             {
-                  rot = new Vector3(0, 0, degrees);
-                 
+             { 
+               
+                 degrees = pallete.transform.rotation.eulerAngles.z - RotatationValues[colorsInPallete.Count];
+                 rot = new Vector3(0, 0, degrees);
              }
 
              else
-             {
-                  rot = new Vector3(0, 0, -degrees);
+             {   
+             
+               
+                 degrees = RotatationValues[colorsInPallete.Count] + pallete.transform.rotation.eulerAngles.z;
+                 rot = new Vector3(0, 0, degrees);
              }
-                
-             pallete.transform.Rotate(rot);
+
+             print(rot);
+           
+             Quaternion quat = Quaternion.Euler(rot.x, rot.y, rot.z);
+             pallete.transform.rotation = quat;
 
          }
 
@@ -188,16 +197,16 @@ public class PlayerHUD : MonoBehaviour
 
     }
 
-    public void rotate()
+    public void rotate(int dir)
     {
-        if (_indexToHightlight > _currColor)
-        {
-            levelColors[_currColorPallete].rotate(false);
-        }
-
-        else
+        if (dir == -1)
         {
             levelColors[_currColorPallete].rotate(true);
+        }
+
+        else if (dir == 1)
+        {
+            levelColors[_currColorPallete].rotate(false);
         }
 
         
