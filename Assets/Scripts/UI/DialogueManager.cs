@@ -289,8 +289,9 @@ public class DialogueManager : MonoBehaviour
                 new Sentence("... ...",3),
                 new Sentence("... ...",3),
                 new Sentence("*Huff* *Huff*",0),
-                new Sentence("So this is how it ends.",3),
-                new Sentence("So this is how it ends.",3),
+                new Sentence("You've impressed me, my child.",3),
+                new Sentence("Take my power, fulfill your destiny as a god.",3),
+                new Sentence("You can keep you title, I'm finally free of this madness.",0)
             }
         }
     };

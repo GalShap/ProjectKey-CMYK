@@ -173,7 +173,8 @@ public class PlayerHUD : MonoBehaviour
             if (i == level) levelColors[i].toggleColors(true, _currColor);
             else levelColors[i].toggleColors(false, _currColor);
         }
-
+        
+        ColorManager.SetColor(ColorManager.ColorName.Neutral);
         _currColorPallete = level;
         
     }
