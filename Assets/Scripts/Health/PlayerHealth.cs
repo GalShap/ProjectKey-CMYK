@@ -328,7 +328,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         if(godMode) return;
         
         PlayerHUD.SharedHud.removeLifeOnUI(amount);
-        CameraManager.Manager.ShakeCamera();
+        CameraManager.Manager.HitShake();
         lives -= amount;
         if (lives <= MIN_LIVES)
         {

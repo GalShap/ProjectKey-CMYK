@@ -103,4 +103,4 @@ MonoBehaviour:
   - {fileID: -2914094284037482596, guid: 5e71632b33908204f9329bd7e26cb46a, type: 3}
   - {fileID: 818420564105879772, guid: 5e71632b33908204f9329bd7e26cb46a, type: 3}
   - {fileID: 7012437048535397296, guid: 5e71632b33908204f9329bd7e26cb46a, type: 3}
-  lifeTime: 0.5
+  lifeTime: 0.2

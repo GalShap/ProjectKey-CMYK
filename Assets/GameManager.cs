@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
         respawnRoom = currRoom;
     }
 
-    public void createWhoosh(Vector3 position)
+    public void CreateWhoosh(Vector3 position)
     {
         Instantiate(whoosh, position, Quaternion.identity);
     }

@@ -2,13 +2,16 @@
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class CameraManager : MonoBehaviour
 {
     public static CameraManager Manager;
     
+    [FormerlySerializedAs("shakeAmplitude")]
     [Header("Camera Shake")]
-    [SerializeField] private float shakeAmplitude = 5;
+    [SerializeField] private float hitShakeAmplitude = 7;
+    [SerializeField] private float attackShakeAmplitude = 7;
     [SerializeField] private float shakeTime = 0.2f;
     
     [Header("Look Ahead")]
@@ -78,8 +81,24 @@ public class CameraManager : MonoBehaviour
     
     public void ShakeCamera()
     {
-        _perlin.m_AmplitudeGain = shakeAmplitude;
+        _perlin.m_AmplitudeGain = hitShakeAmplitude;
         shakeCounter = shakeTime;
+    }
+    
+    private void ShakeCamera(float amp)
+    {
+        _perlin.m_AmplitudeGain = amp;
+        shakeCounter = shakeTime;
+    }
+
+    public void HitShake()
+    {
+        ShakeCamera(hitShakeAmplitude);
+    }
+    
+    public void AttackShake()
+    {
+        ShakeCamera(attackShakeAmplitude);
     }
     
     private void StopShake()

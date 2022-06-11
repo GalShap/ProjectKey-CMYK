@@ -8,6 +8,7 @@ public class Whoosh: MonoBehaviour
     [SerializeField] private float lifeTime = 0.5f;
 
     private SpriteRenderer _renderer;
+    private float mult = 5;
     private float counter;
     
 
@@ -27,7 +28,7 @@ public class Whoosh: MonoBehaviour
 
     private void Update()
     {
-        transform.localScale = new Vector3(1 + counter, 1 + counter, 0);
+        transform.localScale = new Vector3(1 + counter*mult, 1 + counter*mult, 0);
         counter += Time.deltaTime;
         if (counter >= lifeTime)
         {
