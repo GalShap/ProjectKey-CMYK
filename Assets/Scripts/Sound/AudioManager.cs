@@ -1,8 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using System.Diagnostics;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class AudioManager : MonoBehaviour
 {
@@ -95,7 +96,7 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] private List<AudioClip> uiAudioClips;
 
-    [SerializeField] private float defaultVolume = 0.7f;
+    [SerializeField] public float defaultVolume = 0.7f;
     
     private const float MaxVolume = 1f;
 
@@ -114,6 +115,11 @@ public class AudioManager : MonoBehaviour
     public enum EnemySounds
     {
         Hit, Shoot, Death
+    }
+    
+    public enum AudioSources
+    {
+        Music, Key, Enemy, UI 
     }
 
     public void PlayPrev()
@@ -223,8 +229,28 @@ public class AudioManager : MonoBehaviour
      
         musicAudioQueue.PlayTrackByIndex(index);
     }
-    
-    
+
+    public void SetVolume(int audio, float volume)
+    {
+        switch (audio)
+        {
+            case (int) AudioSources.Music:
+                musicAudioQueue.GetMusicAudioSrc().volume = volume;
+                return;
+            
+            case (int) AudioSources.Key:
+                keyAudioSource.volume = volume;
+                return;
+            
+            case (int) AudioSources.Enemy:
+                enemyAudioSource.volume = volume;
+                return;
+            
+            case (int) AudioSources.UI:
+                uiAudioSource.volume = volume;
+                return;
+        }
+    }
 
 
 }

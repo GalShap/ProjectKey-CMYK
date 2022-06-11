@@ -58,6 +58,12 @@ TagManager:
   - name: Game
     uniqueID: 3712461745
     locked: 0
+  - name: BlackBG
+    uniqueID: 3714270067
+    locked: 0
+  - name: Orb
+    uniqueID: 2106556061
+    locked: 0
   - name: Player
     uniqueID: 3667924489
     locked: 0

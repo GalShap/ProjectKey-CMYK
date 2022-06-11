@@ -8,6 +8,11 @@ public class ColorOrb : MonoBehaviour
 {
     [SerializeField] private LayerMask layer;
     [SerializeField] private UnityEvent onTake = null;
+ 
+    [SerializeField] private GameObject OrbForceField;
+    [SerializeField] private List<GameObject> gameObjectsForScene;
+
+
     
     private SpriteRenderer _renderer;
 
@@ -15,6 +20,15 @@ public class ColorOrb : MonoBehaviour
     {
         _renderer = GetComponent<SpriteRenderer>();
         Init();
+    }
+
+    private void OnEnable()
+    {
+        for (int i = 0; i < gameObjectsForScene.Count; i++)
+        {
+            gameObjectsForScene[i].SetActive(true);
+        }
+        AudioManager.SharedAudioManager.SetVolume((int) AudioManager.AudioSources.Music, 0.1f);
     }
 
     private void Init()
@@ -30,10 +44,28 @@ public class ColorOrb : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            ColorManager.AddColor(layer);
-            if(onTake != null)
-                onTake.Invoke();
-            Destroy(gameObject);   
+            StartCoroutine(NewPowerSequence());
         }
+    }
+
+    private IEnumerator NewPowerSequence()
+    {   
+        
+        GetComponent<ParticleSystem>().Play();
+        OrbForceField.SetActive(true);
+        yield return new WaitForSeconds(3f);
+      
+        if(onTake != null)
+            onTake.Invoke();
+        Destroy(gameObject);
+       
+        for (int i = 0; i < gameObjectsForScene.Count; i++)
+        {
+            gameObjectsForScene[i].SetActive(false);
+        }
+        ColorManager.AddColor(layer);
+        
+        AudioManager.SharedAudioManager.SetVolume((int) AudioManager.AudioSources.Music,
+            AudioManager.SharedAudioManager.defaultVolume);
     }
 }

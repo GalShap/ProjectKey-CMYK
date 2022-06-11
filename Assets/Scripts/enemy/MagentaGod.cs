@@ -14,6 +14,7 @@ public class MagentaGod : EnemyObject
     private float timer = 0;
     [SerializeField] private float lifeToGoDiffMode = 200;
     [SerializeField]private bool isLeft = false;
+    
     private bool[] flag = {false, false, false, false};
 
     // [FormerlySerializedAs("m_Projectile")]
@@ -28,6 +29,7 @@ public class MagentaGod : EnemyObject
     private Transform[] m_SpawnTransformBlue; // this is a reference to the transform where the prefab will spawn
 
     [SerializeField] private ColorOrb orb;
+   
 
     public GameObject player;
     public Transform right;
