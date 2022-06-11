@@ -50,7 +50,7 @@ public class ColorOrb : MonoBehaviour
 
     private IEnumerator NewPowerSequence()
     {   
-        
+        InputManager.Manager.DisableAll();
         GetComponent<ParticleSystem>().Play();
         OrbForceField.SetActive(true);
         yield return new WaitForSeconds(3f);
@@ -58,14 +58,17 @@ public class ColorOrb : MonoBehaviour
         if(onTake != null)
             onTake.Invoke();
         Destroy(gameObject);
-       
+        ColorManager.AddColor(layer);
+
+        yield return new WaitForSeconds(0.5f);
         for (int i = 0; i < gameObjectsForScene.Count; i++)
         {
             gameObjectsForScene[i].SetActive(false);
         }
-        ColorManager.AddColor(layer);
-        
+
+
         AudioManager.SharedAudioManager.SetVolume((int) AudioManager.AudioSources.Music,
             AudioManager.SharedAudioManager.defaultVolume);
+        InputManager.Manager.EnablePlayer();
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveRight : StateMachineBehaviour
 {
     private Transform right;
-    private GameObject player;
+    private GameObject _player;
     private Rigidbody2D rb;
     private MagentaGod red;
     private bool unactive;
@@ -15,7 +15,7 @@ public class MoveRight : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameObject.FindGameObjectWithTag("Player");
         red = animator.GetComponent<MagentaGod>();
         rb = animator.GetComponent<Rigidbody2D>();
         right = red.right;

@@ -2,14 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PatrolEnemy : EnemyObject
 {
-    [SerializeField] public GameObject player;
+    [FormerlySerializedAs("player")] [SerializeField] public GameObject _player;
     [SerializeField] protected float speed = 2f;
     [SerializeField] protected Transform[] places;
 
     [SerializeField] protected int counter;
+    [SerializeField] protected bool isStatic = false;
 
     private void Awake()
     {
@@ -40,8 +42,11 @@ public class PatrolEnemy : EnemyObject
     {
         if (KickBackVector == null)
         {
-            return;
-             var x = transform.position.x - places[counter].position.x;
+            if (places.Length <= 1 || places[0] == null || isStatic)
+            {
+                return;
+            }
+            var x = transform.position.x - places[counter].position.x;
                     rb.velocity = new Vector2((x <= 0 ? speed : -speed),
                         rb.velocity.y);
             if (Math.Abs(x) > 0.1f) return;

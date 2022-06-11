@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShootBlueLine : StateMachineBehaviour
 {
-    private GameObject player;
+    private GameObject _player;
     private Rigidbody2D rb;
     private MagentaGod red;
     [SerializeField] private float timerToShoot = 1;
@@ -13,7 +13,7 @@ public class ShootBlueLine : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameObject.FindGameObjectWithTag("Player");
         red = animator.GetComponent<MagentaGod>();
         rb = animator.GetComponent<Rigidbody2D>();
         

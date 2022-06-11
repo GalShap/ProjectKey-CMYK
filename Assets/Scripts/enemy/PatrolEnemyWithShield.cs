@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PatrolEnemyWithShield : PatrolEnemy
 {
@@ -11,6 +12,11 @@ public class PatrolEnemyWithShield : PatrolEnemy
     
     [SerializeField] private Transform place1;
     [SerializeField] private Transform place2;
+
+    [FormerlySerializedAs("player")] [SerializeField] private Transform playerTrans;
+
+    private bool facingRight;
+    private bool FacingPlayer => facingRight && playerTrans.position.x > transform.position.x;
     private float x = 0f;
 
     private void Update()
@@ -25,6 +31,8 @@ public class PatrolEnemyWithShield : PatrolEnemy
         Move();
         if(rb.velocity.x != x)
             MoveShield();
+
+        health.damagable = colored || !FacingPlayer;
     }
 
     private void MoveShield()
@@ -42,7 +50,6 @@ public class PatrolEnemyWithShield : PatrolEnemy
 
     public override void OnColorChange(ColorManager.ColorLayer layer)
     {
-        health.damagable = (layer.index == shield.layer);
-        print(health.damagable);
+        colored = layer.index == shield.layer;
     }
 }

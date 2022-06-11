@@ -30,6 +30,10 @@ public class BossHelath : EnemyHealth
             (()=>{sprite.gameObject.SetActive(false);}),
             (() => {base.Dead();}));
       }
+      else
+      {
+         base.Dead();
+      }
    }
 
    public void CoolDown()

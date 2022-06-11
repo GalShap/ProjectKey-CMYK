@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.Serialization;
 
 public class simpleEnemy : EnemyObject
 {
     [SerializeField] private Vector3 _currentTarget;
-    [SerializeField] public GameObject player;
+    [FormerlySerializedAs("player")] [SerializeField] public GameObject _player;
 
     [SerializeField] private float speed = 2f;
     [SerializeField] private float radius = 4f;
@@ -36,7 +37,7 @@ public class simpleEnemy : EnemyObject
     // Update is called once per frame
     private void Update()
     {
-        _currentTarget = player.transform.position;
+        _currentTarget = _player.transform.position;
     }
 
     // physics is best, when activating it in Fixed update. 
@@ -45,7 +46,7 @@ public class simpleEnemy : EnemyObject
         if (!isAlive()) UponDead();
         isOnGround();
         // if (Math.Abs(PositionX()) <= len && Math.Abs(PositionY()) <= 0.3f && onGround)
-        if (Vector3.Distance(transform.position, player.transform.position) < radius && onGround)
+        if (Vector3.Distance(transform.position, _player.transform.position) < radius && onGround)
         {
             move();
         }
@@ -106,11 +107,11 @@ public class simpleEnemy : EnemyObject
 
     private float PositionX()
     {
-        return (transform.position.x - player.transform.position.x);
+        return (transform.position.x - _player.transform.position.x);
     }
 
     private float PositionY()
     {
-        return (transform.position.y - player.transform.position.y);
+        return (transform.position.y - _player.transform.position.y);
     }
 }
