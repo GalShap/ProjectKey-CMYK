@@ -10,35 +10,40 @@ public abstract class pillarScript : MonoBehaviour
     protected bool moveBack;
     protected Vector3 startPostion;
 
-    [SerializeField] protected GameObject OtherBlock;
+    // [SerializeField] protected GameObject OtherBlock;
     // [SerializeField] protected GameObject blockToStop;
 
     // [SerializeField] private Transform pointA;
     // [SerializeField] private Transform pointB;
-    [SerializeField] protected float speed = 3;
+    [SerializeField] protected float speed = 6;
     protected PilerSide side;
+    private bool isSet = false;
 
     public enum PilerSide
     {
-        LEFT, RIGHT, UP, DOWN
+        LEFT,
+        RIGHT,
+        UP,
+        DOWN
     };
 
-    private void Awake()
+    protected virtual void Awake()
     {
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        startPostion = transform.position;
+        if (!isSet)
+        {
+            print("one");
+            rb = gameObject.GetComponent<Rigidbody2D>();
+            startPostion = transform.position;
+            isSet = true;
+        }
+        else
+        {
+            print("somthing");
+        }
+        print("two");
     }
 
-    // // Start is called before the first frame update
-    // void Start()
-    // {
-    // }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
+    
     protected void FixedUpdate()
     {
         if (moveForwed)
@@ -51,21 +56,20 @@ public abstract class pillarScript : MonoBehaviour
         }
         else
         {
-            print("are We Here");
             rb.velocity = Vector2.zero;
         }
     }
 
     protected abstract void MoveBack();
     // {
-        // rb.velocity = Vector2.down * speed;
-        // rb.position = Vector2.MoveTowards(transform.position, pointA.position, speed * Time.fixedDeltaTime);
+    // rb.velocity = Vector2.down * speed;
+    // rb.position = Vector2.MoveTowards(transform.position, pointA.position, speed * Time.fixedDeltaTime);
     // }
 
     protected abstract void MoveToMid();
     // {
-        // rb.velocity = Vector2.up * speed;
-        // rb.position = Vector2.MoveTowards(transform.position, pointB.position, speed * Time.fixedDeltaTime);
+    // rb.velocity = Vector2.up * speed;
+    // rb.position = Vector2.MoveTowards(transform.position, pointB.position, speed * Time.fixedDeltaTime);
     // }
 
     //set the block to move 
@@ -94,10 +98,10 @@ public abstract class pillarScript : MonoBehaviour
     //         CollideWithOtherBlock();
     //     }
     // }
-    
+
     public virtual void resetPostion()
     {
-        transform.position = startPostion;
+        rb.transform.position = startPostion;
     }
 
     public PilerSide getSide()

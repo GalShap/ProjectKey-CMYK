@@ -24,9 +24,13 @@ public class YellowGod : EnemyObject
 
     [SerializeField] private int oddsForRed = 2;
     public GameObject player;
+    public GameObject leftBarrier;
+    public GameObject rightBarrier;
+    private Vector3 initPlace;
 
     private void Awake()
     {
+        initPlace = transform.position;
         movement = gameObject.transform.position;
         rb = GetComponent<Rigidbody2D>();
         _renderer = GetComponentInChildren<SpriteRenderer>();
@@ -43,16 +47,23 @@ public class YellowGod : EnemyObject
     {
         for (int i = 0; i < leftPillars.Length; i++)
         {
-            leftPillars[i].gameObject.GetComponent<pillarScript>().resetPostion();
-            rightPillars[i].gameObject.GetComponent<pillarScript>().resetPostion();
-            rightPillars[i].gameObject.GetComponent<ColorObject>().ChangeColor(ColorManager.ColorName.Yellow);
-            leftPillars[i].gameObject.GetComponent<ColorObject>().ChangeColor(ColorManager.ColorName.Yellow);
+            // if (leftPillars[i].gameObject.activeSelf)
+            {
+                leftPillars[i].gameObject.GetComponent<pillarScript>().resetPostion();
+                leftPillars[i].gameObject.GetComponent<ColorObject>().ChangeColor(ColorManager.ColorName.Yellow);
+            }
+
+            // if (rightPillars[i].gameObject.activeSelf)
+            {
+                rightPillars[i].gameObject.GetComponent<pillarScript>().resetPostion();
+                rightPillars[i].gameObject.GetComponent<ColorObject>().ChangeColor(ColorManager.ColorName.Yellow);
+            }
         }
 
         leftBlocks.SetActive(false);
         rightBlocks.SetActive(false);
 
-        rb.position = new Vector2(0, rb.position.y);
+        rb.transform.position = initPlace;
     }
 
     public void HorizStart()
@@ -75,18 +86,24 @@ public class YellowGod : EnemyObject
     {
         foreach (var t in groundPillars)
         {
-            t.GetComponent<pillarScript>().resetPostion();
+            if(t.activeSelf)
+                t.GetComponent<pillarScript>().resetPostion();
         }
 
         foreach (var t in upperPillars)
         {
-            t.GetComponent<pillarScript>().resetPostion();
-            t.SetActive(false);
+            if (t.activeSelf)
+            {
+                t.GetComponent<pillarScript>().resetPostion();
+                t.SetActive(false);
+            }
+                
         }
 
         downBlocks.SetActive(false);
         // downBlocks.
-        rb.position = new Vector2(upperPillars[0].GetComponent<pillarScript>().transform.position.x, rb.position.y);
+        rb.transform.position = initPlace;
+        // rb.position = new Vector2(upperPillars[0].GetComponent<pillarScript>().transform.position.x, rb.position.y);
     }
 
 
@@ -98,14 +115,24 @@ public class YellowGod : EnemyObject
     public void HorizMoveBlock(int i)
     {
         var animator = gameObject.GetComponent<Animator>();
-        animator.SetTrigger("attack");
         if (i < leftPillars.Length && i < rightPillars.Length)
         {
             leftPillars[i].gameObject.GetComponent<pillarScript>().GO();
             rightPillars[i].gameObject.GetComponent<pillarScript>().GO();
+            animator.SetTrigger("attack");
         }
 
         animator.SetTrigger("stopAttack");
+    }
+
+    public void horizMoveBack(int i)
+    {
+        var animator = gameObject.GetComponent<Animator>();
+        if (i < leftPillars.Length && i < rightPillars.Length)
+        {
+            leftPillars[i].gameObject.GetComponent<pillarScript>().Back();
+            rightPillars[i].gameObject.GetComponent<pillarScript>().Back();
+        }
     }
 
     public void ChangeColorOfBlock(int i)
@@ -121,12 +148,14 @@ public class YellowGod : EnemyObject
 
     public void HorizMoveBack()
     {
-        for (int i = 0; i < leftPillars.Length; i++)
+        
+        for (var i = 0; i < leftPillars.Length; i++)
         {
             leftPillars[i].gameObject.GetComponent<pillarScript>().Back();
             rightPillars[i].gameObject.GetComponent<pillarScript>().Back();
         }
     }
+    
 
     public GameObject[] getLeftPil()
     {
@@ -177,7 +206,7 @@ public class YellowGod : EnemyObject
             }
             else
             {
-                rb.position = new Vector2(upperPillars[k].transform.position.x, rb.position.y);
+                rb.transform.position = new Vector2(upperPillars[k].transform.position.x, rb.position.y);
             }
         }
 
@@ -252,9 +281,9 @@ public class YellowGod : EnemyObject
         var animator = gameObject.GetComponent<Animator>();
         if (player.GetComponent<PlayerHealth>().GetHealth() <= 0)
         {
-            PillarEnd();
-            HorizEnd();
             resetBoss();
+            animator.SetBool("rage", false);
+            animator.SetTrigger("stop");
         }
     }
 }
