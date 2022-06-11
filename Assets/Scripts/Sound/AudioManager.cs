@@ -38,7 +38,7 @@ public class AudioManager : MonoBehaviour
         {
             if (_curTrackIndex != 0)
                 _curTrackIndex--;
-            print("index: " + _curTrackIndex); 
+           
             tracksAudioSource.Stop();
             tracksAudioSource.clip = tracks[_curTrackIndex];
             tracksAudioSource.Play();
@@ -46,7 +46,7 @@ public class AudioManager : MonoBehaviour
         /// <summary>
         /// plays track of the current index
         /// </summary>
-        public void PlayCurTrack()
+        public void PlayCurTrack(){
             tracksAudioSource.Stop();
             tracksAudioSource.clip = tracks[_curTrackIndex];
             tracksAudioSource.Play();
