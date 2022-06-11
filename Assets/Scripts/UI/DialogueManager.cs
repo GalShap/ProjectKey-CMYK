@@ -98,14 +98,16 @@ public class DialogueManager : MonoBehaviour
             new List<Sentence>()
             {
                 new Sentence("Gotcha!",0),
-                new Sentence("Think again...",1)
+                new Sentence("You didn't think its gonna be that easy wont you?",1)
             }
         },
         {
             Dialogues.DAMN_IT,
             new List<Sentence>()
             {
-                new Sentence("DAMNIT!",0)
+                new Sentence("DAMNIT!",0),
+                new Sentence("After all, we do run this place you know...", 1),
+                new Sentence("We'll see who runs things around here very soon cyan!", 0)
             }
         },
         {
@@ -123,8 +125,8 @@ public class DialogueManager : MonoBehaviour
                 new Sentence("*Huff*...\n*Huff*...",1),
                 new Sentence("Rats. Seems like you got me...",1),
                 new Sentence("You know I have to do this...",0),
-                new Sentence("So you say...",1),
-                new Sentence("C'mon. Do your worst.",1)
+                new Sentence("I've never imagined this day will come",1),
+                new Sentence("Come on then! Do your worst!",1)
             }
         },
         {
@@ -134,7 +136,7 @@ public class DialogueManager : MonoBehaviour
                 new Sentence("You... You have.. no idea...",1),
                 new Sentence("Wh-what... You're getting yourself... into...",1),
                 new Sentence("That may be, But it's too late to go back now.",0),
-                new Sentence("Heh... G'luck k-kid. This is... only... the beginning...",1),
+                new Sentence("All of this, it's only because we saw... your potential...",1),
             }
         },
         {
@@ -149,7 +151,8 @@ public class DialogueManager : MonoBehaviour
             Dialogues.ONE_DOWN,
             new List<Sentence>()
             {
-                new Sentence("One down, two more to go...",0)
+                new Sentence("One step closer to get out of this hell hole.",0),
+                new Sentence("those so called \"higher beings\" are gonna regret soon...", 0)
             }
         },
         {
@@ -165,12 +168,13 @@ public class DialogueManager : MonoBehaviour
             {
                 new Sentence("What the hell?",0),
                 new Sentence("Oh ho ho... Look who we have here! Are you lost my dear?",2),
-                new Sentence("Do I know you?",0),
-                new Sentence("Nah. I don't think you do. But my brother took a little beating by you.",2),
-                new Sentence("Your... brother...?",0),
-                new Sentence("Hell yeah, little cyan dude, more piano and brass. Seems it'll Take more distortion to kick your ass",2),
-                new Sentence("What's with the rhymes?",0),
-                new Sentence("Ain't nothing to it, just adding some groove. C'mon princess, let's see you move",2)
+                new Sentence("Magenta! I should have known when i heard the guitars!",0),
+                new Sentence("Nice to see you again too, I heard cyan took a little beating by you...",2),
+                new Sentence("...Then again, the old ink spot never knew how to deal with his gift", 2),
+                new Sentence("and you're gonna suffer a similar fate if you don't let me through",0),
+                new Sentence("Careful now hon', you might find yourself all pierced up if you keep this talk.",2),
+                new Sentence("Do I? I think you and your brother are gonna unite real soon",0),
+                new Sentence("That's it! Im gonna teach you some manners you ungrateful shit ",2)
             }
         },
         {
@@ -185,10 +189,13 @@ public class DialogueManager : MonoBehaviour
             Dialogues.PINK_DEAD,
             new List<Sentence>()
             {
-                new Sentence("Nice going kid, you've got some spark. And here I am only left with the bark",2),
-                new Sentence("You've had a good run, I'll give you that. But there are some grudges no rhymes can bat",0),
-                new Sentence("You're not quite done, there's a way to go",2),
-            }
+                new Sentence("Key...Listen...\"groans\" spare me, please!" ,2),
+                new Sentence("you've been treating me like nothing for to long magenta, you got whats coming to you, " +
+                             "that's all",0),
+                new Sentence("Key...I beg you... ", 2),
+                new Sentence("All my though love was only to make you the strongest!",2),
+                new Sentence("So why you're complaining?, you clearly succeeded", 0),
+                }
         },
         {
             Dialogues.YELLOW_GIVE_1,

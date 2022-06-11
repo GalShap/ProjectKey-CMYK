@@ -134,6 +134,7 @@ MonoBehaviour:
         m_CallState: 2
   OrbForceField: {fileID: 0}
   gameObjectsForScene: []
+  _returnToDialogue: 0
 --- !u!50 &5253846568265224268
 Rigidbody2D:
   serializedVersion: 4
@@ -5055,7 +5056,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -6051670424058899397, guid: 188392a4abbf9614d9466b10b8275669, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.4}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
