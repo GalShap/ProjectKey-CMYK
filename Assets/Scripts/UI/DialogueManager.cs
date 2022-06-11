@@ -421,7 +421,7 @@ public class DialogueManager : MonoBehaviour
             if (hasDialogue && (time <= 0))
             {   
                
-               
+                AudioManager.SharedAudioManager.PlayUiSounds((int) AudioManager.UiSounds.NextDialogue);
                 NextDialogue();
                 time = timer;
             }
@@ -432,7 +432,7 @@ public class DialogueManager : MonoBehaviour
                 DisableDialog();
             }    
             
-            AudioManager.SharedAudioManager.PlayUiSounds((int) AudioManager.UiSounds.NextDialogue);
+            
         }
     }
 
