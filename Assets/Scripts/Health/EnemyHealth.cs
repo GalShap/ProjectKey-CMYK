@@ -174,9 +174,9 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     public void Damage(int amount)
     {
+        if(!damagable) return;
         GameManager.Manager.CreateWhoosh(transform.position);
         CameraManager.Manager.AttackShake();
-        if(!damagable) return;
         health -= amount;
         if (health <= MIN_HEALTH)
         {

@@ -11,6 +11,7 @@ public class spikeEnemy : PatrolEnemy
     private Animator _animatorr;
     private int originalLayer;
     private ColorObject _colorObject;
+    private EnemyHealth _health;
     
     private static readonly int Walking = Animator.StringToHash("Walking");
     private static readonly int Disappear = Animator.StringToHash("Disappear");
@@ -23,6 +24,7 @@ public class spikeEnemy : PatrolEnemy
         // reg = spikes.GetComponent<Rigidbody2D>();
         _animatorr = GetComponent<Animator>();
         _colorObject = GetComponent<ColorObject>();
+        _health = GetComponent<EnemyHealth>();
         originalLayer = _colorObject.LayerIndex;
         
         _animatorr.SetBool(Walking, true);
@@ -45,43 +47,30 @@ public class spikeEnemy : PatrolEnemy
         colored = layer.index == originalLayer; 
         if (colored)
         {
-            // if (IsOneHit)
-            // {
-            //     DisableSpikes();
-            //     _animatorr.SetTrigger(Reappear);
-            //     _animatorr.SetBool(Walking, true);
-            //     colored = false;
-            // }
-            // else
-            {
-                _animatorr.SetBool(Walking, false);
-                _animatorr.SetTrigger(Disappear);   
-            }
-            // reg.transform.position = rb.transform.position;
+            EnableSpikes();
+            _animatorr.SetBool(Walking, false);
+            _animatorr.SetTrigger(Disappear);
         }
         else
         {
-            // if (IsOneHit)
-            // {
-                DisableSpikes();
-                _animatorr.SetTrigger(Reappear);
-                _animatorr.SetBool(Walking, true);
-            // }
+            DisableSpikes();
+            _animatorr.SetTrigger(Reappear);
+            _animatorr.SetBool(Walking, true);
         }
     }
 
     public void EnableSpikes()
     {
         gameObject.layer = (int) Mathf.Log(ColorManager.NeutralLayer,2);
-        // tag = "Spikes";
         IsOneHit = true;
+        _health.damagable = false;
     }
     
     public void DisableSpikes()
     {
         gameObject.layer = originalLayer;
-        // tag = "Monster";
         IsOneHit = false;
+        _health.damagable = true;
     }
 
     public void OnDeathEnd()
