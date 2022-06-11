@@ -139,7 +139,11 @@ public class ColorManager : MonoBehaviour
     {
         if (startWithAll)
         {
-            availableLayers = AllLayers;
+            availableLayers = new List<ColorLayer>();
+            foreach (var l in AllLayers)
+            {
+                availableLayers.Add(l);
+            }
         }
         else
         {
@@ -225,8 +229,16 @@ public class ColorManager : MonoBehaviour
 
         _shared.availableLayers.Add((ColorLayer) cl);
         PlayerHUD.SharedHud.SetColorPallete(_shared.availableLayers.Count-1);
+    }
 
+    public static void RemoveYellow()
+    {
+        ColorLayer cl = GetColorLayer(ColorName.Yellow);
+        if(!_shared.availableLayers.Contains(cl))
+            return;
         
+        _shared.availableLayers.Remove(cl);
+        PlayerHUD.SharedHud.SetColorPallete(_shared.availableLayers.Count-1);
     }
 
     public static ColorLayer? GetColorLayer(int layerValue)

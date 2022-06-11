@@ -277,6 +277,8 @@ public class YellowGod : EnemyObject
         var hl = animator.GetComponent<EnemyHealth>();
         hl.SetHealth(1200);
         animator.SetTrigger("reset");
+        
+        print(hl.GetHealth());
     }
 
     public void stopBoss()

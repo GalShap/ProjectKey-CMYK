@@ -13,7 +13,7 @@ public class TimelineManager : MonoBehaviour
     
     [SerializeField] private List<UnityEvent> timelineEvents;
     
-    private int currIndex = 0;
+    private int currIndex = 1;
     private PlayableDirector _currTimeline;
     public static TimelineManager Manager;
     public int startAt = 0;
