@@ -36,11 +36,13 @@ public class BlueGod : MonoBehaviour
             if (blue)
             {
                 blue = false;
+                AudioManager.SharedAudioManager.PlayBossSounds((int) AudioManager.BossSounds.CyanColorChange);
                 ColorManager.SetColor(ColorManager.ColorName.Neutral);
             }
             else
             {
                 blue = true;
+                AudioManager.SharedAudioManager.PlayBossSounds((int) AudioManager.BossSounds.CyanColorChange);
                 ColorManager.SetColor(ColorManager.ColorName.Cyan);
             }
         }
@@ -65,9 +67,10 @@ public class BlueGod : MonoBehaviour
     }
 
     public void HideBridge()
-    {
+    {   
         blue = true;
         ColorManager.SetColor(ColorManager.ColorName.Cyan);
+        AudioManager.SharedAudioManager.PlayBossSounds((int) AudioManager.BossSounds.CyanColorChange);
     }
 
     public void ToggleColors()

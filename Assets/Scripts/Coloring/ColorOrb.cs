@@ -12,6 +12,7 @@ public class ColorOrb : MonoBehaviour
     [SerializeField] private GameObject OrbForceField;
     [SerializeField] private List<GameObject> gameObjectsForScene;
 
+    [SerializeField] private bool _returnToDialogue;
 
     
     private SpriteRenderer _renderer;
@@ -43,7 +44,8 @@ public class ColorOrb : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
-        {
+        {   
+            AudioManager.SharedAudioManager.PlayUiSounds((int) AudioManager.UiSounds.LoadNewColor);
             StartCoroutine(NewPowerSequence());
         }
     }
@@ -57,18 +59,20 @@ public class ColorOrb : MonoBehaviour
       
         if(onTake != null)
             onTake.Invoke();
-        Destroy(gameObject);
+        
         ColorManager.AddColor(layer);
-
         yield return new WaitForSeconds(0.5f);
         for (int i = 0; i < gameObjectsForScene.Count; i++)
-        {
+        {   
             gameObjectsForScene[i].SetActive(false);
         }
-
-
         AudioManager.SharedAudioManager.SetVolume((int) AudioManager.AudioSources.Music,
             AudioManager.SharedAudioManager.defaultVolume);
-        InputManager.Manager.EnablePlayer();
+        
+        if (_returnToDialogue) InputManager.Manager.EnableDialogue();
+        
+        else InputManager.Manager.EnablePlayer();
+        AudioManager.SharedAudioManager.PlayUiSounds((int) AudioManager.UiSounds.NewColorEnd);
+        Destroy(gameObject);
     }
 }

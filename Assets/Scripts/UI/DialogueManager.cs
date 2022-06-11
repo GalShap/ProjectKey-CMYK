@@ -317,20 +317,22 @@ public class DialogueManager : MonoBehaviour
     #region Private Methods
     
     private void NextDialogue()
-    {
+    {   
+        AudioManager.SharedAudioManager.bossAudioSource.Stop();
         if(currentLineCoroutine != null)
             StopCoroutine(currentLineCoroutine);
-
         Sentence nextLine = _dialogueLines.Dequeue();
 
-        currentLineCoroutine = StartCoroutine(DisplayNextLine(nextLine));
+        AudioManager.SharedAudioManager.PlayBossSounds((int)AudioManager.BossSounds.CyanTalk);
+
+       currentLineCoroutine = StartCoroutine(DisplayNextLine(nextLine));
         
         if (_dialogueLines.Count == NO_LINES)
             hasDialogue = false;
     }
     private IEnumerator DisplayNextLine(Sentence next)
-    {   
-        AudioManager.SharedAudioManager.PlayUiSounds((int) AudioManager.UiSounds.DialogueLetters);
+    {
+        
         Arrow.SetActive(false);
         speakerImage.sprite = SpeakersSprites[next.ID];
         TalkerNameTextBox.text = TalkerNames[next.ID];
@@ -346,7 +348,9 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.025f);
         }
         Arrow.SetActive(true);
-        
+
+
+        AudioManager.SharedAudioManager.bossAudioSource.Stop();
     }
     private IEnumerator ResizeDialogueBox(float start, float end)
     {

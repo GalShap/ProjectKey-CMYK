@@ -35715,6 +35715,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1195685546}
   - component: {fileID: 1195685548}
+  - component: {fileID: 1195685547}
   m_Layer: 0
   m_Name: BlackBackground
   m_TagString: Untagged
@@ -35730,12 +35731,31 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195685545}
   m_LocalRotation: {x: -7.4505807e-10, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.940273, y: -0.07529783, z: 1}
-  m_LocalScale: {x: 20, y: 20, z: 1}
+  m_LocalPosition: {x: 0.0267, y: 51.1656, z: 10}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 243917316}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1818360608 &1195685547
+PositionConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195685545}
+  m_Enabled: 1
+  m_Weight: 1
+  m_TranslationAtRest: {x: 0.0267, y: 51.1656, z: 10}
+  m_TranslationOffset: {x: 0.0267, y: 0.29413986, z: 10}
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 1
+  m_AffectTranslationZ: 1
+  m_IsContraintActive: 1
+  m_IsLocked: 1
+  m_Sources:
+  - sourceTransform: {fileID: 1330743060}
+    weight: 1
 --- !u!212 &1195685548
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -56402,6 +56422,10 @@ PrefabInstance:
       propertyPath: OrbForceField
       value: 
       objectReference: {fileID: 1483094682}
+    - target: {fileID: 7308870848596121639, guid: 00f3aa89bb041b348af9c494d84a5bcb, type: 3}
+      propertyPath: _returnToDialogue
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7308870848596121639, guid: 00f3aa89bb041b348af9c494d84a5bcb, type: 3}
       propertyPath: gameObjectsForScene.Array.size
       value: 3
