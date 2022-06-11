@@ -44,6 +44,7 @@ public class PatrolEnemy : EnemyObject
         {
             if (places.Length <= 1 || places[0] == null || isStatic)
             {
+                rb.velocity = Vector3.Slerp(rb.velocity, Vector3.zero, 1);
                 return;
             }
             var x = transform.position.x - places[counter].position.x;
@@ -57,7 +58,7 @@ public class PatrolEnemy : EnemyObject
         else
         {
             // rb.AddForce(KickBackVector.Value, ForceMode2D.Impulse);
-            rb.velocity += KickBackVector.Value;
+            rb.velocity = KickBackVector.Value;
             KickBackVector = null;
         }
        

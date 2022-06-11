@@ -45,6 +45,7 @@ public class spikeEnemy : PatrolEnemy
     public override void OnColorChange(ColorManager.ColorLayer layer)
     {
         colored = layer.index == originalLayer; 
+        if(!isAlive()) return;
         if (colored)
         {
             EnableSpikes();

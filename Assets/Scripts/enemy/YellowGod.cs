@@ -24,6 +24,7 @@ public class YellowGod : EnemyObject
 
     [SerializeField] private int oddsForRed = 2;
     [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private ColorOrb orb;
     public GameObject player;
     public GameObject leftBarrier;
     public GameObject rightBarrier;
@@ -36,6 +37,17 @@ public class YellowGod : EnemyObject
         rb = GetComponent<Rigidbody2D>();
         _renderer = GetComponentInChildren<SpriteRenderer>();
         collisionOffset = Vector2.right * (_renderer.sprite.rect.width / _renderer.sprite.pixelsPerUnit) / 2;
+    }
+
+    public void Die()
+    {
+        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.YELLOW_DEAD_1, true,
+            () =>
+            {   
+                sprite.gameObject.SetActive(false);
+                gameObject.SetActive(false);
+                orb.gameObject.SetActive(true);
+            });
     }
 
     public void HorizEnd()
@@ -277,6 +289,8 @@ public class YellowGod : EnemyObject
         var hl = animator.GetComponent<EnemyHealth>();
         hl.SetHealth(1200);
         animator.SetTrigger("reset");
+        
+        print(hl.GetHealth());
     }
 
     public void stopBoss()
