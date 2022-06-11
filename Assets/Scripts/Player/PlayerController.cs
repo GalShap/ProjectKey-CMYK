@@ -149,6 +149,11 @@ public class PlayerController : MonoBehaviour
         ModifyPhysics();
     }
 
+    public void Freeze()
+    {
+        _rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
+    }
+
     public void ToIdle()
     {
         _animator.SetFloat(Action, IDLE);
