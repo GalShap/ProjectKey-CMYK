@@ -1,0 +1,1068 @@
+fileFormatVersion: 2
+guid: 52e6e456f19236c4a83428e65b791f08
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1266786378314361606
+    second: clone key_0
+  - first:
+      213: -2588465754952939445
+    second: clone key_3
+  - first:
+      213: 2876254863001036138
+    second: clone key_6
+  - first:
+      213: -2540604300742336694
+    second: clone key_7
+  - first:
+      213: 3353603076212682839
+    second: clone key_8
+  - first:
+      213: -2996051974773321909
+    second: clone key_9
+  - first:
+      213: -6400125953927896166
+    second: clone key_10
+  - first:
+      213: -6872499510386157462
+    second: clone key_13
+  - first:
+      213: -3720979257059453507
+    second: clone key_14
+  - first:
+      213: 8547339373284249644
+    second: clone key_15
+  - first:
+      213: 4072290990457939636
+    second: clone key_17
+  - first:
+      213: 5536585268859183759
+    second: clone key_22
+  - first:
+      213: 5927278214780351400
+    second: clone key_23
+  - first:
+      213: 3175483197371564462
+    second: clone key_25
+  - first:
+      213: -7500061849106709546
+    second: clone key_26
+  - first:
+      213: -6856829677727334803
+    second: clone key_27
+  - first:
+      213: -6853794773009562019
+    second: clone key_28
+  - first:
+      213: 7185620287194109298
+    second: clone key_33
+  - first:
+      213: 2497558457677061213
+    second: clone key_35
+  - first:
+      213: -8143168473994492722
+    second: clone key_37
+  - first:
+      213: -5378682947750681410
+    second: clone key_38
+  - first:
+      213: -6055903156506434942
+    second: clone key_39
+  - first:
+      213: 8765758374266011112
+    second: clone key_41
+  - first:
+      213: 1488574229628487461
+    second: clone key_42
+  - first:
+      213: -1811443472265849230
+    second: clone key_48
+  - first:
+      213: 1974594555211290285
+    second: clone key_49
+  - first:
+      213: -3644501765373146256
+    second: clone key_50
+  - first:
+      213: -9040265975550667636
+    second: clone key_51
+  - first:
+      213: -2885481786997952758
+    second: clone key_52
+  - first:
+      213: 3295322448114224104
+    second: clone key_53
+  - first:
+      213: -1818991896019095072
+    second: clone key_54
+  - first:
+      213: 3989683811593886333
+    second: clone key_55
+  - first:
+      213: -5696598303933118426
+    second: clone key_56
+  - first:
+      213: 678396320001981681
+    second: clone key_57
+  - first:
+      213: -1906435864401166423
+    second: clone key_58
+  - first:
+      213: -7908118995158913220
+    second: clone key_59
+  - first:
+      213: 7722900030701733542
+    second: clone key_1
+  - first:
+      213: -7618941821834698623
+    second: clone key_2
+  - first:
+      213: -8936386710779611920
+    second: clone key_4
+  - first:
+      213: 8466205505775845433
+    second: clone key_5
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: clone key_0
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 1049
+        width: 267
+        height: 403
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af4d44a20887b6ee0800000000000000
+      internalID: -1266786378314361606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_3
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 1052
+        width: 236
+        height: 390
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4844c23c1ce31cd0800000000000000
+      internalID: -2588465754952939445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_6
+      rect:
+        serializedVersion: 2
+        x: 2038
+        y: 1158
+        width: 126
+        height: 291
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a65aaa01f828ae720800000000000000
+      internalID: 2876254863001036138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_7
+      rect:
+        serializedVersion: 2
+        x: 2244
+        y: 1194
+        width: 184
+        height: 272
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4f5c6369d5fdbcd0800000000000000
+      internalID: -2540604300742336694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_8
+      rect:
+        serializedVersion: 2
+        x: 2468
+        y: 1137
+        width: 186
+        height: 321
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 750705bca346a8e20800000000000000
+      internalID: 3353603076212682839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_9
+      rect:
+        serializedVersion: 2
+        x: 2695
+        y: 1401
+        width: 22
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4f470b4a92eb66d0800000000000000
+      internalID: -2996051974773321909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_10
+      rect:
+        serializedVersion: 2
+        x: 2789
+        y: 1390
+        width: 67
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a93ae5eaa5f2e27a0800000000000000
+      internalID: -6400125953927896166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_13
+      rect:
+        serializedVersion: 2
+        x: 2927
+        y: 1275
+        width: 67
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a68136c7b1aff90a0800000000000000
+      internalID: -6872499510386157462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_14
+      rect:
+        serializedVersion: 2
+        x: 2696
+        y: 1250
+        width: 22
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db5df5e841d6c5cc0800000000000000
+      internalID: -3720979257059453507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_15
+      rect:
+        serializedVersion: 2
+        x: 2839
+        y: 1132
+        width: 74
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c20515fcfdf3e9670800000000000000
+      internalID: 8547339373284249644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_17
+      rect:
+        serializedVersion: 2
+        x: 2722
+        y: 1140
+        width: 66
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b6e444741fa38830800000000000000
+      internalID: 4072290990457939636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_22
+      rect:
+        serializedVersion: 2
+        x: 2697
+        y: 1039
+        width: 67
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f82230bc7f6e5dc40800000000000000
+      internalID: 5536585268859183759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_23
+      rect:
+        serializedVersion: 2
+        x: 2781
+        y: 1038
+        width: 67
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a3f4ecd12ce14250800000000000000
+      internalID: 5927278214780351400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_25
+      rect:
+        serializedVersion: 2
+        x: 1929
+        y: 859
+        width: 192
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea1cd81c425911c20800000000000000
+      internalID: 3175483197371564462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_26
+      rect:
+        serializedVersion: 2
+        x: 2199
+        y: 870
+        width: 192
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d3098a3c7d6ae790800000000000000
+      internalID: -7500061849106709546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_27
+      rect:
+        serializedVersion: 2
+        x: 2550
+        y: 1013
+        width: 22
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6eb4b5bcb5a7d0a0800000000000000
+      internalID: -6856829677727334803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_28
+      rect:
+        serializedVersion: 2
+        x: 2621
+        y: 1011
+        width: 22
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d56065787fd62e0a0800000000000000
+      internalID: -6853794773009562019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_33
+      rect:
+        serializedVersion: 2
+        x: 2694
+        y: 887
+        width: 66
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2759b05849378b360800000000000000
+      internalID: 7185620287194109298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_35
+      rect:
+        serializedVersion: 2
+        x: 2460
+        y: 901
+        width: 86
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5c1d934f2c19a220800000000000000
+      internalID: 2497558457677061213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_37
+      rect:
+        serializedVersion: 2
+        x: 2617
+        y: 898
+        width: 26
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec40661da67adfe80800000000000000
+      internalID: -8143168473994492722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_38
+      rect:
+        serializedVersion: 2
+        x: 2854
+        y: 884
+        width: 93
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb4aed34b541b55b0800000000000000
+      internalID: -5378682947750681410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_39
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 529
+        width: 230
+        height: 408
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 282644a2a2c15fba0800000000000000
+      internalID: -6055903156506434942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_41
+      rect:
+        serializedVersion: 2
+        x: 966
+        y: 530
+        width: 230
+        height: 408
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8edf7056cca36a970800000000000000
+      internalID: 8765758374266011112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_42
+      rect:
+        serializedVersion: 2
+        x: 1337
+        y: 550
+        width: 230
+        height: 408
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5278ec2006a78a410800000000000000
+      internalID: 1488574229628487461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_48
+      rect:
+        serializedVersion: 2
+        x: 1715
+        y: 459
+        width: 126
+        height: 291
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 276d4e862c57cd6e0800000000000000
+      internalID: -1811443472265849230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_49
+      rect:
+        serializedVersion: 2
+        x: 1922
+        y: 494
+        width: 183
+        height: 273
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da61ace394b276b10800000000000000
+      internalID: 1974594555211290285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_50
+      rect:
+        serializedVersion: 2
+        x: 2145
+        y: 438
+        width: 186
+        height: 321
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07b46ab24f02c6dc0800000000000000
+      internalID: -3644501765373146256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_51
+      rect:
+        serializedVersion: 2
+        x: 2377
+        y: 476
+        width: 126
+        height: 291
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c84904c1ef58a8280800000000000000
+      internalID: -9040265975550667636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_52
+      rect:
+        serializedVersion: 2
+        x: 2584
+        y: 511
+        width: 193
+        height: 273
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0fa0284a95b4f7d0800000000000000
+      internalID: -2885481786997952758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_53
+      rect:
+        serializedVersion: 2
+        x: 2793
+        y: 455
+        width: 200
+        height: 321
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8eb0834ae465bbd20800000000000000
+      internalID: 3295322448114224104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_54
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 47
+        width: 266
+        height: 403
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e1b77c0284a1c6e0800000000000000
+      internalID: -1818991896019095072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_55
+      rect:
+        serializedVersion: 2
+        x: 572
+        y: 52
+        width: 229
+        height: 407
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7a1e24d9443e5730800000000000000
+      internalID: 3989683811593886333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_56
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 59
+        width: 235
+        height: 389
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62849f1460e91f0b0800000000000000
+      internalID: -5696598303933118426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_57
+      rect:
+        serializedVersion: 2
+        x: 2343
+        y: 82
+        width: 126
+        height: 291
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fc76a6dbd52a6900800000000000000
+      internalID: 678396320001981681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_58
+      rect:
+        serializedVersion: 2
+        x: 2550
+        y: 117
+        width: 183
+        height: 273
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9afbd4b9eaafa85e0800000000000000
+      internalID: -1906435864401166423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_59
+      rect:
+        serializedVersion: 2
+        x: 2773
+        y: 61
+        width: 186
+        height: 321
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3fa8044ca7b04290800000000000000
+      internalID: -7908118995158913220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_1
+      rect:
+        serializedVersion: 2
+        x: 1307
+        y: 1065
+        width: 267
+        height: 403
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a684d509a04d2b60800000000000000
+      internalID: 7722900030701733542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_2
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 532
+        width: 267
+        height: 403
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 180ec29a7c4144690800000000000000
+      internalID: -7618941821834698623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_4
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 1048
+        width: 236
+        height: 390
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f4b57032a39bf380800000000000000
+      internalID: -8936386710779611920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clone key_5
+      rect:
+        serializedVersion: 2
+        x: 1676
+        y: 1075
+        width: 236
+        height: 390
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 930c9373d010e7570800000000000000
+      internalID: 8466205505775845433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

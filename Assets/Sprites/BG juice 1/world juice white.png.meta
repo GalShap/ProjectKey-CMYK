@@ -1,0 +1,660 @@
+fileFormatVersion: 2
+guid: 0c3de82ccacf193409d3e40de00462da
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2688474845773313086
+    second: world juice white_0
+  - first:
+      213: -175956889442611909
+    second: world juice white_8
+  - first:
+      213: 3801467662954318259
+    second: world juice white_10
+  - first:
+      213: 722754193788966727
+    second: world juice white_11
+  - first:
+      213: 985566374124417835
+    second: world juice white_12
+  - first:
+      213: -6541303372017658230
+    second: world juice white_13
+  - first:
+      213: -8743567317023119108
+    second: world juice white_15
+  - first:
+      213: -1599496085929897081
+    second: world juice white_22
+  - first:
+      213: 800963405275220507
+    second: world juice white_23
+  - first:
+      213: 1532661179393693857
+    second: world juice white_24
+  - first:
+      213: -7248722913584543756
+    second: world juice white_25
+  - first:
+      213: -239507215505449713
+    second: world juice white_26
+  - first:
+      213: 7612917231318843922
+    second: world juice white_27
+  - first:
+      213: -895599366991007171
+    second: world juice white_28
+  - first:
+      213: -7988731066218991979
+    second: world juice white_29
+  - first:
+      213: 9055438241644189458
+    second: world juice white_30
+  - first:
+      213: 3752364119922010305
+    second: world juice white_32
+  - first:
+      213: -4129923739983135044
+    second: world juice white_33
+  - first:
+      213: 3670549657667819283
+    second: world juice white_34
+  - first:
+      213: 1544010839827887006
+    second: world juice white_37
+  - first:
+      213: 8288802195431607279
+    second: world juice white_43
+  - first:
+      213: 9060650772937777851
+    second: world juice white_1
+  - first:
+      213: -5778081517035780620
+    second: world juice white_2
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: world juice white_0
+      rect:
+        serializedVersion: 2
+        x: 1667
+        y: 833
+        width: 23
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3434e9c0a16f4520800000000000000
+      internalID: 2688474845773313086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: world juice white_8
+      rect:
+        serializedVersion: 2
+        x: 894
+        y: 1006
+        width: 5
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3d8dfc2420ee8df0800000000000000
+      internalID: -175956889442611909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: world juice white_10
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 994
+        width: 40
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b9c68bc2b681c430800000000000000
+      internalID: 3801467662954318259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: world juice white_11
+      rect:
+        serializedVersion: 2
+        x: 1808
+        y: 997
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74717b42c1db70a00800000000000000
+      internalID: 722754193788966727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: world juice white_12
+      rect:
+        serializedVersion: 2
+        x: 1849
+        y: 993
+        width: 4
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b237140456f6dad00800000000000000
+      internalID: 985566374124417835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: world juice white_13
+      rect:
+        serializedVersion: 2
+        x: 1863
+        y: 998
+        width: 31
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8692de8d3f9835a0800000000000000
+      internalID: -6541303372017658230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: world juice white_15
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 116
+        width: 227
+        height: 876
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf82f1fb9db98a680800000000000000
+      internalID: -8743567317023119108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: world juice white_22
+      rect:
+        serializedVersion: 2
+        x: 1860
+        y: 981
+        width: 43
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 783558ac8c27dc9e0800000000000000
+      internalID: -1599496085929897081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: world juice white_23
+      rect:
+        serializedVersion: 2
+        x: 993
+        y: 878
+        width: 63
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1a448139f79d1b00800000000000000
+      internalID: 800963405275220507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: world juice white_24
+      rect:
+        serializedVersion: 2
+        x: 1073
+        y: 887
+        width: 53
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a8dac6e83b154510800000000000000
+      internalID: 1532661179393693857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: world juice white_25
+      rect:
+        serializedVersion: 2
+        x: 1154
+        y: 886
+        width: 52
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f70f8c5aec576b90800000000000000
+      internalID: -7248722913584543756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: world juice white_26
+      rect:
+        serializedVersion: 2
+        x: 1227
+        y: 875
+        width: 71
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0d97aad4791dacf0800000000000000
+      internalID: -239507215505449713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: world juice white_27
+      rect:
+        serializedVersion: 2
+        x: 1313
+        y: 875
+        width: 71
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 212c53d03e386a960800000000000000
+      internalID: 7612917231318843922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: world juice white_28
+      rect:
+        serializedVersion: 2
+        x: 1398
+        y: 875
+        width: 71
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d32bf6dee113293f0800000000000000
+      internalID: -895599366991007171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: world juice white_29
+      rect:
+        serializedVersion: 2
+        x: 1485
+        y: 876
+        width: 67
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59ea3efdb63522190800000000000000
+      internalID: -7988731066218991979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: world juice white_30
+      rect:
+        serializedVersion: 2
+        x: 1568
+        y: 875
+        width: 71
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21790be5a116bad70800000000000000
+      internalID: 9055438241644189458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: world juice white_32
+      rect:
+        serializedVersion: 2
+        x: 1797
+        y: 901
+        width: 4
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c86fd34943131430800000000000000
+      internalID: 3752364119922010305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: world juice white_33
+      rect:
+        serializedVersion: 2
+        x: 1817
+        y: 889
+        width: 53
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbe3ad06d309fa6c0800000000000000
+      internalID: -4129923739983135044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: world juice white_34
+      rect:
+        serializedVersion: 2
+        x: 1861
+        y: 937
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 317d8bb577960f230800000000000000
+      internalID: 3670549657667819283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: world juice white_37
+      rect:
+        serializedVersion: 2
+        x: 1832
+        y: 870
+        width: 74
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e933b45adad6d6510800000000000000
+      internalID: 1544010839827887006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: world juice white_43
+      rect:
+        serializedVersion: 2
+        x: 1827
+        y: 813
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: febcd284eadb70370800000000000000
+      internalID: 8288802195431607279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: world juice white_1
+      rect:
+        serializedVersion: 2
+        x: 1502
+        y: 19
+        width: 387
+        height: 388
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb223d26fd5edbd70800000000000000
+      internalID: 9060650772937777851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: world juice white_2
+      rect:
+        serializedVersion: 2
+        x: 1732
+        y: 801
+        width: 181
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f505dd497120dfa0800000000000000
+      internalID: -5778081517035780620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
