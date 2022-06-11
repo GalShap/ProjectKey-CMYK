@@ -22,7 +22,8 @@ public class AudioManager : MonoBehaviour
         /// plays the next audio track. Used When we want to go between worlds and sounds. 
         /// </summary>
         public void PlayNextTrack()
-        {
+        {   
+          
             _curTrackIndex = (_curTrackIndex == tracks.Count - 1) ? 0 : ++_curTrackIndex;
             tracksAudioSource.Stop();
             tracksAudioSource.clip = tracks[_curTrackIndex];
@@ -36,7 +37,7 @@ public class AudioManager : MonoBehaviour
         {
             if (_curTrackIndex != 0)
                 _curTrackIndex--;
-            
+            print("index: " + _curTrackIndex); 
             tracksAudioSource.Stop();
             tracksAudioSource.clip = tracks[_curTrackIndex];
             tracksAudioSource.Play();
@@ -47,7 +48,7 @@ public class AudioManager : MonoBehaviour
         public void PlayCurTrack()
         {   
             
-            print("index: " + _curTrackIndex); 
+            
             tracksAudioSource.Stop();
             tracksAudioSource.clip = tracks[_curTrackIndex];
             tracksAudioSource.Play();
@@ -61,14 +62,14 @@ public class AudioManager : MonoBehaviour
         /// </param>
         public void PlayTrackByIndex(int index)
         {
-            if (index >= tracks.Count  - 1|| index < 0)
+            if (index >= tracks.Count  - 1 || index < 0)
             {
                 Debug.LogWarning("Invalid Index given, method didn't do nothing");
                 return;
             }
             
             tracksAudioSource.Stop();
-            tracksAudioSource.clip = tracks[_curTrackIndex];
+            tracksAudioSource.clip = tracks[index];
             tracksAudioSource.Play();
             _curTrackIndex = index;
         }
@@ -121,7 +122,7 @@ public class AudioManager : MonoBehaviour
     }
     
     private void Awake()
-    {
+    {   
         SharedAudioManager = this;
         if (this != SharedAudioManager)
             Destroy(this);
@@ -133,7 +134,8 @@ public class AudioManager : MonoBehaviour
 
     }
     public void LoadNextMusic()
-    {
+    {   
+        
         musicAudioQueue.PlayNextTrack();
     }
 
@@ -217,7 +219,8 @@ public class AudioManager : MonoBehaviour
     }
 
     public void PlayByIndex(int index)
-    {
+    {   
+     
         musicAudioQueue.PlayTrackByIndex(index);
     }
     
