@@ -60,7 +60,7 @@ public class AudioManager : MonoBehaviour
         /// </param>
         public void PlayTrackByIndex(int index)
         {
-            if (index >= tracks.Count  - 1 || index < 0)
+            if (index > tracks.Count  - 1 || index < 0)
             {
                 Debug.LogWarning("Invalid Index given, method didn't do nothing");
                 return;
