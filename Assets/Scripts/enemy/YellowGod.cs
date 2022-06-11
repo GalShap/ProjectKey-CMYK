@@ -21,10 +21,12 @@ public class YellowGod : EnemyObject
 
     [SerializeField]
     private Transform[] m_SpawnTransform; // this is a reference to the transform where the prefab will spawn
+    
 
     [SerializeField] private int oddsForRed = 2;
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private ColorOrb orb;
+    [SerializeField] private GameObject otherSprite;
     public GameObject player;
     public GameObject leftBarrier;
     public GameObject rightBarrier;
@@ -44,7 +46,7 @@ public class YellowGod : EnemyObject
         DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.YELLOW_DEAD_1, true,
             () =>
             {   
-                sprite.gameObject.SetActive(false);
+                otherSprite.gameObject.SetActive(false);
                 gameObject.SetActive(false);
                 orb.gameObject.SetActive(true);
             });
