@@ -45,5 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
   currRoom: {fileID: 0}
-  shakeAmplitude: 2
-  shakeTime: 0.2
+  curMusicIndex: 0
+  whoosh: {fileID: 2093216362935529742, guid: 0f2694c472111e0408263d2400810b1c, type: 3}

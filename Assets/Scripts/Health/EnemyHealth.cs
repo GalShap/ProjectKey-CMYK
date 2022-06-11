@@ -174,6 +174,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     public void Damage(int amount)
     {
+        GameManager.Manager.createWhoosh(transform.position);
         if(!damagable) return;
         health -= amount;
         if (health <= MIN_HEALTH)

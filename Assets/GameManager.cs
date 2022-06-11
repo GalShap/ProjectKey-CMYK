@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [Range(0, 4)]
     [SerializeField] private int curMusicIndex;
     
+    [SerializeField] private Whoosh whoosh;
 
     #endregion
 
@@ -55,6 +56,11 @@ public class GameManager : MonoBehaviour
     {
         respawnPoint = respawn;
         respawnRoom = currRoom;
+    }
+
+    public void createWhoosh(Vector3 position)
+    {
+        Instantiate(whoosh, position, Quaternion.identity);
     }
 
     public void SetRoom(Room r)
