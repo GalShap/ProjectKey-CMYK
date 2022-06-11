@@ -61,10 +61,10 @@ public class PlayerHUD : MonoBehaviour
 
          public void rotate(bool clockWise)
          {
-             if (colorsInPallete.Count <= 2) return;
+             if (colorsInPallete.Count <= 1) return;
              Vector3 rot;
              float degrees = pallete.transform.rotation.z +  RotatationValues[colorsInPallete.Count];
-             print(degrees);
+            
              if (clockWise)
              {
                   rot = new Vector3(0, 0, degrees);

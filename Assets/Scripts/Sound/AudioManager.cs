@@ -1,8 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using System.Diagnostics;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class AudioManager : MonoBehaviour
 {
@@ -22,7 +23,8 @@ public class AudioManager : MonoBehaviour
         /// plays the next audio track. Used When we want to go between worlds and sounds. 
         /// </summary>
         public void PlayNextTrack()
-        {
+        {   
+          
             _curTrackIndex = (_curTrackIndex == tracks.Count - 1) ? 0 : ++_curTrackIndex;
             tracksAudioSource.Stop();
             tracksAudioSource.clip = tracks[_curTrackIndex];
@@ -36,7 +38,7 @@ public class AudioManager : MonoBehaviour
         {
             if (_curTrackIndex != 0)
                 _curTrackIndex--;
-            
+            print("index: " + _curTrackIndex); 
             tracksAudioSource.Stop();
             tracksAudioSource.clip = tracks[_curTrackIndex];
             tracksAudioSource.Play();
@@ -45,7 +47,6 @@ public class AudioManager : MonoBehaviour
         /// plays track of the current index
         /// </summary>
         public void PlayCurTrack()
-        {
             tracksAudioSource.Stop();
             tracksAudioSource.clip = tracks[_curTrackIndex];
             tracksAudioSource.Play();
@@ -59,14 +60,14 @@ public class AudioManager : MonoBehaviour
         /// </param>
         public void PlayTrackByIndex(int index)
         {
-            if (index >= tracks.Count  - 1|| index < 0)
+            if (index >= tracks.Count  - 1 || index < 0)
             {
                 Debug.LogWarning("Invalid Index given, method didn't do nothing");
                 return;
             }
             
             tracksAudioSource.Stop();
-            tracksAudioSource.clip = tracks[_curTrackIndex];
+            tracksAudioSource.clip = tracks[index];
             tracksAudioSource.Play();
             _curTrackIndex = index;
         }
@@ -92,7 +93,7 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] private List<AudioClip> uiAudioClips;
 
-    [SerializeField] private float defaultVolume = 0.7f;
+    [SerializeField] public float defaultVolume = 0.7f;
     
     private const float MaxVolume = 1f;
 
@@ -112,6 +113,11 @@ public class AudioManager : MonoBehaviour
     {
         Hit, Shoot, Death
     }
+    
+    public enum AudioSources
+    {
+        Music, Key, Enemy, UI 
+    }
 
     public void PlayPrev()
     {
@@ -119,7 +125,7 @@ public class AudioManager : MonoBehaviour
     }
     
     private void Awake()
-    {
+    {   
         SharedAudioManager = this;
         if (this != SharedAudioManager)
             Destroy(this);
@@ -131,7 +137,8 @@ public class AudioManager : MonoBehaviour
 
     }
     public void LoadNextMusic()
-    {
+    {   
+        
         musicAudioQueue.PlayNextTrack();
     }
 
@@ -215,11 +222,32 @@ public class AudioManager : MonoBehaviour
     }
 
     public void PlayByIndex(int index)
-    {
+    {   
+     
         musicAudioQueue.PlayTrackByIndex(index);
     }
-    
-    
+
+    public void SetVolume(int audio, float volume)
+    {
+        switch (audio)
+        {
+            case (int) AudioSources.Music:
+                musicAudioQueue.GetMusicAudioSrc().volume = volume;
+                return;
+            
+            case (int) AudioSources.Key:
+                keyAudioSource.volume = volume;
+                return;
+            
+            case (int) AudioSources.Enemy:
+                enemyAudioSource.volume = volume;
+                return;
+            
+            case (int) AudioSources.UI:
+                uiAudioSource.volume = volume;
+                return;
+        }
+    }
 
 
 }
