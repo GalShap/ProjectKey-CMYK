@@ -11,6 +11,11 @@ public class PatrolEnemyWithShield : PatrolEnemy
     
     [SerializeField] private Transform place1;
     [SerializeField] private Transform place2;
+
+    [SerializeField] private Transform player;
+
+    private bool facingRight;
+    private bool FacingPlayer => facingRight && player.position.x > transform.position.x;
     private float x = 0f;
 
     private void Update()
@@ -25,6 +30,8 @@ public class PatrolEnemyWithShield : PatrolEnemy
         Move();
         if(rb.velocity.x != x)
             MoveShield();
+
+        health.damagable = colored || !FacingPlayer;
     }
 
     private void MoveShield()
@@ -42,7 +49,6 @@ public class PatrolEnemyWithShield : PatrolEnemy
 
     public override void OnColorChange(ColorManager.ColorLayer layer)
     {
-        health.damagable = (layer.index == shield.layer);
-        print(health.damagable);
+        colored = layer.index == shield.layer;
     }
 }
