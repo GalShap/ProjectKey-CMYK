@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using JetBrains.Annotations;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -38,6 +39,8 @@ public class ColorManager : MonoBehaviour
 
     [SerializeField] private List<LayerMask> startWith;
 
+    [SerializeField] private float yellowFlashTime = 0.2f;
+
     // [SerializeField] private BackgroundMachine bgMachine;
     
     [SerializeField] private bool startWithAll;
@@ -57,6 +60,8 @@ public class ColorManager : MonoBehaviour
     private bool _afterAwake = false;
 
     private bool _afterStart = false;
+
+    private ColorName last = ColorName.Neutral;
     
     public static LayerMask GroundLayers
     {
@@ -178,6 +183,25 @@ public class ColorManager : MonoBehaviour
         }
     }
 
+    public static void ToggleYellow(Action onStart, Action onEnd)
+    {
+        _shared.StartCoroutine(_shared.FlashYellow(onStart, onEnd));
+    }
+
+    private IEnumerator FlashYellow([CanBeNull] Action onStart, [CanBeNull] Action onEnd)
+    {
+        float timer = yellowFlashTime;
+        SetColor(ColorName.Yellow);
+        onStart?.Invoke();
+        while (timer >=0)
+        {
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+        onEnd?.Invoke();
+        SetColor(last);
+    }
+
     public static void RotateColor(int dir)
     {
         if(Math.Abs(dir) != 1) return;
@@ -295,6 +319,7 @@ public class ColorManager : MonoBehaviour
         int index = _shared.AllLayers.FindIndex(cl => cl.name == c);
         if(index == -1)
             return;
+        _shared.last = _shared.AllLayers[_shared.CurWorldColor].name;
         _shared.CurWorldColor = index;
         ColorLayer cl = _shared.AllLayers[index];
         _shared.CancelCollisionLayer(_shared.AllLayers[index]);
@@ -302,7 +327,7 @@ public class ColorManager : MonoBehaviour
         {
             l.OnColorChange(cl);
         }
-
+        
         _shared.Background.color = cl.color;
         // _shared.bgMachine.Rotate(cl.color, () =>
         // {

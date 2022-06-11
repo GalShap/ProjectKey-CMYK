@@ -324,8 +324,7 @@ public class PlayerHUD : MonoBehaviour
     private IEnumerator ReduceLifeSlider(int bar, int livesToRemove)
     {
         if (livesToRemove >= _currLife && _currLife >= 1)
-        {       
-            print("death!");
+        {
             lifeFill.value = 0;
             yield return new WaitForSeconds(_timeToScaleLife);
         }

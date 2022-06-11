@@ -23,7 +23,7 @@ public class deathYellow : StateMachineBehaviour
         {
             // red.ShootBlue();
             timeToDie = 0;
-            yellow.gameObject.SetActive(false);
+            // yellow.gameObject.SetActive(false);
         }
     }
 

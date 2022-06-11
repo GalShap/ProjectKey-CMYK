@@ -12,6 +12,7 @@ TagManager:
   - Projectile
   - cameraPhysics
   - pillar
+  - barrier
   layers:
   - Default
   - TransparentFX

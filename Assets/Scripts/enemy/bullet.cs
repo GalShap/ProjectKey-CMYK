@@ -48,7 +48,7 @@ public class bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("Projectile") || other.gameObject.CompareTag("Monster")) return;
+        if(other.gameObject.CompareTag("Projectile") || other.gameObject.CompareTag("Monster") || other.gameObject.CompareTag("barrier")) return;
         if(!other.gameObject.CompareTag("Player")) Unactive();
     }
 

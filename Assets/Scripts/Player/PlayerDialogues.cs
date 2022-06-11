@@ -59,10 +59,40 @@ public class PlayerDialogues : MonoBehaviour
 
     public void YellowFirst()
     {
-        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.YELLOW_FIRST, true, 
+        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.YELLOW_FIGHT_1, true, 
             (() =>
             {
                 yellowBoss.Invoke();
+            }));
+    }
+    
+    public void YellowFight1()
+    {
+        TimelineManager.Manager.Pause();
+        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.YELLOW_FIGHT_1, true, 
+            (() =>
+            {
+                TimelineManager.Manager.Play();
+            }));
+    }
+    
+    public void YellowFight2()
+    {
+        TimelineManager.Manager.Pause();
+        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.YELLOW_FIGHT_2, true, 
+            (() =>
+            {
+                TimelineManager.Manager.Play();
+            }));
+    }
+    
+    public void YellowFight3()
+    {
+        TimelineManager.Manager.Pause();
+        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.YELLOW_FIGHT_3, true, 
+            (() =>
+            {
+                TimelineManager.Manager.Play();
             }));
     }
 
@@ -84,5 +114,15 @@ public class PlayerDialogues : MonoBehaviour
             {
                 TimelineManager.Manager.Play();
             }}));
+    }
+
+    public void YellowDead1()
+    {
+        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.YELLOW_DEAD_1);
+    }
+    
+    public void YellowDead2()
+    {
+        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.YELLOW_DEAD_2);
     }
 }

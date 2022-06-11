@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.Interactions;
 
 public class horizAttack : StateMachineBehaviour
 {
@@ -11,7 +12,7 @@ public class horizAttack : StateMachineBehaviour
     [SerializeField] public float timerBlockWait = 1;
     private int size;
     private int counter = 0;
-    private int counter2 = 0;
+    private int pillarCounter = 0;
     private bool doReturn = false;
 
     private float timer = 0;
@@ -22,10 +23,11 @@ public class horizAttack : StateMachineBehaviour
     {
         yellow = animator.GetComponent<YellowGod>();
         size = yellow.getLeftPil().Length;
-        counter2 = size;
+        pillarCounter = size;
         yellow.leftBarrier.SetActive(false);
         yellow.rightBarrier.SetActive(false);
         yellow.HorizStart();
+        counter = 0;
         // yellow.HorizMoveBlock(counter);
     }
 
@@ -35,26 +37,25 @@ public class horizAttack : StateMachineBehaviour
         yellow.resetBossActive();
         timer += Time.deltaTime;
         timerBlock += Time.deltaTime;
-        if (timer >= timerCounter +size && counter >= size && !doReturn)
+        if (timer >= timerCounter +size && counter >= size && pillarCounter >= 0 && !doReturn)
         {
-            yellow.horizMoveBack(counter2);
-            if (counter2 <= 0)
+            yellow.horizMoveBack(pillarCounter);
+            if (pillarCounter <= 0)
             {
                 doReturn = true;
             }
 
-            counter2--;
+            pillarCounter--;
 
         }
 
-        if (timer >= size + timerEnd && counter >= size && doReturn)
+        // if (timer >= size + timerEnd && counter >= size && doReturn)
+        if(doReturn)
         {
             doReturn = false;
-            counter = 0;
             animator.SetTrigger("coolDown");
         }
-            
-        else if (timerBlock >= timerBlockWait)
+        else if (timerBlock >= timerBlockWait && counter <= size)
         {
             // counter++;
             timerBlock = 0;
@@ -71,6 +72,7 @@ public class horizAttack : StateMachineBehaviour
         yellow.HorizEnd();
         animator.ResetTrigger("coolDown");
         counter = 0;
+        pillarCounter = size;
         timer = 0;
         timerBlock = 0;
         doReturn = false;

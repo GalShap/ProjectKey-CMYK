@@ -23,9 +23,13 @@ public class DialogueManager : MonoBehaviour
         PINK,
         PINK_AGAIN,
         PINK_DEAD,
-        YELLOW_FIRST,
         YELLOW_GIVE_1,
-        YELLOW_GIVE_2
+        YELLOW_GIVE_2,
+        YELLOW_FIGHT_1,
+        YELLOW_FIGHT_2,
+        YELLOW_FIGHT_3,
+        YELLOW_DEAD_1,
+        YELLOW_DEAD_2
     }
 
     [Serializable]
@@ -187,18 +191,6 @@ public class DialogueManager : MonoBehaviour
             }
         },
         {
-            Dialogues.YELLOW_FIRST,
-            new List<Sentence>()
-            {
-                new Sentence("AW C'MON!",0),
-                new Sentence("Ah... We finally meet, child.",3),
-                new Sentence("Let's get this over with...",0),
-                new Sentence("You'd like that wouldn't you? For I am just another obstacle in your road to freedom.",3),
-                new Sentence("I am sorry to disappoint you child... We shall leave the battle to another time.",3),
-                new Sentence("Go. Enjoy your night. We shall resume our business next time we meet.",3)
-            }
-        },
-        {
             Dialogues.YELLOW_GIVE_1,
             new List<Sentence>()
             {
@@ -212,6 +204,49 @@ public class DialogueManager : MonoBehaviour
             {
                 new Sentence("SECOND KEY",0),
                 new Sentence("SECOND YELLOW",3)
+            }
+        },
+        {
+            Dialogues.YELLOW_FIGHT_1,
+            new List<Sentence>()
+            {
+                new Sentence("YOU!",0),
+                new Sentence("How was your little detour, my child?",3),
+                new Sentence("How do you think?! What the hell is going on here?",0),
+                new Sentence("Confused? I bet you are. But know this is all for the greater good.",3),
+                new Sentence("Now, child... How about we take a little walk and discuss what you've just seen.",3),
+                new Sentence("I'm not going anywhere with you. I'm putting an end to all of this!",0),
+                new Sentence("What a shame. And here I thought we managed to create a more civil prototype.",3),
+                new Sentence("If you wish to fight, I suppose I shall take this back.",3),
+            }
+        },
+        {
+            Dialogues.YELLOW_FIGHT_2,
+            new List<Sentence>()
+            {
+                new Sentence("AW C'MON!",0),
+                new Sentence("What do you say, child? Maybe we settle this in a more calm manner?",3),
+                new Sentence("Take you stupid power, I'm gonna kick your ass with or without it!",0),
+                new Sentence("I see... Then you leave me no choice.",3),
+                new Sentence("How disappointing. I really believed you were going to be different than all of the others.",3)
+            }
+        },
+        {
+            Dialogues.YELLOW_FIGHT_3,
+            new List<Sentence>()
+            {
+                new Sentence("Come child! Show me the monster I've created!",3)
+            }
+        },
+        {
+            Dialogues.YELLOW_DEAD_1,
+            new List<Sentence>()
+            {
+                new Sentence("... ...",3),
+                new Sentence("... ...",3),
+                new Sentence("*Huff* *Huff*",0),
+                new Sentence("So this is how it ends.",3),
+                new Sentence("So this is how it ends.",3),
             }
         }
     };

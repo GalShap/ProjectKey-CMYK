@@ -40,6 +40,7 @@ public class PatrolEnemy : EnemyObject
     {
         if (KickBackVector == null)
         {
+            return;
              var x = transform.position.x - places[counter].position.x;
                     rb.velocity = new Vector2((x <= 0 ? speed : -speed),
                         rb.velocity.y);

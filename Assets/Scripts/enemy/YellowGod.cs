@@ -23,6 +23,7 @@ public class YellowGod : EnemyObject
     private Transform[] m_SpawnTransform; // this is a reference to the transform where the prefab will spawn
 
     [SerializeField] private int oddsForRed = 2;
+    [SerializeField] private SpriteRenderer sprite;
     public GameObject player;
     public GameObject leftBarrier;
     public GameObject rightBarrier;
@@ -36,12 +37,6 @@ public class YellowGod : EnemyObject
         _renderer = GetComponentInChildren<SpriteRenderer>();
         collisionOffset = Vector2.right * (_renderer.sprite.rect.width / _renderer.sprite.pixelsPerUnit) / 2;
     }
-
-    // // Start is called before the first frame update
-    // void Start()
-    // {
-    //     
-    // }
 
     public void HorizEnd()
     {
@@ -63,7 +58,14 @@ public class YellowGod : EnemyObject
         leftBlocks.SetActive(false);
         rightBlocks.SetActive(false);
 
-        rb.transform.position = initPlace;
+        if (rb.transform.position != initPlace)
+        {
+            ColorManager.ToggleYellow(
+                (() => {sprite.gameObject.SetActive(false);}),
+                (() => {
+                    rb.transform.position = initPlace;
+                    sprite.gameObject.SetActive(true);}));   
+        }
     }
 
     public void HorizStart()
@@ -102,7 +104,15 @@ public class YellowGod : EnemyObject
 
         downBlocks.SetActive(false);
         // downBlocks.
-        rb.transform.position = initPlace;
+
+        if (rb.transform.position != initPlace)
+        {
+            ColorManager.ToggleYellow(
+                (() => {sprite.gameObject.SetActive(false);}),
+                (() => {
+                    rb.transform.position = initPlace;
+                    sprite.gameObject.SetActive(true);}));   
+        }
         // rb.position = new Vector2(upperPillars[0].GetComponent<pillarScript>().transform.position.x, rb.position.y);
     }
 
@@ -206,7 +216,12 @@ public class YellowGod : EnemyObject
             }
             else
             {
-                rb.transform.position = new Vector2(upperPillars[k].transform.position.x, rb.position.y);
+                int t = k;
+                ColorManager.ToggleYellow(
+                    (() => {sprite.gameObject.SetActive(false);}),
+                    (() => {
+                        rb.transform.position = new Vector2(upperPillars[t].transform.position.x, rb.position.y);
+                        sprite.gameObject.SetActive(true);}));
             }
         }
 

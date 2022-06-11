@@ -9,6 +9,7 @@ public class ShootAttack : StateMachineBehaviour
     [SerializeField] public float timerCounter = 6;
     [SerializeField] public float timerCounterShoot = 2;
     [SerializeField] public float timerBlockWait = 1;
+    [SerializeField] private int[] set_= {2,5};
     private int size;
     private int counter = 0;
 
@@ -16,8 +17,7 @@ public class ShootAttack : StateMachineBehaviour
     private float timerBlock = 0;
 
     private float timerShoot = 0;
-    private int[] set_ = {0, 2, 4 };
-    
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

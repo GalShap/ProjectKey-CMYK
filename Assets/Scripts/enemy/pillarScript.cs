@@ -31,16 +31,10 @@ public abstract class pillarScript : MonoBehaviour
     {
         if (!isSet)
         {
-            print("one");
             rb = gameObject.GetComponent<Rigidbody2D>();
             startPostion = transform.position;
             isSet = true;
         }
-        else
-        {
-            print("somthing");
-        }
-        print("two");
     }
 
     

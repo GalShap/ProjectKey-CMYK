@@ -21,7 +21,6 @@ public class pillarBarriar : MonoBehaviour
     {
         if (other.gameObject.CompareTag("pillar") )
         {
-            print("gotIt");
             pillarScript pil = other.GetComponent<pillarScript>();
             if(pil.getSide() == Side)
                 pil.CollideWithOtherBlock();
