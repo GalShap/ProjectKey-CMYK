@@ -165,10 +165,6 @@ public class MagentaGod : EnemyObject
         {
             // rb.transform.position = new Vector3(rb.transform.position.x,platformLeft.transform.position.y +1, rb.transform.position.z) ;
         }
-        // if (directionAcordingToHp(hp, 400, 0, "left", animator)) return;
-        // if (directionAcordingToHp(hp, 300, 1, "right", animator)) return;
-        // if (directionAcordingToHp(hp, 200, 2, "left", animator)) return;
-        // else directionAcordingToHp(hp, 100, 3, "right", animator);
     }
 
     private bool directionAcordingToHp(float hp, float min, int index, string dir, Animator animator)
@@ -189,7 +185,6 @@ public class MagentaGod : EnemyObject
         var animator = gameObject.GetComponent<Animator>();
         var hl = animator.GetComponent<EnemyHealth>();
         hl.SetHealth(hl.MAX_HEALTH);
-        print($"health: {hl.GetHealth()}");
         animator.SetTrigger("coolDown");
         transform.position = initPos;
         Playing = false;
