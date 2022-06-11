@@ -25,11 +25,15 @@ public class DialogueManager : MonoBehaviour
         PINK_DEAD,
         YELLOW_GIVE_1,
         YELLOW_GIVE_2,
+        SECRET_ROOM_CYAN,
+        SECRET_ROOM_MAGENTA,
+        SECRET_ROOM_YELLOW,
         YELLOW_FIGHT_1,
         YELLOW_FIGHT_2,
         YELLOW_FIGHT_3,
         YELLOW_DEAD_1,
-        YELLOW_DEAD_2
+        YELLOW_DEAD_2,
+        
     }
 
     [Serializable]
@@ -223,6 +227,30 @@ public class DialogueManager : MonoBehaviour
             }
         },
         {
+            Dialogues.SECRET_ROOM_CYAN,
+            new List<Sentence>()
+            {
+                new Sentence("dammit Cyan, you really left me no choice you know...", 0),
+               
+            }
+        },
+        {
+            Dialogues.SECRET_ROOM_MAGENTA,
+            new List<Sentence>()
+            {
+                new Sentence("you were always a sick bastard Magenta, one can only wonder " +
+                             "how you abused all those other test subjects", 0)
+            }
+        },
+        {
+            Dialogues.SECRET_ROOM_YELLOW,
+            new List<Sentence>()
+            {
+                new Sentence("Still can't believe she sees herself as my mother, how twisted...", 0)
+            }
+        },
+        {   
+            
             Dialogues.YELLOW_FIGHT_1,
             new List<Sentence>()
             {
