@@ -76,11 +76,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2106556061
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: -5575374936625819304, guid: 0257e4aecd4e36e4e9932eda23f3bff1, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.99601173, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -132,8 +132,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  blackBackground: {fileID: 0}
   OrbForceField: {fileID: 0}
+  gameObjectsForScene: []
 --- !u!50 &5253846568265224268
 Rigidbody2D:
   serializedVersion: 4
