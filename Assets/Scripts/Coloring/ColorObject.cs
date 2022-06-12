@@ -42,6 +42,8 @@ public class ColorObject : MonoBehaviour
 
     protected void SetColor()
     {
+        if(_renderer == null)
+            return;
         Color? c = ColorManager.GetColor(layer.value);
         if (c == null)
             throw new Exception("ColorObject " + name + " must have a Color layer");

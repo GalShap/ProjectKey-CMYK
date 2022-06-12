@@ -64,6 +64,16 @@ public class PatrolEnemy : EnemyObject
        
     }
 
+    public override void OnColorChange(ColorManager.ColorLayer layer)
+    {
+        base.OnColorChange(layer);
+        var health = GetComponent<EnemyHealth>();
+        if (health != null)
+        {
+            health.damagable = !colored;
+        }
+    }
+
     protected override void UponDead()
     {
         gameObject.SetActive(false);
