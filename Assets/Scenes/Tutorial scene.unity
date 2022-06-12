@@ -11328,10 +11328,26 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 446198940493267377, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: ab1d989578448004cb686232d49a50dc, type: 2}
+    - target: {fileID: 446198940493267377, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4025377662969017281, guid: ab1d989578448004cb686232d49a50dc, type: 2}
     - target: {fileID: 446198941022082097, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 3422964604209472600, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: ab1d989578448004cb686232d49a50dc, type: 2}
+    - target: {fileID: 3422964604209472600, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4025377662969017281, guid: ab1d989578448004cb686232d49a50dc, type: 2}
     - target: {fileID: 3500104434790548418, guid: 82a1d5330ab9ce54db917573524f74dd, type: 3}
       propertyPath: m_Color.a
       value: 0
