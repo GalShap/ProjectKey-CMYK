@@ -118,19 +118,19 @@ public class BlueGod : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            godAnim.localPosition = Vector3.zero;
-            _animator.SetTrigger(Almost);
-            DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.BLUE_DEAD, true, () =>
-            {
-                _animator.SetTrigger(Die);
-                TimelineManager.Manager.Play();
-            });   
-        }
-    }
+    // private void OnCollisionEnter2D(Collision2D other)
+    // {
+    //     if (other.gameObject.CompareTag("Player"))
+    //     {
+    //         godAnim.localPosition = Vector3.zero;
+    //         _animator.SetTrigger(Almost);
+    //         DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.BLUE_DEAD, true, () =>
+    //         {
+    //             _animator.SetTrigger(Die);
+    //             TimelineManager.Manager.Play();
+    //         });   
+    //     }
+    // }
 
     public void Hit()
     {
