@@ -62,7 +62,7 @@ public class spikeEnemy : PatrolEnemy
 
     public void EnableSpikes()
     {
-        gameObject.layer = (int) Mathf.Log(ColorManager.NeutralLayer,2);
+        gameObject.layer = ColorManager.NeutralIndex;
         IsOneHit = true;
         _health.damagable = false;
     }

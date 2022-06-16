@@ -32,7 +32,7 @@ public class PatrolEnemyWithShield : PatrolEnemy
         if(rb.velocity.x != x)
             MoveShield();
 
-        health.damagable = colored || !FacingPlayer;
+        health.damagable = (colored && shield.layer != ColorManager.NeutralIndex) || !FacingPlayer;
     }
 
     private void MoveShield()

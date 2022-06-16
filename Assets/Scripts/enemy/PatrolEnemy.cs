@@ -70,7 +70,7 @@ public class PatrolEnemy : EnemyObject
         var health = GetComponent<EnemyHealth>();
         if (health != null)
         {
-            health.damagable = !colored;
+            health.damagable = gameObject.layer == ColorManager.NeutralIndex || !colored;
         }
     }
 

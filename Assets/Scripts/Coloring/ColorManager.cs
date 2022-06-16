@@ -82,6 +82,7 @@ public class ColorManager : MonoBehaviour
     }
 
     public static LayerMask NeutralLayer => _shared.Neutral;
+    public static int NeutralIndex => GetColorLayer(ColorName.Neutral).index;
 
     
     public enum ColorName

@@ -41,7 +41,7 @@ public class CannonScript : EnemyObject
     
     protected void Shoot()
     {
-        if (!colored)
+        if (gameObject.layer == ColorManager.NeutralIndex || !colored)
         {   
             if (CameraManager.Manager.CanCameraSee(_collider2D)){
                 AudioManager.SharedAudioManager.PlayEnemySounds((int) AudioManager.EnemySounds.Shoot);
