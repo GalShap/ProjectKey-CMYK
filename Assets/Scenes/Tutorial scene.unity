@@ -56464,12 +56464,36 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1623243895}
     - target: {fileID: 7308870848596121639, guid: 00f3aa89bb041b348af9c494d84a5bcb, type: 3}
+      propertyPath: onTake.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308870848596121639, guid: 00f3aa89bb041b348af9c494d84a5bcb, type: 3}
+      propertyPath: onTake.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308870848596121639, guid: 00f3aa89bb041b348af9c494d84a5bcb, type: 3}
       propertyPath: onTake.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1154897993}
     - target: {fileID: 7308870848596121639, guid: 00f3aa89bb041b348af9c494d84a5bcb, type: 3}
       propertyPath: onTake.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308870848596121639, guid: 00f3aa89bb041b348af9c494d84a5bcb, type: 3}
+      propertyPath: onTake.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TakeOrb
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308870848596121639, guid: 00f3aa89bb041b348af9c494d84a5bcb, type: 3}
+      propertyPath: onTake.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerDialogues, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308870848596121639, guid: 00f3aa89bb041b348af9c494d84a5bcb, type: 3}
+      propertyPath: onTake.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308870848596121639, guid: 00f3aa89bb041b348af9c494d84a5bcb, type: 3}
+      propertyPath: onTake.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8909316564969978125, guid: 00f3aa89bb041b348af9c494d84a5bcb, type: 3}
       propertyPath: m_Color.a

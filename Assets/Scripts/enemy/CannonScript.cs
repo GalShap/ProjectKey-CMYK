@@ -47,7 +47,6 @@ public class CannonScript : EnemyObject
                 AudioManager.SharedAudioManager.PlayEnemySounds((int) AudioManager.EnemySounds.Shoot);
                 Instantiate(m_Projectile, m_SpawnTransform.position, m_SpawnTransform.rotation);
             }
-            Instantiate(m_Projectile, m_SpawnTransform.position, m_SpawnTransform.rotation);
         }
     }
 

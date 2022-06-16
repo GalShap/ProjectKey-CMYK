@@ -45,7 +45,7 @@ public class ColorOrb : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {   
-            onTake.Invoke();
+            // onTake.Invoke();
             AudioManager.SharedAudioManager.PlayUiSounds((int) AudioManager.UiSounds.LoadNewColor);
             StartCoroutine(NewPowerSequence());
         }
