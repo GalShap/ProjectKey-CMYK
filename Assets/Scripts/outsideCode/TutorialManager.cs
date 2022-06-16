@@ -4,15 +4,25 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
 {
+    [Serializable]
+    struct TutorialButton
+    {
+        public GameObject keyboardImage;
+        public GameObject gamepadImage;
+    }
     public enum TutorialState
     {
         MOVE, JUMP, ATTACK, COLOR, OFF,
         END
     }
+
+    [SerializeField] private List<TutorialButton> buttons;
+    
     [SerializeField] private Image tutorial;
 
     [SerializeField] private List<UnityEvent> timelineEvents;
@@ -31,6 +41,21 @@ public class TutorialManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void Update()
+    {
+        var names = Input.GetJoystickNames();
+        ToggleInput(names.Length > 0 && !names[0].Equals(""));
+    }
+    
+    public void ToggleInput(bool gamepad)
+    {
+        foreach (var button in buttons)
+        {
+            button.gamepadImage.SetActive(gamepad);
+            button.keyboardImage.SetActive(!gamepad);
         }
     }
 
