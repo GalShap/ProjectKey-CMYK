@@ -343,6 +343,7 @@ public class ColorManager : MonoBehaviour
         }
         
         _shared.Background.color = cl.color;
+        AudioManager.SharedAudioManager.PlayKeyActionSound((int) AudioManager.KeySounds.ColorSwitch);
         // _shared.bgMachine.Rotate(cl.color, () =>
         // {
         //     _shared.CancelCollisionLayer(_shared.AllLayers[index]);
