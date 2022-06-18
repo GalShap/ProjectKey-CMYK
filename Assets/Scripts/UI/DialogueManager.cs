@@ -102,7 +102,7 @@ public class DialogueManager : MonoBehaviour
             new List<Sentence>()
             {
                 new Sentence("Gotcha!",0),
-                new Sentence("You didn't think its gonna be that easy wont you?",1)
+                new Sentence("You didn't think it's gonna be that easy wont you?",1)
             }
         },
         {
@@ -172,7 +172,7 @@ public class DialogueManager : MonoBehaviour
             {
                 new Sentence("What the hell?",0),
                 new Sentence("Oh ho ho... Look who we have here! Are you lost my dear?",2),
-                new Sentence("Magenta! I should have known when i heard the guitars!",0),
+                new Sentence("Magenta! I should have known when I heard the guitars!",0),
                 new Sentence("Nice to see you again too, I heard cyan took a little beating by you...",2),
                 new Sentence("...Then again, the old ink spot never knew how to deal with his gift", 2),
                 new Sentence("and you're gonna suffer a similar fate if you don't let me through",0),
@@ -198,7 +198,7 @@ public class DialogueManager : MonoBehaviour
                              "that's all",0),
                 new Sentence("Key...I beg you... ", 2),
                 new Sentence("All my though love was only to make you the strongest!",2),
-                new Sentence("So why you're complaining?, you clearly succeeded", 0),
+                new Sentence("So why you're complaining? you clearly succeeded", 0),
                 }
         },
         {
@@ -208,10 +208,10 @@ public class DialogueManager : MonoBehaviour
                 new Sentence("Hello Daughter i've been waiting for you.",3),
                 new Sentence("Daughter? You're just as sick as everyone else",0),
                 new Sentence("Oh you don't mean that, don't be foolish", 3),
-                new Sentence("Anyway, i want you to have this key...", 3),
+                new Sentence("Anyway, I want you to have this key...", 3),
                 new Sentence("Why will you do this? what is this sick game", 0),
                 new Sentence("I just want you to get a taste of what you can do if you stop this madness!", 3),
-                new Sentence("If you truly knew me like you think you do, then you'd know i won't go back!", 0)
+                new Sentence("If you truly knew me like you think you do, then you'd know I won't go back!", 0)
                 
               
             }
