@@ -23,8 +23,7 @@ public class AudioManager : MonoBehaviour
         /// plays the next audio track. Used When we want to go between worlds and sounds. 
         /// </summary>
         public void PlayNextTrack()
-        {   
-          
+        {
             _curTrackIndex = (_curTrackIndex == tracks.Count - 1) ? 0 : ++_curTrackIndex;
             tracksAudioSource.Stop();
             tracksAudioSource.clip = tracks[_curTrackIndex];

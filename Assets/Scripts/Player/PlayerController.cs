@@ -202,6 +202,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {   
+        if(_rigidbody2D.constraints == RigidbodyConstraints2D.FreezeAll) return;
         jumpDust.Play();
         AudioManager.SharedAudioManager.PlayKeyActionSound((int) AudioManager.KeySounds.Jump);
         _animator.SetBool(Jump1,true);

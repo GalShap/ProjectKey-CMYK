@@ -34936,7 +34936,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5946542345231676971, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
       propertyPath: godMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5946542345231676971, guid: a3098d52e5d9a1f449d7f192ee2ce827, type: 3}
       propertyPath: OnPinkDie.m_PersistentCalls.m_Calls.Array.size

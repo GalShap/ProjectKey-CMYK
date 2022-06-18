@@ -9,7 +9,7 @@ public class RedStand : StateMachineBehaviour
     
     private MagentaGod red;
     private EnemyHealth hl;
-    [SerializeField] public float timerCounter = 5;
+    [SerializeField] public float timerCounter = 1;
     [SerializeField] public float timerMove = 2;
 
     private float timer = 2;

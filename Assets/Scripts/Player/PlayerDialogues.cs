@@ -125,4 +125,20 @@ public class PlayerDialogues : MonoBehaviour
     {
         DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.YELLOW_DEAD_2);
     }
+
+    public void SecretYellow()
+    {
+        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.SECRET_ROOM_YELLOW);
+    }
+    
+    public void SecretCyan()
+    {
+        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.SECRET_ROOM_CYAN);
+    }
+    
+    public void SecretMagenta()
+    {
+        DialogueManager.Manager.LoadDialogue(DialogueManager.Dialogues.SECRET_ROOM_MAGENTA);
+    }
+    
 }

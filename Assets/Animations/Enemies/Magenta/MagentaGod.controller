@@ -369,7 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c31c949f6a2f03c44896ac039c6703ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerCounter: 3
+  timerCounter: 1
   timerMove: 2
 --- !u!1101 &-1716794949671947376
 AnimatorStateTransition:
